@@ -31,12 +31,16 @@
         margin-top: 70px;
     }
     header{
+        padding: 5px;
         background-color: $color4;
         position: fixed;
         min-width: 100% !important;
         top: 0;
         left: 0;
         z-index: 40;
+    }
+    .nav--links{
+        gap: 0.5rem;
     }
     .card--enmarcar{
         &:nth-of-type(1){
@@ -62,11 +66,10 @@
             }
         }
     }
-    .logo{
-        display: none;
-    }
-    .icon-mobile{
-        display: block;
+    .logo-desktop{
+        img{
+            width: 50px;
+        }
     }
     #btnNav{
         display: block;

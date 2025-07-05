@@ -39,6 +39,12 @@ closeSearch.addEventListener("click",function(){
     search.classList.remove("active");
     document.querySelector("body").style.overflow="auto";
 });
+search.addEventListener("click",function(e){
+    if(e.target.classList[0] == "search"){
+        search.classList.remove("active");
+        document.querySelector("body").style.overflow="auto";
+    }
+});
 
 /********************************Aside cart******************************** */
 btnCart.addEventListener("click",function(){
@@ -125,134 +131,6 @@ if(document.querySelector("#myAccount")){
     }
 });*/
 
-window.addEventListener("load",function(){
-    if(document.querySelector("#modalPoup")){
-        request(base_url+"/tienda/statusCouponSuscriber","","get").then(function(data){
-            let discount = data.discount;
-            if(data.status && !checkPopup()){
-                setTimeout(function(){
-                    let modal="";
-                    let modalPopup = document.querySelector("#modalPoup");
-                    let timer;
-                    modal= `
-                            <div class="modal fade" id="modalSuscribe">
-                                <div class="modal-dialog modal-dialog-centered ">
-                                    <div class="modal-content">
-                                        <div class="d-flex justify-content-end">
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-                                        <div class="container mb-3 p-4 pe-5 ps-5">
-                                            <form id="formModalSuscribe" class="mb-3">
-                                                <h2 class="t-p">${COMPANY}</h2>
-                                                <h2 class="fs-5">Suscríbete a nuestro boletín y recibe un cupón de descuento de ${discount}%</h2>
-                                                <p>Reciba información actualizada sobre novedades, ofertas especiales y nuestras promociones</p>
-                                                <div class="mb-3">
-                                                    <input type="email" class="form-control" id="txtEmailModalSuscribe" name="txtEmailSuscribe" placeholder="Tu correo" required>
-                                                </div>
-                                                <div class="alert alert-danger d-none" id="alertModalSuscribe" role="alert"></div>
-                                                <button type="submit" class="btn btn-bg-1" id="btnModalSuscribe">Suscribirse</button>
-                                            </form>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="delPopup">
-                                                <label class="form-check-label" for="flexCheckDefault">
-                                                    No volver a mostrar esta ventana emergente
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            `;
-                    modalPopup.innerHTML = modal;
-                    let modalView = new bootstrap.Modal(document.querySelector("#modalSuscribe"));
-                    modalView.show();
-                    document.querySelector("#modalSuscribe").addEventListener("hidden.bs.modal",function(){
-                        window.clearTimeout(timer);
-                        modalView.hide();
-                        modalPopup.innerHTML = "";
-                        let key =COMPANY+"popup"; 
-                        localStorage.setItem(key,false);
-                    });
-                     let formModalSuscribe = document.querySelector("#formModalSuscribe");
-                     formModalSuscribe.addEventListener("submit",function(e){
-                        e.preventDefault();
-                        let btn = document.querySelector("#btnModalSuscribe");
-                        let strEmail = document.querySelector("#txtEmailModalSuscribe").value;
-                        let formData = new FormData(formModalSuscribe);
-                        let alert = document.querySelector("#alertModalSuscribe");
-                        if(strEmail ==""){
-                            alert.classList.remove("d-none");
-                            alert.innerHTML = "Por favor, completa el campo";
-                            return false;
-                        }
-                        if(!fntEmailValidate(strEmail)){
-                            alert.classList.remove("d-none");
-                            alert.innerHTML = "El correo es invalido";
-                            return false;
-                        }
-                        btn.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;    
-                        btn.setAttribute("disabled","");
-                        
-                        request(base_url+"/tienda/setSuscriber",formData,"post").then(function(objData){
-                            btn.innerHTML="Suscribirse";    
-                            btn.removeAttribute("disabled");
-                            if(objData.status){
-                                window.clearTimeout(timer);
-                                modalView.hide();
-                                modalPopup.innerHTML = "";
-                                let key =COMPANY+"popup"; 
-                                localStorage.setItem(key,false);
-                            }else{
-                                alert.classList.remove("d-none");
-                                alert.innerHTML = objData.msg;
-                            }
-                        });
-                        
-                     });
-                },1000);
-            }
-        });
-        
-    }
-});
-
-if(document.querySelector("#formSuscriber")){
-    let formSuscribe = document.querySelector("#formSuscriber");
-    formSuscribe.addEventListener("submit",function(e){
-    e.preventDefault();
-    let btn = document.querySelector("#btnSuscribe");
-    let strEmail = document.querySelector("#txtEmailSuscribe").value;
-    let formData = new FormData(formSuscribe);
-    let alert = document.querySelector("#alertSuscribe");
-    if(strEmail ==""){
-        alert.classList.remove("d-none");
-        alert.innerHTML = "Por favor, completa el campo";
-        return false;
-    }
-    if(!fntEmailValidate(strEmail)){
-        alert.classList.remove("d-none");
-        alert.innerHTML = "El correo es invalido";
-        return false;
-    }
-    btn.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;    
-    btn.setAttribute("disabled","");
-    
-    request(base_url+"/tienda/setSuscriber",formData,"post").then(function(objData){
-        btn.innerHTML=`<i class="fas fa-paper-plane"></i>`;    
-        btn.removeAttribute("disabled");
-        if(objData.status){
-            alert.classList.add("d-none");
-            formSuscribe.reset();
-            let key =COMPANY+"popup"; 
-            localStorage.setItem(key,false);
-        }else{
-            alert.classList.remove("d-none");
-            alert.innerHTML = objData.msg;
-        }
-    });
-    
-    });
-}
 /***************************Essentials Functions****************************** */
 function openLoginModal(){
     let modalItem = document.querySelector("#modalLogin");

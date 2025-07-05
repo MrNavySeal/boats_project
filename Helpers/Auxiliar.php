@@ -144,7 +144,7 @@
         require_once "Views/Template/Error/error.php";
     }
     function setView($route){
-        $ip = getIp();
+        /*$ip = getIp();
         //$ip = "191.107.176.102";
         $con = new Mysql();
         $sql = "SELECT * FROM locations WHERE ip = '$ip' AND route = '$route'";
@@ -170,7 +170,7 @@
                 ];
                 $con->insert($sql,$arrData);
             }
-        }
+        }*/
     }
     function resetUserData(){
         $id = $_SESSION['idUser'];

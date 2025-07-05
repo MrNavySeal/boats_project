@@ -15,7 +15,7 @@
     <div class="cartbar--elements">
         <div class="cartbar--header">
             <div class="cartbar--title">
-                Mi carrito <span id="qtyCartbar"><?=$qtyCart?></span>
+                Shopping cart <span id="qtyCartbar"><?=$qtyCart?></span>
             </div>
             <span id="closeCart"><i class="fas fa-times"></i></span>
         </div>
@@ -28,8 +28,8 @@
                 <span id="totalCart"><?=formatNum($total)?></span>
             </div>
             <div id="btnsCartBar" class="d-none">
-                <a href="<?=base_url()?>/carrito" class="btn btn-bg-2 d-block w-100 mb-3"> Ver carrito</a>
-                <button type="button" class="btn d-block btn-bg-1 btnCheckoutCart w-100"> Pagar</a>
+                <a href="<?=base_url()?>/cart" class="btn btn-bg-2 d-block w-100 mb-3"> View cart</a>
+                <button type="button" class="btn d-block btn-bg-1 btnCheckoutCart w-100"> Check out</a>
             </div>
         </div>
     </div>
