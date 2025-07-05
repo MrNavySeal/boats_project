@@ -42,6 +42,7 @@ nav{
 }
 .nav-link{
     padding: 0;
+    font-weight: bold;
     a{
         &:hover{
             color:$color1;
@@ -165,6 +166,7 @@ nav{
     list-style: none;
 }
 .navmobile-link{
+    font-weight: bold;
     width: 100%;
     padding: 1rem 0.5rem;
     position: relative;
@@ -177,6 +179,7 @@ nav{
     width: 100%;
     padding: 0;
     border-width: 0;
+    
     .accordion-item{
         background-color: transparent;
     }
@@ -193,6 +196,7 @@ nav{
         }
     }
     .accordion-button{
+        font-weight: bold;
         background-color: $color4;
         padding: 0;
         color:$color2;

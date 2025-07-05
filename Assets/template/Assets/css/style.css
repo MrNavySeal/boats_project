@@ -539,6 +539,7 @@ nav a {
 
 .nav-link {
   padding: 0;
+  font-weight: bold;
 }
 .nav-link a:hover {
   color: #25b6d1;
@@ -671,6 +672,7 @@ nav a {
 }
 
 .navmobile-link {
+  font-weight: bold;
   width: 100%;
   padding: 1rem 0.5rem;
   position: relative;
@@ -701,6 +703,7 @@ nav a {
   list-style: none;
 }
 .navmobile-link.accordion .accordion-button {
+  font-weight: bold;
   background-color: #fff;
   padding: 0;
   color: #1d2a4d;
