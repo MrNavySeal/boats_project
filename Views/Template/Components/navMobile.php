@@ -24,7 +24,7 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-categories">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseCategories" aria-expanded="false" aria-controls="flush-collapseCategories">
-                        <strong class="fs-5">Store</strong>
+                        <strong class="fs-5">shop</strong>
                     </button>
                     </h2>
                     <div id="flush-collapseCategories" class="accordion-collapse collapse show" aria-labelledby="flush-categories" data-bs-parent="#accordionFlushCategories">
@@ -32,7 +32,7 @@
                         <div class="accordion accordion-flush" id="accordionFlushCategorie">
                             <?php
                                 for ($i=0; $i < count($navCategories) ; $i++) { 
-                                    $routeC = base_url()."/store/category/".$navCategories[$i]['route'];
+                                    $routeC = base_url()."/shop/category/".$navCategories[$i]['route'];
                             ?>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="flush-categorie<?=$i?>">
@@ -47,7 +47,7 @@
                                             for ($j=0; $j < count($navCategories[$i]['subcategories']) ; $j++) { 
                                                 $navSubCategories = $navCategories[$i]['subcategories'][$j];
                                                 if($navSubCategories['total'] >0){
-                                                    $routeS = base_url()."/store/category/".$navCategories[$i]['route']."/".$navSubCategories['route'];
+                                                    $routeS = base_url()."/shop/category/".$navCategories[$i]['route']."/".$navSubCategories['route'];
                                             ?>
                                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                                         <a href="<?=$routeS?>"><?=$navSubCategories['name']?></a>
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
                             <?php }?>
-                            <li class="navmobile-link"><a href="<?=base_url()?>/store">All</a></li>
+                            <li class="navmobile-link"><a href="<?=base_url()?>/shop">All</a></li>
                         </div>
                     </div>
                     </div>

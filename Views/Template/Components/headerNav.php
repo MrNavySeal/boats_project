@@ -29,7 +29,7 @@
             <li class="nav-link"><a href="<?=base_url()?>">Home</a></li>
             <div class="nav-link dropdown">
                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    Store
+                    shop
                     <i class="fas fa-angle-down dropdown-icon"></i>
                 </a>
                 <ul class="dropdown-menu">
@@ -38,10 +38,10 @@
                             $link = $subLinks['categories'][$i];
                             if($i <= 8){
                     ?>
-                    <li><a class="dropdown-item" href="<?=base_url()."/store/category/".$link['route']?>"><?=$link['name']?></a></li>
+                    <li><a class="dropdown-item" href="<?=base_url()."/shop/category/".$link['route']?>"><?=$link['name']?></a></li>
                     <?php } }?>
                     <hr>
-                    <li><a class="dropdown-item" href="<?=base_url()?>/store">All</a></li>
+                    <li><a class="dropdown-item" href="<?=base_url()?>/shop">All</a></li>
                 </ul>
             </div>
             <li class="nav-link"><a href="<?=base_url()?>/services">Services</a></li>
@@ -76,7 +76,7 @@
 </header>
 <div class="search">
     <span id="closeSearch"><i class="fas fa-times"></i></span>
-    <form action="<?=base_url()?>/store/search" method="GET">
+    <form action="<?=base_url()?>/shop/search" method="GET">
         <input type="search" name="b" id="" placeholder="Search...">
         <button type="submit" class="btn"><i class="fas fa-search"></i></button>
     </form>

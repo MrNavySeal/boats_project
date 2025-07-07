@@ -6,6 +6,7 @@
   border-radius: 10px;
 }
 .btn-bg-1:hover {
+  background-color: #1d2a4d;
   color: #fff;
 }
 .btn-bg-1 a {
@@ -2549,6 +2550,18 @@ hr {
   height: 2px;
   content: " ";
   background-color: #25b6d1;
+}
+
+.nav-pills li button {
+  padding: 0.5rem;
+  color: #fff;
+  background-color: #25b6d1 !important;
+}
+.nav-pills li button:hover {
+  color: #fff;
+}
+.nav-pills li button.active {
+  background-color: #1d2a4d !important;
 }
 
 p iframe {
