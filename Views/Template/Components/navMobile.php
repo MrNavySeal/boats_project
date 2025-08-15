@@ -24,7 +24,7 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="flush-categories">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseCategories" aria-expanded="false" aria-controls="flush-collapseCategories">
-                        <strong class="fs-5">shop</strong>
+                        <strong class="fs-5">Shop</strong>
                     </button>
                     </h2>
                     <div id="flush-collapseCategories" class="accordion-collapse collapse show" aria-labelledby="flush-categories" data-bs-parent="#accordionFlushCategories">
@@ -65,9 +65,14 @@
                     </div>
                 </div>
             </div>
-            <li class="navmobile-link"><a href="<?=base_url()?>/services"><strong class="fs-5">Services</strong></a></li>
-            <li class="navmobile-link"><a href="<?=base_url()?>/about"><strong class="fs-5">About</strong></a></li>
-            <li class="navmobile-link"><a href="<?=base_url()?>/contact"><strong class="fs-5">Contact us</strong></a></li>
+            <li class="navmobile-link"><a href="<?=base_url()?>/services/"><strong class="fs-5">Services</strong></a></li>
+            <li class="navmobile-link"><a href="<?=base_url()?>/about/"><strong class="fs-5">About</strong></a></li>
+            <li class="navmobile-link"><a href="<?=base_url()?>/contact/"><strong class="fs-5">Contact us</strong></a></li>
+            <?php if(!isset($_SESSION['login'])){ ?>
+            <li class="navmobile-link" onclick="openLoginModal();"><a href="#"><strong class="fs-5">Log in</strong></a></li>
+            <?php }else {?>
+            <li class="navmobile-link"><a href="<?=base_url()?>/profile/"><strong class="fs-5">My profile</strong></a></li>
+            <?php }?>
         </ul>
     </div>
 </div>

@@ -10,7 +10,7 @@
     <div class="navbar-nav align-items-center ms-auto">
         <a href="<?=base_url()?>" class="nav-link">
             <i class="fas fa-eye"></i>
-            <span class="d-none d-lg-inline-flex">Ver tienda</span>
+            <span class="d-none d-lg-inline-flex">Ver sitio web</span>
         </a>
         <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
@@ -18,8 +18,8 @@
                 <span class="d-none d-lg-inline-flex"><?=$_SESSION['userData']['firstname']." ".$_SESSION['userData']['lastname']?></span>
             </a>
             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                <a href="<?=base_url()?>/usuarios/perfil" class="dropdown-item">Mi perfil</a>
-                <a href="<?=base_url()?>/logout" class="dropdown-item">Cerrar sesión</a>
+                <a href="<?=base_url()?>/profile/" class="dropdown-item">My profile</a>
+                <a href="<?=base_url()?>/logout" class="dropdown-item">Log out</a>
             </div>
         </div>
     </div>

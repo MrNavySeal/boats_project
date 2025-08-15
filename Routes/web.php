@@ -1,4 +1,47 @@
 <?php
+    //Modulos
+    $router->setRoute("modulos/","Modulos/Modulos",false);
+    $router->setRoute("modulos/secciones/","Modulos/Secciones",false);
+    $router->setRoute("modulos/opciones/","Modulos/Opciones",false);
+
+    //Dashboard
+    $router->setRoute("dashboard/","Dashboard/Dashboard",false);
+
+    //Sistema
+    $router->setRoute("sistema/roles/","Sistema/Roles",false);
+    $router->setRoute("sistema/usuarios/","Sistema/Usuarios",false);
+    $router->setRoute("profile/","Sistema/Usuarios/perfil",false);
+    
+
+    //Clientes
+    $router->setRoute("clientes/","Clientes/Clientes",false);
+
+    //Productos
+    $router->setRoute("productos/categorias/","Productos/ProductosCategorias/categorias",false);
+    $router->setRoute("productos/subcategorias/","Productos/ProductosCategorias/subcategorias",false);
+    $router->setRoute("productos/creacion-edicion-masiva/","Productos/ProductosMasivos/productos",false);
+    $router->setRoute("productos/","Productos/Productos",false);
+    $router->setRoute("productos/variantes/","Productos/ProductosOpciones/variantes",false);
+    $router->setRoute("productos/unidades-medida/","Productos/ProductosOpciones/unidades",false);
+    $router->setRoute("productos/caracteristicas/","Productos/ProductosOpciones/caracteristicas",false);
+
+    //Pedidos
+    $router->setRoute("pedidos/cotizaciones/","Pedidos/Cotizaciones/cotizaciones",false);
+    $router->setRoute("pedidos/","Pedidos/Pedidos",false);
+    $router->setRoute("pedidos/pedidos-credito/","Pedidos/Pedidos/creditos",false);
+    $router->setRoute("pedidos/pedidos-detalle/","Pedidos/Pedidos/detalle",false);
+    $router->setRoute("pedidos/punto-venta/","Pedidos/PedidosPos/venta",false);
+    $router->setRoute("pedidos/transaccion/","Pedidos/Pedidos/transaccion");
+    $router->setRoute("pedidos/factura/","Pedidos/Pedidos/pdf");
+
+
+    //Configuracion
+    $router->setRoute("configuracion/parametros/","Configuracion/Empresa/empresa",false);
+    $router->setRoute("configuracion/envios/","Configuracion/Administracion/envios",false);
+    $router->setRoute("configuracion/paginas/","Configuracion/Paginas/paginas",false);
+    $router->setRoute("configuracion/banners/","Configuracion/Banners/banners",false);
+
+    //Web
     $router->setRoute("shop/","Tienda",false);
     $router->setRoute("cart/","Carrito",false);
     $router->setRoute("shop/product/","Tienda/producto");

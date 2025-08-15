@@ -61,8 +61,8 @@
                     <li><a class="dropdown-item" href="<?=base_url()?>/shop">All</a></li>
                 </ul>
             </div>
-            <li class="nav-link"><a href="<?=base_url()?>/about">About</a></li>
-            <li class="nav-link"><a href="<?=base_url()?>/contact">Contact us</a></li>
+            <li class="nav-link"><a href="<?=base_url()?>/about/">About</a></li>
+            <li class="nav-link"><a href="<?=base_url()?>/contact/">Contact us</a></li>
         </ul>
         <ul class="nav--links">
             <li class="nav--icon" id="btnSearch"><i class="fas fa-search"></i></li>
@@ -79,7 +79,7 @@
                         <i class="fas fa-angle-down dropdown-icon"></i>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item " href="<?=base_url()?>/usuarios/perfil">My profile</a></li>
+                        <li><a class="dropdown-item " href="<?=base_url()?>/profile/">My profile</a></li>
                         <li id="logout"><a href="#" class="dropdown-item">Log out</a></li>
                     </ul>
                 </div>
