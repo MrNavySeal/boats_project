@@ -1,5 +1,5 @@
 <?php
-    class Casos extends Controllers{
+    class Citas extends Controllers{
         public function __construct(){
             
             session_start();
@@ -8,8 +8,6 @@
                 die();
             }
             parent::__construct();
-            sessionCookie();
-            getPermits(6);
         }
 
         public function casos(){

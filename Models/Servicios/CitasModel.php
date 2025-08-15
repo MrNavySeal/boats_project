@@ -1,5 +1,5 @@
 <?php 
-    class CasosModel extends Mysql{
+    class CitasModel extends Mysql{
         private $intId;
         private $intPorPagina;
         private $intPaginaActual;

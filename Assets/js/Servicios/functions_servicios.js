@@ -26,12 +26,14 @@ const App = {
             strDescripcionCorta:"",
             intEstado:"",
             strTituloModal:"",
+            arrAreas:[],
+            intArea:"",
         };
     },mounted(){
-        this.getBuscar(1,"areas");
+        this.getBuscar(1,"servicios");
     },methods:{
         showModal:function(){
-            this.strTituloModal = "Nueva área";
+            this.strTituloModal = "Nuevo servicio";
             this.strImgUrl= base_url+'/Assets/images/uploads/category.jpg';
             this.strImagen= "";
             this.strNombre= "";
@@ -39,13 +41,14 @@ const App = {
             this.strDescripcion= "";
             this.intEstado= 1;
             this.intId = 0;
-            setTinymce("#strDescripcion");
+            this.intArea = "";
+            setTinymce("#strDescripcion",500);
             document.querySelector("#strDescripcion").value ="";
-            this.modal = new bootstrap.Modal(document.querySelector("#modalAreas"));
+            this.modal = new bootstrap.Modal(document.querySelector("#modalServices"));
             this.modal.show();
         },
         setDatos: async function(){
-            if(this.strNombre == ""){
+            if(this.strNombre == "" || this.intArea == ""){
                 Swal.fire("Error","Todos los campos marcados con (*) son obligatorios","error");
                 return false;
             }
@@ -60,7 +63,7 @@ const App = {
             formData.append("estado",this.intEstado);
             this.$refs.btnAdd.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             this.$refs.btnAdd.disabled = true;
-            const response = await fetch(base_url+"/Areas/setArea",{method:"POST",body:formData});
+            const response = await fetch(base_url+"/Servicios/Servicios/setServicio",{method:"POST",body:formData});
             const objData = await response.json();
             this.$refs.btnAdd.innerHTML = `Guardar <i class="fas fa-save"></i>`;
             this.$refs.btnAdd.disabled = false;
@@ -73,12 +76,13 @@ const App = {
                     this.strDescripcionCorta= "";
                     this.strDescripcion= "";
                     this.intEstado= 1;
+                    this.intArea = "";
                 }
                 this.modal.hide();
             }else{
               Swal.fire("Error",objData.msg,"error");
             }
-            await this.getBuscar(1,"areas");
+            await this.getBuscar(1,"servicios");
         },
         getBuscar:async function (intPagina=1,strTipo = ""){
             this.intPagina = intPagina;
@@ -87,7 +91,7 @@ const App = {
             formData.append("pagina",this.intPagina);
             formData.append("buscar",this.strBuscar);
             formData.append("tipo_busqueda",strTipo);
-            const response = await fetch(base_url+"/areas/getBuscar",{method:"POST",body:formData});
+            const response = await fetch(base_url+"/Servicios/Servicios/getBuscar",{method:"POST",body:formData});
             const objData = await response.json();
             this.arrData = objData.data;
             this.intInicioPagina  = objData.start_page;
@@ -98,11 +102,11 @@ const App = {
         },
         getDatos:async function(intId,strTipo){
           this.intId = intId;
-          this.strTituloModal = "Editar área";
+          this.strTituloModal = "Editar servicio";
           const formData = new FormData();
           formData.append("id",this.intId);
           formData.append("tipo_busqueda",strTipo);
-          const response = await fetch(base_url+"/Areas/getDatos",{method:"POST",body:formData});
+          const response = await fetch(base_url+"/Servicios/Servicios/getDatos",{method:"POST",body:formData});
           const objData = await response.json();
           if(objData.status){
               this.strImgUrl= objData.data.url,
@@ -110,9 +114,10 @@ const App = {
               this.strNombre= objData.data.name,
               this.strDescripcionCorta= objData.data.short_description,
               this.intEstado= objData.data.status,
-              setTinymce("#strDescripcion");
+              this.intArea = objData.data.categoryid;
+              setTinymce("#strDescripcion",500);
               document.querySelector("#strDescripcion").value = objData.data.description,
-              this.modal = new bootstrap.Modal(document.querySelector("#modalAreas"));
+              this.modal = new bootstrap.Modal(document.querySelector("#modalServices"));
               this.modal.show();
           }else{
               Swal.fire("Error",objData.msg,"error");
@@ -135,16 +140,16 @@ const App = {
                   const formData = new FormData();
                   formData.append("id",objVue.intId);
                   formData.append("tipo_busqueda",strTipo);
-                  const response = await fetch(base_url+"/Areas/delDatos",{method:"POST",body:formData});
+                  const response = await fetch(base_url+"/Servicios/Servicios/delDatos",{method:"POST",body:formData});
                   const objData = await response.json();
                   if(objData.status){
                     Swal.fire("Eliminado!",objData.msg,"success");
-                    objVue.getBuscar(1,"areas");
+                    objVue.getBuscar(1,"servicios");
                   }else{
                     Swal.fire("Error",objData.msg,"error");
                   }
               }else{
-                objVue.getBuscar(1,"areas");
+                objVue.getBuscar(1,"servicios");
               }
           });
         },

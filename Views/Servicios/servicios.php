@@ -1,10 +1,8 @@
 <?php 
     headerAdmin($data);
-    getModal("modalServices");
+    getModal("Servicios/modalServicios");
 ?>
 <div class="body flex-grow-1 px-3" id="<?=$data['page_name']?>">
-    <h2 class="text-center"><?=$data['page_title']?></h2>
-    <?php getComponent("buttonsAdmin",$data);?>
     <div class="mt-3">
         <div class="row">
             <div class="col-md-2">
@@ -33,9 +31,8 @@
                         <th>ID</th>
                         <th>Portada</th>
                         <th>Servicio</th>
-                        <th>Área</th>
                         <th>Descripción corta</th>
-                        <th>Estado</th>Asdasda
+                        <th>Estado</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -46,7 +43,6 @@
                             <img :src="data.url" :alt="data.name" class="img-thumbnail" style="width: 50px; height: 50px;">
                         </td>
                         <td data-title="Servicio">{{data.name}}</td>
-                        <td data-title="Área">{{data.category}}</td>
                         <td data-title="Descripción">{{data.short_description}}</td>
                         <td data-title="Estado" class="text-center">
                             <span :class="data.status == '1' ? 'bg-success' : 'bg-danger'" class="badge text-white">

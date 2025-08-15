@@ -25,6 +25,10 @@
     $router->setRoute("productos/unidades-medida/","Productos/ProductosOpciones/unidades",false);
     $router->setRoute("productos/caracteristicas/","Productos/ProductosOpciones/caracteristicas",false);
 
+    //Servicios
+    $router->setRoute("servicios/","Servicios/Servicios/servicios",false);
+    $router->setRoute("servicios/citas/","Servicios/Citas/citas",false);
+
     //Pedidos
     $router->setRoute("pedidos/cotizaciones/","Pedidos/Cotizaciones/cotizaciones",false);
     $router->setRoute("pedidos/","Pedidos/Pedidos",false);
