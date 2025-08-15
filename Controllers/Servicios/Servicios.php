@@ -27,7 +27,7 @@
         public function setServicio(){
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
-                    if(empty($_POST['nombre']) || empty($_POST['area'])){
+                    if(empty($_POST['nombre'])){
                         $arrResponse = array("status" => false, "msg" => 'Los campos con (*) son obligatorios.');
                     }else{ 
                         $intId = intval($_POST['id']);

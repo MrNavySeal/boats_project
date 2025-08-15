@@ -70,7 +70,6 @@ const App = {
             if (parts.length > 2) {valor = parts[0] + "," + parts[1];}
             else {valor = numericValue;}
             this.intValorBase = valor;
-            this.getConversion(0);
         },
         setObjetivo:function(e){
             const input = e.target.value;
@@ -80,10 +79,9 @@ const App = {
             if (parts.length > 2) {valor = parts[0] + "," + parts[1];}
             else {valor = numericValue;}
             this.intValorObjetivo = valor;
-            this.getConversion(1);
         },
         getDatosIniciales:async function(){
-            const response = await fetch(base_url+"/casos/getDatosIniciales");
+            const response = await fetch(base_url+"/servicios/citas/getDatosIniciales");
             const objData = await response.json();
             this.strMoneda = objData.currency;
             this.arrEstados =objData.status;
@@ -109,11 +107,11 @@ const App = {
             
         },
         setDatos: async function(){
-            if(this.objCliente.id == "" || this.objServicio.id == "" || this.strFecha == "" || this.strHora=="" || this.intValorBase=="" || this.intValorObjetivo==""){
+            if(this.objCliente.id == "" || this.objServicio.id == "" || this.strFecha == "" || this.strHora=="" || this.intValorBase==""){
                 Swal.fire("Error","Todos los campos marcados con (*) son obligatorios","error");
                 return false;
             }
-            if(this.intValorBase <= 0 || this.intValorObjetivo <=0){
+            if(this.intValorBase <= 0){
                 Swal.fire("Error","El valor y su conversión no puede ser menor o igual a cero","error");
                 return false;
             }
@@ -135,7 +133,7 @@ const App = {
 
             this.$refs.btnAdd.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             this.$refs.btnAdd.disabled = true;
-            const response = await fetch(base_url+"/Casos/setCaso",{method:"POST",body:formData});
+            const response = await fetch(base_url+"/servicios/citas/setCaso",{method:"POST",body:formData});
             const objData = await response.json();
             this.$refs.btnAdd.innerHTML = `Guardar <i class="fas fa-save"></i>`;
             this.$refs.btnAdd.disabled = false;
@@ -166,7 +164,7 @@ const App = {
             formData.append("pagina",this.intPagina);
             formData.append("buscar",this.strBuscar);
             formData.append("tipo_busqueda",strTipo);
-            const response = await fetch(base_url+"/casos/getBuscar",{method:"POST",body:formData});
+            const response = await fetch(base_url+"/servicios/citas/getBuscar",{method:"POST",body:formData});
             const objData = await response.json();
             this.arrData = objData.data;
             this.intInicioPagina  = objData.start_page;
@@ -181,7 +179,7 @@ const App = {
           const formData = new FormData();
           formData.append("id",this.intId);
           formData.append("tipo_busqueda",strTipo);
-          const response = await fetch(base_url+"/Casos/getDatos",{method:"POST",body:formData});
+          const response = await fetch(base_url+"/servicios/citas/getDatos",{method:"POST",body:formData});
           const objData = await response.json();
 
           if(objData.status){
@@ -224,7 +222,7 @@ const App = {
                   const formData = new FormData();
                   formData.append("id",objVue.intId);
                   formData.append("tipo_busqueda",strTipo);
-                  const response = await fetch(base_url+"/casos/delDatos",{method:"POST",body:formData});
+                  const response = await fetch(base_url+"/servicios/citas/delDatos",{method:"POST",body:formData});
                   const objData = await response.json();
                   if(objData.status){
                     Swal.fire("Eliminado!",objData.msg,"success");
@@ -239,26 +237,13 @@ const App = {
         },
         setItem:function(data,tipo){
             if(tipo == "servicios"){this.objServicio=data;this.modalServicios.hide()}
-            if(tipo == "clientes"){this.objCliente=data;this.modalClientes.hide();this.getConversion()}
+            if(tipo == "clientes"){this.objCliente=data;this.modalClientes.hide();}
         },
         getBotones:function(){
             this.arrBotones = [];
             for (let i = this.intInicioPagina; i < this.intTotalBotones; i++) {
                 this.arrBotones.push(i);
             }
-        },
-        getConversion:async function(flag=0){
-            const formData = new FormData();
-            formData.append("base",this.strMoneda);
-            formData.append("objetivo",this.objCliente.currency);
-            formData.append("valor_base",this.intValorBase);
-            formData.append("valor_objetivo",this.intValorObjetivo);
-            formData.append("modo",flag);
-            const response = await fetch(base_url+"/casos/getConversion",{method:"POST",body:formData});
-            const objData = await response.json();
-            if(flag){ this.intValorBase = objData.data; }
-            else { this.intValorObjetivo = objData.data; }
-           
         },
         copiar:function(data,idBtn){
             const url =base_url+"/pago/pago/"+data.id_encrypt;

@@ -15,13 +15,6 @@
                                 <input class="d-none" id="strImagen" type="file" accept="image/*" @change="uploadImagen"> 
                             </div>
                             <div class="mb-3">
-                                <label for="txtName" class="form-label">Área de servicios <span class="text-danger">*</span></label>
-                                <select class="form-control" aria-label="Default select example" v-model="intArea" required>
-                                    <option value="">Seleccione</option>
-                                    <option v-for="(data,index) in arrAreas" :value="data.id" :key="index">{{data.name}}</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
                                 <label for="txtName" class="form-label">Título <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" v-model="strNombre" required>
                             </div>

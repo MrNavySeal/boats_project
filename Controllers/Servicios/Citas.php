@@ -58,9 +58,7 @@
         public function setCaso(){
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
-                    
-                    if(empty($_POST['servicio']) || empty($_POST['cliente']) || empty($_POST['fecha']) || empty($_POST['hora']) || empty($_POST['valor_base'])
-                    || empty($_POST['valor_objetivo']) || empty($_POST['moneda_base']) || empty($_POST['moneda_objetivo'])){
+                    if(empty($_POST['servicio']) || empty($_POST['cliente']) || empty($_POST['fecha']) || empty($_POST['hora']) || empty($_POST['valor_base'])){
                         $arrResponse = array("status" => false, "msg" => 'Los campos con (*) son obligatorios.');
                     }else{ 
                         

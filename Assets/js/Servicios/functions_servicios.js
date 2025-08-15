@@ -48,7 +48,7 @@ const App = {
             this.modal.show();
         },
         setDatos: async function(){
-            if(this.strNombre == "" || this.intArea == ""){
+            if(this.strNombre == ""){
                 Swal.fire("Error","Todos los campos marcados con (*) son obligatorios","error");
                 return false;
             }
@@ -161,6 +161,7 @@ const App = {
         },
         uploadImagen:function(e){
             this.strImagen = e.target.files[0];
+            console.log(this.strImagen);
             let type = this.strImagen.type;
             if(type != "image/png" && type != "image/jpg" && type != "image/jpeg" && type != "image/gif"){
                 Swal.fire("Error","Solo se permite imágenes.","error");
