@@ -463,6 +463,14 @@
   background-color: #1d2a4d !important;
 }
 
+.bg-white {
+  background-color: #fff !important;
+}
+
+.bg-light {
+  background-color: #eff3ff !important;
+}
+
 .c-p {
   cursor: pointer;
 }
@@ -2130,7 +2138,7 @@ footer .logo img {
   padding: 5px;
 }
 .item button {
-  color: #ebedef;
+  color: #eff3ff;
   opacity: 0.9;
 }
 .item button i {
@@ -2225,7 +2233,7 @@ footer .logo img {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  color: #ebedef;
+  color: #eff3ff;
   font-size: 15px;
   text-align: center;
   cursor: pointer;

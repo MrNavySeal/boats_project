@@ -9,12 +9,6 @@
     $reference = $producto['reference']!="" ? "REF: ".$producto['reference'] : "";
     $variant = $producto['product_type'] ? "Desde " : "";
     $price ='</span><span class="current">'.$variant.formatNum($producto['price']).'</span>';
-    $favorite="";
-    if($producto['favorite']== 0){
-        $favorite = '<button type="button" onclick="addWishList(this)" data-id="'.$id.'" class="btn btn-bg-3 btn-fav "><i class="far fa-heart "></i></button>';
-    }else{
-        $favorite = '<button type="button" onclick="addWishList(this)" data-id="'.$id.'" class="btn btn-bg-3 btn-fav active"><i class="fas fa-heart text-danger "></i></button>';
-    }
     if($producto['is_stock']){
         if($producto['discount'] > 0 && $producto['stock'] > 0){
             $discount = '<span class="discount">-'.$resultDiscount.'%</span>';
@@ -30,7 +24,7 @@
         }
     }
 ?>
-<div class="card--product">
+<div class="card--product bg-white">
     <div class="card--product-img">
         <a href="<?=base_url()."/shop/product/".$producto['route']?>">
             <?=$discount?>
@@ -47,13 +41,12 @@
     </div>
     <div class="card--product-btns">
         <div class="d-flex">
-            <?=$favorite?>
             <?php if(!$producto['product_type'] && $producto['is_stock'] && $producto['stock'] > 0){?>
             <button type="button" class="btn btn-bg-1" data-id="<?=$id?>" data-topic="2" onclick="addCart(this)"><i class="fas fa-shopping-cart"></i></button>
             <?php }else if(!$producto['product_type'] && !$producto['is_stock']){?>
             <button type="button" class="btn btn-bg-1" data-id="<?=$id?>" data-topic="2" onclick="addCart(this)"><i class="fas fa-shopping-cart"></i></button>
             <?php }else if($producto['product_type']){?>
-            <a href="<?=base_url()."/shop/product/".$producto['route']?>" class="btn btn-bg-1 w-100"><i class="fas fa-exchange-alt"></i></a>
+            <a href="<?=base_url()."/shop/product/".$producto['route']?>" class="btn btn-bg-1 w-100">Options <i class="fas fa-exchange-alt"></i></a>
             <?php }?>
         </div>
     </div>

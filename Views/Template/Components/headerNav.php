@@ -14,10 +14,10 @@
     }
     
 ?>
-<header>
+<header class="bg-white">
     <nav class="nav--bar">
         <div class="d-flex align-items-center logo-desktop">
-            <img class="me-2" src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>" width="80">
+            <img class="me-2" src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>" width="60">
             <span class="fs-2 fw-bold"><?=$company['name']?></span>
         </div>
         <div class="icon-mobile">
@@ -44,7 +44,23 @@
                     <li><a class="dropdown-item" href="<?=base_url()?>/shop">All</a></li>
                 </ul>
             </div>
-            <li class="nav-link"><a href="<?=base_url()?>/services">Services</a></li>
+            <div class="nav-link dropdown">
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Services
+                    <i class="fas fa-angle-down dropdown-icon"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <?php 
+                        for ($i=0; $i < count($subLinks['categories']); $i++) { 
+                            $link = $subLinks['categories'][$i];
+                            if($i <= 8){
+                    ?>
+                    <li><a class="dropdown-item" href="<?=base_url()."/shop/category/".$link['route']?>"><?=$link['name']?></a></li>
+                    <?php } }?>
+                    <hr>
+                    <li><a class="dropdown-item" href="<?=base_url()?>/shop">All</a></li>
+                </ul>
+            </div>
             <li class="nav-link"><a href="<?=base_url()?>/about">About</a></li>
             <li class="nav-link"><a href="<?=base_url()?>/contact">Contact us</a></li>
         </ul>
