@@ -385,6 +385,43 @@
             $arrData = array($dateBeat);
             $this->con->update("UPDATE orderdata SET date_beat=? WHERE idorder=$idOrder",$arrData);
         }
+        public function selectCaso($intId){
+            $this->con = new Mysql();
+            $this->intId = $intId;
+            $sql = "SELECT date,time,amount as total,personid,service_id,idtransaction,status FROM orderdata WHERE idorder = $this->intId";
+            $request = $this->con->select($sql);
+            if(!empty($request)){
+                $sqlCliente = "SELECT p.firstname,
+                p.lastname,
+                p.email,
+                p.identification,
+                p.address,
+                DATE_FORMAT(p.date, '%d/%m/%Y') as date,
+                co.name as pais,
+                st.name as departamento,
+                ci.name as ciudad,
+                p.phone as telefono
+                FROM person p
+                LEFT JOIN countries co ON p.countryid = co.id
+                LEFT JOIN states st ON p.stateid = st.id
+                LEFT JOIN cities ci ON p.cityid = ci.id
+                WHERE p.idperson = $request[personid] AND p.status = 1";
+
+                $sqlServicio = "SELECT p.name as servicio
+                FROM service p 
+                WHERE p.status = 1 AND p.id = $request[service_id]";
+                $request['cliente'] = $this->con->select($sqlCliente);
+                $request['servicio'] = $this->con->select($sqlServicio);
+            }
+            return $request;
+        }
+        public function updateCaso($intId,$strTransaccion,$strStatus){
+            $this->con = new Mysql();
+            $sql = "UPDATE orderdata SET idtransaction=?,status=? WHERE idorder = $intId";
+            $arrData =[$strTransaccion,$strStatus];
+            $request = $this->con->update($sql,$arrData);
+            return $request;
+        }
     }
     
 ?>

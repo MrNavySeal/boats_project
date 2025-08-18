@@ -14,6 +14,29 @@
         }
 
         /******************************Views************************************/
+        public function servicio($params){
+            $company=getCompanyInfo();
+            if($params !=""){
+                $intId = setDesencriptar($params);
+                $request = $this->selectCaso($intId);
+                if(!empty($request) && $request['status'] != "approved"){
+                    $data['id_encrypt'] = $params;
+                    $data['company'] = $company;
+                    $data['page_tag'] = $company['name'];
+                    $data['page_title'] = "Pago | ".$company['name'];
+                    $data['page_name'] = "Pago";
+                    $data['data'] = $request;
+                    $data['app'] = "functions_pago.js";
+                    $this->views->getView($this,"servicio",$data);
+                }else{
+                    header("location: ".BASE_URL."/errors");
+                    die();
+                }
+            }else{
+                header("location: ".BASE_URL."/errors");
+                die();
+            }
+        }
         public function pago(){
             if(isset($_SESSION['login']) && isset($_SESSION['arrCart']) && !empty($_SESSION['arrCart'])){
                 $company=getCompanyInfo();
@@ -271,6 +294,52 @@
                 $html.='<option value="'.$request[$i]['id'].'">'.$request[$i]['name'].'</option>';
             }
             echo json_encode($html,JSON_UNESCAPED_UNICODE);
+            die();
+        }
+        public function getCaso($params){
+            if($params !=""){
+                $intId = setDesencriptar($params);
+                $request = $this->selectCaso($intId);
+                if(!empty($request)){
+                    echo json_encode($request,JSON_UNESCAPED_UNICODE);
+                }
+            }
+            die();
+        }
+        public function setCaso(){
+            if($_POST){
+                $objPaypal = json_decode($_POST['data']);
+                if(is_object($objPaypal)){
+                    $intId = setDesencriptar($_POST['id']);
+                    $arrOrden = $this->selectCaso($intId);
+                    if(!empty($arrOrden)){
+                        $strTransaccion = $objPaypal->purchase_units[0]->payments->captures[0]->id;
+                        $strStatus = strtolower($objPaypal->purchase_units[0]->payments->captures[0]->status);
+                        $strStatus = $strStatus == "completed" ? "approved" : "pendent";
+                        $request = $this->updateCaso($intId,$strTransaccion,$strStatus);
+                        if($request > 0){
+                            $company = getCompanyInfo();
+                            $arrOrden['idorder'] = $intId;
+                            $arrEmailOrden = array(
+                                'asunto' => "Se ha generado un pago",
+                                'email_usuario' => $arrOrden['cliente']['email'], 
+                                'email_remitente'=>$company['email'],
+                                'company'=>$company,
+                                'email_copia' => $company['secondary_email'],
+                                'order' => $arrOrden);
+                            try {sendEmail($arrEmailOrden,'email_order');} catch (Exception $e) {}
+                            $arrResponse = array("status"=>true,"msg"=>"Payment has been made successfully.");
+                        }else{
+                            $arrResponse = array("status"=>false,"msg"=>"Something went wrong, please try again.");
+                        }
+                    }else{
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong, please try again.");
+                    }
+                }else{
+                    $arrResponse = array("status"=>false,"msg"=>"Something went wrong, please try again.");
+                }
+                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+            }
             die();
         }
     }

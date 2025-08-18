@@ -1,7 +1,6 @@
 <?php
     class Citas extends Controllers{
         public function __construct(){
-            
             session_start();
             if(empty($_SESSION['login'])){
                 header("location: ".base_url());
@@ -10,17 +9,18 @@
             parent::__construct();
         }
 
-        public function casos(){
+        public function citas(){
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
                     "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'] ? true : false, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/casos"."','','');mypop.focus();"],
                     "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'] ? true : false, "evento"=>"@click","funcion"=>"showModal()"],
                 ];
-                $data['page_tag'] = "";
-                $data['page_title'] = "Casos";
-                $data['page_name'] = "";
-                $data['panelapp'] = "functions_casos.js";
-                $this->views->getView($this,"casos",$data);
+                $data['page_tag'] = "Citas";
+                $data['page_title'] = "Citas | Servicios";
+                $data['page_name'] = "Citas";
+                $data['panelapp'] = "/Servicios/functions_citas.js";
+                $this->views->getView($this,"citas",$data);
+                //dep($data);exit;
             }else{
                 header("location: ".base_url());
                 die();
@@ -29,7 +29,7 @@
         public function transaccion($idTransaction){
             if($_SESSION['permitsModule']['r']){
                 $idPerson ="";
-                if($_SESSION['userData']['roleid'] == 2 ){
+                if($_SESSION['userData']['roleid'] == 2){
                     $idPerson= $_SESSION['idUser'];
                 }
                 $data['transaction'] = $this->model->selectTransaction($idTransaction,$idPerson);
@@ -63,29 +63,22 @@
                     }else{ 
                         
                         $intId = intval($_POST['id']);
-                        $strTitulo = ucfirst(strClean(clear_cadena($_POST['titulo'])));
-                        $strDescripcion = $_POST['descripcion'];
                         $intServicio = intval($_POST['servicio']);
                         $intCliente = intval($_POST['cliente']);
                         $strHora = strClean($_POST['hora']);
                         $strFecha = strClean($_POST['fecha']);
-                        $strMonedaBase = strtoupper(strClean($_POST['moneda_base']));
-                        $strMonedaObjetivo = strtoupper(strClean($_POST['moneda_objetivo']));
                         $strEstado = strtolower(strClean($_POST['estado']));
                         $intValorBase = doubleval($_POST['valor_base']);
-                        $intValorObjetivo = doubleval($_POST['valor_objetivo']);
                         if($intId == 0){
                             if($_SESSION['permitsModule']['w']){
                                 $option = 1;
-                                $request= $this->model->insertCaso($strTitulo,$strDescripcion,$intServicio,$intCliente,$strHora,$strFecha,
-                                $strMonedaBase,$strMonedaObjetivo,$intValorBase,$intValorObjetivo,$strEstado);
+                                $request= $this->model->insertCaso($intServicio,$intCliente,$strHora,$strFecha,$intValorBase,$strEstado);
                             }
                                 
                         }else{
                             if($_SESSION['permitsModule']['u']){
                                 $option = 2;
-                                $request = $this->model->updateCaso($intId,$strTitulo,$strDescripcion,$intServicio,$intCliente,$strHora,$strFecha,
-                                $strMonedaBase,$strMonedaObjetivo,$intValorBase,$intValorObjetivo,$strEstado);
+                                $request = $this->model->updateCaso($intId,$intServicio,$intCliente,$strHora,$strFecha,$intValorBase,$strEstado);
                             }
                         }
 
@@ -162,8 +155,6 @@
                         foreach ($request['data'] as &$data) { 
                             if(isset($data['picture'])){ $data['url'] = media()."/images/uploads/".$data['picture'];}
                             $data['id_encrypt'] = setEncriptar($data['idorder']);
-                            $data['edit'] = $_SESSION['permitsModule']['u'];
-                            $data['delete'] = $_SESSION['permitsModule']['d'];
                         }
                     }
                     echo json_encode($request,JSON_UNESCAPED_UNICODE);
@@ -174,46 +165,6 @@
         public function getDatosIniciales(){
             if($_SESSION['permitsModule']['r']){
                 echo json_encode(['currency'=>getCompanyInfo()['currency']['code'],"status"=>STATUS],JSON_UNESCAPED_UNICODE);
-            }
-            die();
-        }
-        public function getConversion(){
-            if($_POST){
-                $intModo = intval($_POST['modo']);
-                $intMonedaBase = strtoupper(strClean($_POST['base']));
-                $intMonedaObjetivo = strtoupper(strClean($_POST['objetivo']));
-                $intValorBase = doubleval($_POST['valor_base']);
-                $intValorObjetivo = doubleval($_POST['valor_objetivo']);
-                $intValorConversionObjetivo = 0;
-                $request = $this->model->selectConversion($intMonedaBase,$intMonedaObjetivo);
-                $objConversion = new CurrencyConversionServiceProvider(new ExChangeProvider,$intMonedaBase,$intMonedaObjetivo,$intValorObjetivo);
-                if(!empty($request)){
-                    $strFechaConversion = new DateTime($request['date']);
-                    $strFechaActual = new DateTime();
-                    $intDias = $strFechaActual->diff($strFechaConversion)->days;
-                    $intValorConversionObjetivo = $request['target'];
-                    if($intDias >=15){
-                        $strFechaActual = date_format($strFechaActual,"Y-m-d");
-                        $arrData = $objConversion->getConversion();
-                        $intValorConversionObjetivo = $arrData['rate'];
-                        $this->model->updateConversion($request['id'],$intValorConversionObjetivo,$strFechaActual);
-                        $intValorObjetivo = round(($intValorBase * $intValorConversionObjetivo));
-                        $arrResponse = array("status"=>true,"data"=>$intValorObjetivo);
-                    }
-                    if(!$intModo){
-                        $intValorObjetivo =  round(($intValorBase*$intValorConversionObjetivo));
-                    }else{
-                        $intValorObjetivo =  round(($intValorObjetivo/$intValorConversionObjetivo));
-                    }
-                    $arrResponse = array("status"=>true,"data"=>$intValorObjetivo);
-                }else{
-                    $arrData = $objConversion->getConversion();
-                    $intValorConversionObjetivo = $arrData['rate'];
-                    $this->model->insertConversion($intMonedaBase,$intMonedaObjetivo,$intValorConversionObjetivo);
-                    $intValorObjetivo = round(($intValorBase * $intValorConversionObjetivo));
-                    $arrResponse = array("status"=>true,"data"=>$intValorObjetivo);
-                }
-                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             }
             die();
         }

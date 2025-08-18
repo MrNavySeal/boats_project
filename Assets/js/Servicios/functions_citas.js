@@ -88,7 +88,7 @@ const App = {
         },
         showModal:function(tipo="crear"){
             if(tipo == "crear"){ 
-                this.strTituloModal = "Nuevo caso";
+                this.strTituloModal = "Nueva cita";
                 this.strEstado= "confirmado";
                 this.intId = 0;
                 this.intValorBase=0;
@@ -98,8 +98,6 @@ const App = {
                 this.strHora="";
                 this.objServicio={id:"",name:""};
                 this.objCliente={id:"",firstname:"",lastname:"",currency:"COP"};
-                setTinymce("#strDescripcion");
-                document.querySelector("#strDescripcion").value ="";
                 this.modal = new bootstrap.Modal(document.querySelector("#modalCase")); this.modal.show();
             }
             if(tipo == "clientes"){ this.modalClientes = new bootstrap.Modal(document.querySelector("#modalSearchCustomers")); this.modalClientes.show();this.getBuscar(1,"clientes")}
@@ -115,8 +113,6 @@ const App = {
                 Swal.fire("Error","El valor y su conversión no puede ser menor o igual a cero","error");
                 return false;
             }
-            tinymce.triggerSave();
-            this.strDescripcion = document.querySelector("#strDescripcion").value;
             const formData = new FormData();
             formData.append("id",this.intId);
             formData.append("servicio",this.objServicio.id);
@@ -148,7 +144,6 @@ const App = {
                     this.objServicio={id:"",name:""};
                     this.objCliente={id:"",firstname:"",lastname:"",currency:"COP"};
                     this.strEstado= "confirmado";
-                    document.querySelector("#strDescripcion").value="";
                 }
                 this.modal.hide();
             }else{
@@ -175,7 +170,7 @@ const App = {
         },
         getDatos:async function(intId,strTipo){
           this.intId = intId;
-          this.strTituloModal = "Editar caso";
+          this.strTituloModal = "Editar cita";
           const formData = new FormData();
           formData.append("id",this.intId);
           formData.append("tipo_busqueda",strTipo);
@@ -187,13 +182,11 @@ const App = {
             this.objServicio = objData.data.servicio;
             this.strFecha = objData.data.date;
             this.strHora = objData.data.time;
-            this.intValorBase = objData.data.value_base;
+            this.intValorBase = objData.data.amount;
             this.intValorObjetivo = objData.data.value_target;
             this.strTitulo = objData.data.title;
             this.strEstado = objData.data.statusorder;
             this.strEstadoPedido = objData.data.status;
-            setTinymce("#strDescripcion",500);
-            document.querySelector("#strDescripcion").value = objData.data.note,
             this.modal = new bootstrap.Modal(document.querySelector("#modalCase"));
             this.modal.show();
           }else{
@@ -246,7 +239,7 @@ const App = {
             }
         },
         copiar:function(data,idBtn){
-            const url =base_url+"/pago/pago/"+data.id_encrypt;
+            const url =base_url+"/checkout/service/"+data.id_encrypt;
             navigator.clipboard.writeText(url).then(function() { 
                 const exampleEl = document.getElementById(idBtn)
                 const popover = new bootstrap.Popover(exampleEl)

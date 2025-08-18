@@ -26,24 +26,21 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Fecha de cita <span class="text-danger">*</span></label>
                                 <input type="date" class="form-control" v-model="strFecha">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Hora de cita <span class="text-danger">*</span></label>
                                 <input type="time" class="form-control" v-model="strHora">
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                             <label for="" class="form-label">Valor <span class="text-danger">*</span></label>
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">{{strMoneda}}</span>
-                                <input :disabled="strEstadoPedido =='approved' && intId > 0" type="text" class="form-control text-end" :value="valorBase" aria-describedby="basic-addon1" @keyup="setBase($event)">
-                            </div>
+                            <input  type="text" class="form-control text-end" :value="valorBase" aria-describedby="basic-addon1" @keyup="setBase($event)">
                         </div>
                         <div class="col-md-12" v-if="intId > 0">
                             <div class="mb-3">

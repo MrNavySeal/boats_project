@@ -28,10 +28,10 @@
             if($this->intPorPagina != 0){
                 $limit = " LIMIT $this->intPaginaInicio,$this->intPorPagina";
             }
-            $sql = "SELECT p.*, c.name as category FROM service p INNER JOIN category c ON c.id = p.categoryid 
-            WHERE p.status = 1 AND (p.name like '$this->strBuscar%' OR p.short_description like '$this->strBuscar%' OR c.name like '$this->strBuscar%') ORDER BY p.id DESC $limit";  
-            $sqlTotal = "SELECT count(*) as total FROM service p INNER JOIN category c ON c.id = p.categoryid 
-            WHERE p.status = 1 AND (p.name like '$this->strBuscar%' OR p.short_description like '$this->strBuscar%' OR c.name like '$this->strBuscar%') ORDER BY p.id DESC $limit"; 
+            $sql = "SELECT p.* FROM service p 
+            WHERE p.status = 1 AND (p.name like '$this->strBuscar%' OR p.short_description like '$this->strBuscar%') ORDER BY p.id DESC $limit";  
+            $sqlTotal = "SELECT count(*) as total FROM service p
+            WHERE p.status = 1 AND (p.name like '$this->strBuscar%' OR p.short_description like '$this->strBuscar%' ) ORDER BY p.id DESC $limit"; 
 
             $totalRecords = $this->select($sqlTotal)['total'];
             $totalPages = intval($totalRecords > 0 ? ceil($totalRecords/$this->intPorPagina) : 0);
@@ -66,31 +66,23 @@
             co.name as pais,
             st.name as departamento,
             ci.name as ciudad,
-            cp.phonecode,
-            ty.name as tipo_documento,
-            cu.code as currency,
-            CONCAT('+',cp.phonecode,' ',p.phone) as telefono
+            p.phone as telefono
             FROM person p
             LEFT JOIN countries co ON p.countryid = co.id
             LEFT JOIN states st ON p.stateid = st.id
             LEFT JOIN cities ci ON p.cityid = ci.id
-            LEFT JOIN countries cp ON p.phone_country = cp.id
-            LEFT JOIN document_type ty ON p.typeid = ty.id
-            LEFT JOIN currency cu ON cp.shortname = cu.iso
             WHERE p.status = 1 AND p.roleid = 2 AND (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
-            OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%') 
+            OR ci.name like '$this->strBuscar%') 
             ORDER BY p.idperson DESC $limit";  
 
             $sqlTotal = "SELECT count(*) as total FROM person p
             LEFT JOIN countries co ON p.countryid = co.id
             LEFT JOIN states st ON p.stateid = st.id
             LEFT JOIN cities ci ON p.cityid = ci.id
-            LEFT JOIN countries cp ON p.phone_country = cp.id
-            LEFT JOIN document_type ty ON p.typeid = ty.id
             WHERE p.status = 1 AND p.roleid = 2 AND (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
-            OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%') 
+            OR ci.name like '$this->strBuscar%')
             ORDER BY p.idperson DESC";
 
             $totalRecords = $this->select($sqlTotal)['total'];
@@ -126,48 +118,34 @@
             co.name as pais,
             st.name as departamento,
             ci.name as ciudad,
-            cp.phonecode,
-            ty.name as tipo_documento,
-            cu.code as currency,
-            CONCAT('+',cp.phonecode,' ',p.phone) as telefono,
+            p.phone as telefono,
             serv.name as servicio,
-            c.name as area,
             p.address,
             p.firstname,
             p.lastname,
-            p.phone,
-            p.phone_country,
             p.email,
             p.identification
             FROM orderdata ord
             LEFT JOIN person p ON p.idperson = ord.personid
             LEFT JOIN service serv ON ord.service_id = serv.id
-            LEFT JOIN category c ON c.id = serv.categoryid 
             LEFT JOIN countries co ON p.countryid = co.id
             LEFT JOIN states st ON p.stateid = st.id
             LEFT JOIN cities ci ON p.cityid = ci.id
-            LEFT JOIN countries cp ON p.phone_country = cp.id
-            LEFT JOIN document_type ty ON p.typeid = ty.id
-            LEFT JOIN currency cu ON cp.shortname = cu.iso
             WHERE (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
-            OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%' OR serv.name like '$this->strBuscar%' OR c.name like '$this->strBuscar%') 
+            OR ci.name like '$this->strBuscar%' OR serv.name like '$this->strBuscar%') AND type_order = 2
             ORDER BY ord.idorder DESC $limit";  
 
             $sqlTotal = "SELECT count(*) as total FROM orderdata ord
             LEFT JOIN person p ON p.idperson = ord.personid
             LEFT JOIN service serv ON ord.service_id = serv.id
-            LEFT JOIN category c ON c.id = serv.categoryid 
             LEFT JOIN countries co ON p.countryid = co.id
             LEFT JOIN states st ON p.stateid = st.id
             LEFT JOIN cities ci ON p.cityid = ci.id
-            LEFT JOIN countries cp ON p.phone_country = cp.id
-            LEFT JOIN document_type ty ON p.typeid = ty.id
-            LEFT JOIN currency cu ON cp.shortname = cu.iso
             WHERE (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
-            OR ci.name like '$this->strBuscar%' OR ty.name like '$this->strBuscar%' OR serv.name like '$this->strBuscar%' OR c.name like '$this->strBuscar%') 
-            ORDER BY ord.idorder DESC";
+            OR ci.name like '$this->strBuscar%' OR serv.name like '$this->strBuscar%')  AND type_order = 2
+            ORDER BY ord.idorder";
 
             $totalRecords = $this->select($sqlTotal)['total'];
             $totalPages = intval($totalRecords > 0 ? ceil($totalRecords/$this->intPorPagina) : 0);
@@ -193,7 +171,7 @@
         }
         public function selectCaso($intId){
             $this->intId = $intId;
-            $sql = "SELECT * FROM orderdata WHERE idorder = $this->intId";
+            $sql = "SELECT *, DATE_FORMAT(date, '%Y-%m-%d') as date FROM orderdata WHERE idorder = $this->intId";
            
             $request = $this->select($sql);
             if(!empty($request)){
@@ -202,110 +180,62 @@
                 co.name as pais,
                 st.name as departamento,
                 ci.name as ciudad,
-                cp.phonecode,
-                ty.name as tipo_documento,
-                cu.code as currency,
-                CONCAT('+',cp.phonecode,' ',p.phone) as telefono
+                p.phone as telefono
                 FROM person p
                 LEFT JOIN countries co ON p.countryid = co.id
                 LEFT JOIN states st ON p.stateid = st.id
                 LEFT JOIN cities ci ON p.cityid = ci.id
-                LEFT JOIN countries cp ON p.phone_country = cp.id
-                LEFT JOIN document_type ty ON p.typeid = ty.id
-                LEFT JOIN currency cu ON cp.shortname = cu.iso
                 WHERE p.idperson = $request[personid] AND p.status = 1";
 
-
-                $sqlServicio = "SELECT p.*, c.name as category 
-                FROM service p INNER JOIN category c ON c.id = p.categoryid 
+                $sqlServicio = "SELECT p.*
+                FROM service p
                 WHERE p.status = 1 AND p.id = $request[service_id]";
                 $request['cliente'] = $this->select($sqlCliente);
                 $request['servicio'] = $this->select($sqlServicio);
             }
             return $request;
         }
-        public function selectConversion($strMonedaBase,$strMonedaObjetivo){
-            $this->strMonedaBase = $strMonedaBase;
-            $this->strMonedaObjetivo = $strMonedaObjetivo;
-            $request = $this->select("SELECT * FROM conversion WHERE code_base = '$this->strMonedaBase' AND code_target = '$this->strMonedaObjetivo'");
-            return $request;
-        }
-        public function insertCaso($strTitulo,$strDescripcion,$intServicio,$intCliente,$strHora,$strFecha,
-        $strMonedaBase,$strMonedaObjetivo,$intValorBase,$intValorObjetivo,$strEstado){
-            $this->strTitulo = $strTitulo;
-            $this->strDescripcion = $strDescripcion;
+        public function insertCaso($intServicio,$intCliente,$strHora,$strFecha,$intValorBase,$strEstado){
             $this->intServicio = $intServicio;
             $this->intCliente = $intCliente;
             $this->strHora = $strHora;
             $this->strFecha = $strFecha;
             $this->intValorBase = $intValorBase;
-            $this->intValorObjetivo = $intValorObjetivo;
-            $this->strMonedaBase = $strMonedaBase;
-            $this->strMonedaObjetivo = $strMonedaObjetivo;
             $this->strEstado = $strEstado;
-            $sql = "INSERT INTO orderdata(title,note,service_id,personid,time,date,value_base,value_target,currency_base,currency_target,status,statusorder)
-            VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
+            $sql = "INSERT INTO orderdata(service_id,personid,time,date,amount,status,statusorder,type_order)
+            VALUES(?,?,?,?,?,?,?,?)";
             $arrData =[
-                $this->strTitulo,
-                $this->strDescripcion,
                 $this->intServicio,
                 $this->intCliente, 
                 $this->strHora,
                 $this->strFecha, 
                 $this->intValorBase,
-                $this->intValorObjetivo,
-                $this->strMonedaBase,
-                $this->strMonedaObjetivo,
                 "pendent",
                 $this->strEstado,
+                2
             ];
             $request = $this->insert($sql,$arrData);
             return $request;
         }
-        public function updateCaso($intId,$strTitulo,$strDescripcion,$intServicio,$intCliente,$strHora,$strFecha,
-        $strMonedaBase,$strMonedaObjetivo,$intValorBase,$intValorObjetivo,$strEstado){
+        public function updateCaso($intId,$intServicio,$intCliente,$strHora,$strFecha,$intValorBase,$strEstado){
             $this->intId = $intId;
-            $this->strTitulo = $strTitulo;
-            $this->strDescripcion = $strDescripcion;
             $this->intServicio = $intServicio;
             $this->intCliente = $intCliente;
             $this->strHora = $strHora;
             $this->strFecha = $strFecha;
             $this->intValorBase = $intValorBase;
-            $this->intValorObjetivo = $intValorObjetivo;
-            $this->strMonedaBase = $strMonedaBase;
-            $this->strMonedaObjetivo = $strMonedaObjetivo;
             $this->strEstado = $strEstado;
-            $sql = "UPDATE orderdata SET title=?,note=?,service_id=?,personid=?,time=?,date=?,value_base=?,value_target=?,currency_base=?,currency_target=?,statusorder=?
+            $sql = "UPDATE orderdata SET service_id=?,personid=?,time=?,date=?,amount=?,statusorder=?
             WHERE idorder = $this->intId";
             $arrData =[
-                $this->strTitulo,
-                $this->strDescripcion,
                 $this->intServicio,
                 $this->intCliente, 
                 $this->strHora,
                 $this->strFecha, 
                 $this->intValorBase,
-                $this->intValorObjetivo,
-                $this->strMonedaBase,
-                $this->strMonedaObjetivo,
                 $this->strEstado,
             ];
             $request = $this->update($sql,$arrData);
-            return $request;
-        }
-        public function insertConversion($strMonedaBase,$strMonedaObjetivo,$intValorObjetivo){
-            $this->strMonedaBase = $strMonedaBase;
-            $this->strMonedaObjetivo = $strMonedaObjetivo;
-            $this->intValorObjetivo = $intValorObjetivo;
-            $request = $this->insert("INSERT INTO conversion(code_base,code_target,target) VALUES(?,?,?)",[$this->strMonedaBase,$this->strMonedaObjetivo,$this->intValorObjetivo]);
-            return $request;
-        }
-        public function updateConversion($intId,$intValorObjetivo,$strFecha){
-            $this->intId = $intId;
-            $this->intValorObjetivo = $intValorObjetivo;
-            $this->strFecha = $strFecha;
-            $request = $this->update("UPDATE conversion SET target=?,date=? WHERE id = $this->intId",[$this->intValorObjetivo,$this->strFecha]);
             return $request;
         }
         public function deleteCaso($id){

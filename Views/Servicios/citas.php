@@ -1,12 +1,10 @@
 <?php 
     headerAdmin($data);
-    getModal("modalCase");
+    getModal("Servicios/modalCitas");
     getModal("modalSearchServices");
     getModal("modalSearchCustomers");
 ?>
 <div class="body flex-grow-1 px-3" id="<?=$data['page_name']?>">
-    <h2 class="text-center"><?=$data['page_title']?></h2>
-    <?php getComponent("buttonsAdmin",$data);?>
     <div class="mt-3">
         <div class="row">
             <div class="col-md-2">
@@ -38,14 +36,10 @@
                         <th>Documento</th>
                         <th>Teléfono</th>
                         <th>Correo</th>
-                        <th>País</th>
                         <th>Cita</th>
-                        <?php if($_SESSION['userData']['roleid'] != 2) {?>
-                        <th>Valor</th>
-                        <?php }?>
                         <th>Total</th>
                         <th>Estado de pago</th>
-                        <th>Estado de caso</th>
+                        <th>Estado de cita</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -57,12 +51,8 @@
                         <td data-title="Documento">{{data.identification}}</td>
                         <td data-title="Teléfono" class="text-nowrap">{{data.telefono}}</td>
                         <td data-title="Correo">{{data.email}}</td>
-                        <td data-title="País">{{data.pais}}</td>
                         <td data-title="Cita" class="text-center text-nowrap">{{data.date}}</td>
-                        <?php if($_SESSION['userData']['roleid'] != 2) {?>
-                        <td data-title="Valor" class="text-end text-nowrap">{{data.currency_base+" "+formatMoney(data.value_base)}}</td>
-                        <?php }?>
-                        <td data-title="Total" class="text-end text-nowrap">{{data.currency_target+" "+formatMoney(data.value_target)}}</td>
+                        <td data-title="Total" class="text-end text-nowrap">{{formatMoney(data.amount)}}</td>
                         <td data-title="Estado" class="text-center">
                             <span :class="data.status == 'approved' ? 'bg-success text-white' : data.status == 'pendent' ? 'bg-warning text-black' :'bg-danger text-white'" class="badge">
                                 {{ data.status == 'approved' ? "pagado" : data.status == 'pendent' ? "pendiente" : "anulado" }}
@@ -76,10 +66,14 @@
                         <td data-title="Opciones">
                             <div class="d-flex justify-content-center">
                                 <button class="btn btn-primary text-white m-1" :id="'btnPopover'+data.idorder" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Copiado!" type="button" title="Paypal"  @click="copiar(data,'btnPopover'+data.idorder)" v-if="data.status != 'approved'"><i class="fab fa-paypal"></i></button>
-                                <button class="btn btn-info text-white m-1" type="button" title="Correo" v-if="data.edit" @click="openBotones('correo',data.email)" ><i class="fa fa-envelope"></i></button>
-                                <button class="btn btn-success m-1"  title="Whatsapp" v-if="data.edit" @click="openBotones('wpp',data.phonecode+data.phone)"><i class="fab fa-whatsapp"></i></button>
-                                <button class="btn btn-success m-1" type="button" title="Editar" v-if="data.edit" @click="getDatos(data.idorder)" ><i class="fas fa-pencil-alt"></i></button>
-                                <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete && data.status != 'approved'" @click="delDatos(data.idorder)" ><i class="fas fa-trash-alt"></i></button>
+                                <button class="btn btn-info text-white m-1" type="button" title="Correo"  @click="openBotones('correo',data.email)" ><i class="fa fa-envelope"></i></button>
+                                <button class="btn btn-success m-1"  title="Whatsapp"  @click="openBotones('wpp',data.phonecode+data.phone)"><i class="fab fa-whatsapp"></i></button>
+                                <?php if($_SESSION['permitsModule']['u']){ ?>
+                                <button class="btn btn-success m-1" type="button" title="Editar"  @click="getDatos(data.idorder)" ><i class="fas fa-pencil-alt"></i></button>
+                                <?php } ?>
+                                <?php if($_SESSION['permitsModule']['d']){ ?>
+                                <button class="btn btn-danger m-1" type="button" title="Eliminar" @click="delDatos(data.idorder)"  v-if="data.status != 'approved'"><i class="fas fa-trash-alt"></i></button>
+                                 <?php } ?>
                             </div>
                         </td>
                     </tr>

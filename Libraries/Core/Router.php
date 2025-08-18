@@ -84,7 +84,7 @@
                 $content = $this->arrRoutes[$strName];
                 $params = !empty($content['params']) ? implode("/",explode(",",$content['params'])) : "";
                 $route = $content['name'].$params;
-                if($route == $strUrlNormalized){
+                if(strtolower($route) == $strUrlNormalized){
                     $arrRouteContent = $content;
                     break;
                 }else{
