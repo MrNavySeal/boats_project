@@ -16,6 +16,7 @@
     }
 
     $productos = $data['productos'];
+    $servicios = $data['servicios'];
     $banners = $data['banners'];
     $proCant = 4;
     $sliders = round(count($productos)/$proCant);
@@ -61,7 +62,7 @@
                     <h3 class="section--title t-color-1 fs-4 mb-0 text-start">Our services</h3>
                     <h2 class="section--title fs-1 t-color-4 text-start">Full suite of underwater cleaning services</h2>
                     <div class="services-slider-cat owl-carousel owl-theme mb-5" data-bs-ride="carousel">
-                        <?php for ($j=0; $j < count($productos); $j++) { $producto = $productos[$j]; getComponent("cardService",$producto);} ?>
+                        <?php for ($j=0; $j < count($servicios); $j++) { $servicio = $servicios[$j]; getComponent("cardService",$servicio);} ?>
                     </div>
                 </div>
             </div>

@@ -1,17 +1,7 @@
 <?php
     headerPage($data);
     $total = 0;
-    require_once("Libraries/vendor/autoload.php");
-    MercadoPago\SDK::setAccessToken($data['credentials']['secret']);
 
-    $preference = new MercadoPago\Preference();
-    $preference->payment_methods = array(
-        "excluded_payment_types" => array(
-          array("id" => "ticket")
-        ),
-        "installments" => 12
-      );
-    $item = new MercadoPago\Item();
     $arrProducts = $_SESSION['arrCart'];
     $arrShipping = $data['shipping'];
     $total = 0;
@@ -39,7 +29,6 @@
     }else{
         $total = $subtotal;
     }
-    //dep($situ);
     if($arrShipping['id'] < 3 || $arrShipping['id'] == 4){
         $envio = $arrShipping['value'];
         $total+=$envio;
@@ -47,24 +36,11 @@
         $envio = $_SESSION['shippingcity'];
         $total+= $envio;
     }
-    $item->title = "productos";
-    $item->quantity = 1;
-    $item->unit_price = floor($total);
-    $item->currency_id=$data['company']['currency']['code'];
-    $preference->items = array($item);
-    $preference->back_urls = array(
-        "success" => base_url()."/pago/confirmar",
-        "failure" => base_url()."/pago/error"
-    );
-    $preference->auto_return = "approved";
-    $preference->binary_mode = true;
-    $preference->save();
-
 
 ?>
-<script src="https://sdk.mercadopago.com/js/v2"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=<?=$$data['credentials']['client']?>&currency=USD"></script>
 <main id="<?=$data['page_name']?>">
-    <div class="container">
+    <div class="container bg-white">
         <nav class="mt-2 mb-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a class="text-decoration-none" href="<?=base_url()?>">Inicio</a></li>

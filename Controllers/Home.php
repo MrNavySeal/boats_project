@@ -19,6 +19,7 @@
             $data['page_tag'] = $company['name'];
             $data['page_title'] = $company['name'];
             $data['productos'] = $this->getProductsT(8);
+            $data['servicios'] = $this->getServicesT();
             $data['banners'] = $this->getBanners();
             $data['page_name'] = "home";
             $data['app'] = "functions_home.js";

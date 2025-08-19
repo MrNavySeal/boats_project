@@ -5,6 +5,7 @@
     $subLinks = navSubLinks();
     $company = getCompanyInfo();
     $navCategories=getNavCat();
+    $navServices=getNavServices();
     if(isset($_SESSION['arrCart']) && !empty($_SESSION['arrCart'])){
         $arrProducts = $_SESSION['arrCart'];
         foreach ($arrProducts as $product) {
@@ -51,14 +52,11 @@
                 </a>
                 <ul class="dropdown-menu">
                     <?php 
-                        for ($i=0; $i < count($subLinks['categories']); $i++) { 
-                            $link = $subLinks['categories'][$i];
-                            if($i <= 8){
+                        for ($i=0; $i < count($subLinks['services']); $i++) { 
+                            $link = $subLinks['services'][$i];
                     ?>
-                    <li><a class="dropdown-item" href="<?=base_url()."/shop/category/".$link['route']?>"><?=$link['name']?></a></li>
-                    <?php } }?>
-                    <hr>
-                    <li><a class="dropdown-item" href="<?=base_url()?>/shop">All</a></li>
+                    <li><a class="dropdown-item" href="<?=base_url()."/services/service/".$link['route']?>"><?=$link['name']?></a></li>
+                    <?php } ?>
                 </ul>
             </div>
             <li class="nav-link"><a href="<?=base_url()?>/about/">About</a></li>

@@ -13,17 +13,15 @@
         return $data;
     }
     function navSubLinks(){
-        require_once("Models/EnmarcarTrait.php");
         require_once("Models/PaginaTrait.php");
         require_once("Models/CategoryTrait.php");
         class SubLink{
-            use EnmarcarTrait,PaginaTrait,CategoryTrait;
+            use PaginaTrait,CategoryTrait;
             public function getInfo(){
-                $services = $this->selectServices();
+                $services = $this->getServicesT();
                 $categories = $this->getCategoriesT();
-                $framing = $this->selectTipos();
                 
-                return array("services"=>$services,"categories"=>$categories,"framing"=>$framing);
+                return array("services"=>$services,"categories"=>$categories);
             }
         }
         $obj = new SubLink();
@@ -411,6 +409,9 @@
         $categoria = new getCat();
         $request = $categoria->getCategories();
         return $request;
+    }
+    function getNavServices(){
+        require_once("Models/CategoryTrait.php");
     }
     function getIp(){
         $ip = "";
