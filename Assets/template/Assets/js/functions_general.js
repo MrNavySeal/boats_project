@@ -94,7 +94,7 @@ btnCart.addEventListener("click",function(){
             let btnCheckoutCart = document.querySelector(".btnCheckoutCart");
             btnCheckoutCart.addEventListener("click",function(){
                 if(objData.status){
-                    window.location.href=base_url+"/pago";
+                    window.location.href=base_url+"/checkout/";
                 }else{
                     openLoginModal();
                 }

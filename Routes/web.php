@@ -49,6 +49,8 @@
     $router->setRoute("shop/","Tienda",false);
     $router->setRoute("cart/","Carrito",false);
     $router->setRoute("checkout/","Pago/pago",false);
+    $router->setRoute("checkout/approved/","Pago/confirmar",false);
+    $router->setRoute("checkout/error/","Pago/error",false);
     $router->setRoute("checkout/service/","Pago/servicio");
     $router->setRoute("shop/product/","Tienda/producto");
     $router->setRoute("shop/category/","Tienda/categoria");

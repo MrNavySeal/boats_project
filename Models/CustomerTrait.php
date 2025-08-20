@@ -56,7 +56,7 @@
         }
         public function selectCountries(){
             $this->con = new Mysql();
-            $sql = "SELECT * FROM countries WHERE id = 47";
+            $sql = "SELECT * FROM countries WHERE id = 231";
             $request = $this->con->select($sql);
             return $request;
         }
@@ -110,7 +110,7 @@
             $this->strPhone = $strPhone;
             $this->strAddress = $strAddress;
             $this->strCedula = $strCedula;
-            $prov = $this->con->select_all("SELECT * FROM orderdata WHERE idtransaction = $this->strIdTransaction");
+            $prov = $this->con->select_all("SELECT * FROM orderdata WHERE idtransaction = '$this->strIdTransaction'");
             if(empty($prov)){
                 $sql ="INSERT INTO orderdata(personid,idtransaction,name,identification,email,phone,address,note,amount,status,coupon,shipping,type,statusorder) VALUE(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
                 $arrData = array(
@@ -130,11 +130,11 @@
                     $statusOrder
                 );
                 $request = $this->con->insert($sql,$arrData);
-                if($request>0){
+                /* if($request>0){
                     $this->updateDateBeat($request);
                     $this->insertIncome($request,3,1,"Venta de producto",$total,1);
                     $this->insertEgress($request,1,27,"Comisión de mercado pago",1,$this->strIdTransaction);
-                }
+                } */
             }
             return $request;
         }

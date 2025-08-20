@@ -1,3 +1,48 @@
+window.addEventListener("load",function(){
+    if(document.querySelector("#paypal-button-container")){
+      const intIdOrder = 0;
+      const paypalBtns=  window.paypal.Buttons({
+              createOrder: async (data, actions) => {
+                  const response = await fetch(base_url+"/pago/getTotal");
+                  const objData = await response.json();
+                  return actions.order.create({
+                      purchase_units: [{
+                          amount: {
+                              value: objData.total
+                          }
+                      }]
+                  });
+              },
+              onApprove: (data, actions) => {
+                  return actions.order.capture().then(async function(arrOrden) {
+                    let intPais = document.querySelector("#listCountry");
+                    let intDepartamento = document.querySelector("#listState");
+                    let intCiudad = document.querySelector("#listCity");
+                    let formOrden = document.querySelector("#formOrder");
+                    let strCountry = intPais.options[intPais.selectedIndex].text;
+                    let strState = intDepartamento.options[intDepartamento.selectedIndex].text;
+                    let strCity = intCiudad.options[intCiudad.selectedIndex].text;
+                    const formData = new FormData(formOrden);
+                    formData.append("country",strCountry);
+                    formData.append("state",strState);
+                    formData.append("city",strCity);
+                    formData.append("data",JSON.stringify(arrOrden));
+                    formData.append("id",intIdOrder);
+                    const response = await fetch(base_url+"/pago/checkInfo",{method:"POST",body:formData});
+                    const objData = await response.json();
+                      if(objData.status){
+                          window.location.href=base_url+"/checkout/approved/";
+                      }else{
+                          window.location.href=base_url+"/checkout/error/";
+                      }
+                  });
+              }
+          },
+      );
+      paypalBtns.render("#paypal-button-container");
+    }
+});
+
 document.querySelector("#btnCart").classList.add("d-none");
 let intCountry = document.querySelector("#listCountry");
 let intState = document.querySelector("#listState");
@@ -20,7 +65,7 @@ intState.addEventListener("change",function(){
         intCity.innerHTML = objData;
     });
 });
-btnOrder.addEventListener("click",function(e){
+/* btnOrder.addEventListener("click",function(e){
     let urlSearch = window.location.search;
     let params = new URLSearchParams(urlSearch);
     let cupon = "";
@@ -82,37 +127,4 @@ btnOrder.addEventListener("click",function(e){
             Swal.fire("Error",objData.msg,"error");
         }
     });
-});
-
-if(document.querySelector("#btnCoupon")){
-    let btnCoupon = document.querySelector("#btnCoupon");
-    btnCoupon.addEventListener("click",function(){
-        let formCoupon = document.querySelector("#formCoupon");
-        let strCoupon = document.querySelector("#txtCoupon").value;
-        if(strCoupon ==""){
-            alertCoupon.innerHTML="Por favor, ingresa el cupón.";
-            alertCoupon.classList.remove("d-none");
-            return false;
-        }
-        btnCoupon.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
-        btnCoupon.setAttribute("disabled","");
-
-        let formData = new FormData(formCoupon);
-        request(base_url+"/carrito/setCouponCode",formData,"post").then(function(objData){
-            btnCoupon.innerHTML=`+`;
-            btnCoupon.removeAttribute("disabled");
-            if(objData.status){
-                let urlSearch = window.location.search;
-                let params = new URLSearchParams(urlSearch);
-                let situ ="";
-                if(params.get("situ")){
-                    situ="&situ="+params.get("situ");
-                }
-                window.location.href = base_url+"/pago?cupon="+objData.data.code+situ;
-            }else{
-                alertCoupon.innerHTML=objData.msg;
-                alertCoupon.classList.remove("d-none");
-            }
-        });
-    })
-}
+}); */

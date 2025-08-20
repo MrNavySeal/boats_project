@@ -36,38 +36,37 @@
         $envio = $_SESSION['shippingcity'];
         $total+= $envio;
     }
-
 ?>
-<script src="https://www.paypal.com/sdk/js?client-id=<?=$$data['credentials']['client']?>&currency=USD"></script>
+<script src="https://www.paypal.com/sdk/js?client-id=<?=$data['credentials']['client']?>&currency=USD"></script>
 <main id="<?=$data['page_name']?>">
     <div class="container bg-white">
-        <nav class="mt-2 mb-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+        <nav class="mt-2 mb-2 p-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a class="text-decoration-none" href="<?=base_url()?>">Inicio</a></li>
-                <li class="breadcrumb-item"><a class="text-decoration-none" href="<?=base_url()?>/carrito">Carrito</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Pago</li>
+                <li class="breadcrumb-item"><a class="text-decoration-none" href="<?=base_url()?>">Home</a></li>
+                <li class="breadcrumb-item"><a class="text-decoration-none" href="<?=base_url()?>/cart/">Cart</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Checkout</li>
             </ol>
         </nav>
         <div class="row">
            <div class="col-lg-7 order-lg-1 order-md-5 order-sm-5">
                 <form id="formOrder" name="formOrder" class="p-4">
-                    <h2>Detalles de facturación</h2>
+                    <h2>Checkout</h2>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="txtNameOrder" class="form-label">Nombres <span class="text-danger">*</span></label>
+                                <label for="txtNameOrder" class="form-label">Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="txtNameOrder" name="txtNameOrder" value="<?=$_SESSION['userData']['firstname']?>" required="">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="txtLastNameOrder" class="form-label">Apellidos <span class="text-danger">*</span></label>
+                                <label for="txtLastNameOrder" class="form-label">Lastname <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="txtLastNameOrder" name="txtLastNameOrder" value="<?=$_SESSION['userData']['lastname']?>" required="">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="txtDocument" class="form-label">CC/NIT <span class="text-danger">*</span></label>
+                                <label for="txtDocument" class="form-label">ID number <span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" id="txtDocument" name="txtDocument" value="<?=$_SESSION['userData']['identification']?>" placeholder="12345678" required="">
                             </div>
                         </div>
@@ -80,13 +79,13 @@
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="txtPhoneOrder" class="form-label">Teléfono <span class="text-danger">*</span></label>
+                                <label for="txtPhoneOrder" class="form-label">Phone <span class="text-danger">*</span></label>
                                 <input type="number" class="form-control" id="txtPhoneOrder" name="txtPhoneOrder" required placeholder="312 345 6789">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="txtAddressOrder" class="form-label"> Dirección<span class="text-danger">*</span></label>
+                                <label for="txtAddressOrder" class="form-label">Address<span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="txtAddressOrder" name="txtAddressOrder" required="" placeholder="Carrera, calle, barrio...">
                             </div>
                         </div>
@@ -94,41 +93,41 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="listCountry" class="form-label">País <span class="text-danger">*</span></label>
+                                <label for="listCountry" class="form-label">Country <span class="text-danger">*</span></label>
                                 <select class="form-select" id="listCountry" name="listCountry" aria-label="Default select example" required="">
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="listState" class="form-label">Departamento <span class="text-danger">*</span></label>
+                                <label for="listState" class="form-label">State <span class="text-danger">*</span></label>
                                 <select class="form-select" id="listState" name="listState" aria-label="Default select example" required="">
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="listCity" class="form-label">Ciudad <span class="text-danger">*</span></label>
+                                <label for="listCity" class="form-label">City <span class="text-danger">*</span></label>
                                 <select class="form-select" id="listCity" name="listCity" aria-label="Default select example" required="">
                                 </select>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="txtPostCodeOrder" class="form-label"> Código postal</label>
-                                <input type="text" class="form-control" id="txtPostCodeOrder" name="txtPostCodeOrder" placeholder="500001">
+                                <label for="txtPostCodeOrder" class="form-label"> ZIP code</label>
+                                <input type="text" class="form-control" id="txtPostCodeOrder" name="txtPostCodeOrder" >
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="txtNote" class="form-label">Notas</label>
-                        <textarea class="form-control" id="txtNote" name="txtNote" rows="5" placeholder="Es posible que..."></textarea>
+                        <label for="txtNote" class="form-label">Notes</label>
+                        <textarea class="form-control" id="txtNote" name="txtNote" rows="5"></textarea>
                     </div>
                 </form>
             </div>
             <div class="col-lg-5 order-lg-5 order-md-5 order-sm-1 mb-4">
                 <div class="p-4 mb-4">
-                    <h2>Resumen</h2>
+                    <h2>Resume</h2>
                     <?php 
                         for ($i=0; $i < count($arrProducts) ; $i++) { 
                             $price =0;
@@ -148,61 +147,19 @@
                         <p class="m-0 fw-bold">Subtotal:</p>
                         <p class="m-0" id="subtotal"><?=formatNum($subtotal)?></p>
                     </div>
-                    <?php if(isset($data['cupon']) && !$data['cupon']['check']){?>
-                        <p class="m-0 fw-bold">Cupón:</p>
-                        <div class="d-flex justify-content-between">
-                            <p class="m-0"><?=$data['cupon']['code']?>:</p>
-                            <p class="m-0"><?=$data['cupon']['discount']?>%</p>
-                        </div>
-                        <a href="<?=base_url()."/pago".$situ?>" class="mb-3">Remover cupón</a>
-                        <div class="d-flex justify-content-between mb-3">
-                            <p class="m-0 fw-bold">Subtotal:</p>
-                            <p class="m-0" id="cuponTotal"><?=formatNum($cupon)?></p>
-                        </div>
-                    <?php }else if(isset($data['cupon']) && $data['cupon']['check']){?>
-                    <form id="formCoupon" class="mb-3">
-                        <div class="input-group">
-                            <input type="text" id="txtCoupon" name="cupon" class="form-control" placeholder="Código de descuento" aria-label="Coupon code" aria-describedby="button-addon2">
-                            <button type="button" class="btn btn-bg-1" type="button" id="btnCoupon">+</button>
-                        </div>
-                        <div class="alert alert-danger mt-3 d-none" id="alertCoupon" role="alert"></div>
-                    </form>
-                    <div id="alertCheckData" class="alert alert-danger" role="alert">
-                        El cupón <?=$data['cupon']['code']?> ya fue usado anteriormente, ingresa otro.
-                    </div>
-                    <?php }else{?>
-                    <form id="formCoupon" class="mb-3">
-                        <div class="input-group">
-                            <input type="text" id="txtCoupon" name="cupon" class="form-control" placeholder="Código de descuento" aria-label="Coupon code" aria-describedby="button-addon2">
-                            <button type="button" class="btn btn-bg-1" type="button" id="btnCoupon">+</button>
-                        </div>
-                        <div class="alert alert-danger mt-3 d-none" id="alertCoupon" role="alert"></div>
-                    </form>
-                    <?php }?>
                     <div class="d-flex justify-content-between mb-3 position-relative af-b-line">
-                        <p class="m-0 fw-bold">Envio <?= $arrShipping['id'] == 4 ? "contra entrega": ""?>:</p>
+                        <p class="m-0 fw-bold">Shippment <?= $arrShipping['id'] == 4 ? "cash on delivery": ""?>:</p>
                         <p class="m-0 fw-bold"><?=formatNum($envio)?></p>
                     </div>
                     <div class="d-flex justify-content-between mb-3 position-relative af-b-line">
                         <p class="m-0 fw-bold fs-5">Total</p>
                         <p class="m-0 fw-bold fs-5" id="totalResume"><?=formatNum($total)?></p>
                     </div>
-                    <button type="button" class="mb-3 w-100 btn btn-bg-1" id="btnOrder" red="<?=$preference->init_point; ?>">Pagar</button>
+                    <div id="paypal-button-container"></div>
+                    <!-- <button type="button" class="mb-3 w-100 btn btn-bg-1" id="btnOrder">Pagar</button> -->
                 </div>
             </div>
         </div>
     </div>
 </main>
-<script>
-const mp = new MercadoPago('<?=$data['credentials']['client']?>', {
-    locale: 'en-US'
-})
-const checkout = mp.checkout({
-    preference: {
-        id: '<?php echo $preference->id; ?>'
-    }
-});
-    </script>
-<?php
-    footerPage($data);
-?>
+<?php  footerPage($data); ?>

@@ -87,10 +87,10 @@
             if(isset($_SESSION['orderDataInfo'])){
                 $company=getCompanyInfo();
                 $data['page_tag'] = $company['name'];
-                $data['page_title'] ="Confirmar pedido | ".$company['name'];
-                $data['page_name'] = "confirmar";
+                $data['page_title'] ="Order approved | ".$company['name'];
+                $data['page_name'] = "approved";
                 $arrData = $_SESSION['orderDataInfo'];
-                $arrData['transaction'] = strClean($_GET['payment_id']);
+                $arrData['transaction'] = strClean($_SESSION['orderDataInfo']['transaction']);
                 $arrData['status'] = strClean($_GET['status']);
                 $arrData['type'] = strClean($_GET['payment_type']);
                 $orderData = $this->setOrder($arrData);
@@ -109,7 +109,12 @@
             $data['page_name'] = "Error";
             $this->views->getView($this,"error",$data); 
         }
-        public function calcTotalCart($arrProducts,$code=null,$city=null,$situ){
+        public function getTotal(){
+            $arrProducts = $_SESSION['arrCart'];
+            $arrData = $this->calcTotalCart($arrProducts);
+            echo json_encode($arrData,JSON_UNESCAPED_UNICODE);
+        }
+        public function calcTotalCart($arrProducts,$code=null,$city=null,$situ=true){
             $arrShipping = $this->selectShippingMode();
             $total=0;
             $subtotal=0;
@@ -170,34 +175,41 @@
                 empty($_POST['listState']) || empty($_POST['listCity']) || empty($_POST['txtDocument'])){
                     $arrResponse = array("status"=>false,"msg"=>"Error de datos");
                 }else{
-                    $strName = strClean(ucwords($_POST['txtNameOrder']));
-                    $strLastName = strClean(ucwords($_POST['txtLastNameOrder']));
-                    $strEmail = strClean(strtolower($_POST['txtEmailOrder']));
-                    $strPhone = strClean($_POST['txtPhoneOrder']);
-                    $strAddress = strClean($_POST['txtAddressOrder']);
-                    $strCountry = strClean($_POST['country']);
-                    $strState = strClean($_POST['state']);
-                    $strCity = strClean($_POST['city']);
-                    $cupon = strtoupper(strClean($_POST['cupon']));
-                    $strPostal = strClean($_POST['txtPostCodeOrder']);
-                    $strNote = strClean($_POST['txtNote']);
-                    $strDocument = strClean($_POST['txtDocument']);
-                    $situ = strtolower(strClean($_POST['situ']));
-                    $strAddress = $strAddress.", ".$strCity."/".$strState."/".$strCountry." ".$strPostal;
-                    $strName = $strName." ".$strLastName;
-
-                    $_SESSION['orderDataInfo'] = array(
-                        "name"=>$strName,
-                        "email"=>$strEmail,
-                        "phone"=>$strPhone,
-                        "address"=>$strAddress,
-                        "note"=>$strNote,
-                        "cupon"=>$cupon,
-                        "situ"=>$situ,
-                        "document"=>$strDocument,
-                        "city"=>$strCity
-                    );
-                    $arrResponse = array("status"=>true,"msg"=>"Datos guardados");
+                    $objPaypal = json_decode($_POST['data']);
+                    if(is_object($objPaypal)){
+                        $strName = strClean(ucwords($_POST['txtNameOrder']));
+                        $strLastName = strClean(ucwords($_POST['txtLastNameOrder']));
+                        $strEmail = strClean(strtolower($_POST['txtEmailOrder']));
+                        $strPhone = strClean($_POST['txtPhoneOrder']);
+                        $strAddress = strClean($_POST['txtAddressOrder']);
+                        $strCountry = strClean($_POST['country']);
+                        $strState = strClean($_POST['state']);
+                        $strCity = strClean($_POST['city']);
+                        $cupon = strtoupper(strClean($_POST['cupon']));
+                        $strPostal = strClean($_POST['txtPostCodeOrder']);
+                        $strNote = strClean($_POST['txtNote']);
+                        $strDocument = strClean($_POST['txtDocument']);
+                        $situ = strtolower(strClean($_POST['situ']));
+                        $strAddress = $strAddress.", ".$strCity."/".$strState."/".$strCountry." ".$strPostal;
+                        $strName = $strName." ".$strLastName;
+                        $strTransaccion = $objPaypal->purchase_units[0]->payments->captures[0]->id;
+    
+                        $_SESSION['orderDataInfo'] = array(
+                            "name"=>$strName,
+                            "email"=>$strEmail,
+                            "phone"=>$strPhone,
+                            "address"=>$strAddress,
+                            "note"=>$strNote,
+                            "cupon"=>$cupon,
+                            "situ"=>$situ,
+                            "document"=>$strDocument,
+                            "city"=>$strCity,
+                            "transaction"=>$strTransaccion
+                        );
+                        $arrResponse = array("status"=>true,"msg"=>"Datos guardados");
+                    }else{
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong, please try again.");
+                    }
                 }
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             }
@@ -217,7 +229,7 @@
             $strNote = $arrData['note'];
             $status = $arrData['status']!="" ? $arrData['status'] : "approved";
             $idTransaction =$arrData['transaction'];
-            $type ="mercadopago";
+            $type ="paypal";
             $situ = $arrData['situ'];
             $envio = 0;
             $statusOrder ="confirmado";
@@ -252,7 +264,7 @@
                 $requestDetail = $this->insertOrderDetail($arrOrder);
                 $orderInfo = $this->getOrder($request);
                 $company = getCompanyInfo();
-                $dataEmailOrden = array(
+                /* $dataEmailOrden = array(
                     'asunto' => "Se ha generado un pedido",
                     'email_usuario' => $strEmail, 
                     'email_remitente'=>$company['email'],
@@ -260,7 +272,7 @@
                     'email_copia' => $company['secondary_email'],
                     'order' => $orderInfo);
 
-                try {sendEmail($dataEmailOrden,'email_order');} catch (Exception $e) {}
+                try {sendEmail($dataEmailOrden,'email_order');} catch (Exception $e) {} */
                 $idOrder = openssl_encrypt($request,METHOD,KEY);
                 $idTransaction = openssl_encrypt($orderInfo['order']['idtransaction'],METHOD,KEY);
                 $orderData = array("order"=>$idOrder,"transaction"=>$idTransaction);
@@ -272,7 +284,7 @@
         public function getCountries(){
             $request = $this->selectCountries();
             $html='
-            <option value="0" selected>Seleccione</option>
+            <option value="0" selected>Select</option>
             <option value="'.$request['id'].'">'.$request['name'].'</option>
             ';
             echo json_encode($html,JSON_UNESCAPED_UNICODE);
@@ -280,7 +292,7 @@
         }
         public function getSelectCountry($id){
             $request = $this->selectStates($id);
-            $html='<option value="0" selected>Seleccione</option>';
+            $html='<option value="0" selected>Select</option>';
             for ($i=0; $i < count($request) ; $i++) { 
                 $html.='<option value="'.$request[$i]['id'].'">'.$request[$i]['name'].'</option>';
             }
@@ -289,7 +301,7 @@
         }
         public function getSelectState($id){
             $request = $this->selectCities($id);
-            $html='<option value="0" selected>Seleccione</option>';
+            $html='<option value="0" selected>Select</option>';
             for ($i=0; $i < count($request) ; $i++) { 
                 $html.='<option value="'.$request[$i]['id'].'">'.$request[$i]['name'].'</option>';
             }
