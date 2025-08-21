@@ -42,7 +42,7 @@
                     <li><a class="dropdown-item" href="<?=base_url()."/shop/category/".$link['route']?>"><?=$link['name']?></a></li>
                     <?php } }?>
                     <hr>
-                    <li><a class="dropdown-item" href="<?=base_url()?>/shop">All</a></li>
+                    <li><a class="dropdown-item" href="<?=base_url()?>/shop/">All</a></li>
                 </ul>
             </div>
             <div class="nav-link dropdown">
@@ -90,7 +90,7 @@
 </header>
 <div class="search">
     <span id="closeSearch"><i class="fas fa-times"></i></span>
-    <form action="<?=base_url()?>/shop/search" method="GET">
+    <form action="<?=base_url()?>/shop/search/" method="GET">
         <input type="search" name="b" id="" placeholder="Search...">
         <button type="submit" class="btn"><i class="fas fa-search"></i></button>
     </form>

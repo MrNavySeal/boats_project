@@ -23,7 +23,4 @@ window.addEventListener("load",function(){
         filterOptions.classList.add("active");
         document.querySelector(".filter-options-overlay").style.display="block";
     });
-    selectSort.addEventListener("change",function(){
-        window.location.href = selectSort.options[selectSort.options.selectedIndex].getAttribute("data-url")+"&s="+selectSort.value;
-    });
 })

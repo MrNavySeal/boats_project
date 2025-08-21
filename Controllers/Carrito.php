@@ -96,7 +96,7 @@
                                             $arrCart[$i]['qty']+= $qty;
                                             if($arrCart[$i]['is_stock'] && $arrCart[$i]['qty'] > $arrProduct['stock']){
                                                 $arrCart[$i]['qty'] = $currentQty;
-                                                $arrResponse = array("status"=>false,"msg"=>"No hay suficientes unidades","data"=>$data);
+                                                $arrResponse = array("status"=>false,"msg"=>"Stock has run out","data"=>$data);
                                                 $flag = false;
                                                 break;
                                             }else{
@@ -104,7 +104,7 @@
                                                 foreach ($_SESSION['arrCart'] as $quantity) {
                                                     $qtyCart += $quantity['qty'];
                                                 }
-                                                $arrResponse = array("status"=>true,"msg"=>"Ha sido agregado a tu carrito.","qty"=>$qtyCart,"data"=>$data);
+                                                $arrResponse = array("status"=>true,"msg"=>"It has been added.","qty"=>$qtyCart,"data"=>$data);
                                             }
                                             $flag =false;
                                             break;
@@ -115,7 +115,7 @@
                                             $arrCart[$i]['qty']+= $qty;
                                             if($arrCart[$i]['is_stock'] && $arrCart[$i]['qty'] > $arrProduct['stock']){
                                                 $arrCart[$i]['qty'] = $currentQty;
-                                                $arrResponse = array("status"=>false,"msg"=>"No hay suficientes unidades","data"=>$data);
+                                                $arrResponse = array("status"=>false,"msg"=>"Stock has run out","data"=>$data);
                                                 $flag = false;
                                                 break;
                                             }else{
@@ -123,7 +123,7 @@
                                                 foreach ($_SESSION['arrCart'] as $quantity) {
                                                     $qtyCart += $quantity['qty'];
                                                 }
-                                                $arrResponse = array("status"=>true,"msg"=>"Ha sido agregado a tu carrito.","qty"=>$qtyCart,"data"=>$data);
+                                                $arrResponse = array("status"=>true,"msg"=>"It has been added.","qty"=>$qtyCart,"data"=>$data);
                                             }
                                             $flag =false;
                                             break;
@@ -133,10 +133,10 @@
                             }
                             if($flag){
                                 if(!empty($request) && $request['is_stock']  && $qty > $request['stock'] && $productType !=1){
-                                    $arrResponse = array("status"=>false,"msg"=>"No hay suficientes unidades","data"=>$data);
+                                    $arrResponse = array("status"=>false,"msg"=>"Stock has run out","data"=>$data);
                                     $_SESSION['arrCart'] = $arrCart;
                                 }else if(!empty($request['variant']) && $request['is_stock']  && $qty > $variant['stock'] && $productType == 1){
-                                    $arrResponse = array("status"=>false,"msg"=>"No hay suficientes unidades","data"=>$data);
+                                    $arrResponse = array("status"=>false,"msg"=>"Stock has run out","data"=>$data);
                                     $_SESSION['arrCart'] = $arrCart;
                                 }else{
                                     array_push($arrCart,$arrProduct);
@@ -144,12 +144,12 @@
                                     foreach ($_SESSION['arrCart'] as $quantity) {
                                         $qtyCart += $quantity['qty'];
                                     }
-                                    $arrResponse = array("status"=>true,"msg"=>"Ha sido agregado a tu carrito.","qty"=>$qtyCart,"data"=>$data);
+                                    $arrResponse = array("status"=>true,"msg"=>"It has been added.","qty"=>$qtyCart,"data"=>$data);
                                 }
                             }
                         }else{
                             if(!empty($request) && $request['is_stock'] && $qty > $request['stock'] && $productType != 1){
-                                $arrResponse = array("status"=>false,"msg"=>"No hay suficientes unidades","data"=>$data);
+                                $arrResponse = array("status"=>false,"msg"=>"Stock has run out","data"=>$data);
                                 $_SESSION['arrCart'] = $arrCart;
                             }else if(!empty($request['variant']) && $request['is_stock'] && $qty > $variant['stock'] && $productType == 1){
                                 $arrResponse = array("status"=>false,"msg"=>"No hay suficientes unidades","data"=>$data);
@@ -160,15 +160,15 @@
                                 foreach ($_SESSION['arrCart'] as $quantity) {
                                     $qtyCart += $quantity['qty'];
                                 }
-                                $arrResponse = array("status"=>true,"msg"=>"Ha sido agregado a tu carrito.","qty"=>$qtyCart,"data"=>$data);
+                                $arrResponse = array("status"=>true,"msg"=>"It has been added.","qty"=>$qtyCart,"data"=>$data);
                             }
                         }
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"El producto no existe");
+                        $arrResponse = array("status"=>false,"msg"=>"Product does not exist");
                     }
                     
                 }else{
-                    $arrResponse = array("status"=>false,"msg"=>"Error de datos");
+                    $arrResponse = array("status"=>false,"msg"=>"Something went wrong");
                 }
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             }
