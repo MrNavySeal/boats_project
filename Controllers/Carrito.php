@@ -17,21 +17,21 @@
         public function carrito(){
             $company=getCompanyInfo();
             $data['page_tag'] = $company['name'];
-            $data['page_title'] ="Carrito de compras | ".$company['name'];
-            $data['page_name'] = "carrito";
+            $data['page_title'] ="My cart | ".$company['name'];
+            $data['page_name'] = "cart";
             $data['shipping'] = $this->selectShippingMode();
             if(isset($_GET['cupon'])){
                 $cupon = strtoupper(strClean($_GET['cupon']));
                 $data['cupon'] = $this->selectCouponCode($cupon);
                 if(empty($data['cupon'])){
-                    header("location: ".base_url()."/carrito");
+                    header("location: ".base_url()."/cart/");
                     die();
                 }
             }
             if(isset($_GET['situ'])){
                 $situ = strtolower(strClean($_GET['situ']));
                 if($situ != "true" && $situ != "false"){
-                    header("location: ".base_url()."/carrito");
+                    header("location: ".base_url()."/cart/");
                     die();
                 }
                 //header("location: ".base_url()."/carrito");

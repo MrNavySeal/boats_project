@@ -28,7 +28,7 @@
                 <span id="totalCart"><?=formatNum($total)?></span>
             </div>
             <div id="btnsCartBar" class="d-none">
-                <a href="<?=base_url()?>/cart" class="btn btn-bg-2 d-block w-100 mb-3"> View cart</a>
+                <a href="<?=base_url()?>/cart/" class="btn btn-bg-2 d-block w-100 mb-3"> View cart</a>
                 <button type="button" class="btn d-block btn-bg-1 btnCheckoutCart w-100"> Check out</a>
             </div>
         </div>

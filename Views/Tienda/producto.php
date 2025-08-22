@@ -131,7 +131,7 @@
                                         <input type="number" name="txtQty" id="txtQty" min="1" <?=$stock?> value="1">
                                         <button class="btn" id="btnPIncrement"><i class="fas fa-plus"></i></button>
                                     </div>
-                                    <button type="button" class="btn btn-bg-1 me-3 mb-3" onclick="addProductCart(this)" data-id="<?=$id?>" data-topic="2" data-type="<?=$product['product_type']?>"><i class="fas fa-shopping-cart"></i> Agregar</button>
+                                    <button type="button" class="btn btn-bg-1 me-3 mb-3" onclick="addProductCart(this)" data-id="<?=$id?>" data-topic="2" data-type="<?=$product['product_type']?>"><i class="fas fa-shopping-cart"></i> Add</button>
                                 </div>
                             </div>
                         </div>
@@ -176,7 +176,7 @@
         </main>
         <section class="mt-4">
             <?php if(!empty($productos)){?>
-            <h2 class="section--title">También te puede interesar</h2>
+            <h2 class="section--title">More products</h2>
             <div class="row">
                 <div class="product-slider-cat owl-carousel owl-theme">
                 <?php for ($j=0; $j < count($productos); $j++) {  $producto = $productos[$j];  getComponent("cardProduct",$producto); }  ?>

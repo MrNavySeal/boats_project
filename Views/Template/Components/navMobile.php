@@ -1,6 +1,7 @@
 <?php
     $company = getCompanyInfo();
-    $navCategories=$data;
+    $navCategories=$data['categories'];
+    $navServices = $data['services'];
 ?>
 <div class="navmobile">
     <div class="navmobile--mask"></div>
@@ -65,7 +66,25 @@
                     </div>
                 </div>
             </div>
-            <li class="navmobile-link"><a href="<?=base_url()?>/services/"><strong class="fs-5">Services</strong></a></li>
+            <div class="navmobile-link accordion" id="accordionService">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-services">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseServices" aria-expanded="false" aria-controls="flush-collapseCategories">
+                        <strong class="fs-5">Services</strong>
+                    </button>
+                    </h2>
+                    <div id="flush-collapseServices" class="accordion-collapse collapse" aria-labelledby="flush-services" data-bs-parent="#accordionFlushServices">
+                    <div class="accordion-body">
+                        <?php
+                            for ($i=0; $i < count($navServices) ; $i++) { 
+                                $routeC = base_url()."/shop/service/".$navServices[$i]['route'];
+                        ?>
+                        <li class="navmobile-link fw-normal"><a href="<?=$routeC?>"><?=$navServices[$i]['name']?></a></li>
+                        <?php }?>
+                    </div>
+                    </div>
+                </div>
+            </div>
             <li class="navmobile-link"><a href="<?=base_url()?>/about/"><strong class="fs-5">About</strong></a></li>
             <li class="navmobile-link"><a href="<?=base_url()?>/contact/"><strong class="fs-5">Contact us</strong></a></li>
             <?php if(!isset($_SESSION['login'])){ ?>

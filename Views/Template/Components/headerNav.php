@@ -55,7 +55,7 @@
                         for ($i=0; $i < count($subLinks['services']); $i++) { 
                             $link = $subLinks['services'][$i];
                     ?>
-                    <li><a class="dropdown-item" href="<?=base_url()."/services/service/".$link['route']?>"><?=$link['name']?></a></li>
+                    <li><a class="dropdown-item" href="<?=base_url()."/shop/service/".$link['route']?>"><?=$link['name']?></a></li>
                     <?php } ?>
                 </ul>
             </div>
@@ -95,4 +95,4 @@
         <button type="submit" class="btn"><i class="fas fa-search"></i></button>
     </form>
 </div>
-<?php getComponent("cartBar");getComponent("navMobile",$navCategories);?>
+<?php getComponent("cartBar");getComponent("navMobile",['categories'=>$navCategories,'services'=>$subLinks['services']]);?>

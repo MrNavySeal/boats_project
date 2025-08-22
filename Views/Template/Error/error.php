@@ -6,9 +6,7 @@
         <div class="d-flex justify-content-center align-items-center p-5 text-center">
             <div>
                 <h1 class="fs-1 t-color-2">Error <?=$data['error']['code']?></h1>
-                <h2 class="fs-2 text-secondary mb-3"><?=$data['error']['msg']?></h2>
-                <a href="<?=base_url()?>/tienda" class="btn btn-bg-2">Ver tienda</a>
-                <a href="<?=base_url()?>/enmarcar" class="btn btn-bg-2">Enmarcar</a>
+                <a href="<?=base_url()?>/shop/" class="btn btn-bg-2">Go shopping</a>
             </div>
         </div>
     </main>

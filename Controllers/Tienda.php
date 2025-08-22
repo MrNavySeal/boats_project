@@ -3,9 +3,10 @@
     require_once("Models/ProductTrait.php");
     require_once("Models/CategoryTrait.php");
     require_once("Models/CustomerTrait.php");
+    require_once("Models/ServicioTrait.php");
     require_once("Models/LoginModel.php");
     class Tienda extends Controllers{
-        use ProductTrait, CategoryTrait, CustomerTrait;
+        use ProductTrait, CategoryTrait, CustomerTrait,ServicioTrait;
         private $login;
         public function __construct(){
             session_start();
@@ -16,13 +17,12 @@
 
         /******************************Views************************************/
         public function tienda(){
-            setView(BASE_URL."/tienda");
             $pageNow = isset($_GET['p']) ? intval(strClean($_GET['p'])) : 1;
             $sort = isset($_GET['s']) ? intval(strClean($_GET['s'])) : 1;
             $company=getCompanyInfo();
             $data['page_tag'] = $company['name'];
-            $data['page_title'] = "Tienda | ".$company['name'];
-            $data['page_name'] = "tienda";
+            $data['page_title'] = "Shop | ".$company['name'];
+            $data['page_name'] = "shop";
             $data['categories'] = $this->getCategoriesT();
             $productsPage =  $this->getProductsPageT($pageNow,$sort);
             $productsPage['productos'] = $this->bubbleSortPrice($productsPage['productos'],$sort);
@@ -39,13 +39,12 @@
             $pageNow = isset($_GET['p']) ? intval(strClean($_GET['p'])) : 1;
             $sort = isset($_GET['s']) ? intval(strClean($_GET['s'])) : 1;
             $params = strClean($params);
-            setView(BASE_URL."/tienda/categoria/".str_replace(",","/",$params));
             $arrParams = explode(",",$params);
             $title = count($arrParams) > 1 ? ucwords(str_replace("-"," ",$arrParams[1])): ucwords(str_replace("-"," ",$arrParams[0]));
             //dep($title);exit;
             $company=getCompanyInfo();
             $data['page_tag'] = $company['name'];
-            $data['page_name'] = "categoria";
+            $data['page_name'] = "category";
             $data['categories'] = $this->getCategoriesT();
             $data['ruta'] = count($arrParams) > 1 ? $arrParams[0]."/".$arrParams[1] : $arrParams[0];
             $productsPage =  $this->getProductsCategoryT($arrParams,$pageNow,$sort);
@@ -67,8 +66,8 @@
             $search = isset($_GET['b']) ? strClean($_GET['b']) : "";
             $company=getCompanyInfo();
             $data['page_tag'] = $company['name'];
-            $data['page_title'] = "Tienda | ".$company['name'];
-            $data['page_name'] = "tienda";
+            $data['page_title'] = "Shop | ".$company['name'];
+            $data['page_name'] = "shop";
             $data['categories'] = $this->getCategoriesT();
             $productsPage =  $this->getProductsSearchT($pageNow,$sort,$search);
             $productsPage['paginas'] = $productsPage['paginas'] == 0 ? 1 : $productsPage['paginas'];
@@ -86,7 +85,6 @@
         public function producto($params){
             if($params!= ""){
                 $params = strClean($params);
-                setView(BASE_URL."/tienda/producto/".$params);
                 $data['product'] = $this->getProductPageT($params);
                 if(!empty($data['product'])){
                     $company=getCompanyInfo();
@@ -99,6 +97,28 @@
                     $data['review'] = $this->getRate($data['product']['idproduct']);
                     $data['modal'] = getFile("Template/Modal/modalReview",$data['product']['idproduct']);
                     $this->views->getView($this,"producto",$data); 
+                }else{
+                    header("location: ".base_url()."/error");
+                    die();
+                }
+               
+            }else{
+                header("location: ".base_url()."/error");
+                die();
+            }
+        }
+        public function servicio($params){
+            if($params!= ""){
+                $params = strClean($params);
+                $data['service'] = $this->getServicioPageT($params);
+                if(!empty($data['service'])){
+                    $company=getCompanyInfo();
+                    $data['page_tag'] = $company['name'];
+                    $data['page_name'] = "service";
+                    $data['services'] = $this->getServicesT();
+                    $data['page_title'] =$data['service']['name']." | ".$company['name'];
+                    $data['app'] = "";
+                    $this->views->getView($this,"servicio",$data); 
                 }else{
                     header("location: ".base_url()."/error");
                     die();

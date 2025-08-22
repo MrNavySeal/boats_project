@@ -14,7 +14,7 @@
             $discount = '<span class="discount">-'.$resultDiscount.'%</span>';
             $price ='<span class="current sale me-2">'.$variant.formatNum($producto['discount'],false).'</span><span class="compare">'.formatNum($producto['price']).'</span>';
         }else if($producto['stock'] <= 0){
-            $price = '<span class="current sale me-2">Agotado</span>';
+            $price = '<span class="current sale me-2">Out of stock</span>';
             $discount="";
         }
     }else{

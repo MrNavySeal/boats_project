@@ -65,9 +65,6 @@ btnPrevP.addEventListener("click",function(){
 btnNextP.addEventListener("click",function(){
     innerP.scrollBy(100,0);
 });
-btnReview.addEventListener("click",function(){
-    modal.show();
-})
 
 let btnPPlus = document.querySelector("#btnPIncrement");
 let btnPMinus = document.querySelector("#btnPDecrement");
@@ -278,7 +275,7 @@ function addProductCart(element){
     element.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
     element.setAttribute("disabled","");
     request(base_url+"/carrito/addCart",formData,"post").then(function(objData){
-        element.innerHTML=`<i class="fas fa-shopping-cart"></i> Agregar`;
+        element.innerHTML=`<i class="fas fa-shopping-cart"></i> Add`;
         element.removeAttribute("disabled");
         document.querySelector(".toast-header img").src=objData.data.image;
         document.querySelector(".toast-header img").alt=objData.data.name;
