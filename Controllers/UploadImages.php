@@ -6,7 +6,7 @@
             parent::__construct();
         }
         public function UploadImages(){
-            if($_SESSION['permit'][5]['r'] || $_SESSION['permit'][4]['r'] ){
+
                 $imageFolder ='Assets/images/tinyImg/'; 
                 $name= "tinyImg_".bin2hex(random_bytes(6)).".jpg";
                 $filetowrite = $imageFolder.$name; 
@@ -24,28 +24,23 @@
                     header("HTTP/1.1 400 Upload failed."); 
                     return; 
                 }
-            }
         }
         public function uploadMultipleImages(){
-            if($_SESSION['permit'][7]['r'] || $_SESSION['permit'][4]['r'] ){
                 if($_FILES['txtImg'] && $_POST['pre']){
                     $arrImages = orderFiles($_FILES['txtImg'],strClean($_POST['pre']));
                     $arrResponse = array("status"=>true,"data"=>$arrImages,"msg"=>"Uploaded");
                     
                 }else{
-                    $arrResponse = array("status"=>false,"data"=>$arrImages,"msg"=>"Uploaded");
+                    $arrResponse = array("status"=>false,"msg"=>"Something went wrong");
                 }
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-            }
             die();
         }
         public function delImg(){
-            if($_SESSION['permit'][7]['r'] || $_SESSION['permit'][4]['r'] ){
                 $image = $_POST['image'];
                 deleteFile($image);
                 $arrResponse = array("msg"=>"Deleted");
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-            }
             die();
         }
     }

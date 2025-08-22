@@ -46,7 +46,7 @@
             <?php }else if(!$producto['product_type'] && !$producto['is_stock']){?>
             <button type="button" class="btn btn-bg-1" data-id="<?=$id?>" data-topic="2" onclick="addCart(this)"><i class="fas fa-shopping-cart"></i></button>
             <?php }else if($producto['product_type']){?>
-            <a href="<?=base_url()."/shop/product/".$producto['route']?>" class="btn btn-bg-1 w-100">Options <i class="fas fa-exchange-alt"></i></a>
+            <a href="<?=base_url()."/shop/product/".$producto['route']?>" class="btn btn-bg-1 t-color-4 w-100">Options <i class="fas fa-exchange-alt"></i></a>
             <?php }?>
         </div>
     </div>
