@@ -13,9 +13,9 @@
         
         public function banners(){
             if($_SESSION['permitsModule']['r']){
-                $data['page_tag'] = "Banners";
-                $data['page_title'] = "Banners";
-                $data['page_name'] = "banners";
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['data'] = $this->getBanners();
                 $data['panelapp'] = "/Configuracion/functions_banner.js";
                 $this->views->getView($this,"banners",$data);
@@ -56,6 +56,9 @@
                         }
                         $html.='
                             <tr class="item">
+                                <td data-title="Portada">
+                                    <img :src="data.image" :alt="data.name" class="img-thumbnail" style="width: 50px; height: 50px;">
+                                </td>
                                 <td data-label="Titulo: ">'.$request[$i]['name'].'</td>
                                 <td data-label="Estado: ">'.$status.'</td>
                                 <td class="item-btn">'.$btnEdit.$btnDelete.'</td>

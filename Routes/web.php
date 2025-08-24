@@ -8,42 +8,39 @@
     $router->setRoute("dashboard/","Dashboard/Dashboard",false);
 
     //Sistema
-    $router->setRoute("sistema/roles/","Sistema/Roles",false);
-    $router->setRoute("sistema/usuarios/","Sistema/Usuarios",false);
+    $router->setRoute("system/roles/","Sistema/Roles",false);
+    $router->setRoute("system/users/","Sistema/Usuarios",false);
     $router->setRoute("profile/","Sistema/Usuarios/perfil",false);
     
 
     //Clientes
-    $router->setRoute("clientes/","Clientes/Clientes",false);
+    $router->setRoute("customers/","Clientes/Clientes",false);
 
     //Productos
-    $router->setRoute("productos/categorias/","Productos/ProductosCategorias/categorias",false);
-    $router->setRoute("productos/subcategorias/","Productos/ProductosCategorias/subcategorias",false);
-    $router->setRoute("productos/creacion-edicion-masiva/","Productos/ProductosMasivos/productos",false);
-    $router->setRoute("productos/","Productos/Productos",false);
-    $router->setRoute("productos/variantes/","Productos/ProductosOpciones/variantes",false);
-    $router->setRoute("productos/unidades-medida/","Productos/ProductosOpciones/unidades",false);
-    $router->setRoute("productos/caracteristicas/","Productos/ProductosOpciones/caracteristicas",false);
-
-    //Servicios
-    $router->setRoute("servicios/","Servicios/Servicios/servicios",false);
-    $router->setRoute("servicios/citas/","Servicios/Citas/citas",false);
+    $router->setRoute("products/categories/","Productos/ProductosCategorias/categorias",false);
+    $router->setRoute("products/subcategores/","Productos/ProductosCategorias/subcategorias",false);
+    $router->setRoute("products/masive-creation/","Productos/ProductosMasivos/productos",false);
+    $router->setRoute("products/","Productos/Productos",false);
+    $router->setRoute("products/variants/","Productos/ProductosOpciones/variantes",false);
+    $router->setRoute("products/units/","Productos/ProductosOpciones/unidades",false);
+    $router->setRoute("products/features/","Productos/ProductosOpciones/caracteristicas",false);
+    $router->setRoute("products/services/","Servicios/Servicios/servicios",false);
 
     //Pedidos
-    $router->setRoute("pedidos/cotizaciones/","Pedidos/Cotizaciones/cotizaciones",false);
-    $router->setRoute("pedidos/","Pedidos/Pedidos",false);
-    $router->setRoute("pedidos/pedidos-credito/","Pedidos/Pedidos/creditos",false);
-    $router->setRoute("pedidos/pedidos-detalle/","Pedidos/Pedidos/detalle",false);
-    $router->setRoute("pedidos/punto-venta/","Pedidos/PedidosPos/venta",false);
-    $router->setRoute("pedidos/transaccion/","Pedidos/Pedidos/transaccion");
-    $router->setRoute("pedidos/factura/","Pedidos/Pedidos/pdf");
+    $router->setRoute("orders/appointments/","Servicios/Citas/citas",false);
+    $router->setRoute("orders/","Pedidos/Pedidos",false);
+    $router->setRoute("orders/detailed/","Pedidos/Pedidos/detalle",false);
+    $router->setRoute("orders/pos/","Pedidos/PedidosPos/venta",false);
 
 
     //Configuracion
-    $router->setRoute("configuracion/parametros/","Configuracion/Empresa/empresa",false);
-    $router->setRoute("configuracion/envios/","Configuracion/Administracion/envios",false);
-    $router->setRoute("configuracion/paginas/","Configuracion/Paginas/paginas",false);
-    $router->setRoute("configuracion/banners/","Configuracion/Banners/banners",false);
+    $router->setRoute("settings/parameters/","Configuracion/Empresa/empresa",false);
+    $router->setRoute("settings/shippment/","Configuracion/Administracion/envios",false);
+
+    $router->setRoute("sections/pages/","Configuracion/Secciones/paginas",false);
+    $router->setRoute("sections/banners/","Configuracion/Banners/banners",false);
+    $router->setRoute("sections/gallery/","Configuracion/Gallery/gallery",false);
+    $router->setRoute("sections/faq/","Configuracion/Secciones/faq",false);
 
     //Web
     $router->setRoute("about/","Nosotros",false);

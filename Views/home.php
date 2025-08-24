@@ -56,6 +56,7 @@
         </div>
         
         <?php getComponent("AboutSection"); ?>
+        <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$productos]); ?>
         <div class="bg-color-2">
             <div class="container">
                 <div class="py-2">
@@ -67,10 +68,8 @@
                 </div>
             </div>
         </div>
-        <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$productos]); ?>
         <?php getComponent("contactForm",$servicios); ?>
         <?php getComponent("ProductsCarouselSection",['titulo'=>"Our products","subtitulo"=>"Most recent","datos"=>$productos]);?>
-        <?php getComponent("whyUs"); ?>
     </main>
 <?php
     footerPage($data);
