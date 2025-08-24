@@ -31,7 +31,6 @@ formCompany.addEventListener("submit",function(e){
     e.preventDefault();
 
     let strName = document.querySelector("#txtName").value;
-    let intCurrency = document.querySelector("#currencyList").value;
     let strCompanyEmail = document.querySelector("#txtCompanyEmail").value;
     let strEmail = document.querySelector("#txtEmail").value;
     let strPhone = document.querySelector("#txtPhone").value;
@@ -43,7 +42,7 @@ formCompany.addEventListener("submit",function(e){
     let strPassword = document.querySelector("#txtPassword").value;
     let strNit = document.querySelector("#txtNit").value;
 
-    if(strName == "" || intCurrency == "" || strCompanyEmail=="" || strEmail == "" || strPhone == "" || strAddress ==""
+    if(strName == "" || strCompanyEmail=="" || strEmail == "" || strPhone == "" || strAddress ==""
     || intCountry == "" || intState == "" || strNit ==""
     || intCity == "" || strPassword=="" || strPhoneS == ""){
         Swal.fire("Error","Todos los campos marcados con (*) son obligatorios","error");

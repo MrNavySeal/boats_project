@@ -33,7 +33,7 @@
             //dep($_POST);exit;
             if($_SESSION['idUser']==1){
                 if($_POST){
-                    if(empty($_POST['txtName']) || empty($_POST['currencyList']) || empty($_POST['txtCompanyEmail']) || empty($_POST['txtEmail']) || empty($_POST['txtPhone']) 
+                    if(empty($_POST['txtName']) || empty($_POST['txtCompanyEmail']) || empty($_POST['txtEmail']) || empty($_POST['txtPhone']) 
                     || empty($_POST['txtAddress']) || empty($_POST['countryList']) || empty($_POST['stateList']) || empty($_POST['cityList']) || empty($_POST['txtPassword'])
                     || empty($_POST['txtPhoneS']) || empty($_POST['txtNit'])){
                         $arrResponse = array("status" => false, "msg" => 'Error de datos');
