@@ -28,7 +28,7 @@ const App = {
         this.getBuscar(1,"faq");
     },methods:{
         showModal:function(){
-            this.strTituloModal = "Nuevo FAQ";
+            this.strTituloModal = "New FAQ";
             this.strPregunta= "";
             this.strRespuesta= "";
             this.intEstado= 1;
@@ -50,7 +50,7 @@ const App = {
             this.$refs.btnAdd.disabled = true;
             const response = await fetch(base_url+"/Secciones/setFaq",{method:"POST",body:formData});
             const objData = await response.json();
-            this.$refs.btnAdd.innerHTML = `Guardar <i class="fas fa-save"></i>`;
+            this.$refs.btnAdd.innerHTML = `Save <i class="fas fa-save"></i>`;
             this.$refs.btnAdd.disabled = false;
             if(objData.status){
                 Swal.fire("Guardado!",objData.msg,"success");
@@ -83,7 +83,7 @@ const App = {
         },
         getDatos:async function(intId,strTipo){
           this.intId = intId;
-          this.strTituloModal = "Editar FAQ";
+          this.strTituloModal = "Edit FAQ";
           const formData = new FormData();
           formData.append("id",this.intId);
           formData.append("tipo_busqueda",strTipo);
@@ -102,14 +102,14 @@ const App = {
         delDatos:function(intId,strTipo){
             const objVue = this;
             Swal.fire({
-              title:"¿Esta seguro de eliminarlo?",
-              text:"Se eliminará para siempre...",
+              title:"¿Are you sure?",
+              text:"It will be deleted forever...",
               icon: 'warning',
               showCancelButton:true,
               confirmButtonColor: '#3085d6',
               cancelButtonColor: '#d33',
-              confirmButtonText:"Sí, eliminar",
-              cancelButtonText:"No, cancelar"
+              confirmButtonText:"Yes",
+              cancelButtonText:"No"
           }).then(async function(result){
               if(result.isConfirmed){
                   objVue.intId = intId;
@@ -119,7 +119,7 @@ const App = {
                   const response = await fetch(base_url+"/Secciones/delDatos",{method:"POST",body:formData});
                   const objData = await response.json();
                   if(objData.status){
-                    Swal.fire("Eliminado!",objData.msg,"success");
+                    Swal.fire("Deleted!",objData.msg,"success");
                     objVue.getBuscar(1,"faq");
                   }else{
                     Swal.fire("Error",objData.msg,"error");

@@ -8,23 +8,23 @@
             <div class="modal-body">
                 <form id="formItem" name="formItem" class="mb-4">
                     <div class="mb-3">
-                        <label for="txtName" class="form-label">Pregunta <span class="text-danger">*</span></label>
+                        <label for="txtName" class="form-label">Question <span class="text-danger">*</span></label>
                         <input type="text" class="form-control" v-model="strPregunta" required>
                     </div>
                     <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Respuesta</label>
+                        <label for="exampleFormControlTextarea1" class="form-label">Answer</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" v-model="strRespuesta" required rows="3"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="statusList" class="form-label">Estado </label>
+                        <label for="statusList" class="form-label">Status </label>
                         <select class="form-control" aria-label="Default select example" v-model="intEstado" required>
-                            <option value="1">Activo</option>
-                            <option value="2">Inactivo</option>
+                            <option value="1">Active</option>
+                            <option value="2">Inactive</option>
                         </select>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" @click="setDatos()" class="btn btn-primary" ref="btnAdd">Guardar <i class="fas fa-save"></i></button>
-                        <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Cerrar</button>
+                        <button type="button" @click="setDatos()" class="btn btn-primary" ref="btnAdd">Save <i class="fas fa-save"></i></button>
+                        <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>

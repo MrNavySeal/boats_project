@@ -97,9 +97,9 @@
                         $request = $this->model->updatePagina($strPagina,$strTitulo,"","",$strDescripcion,"");
                     }
                     if($request > 0 ){
-                        $arrResponse = array('status' => true, 'msg' => 'Datos guardados');	
+                        $arrResponse = array('status' => true, 'msg' => 'Data saved');	
                     }else{
-                        $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                        $arrResponse = array("status" => false, "msg" => 'Something went wrong.');
                     }
                     
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -111,7 +111,7 @@
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
                     if(empty($_POST['respuesta']) || empty($_POST['pregunta'])){
-                        $arrResponse = array("status" => false, "msg" => 'Error de datos');
+                        $arrResponse = array("status" => false, "msg" => 'Something went wrong');
                     }else{ 
                         $intId = intval($_POST['id']);
                         $strRespuesta = ucfirst(strClean($_POST['respuesta']));
@@ -129,10 +129,10 @@
                             }
                         }
                         if($request > 0 ){
-                            if($option == 1){ $arrResponse = array('status' => true, 'msg' => 'Datos guardados');	
-                            }else{ $arrResponse = array('status' => true, 'msg' => 'Datos actualizados'); }
+                            if($option == 1){ $arrResponse = array('status' => true, 'msg' => 'Data saved');	
+                            }else{ $arrResponse = array('status' => true, 'msg' => 'Data updated'); }
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                            $arrResponse = array("status" => false, "msg" => 'Something went wrong.');
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

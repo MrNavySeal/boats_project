@@ -82,9 +82,9 @@
                 $data['botones'] = [
                     "duplicar" => ["mostrar"=>true, "evento"=>"onclick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
                 ];
-                $data['page_tag'] = "Envios";
-                $data['page_title'] = "Envios";
-                $data['page_name'] = "envios";
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['countries'] = $this->model->selectCountries();
                 $data['ShippingCities'] = $this->getShippingCities();
                 $data['flat'] = $this->model->selectFlatRate();

@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="mb-3">
-                    <label for="intPorPagina" class="form-label">Por página</label>
+                    <label for="intPorPagina" class="form-label">Per page</label>
                     <select class="form-control" aria-label="Default select example" id="intPorPagina" v-model="intPorPagina" @change="getBuscar(1,'faq')">
                         <option value="10">10</option>
                         <option value="25">25</option>
@@ -19,7 +19,7 @@
             </div>
             <div class="col-md-10">
                 <div class="mb-3">
-                    <label for="strBuscar" class="form-label">Buscar</label>
+                    <label for="strBuscar" class="form-label">Search</label>
                     <input type="text" class="form-control" id="strBuscar" v-model="strBuscar" @keyup="getBuscar(1,'faq')">
                 </div>
             </div> 
@@ -29,10 +29,10 @@
                 <thead>
                     <tr class="text-center">
                         <th>ID</th>
-                        <th>Pregunta</th>
-                        <th>Respuesta</th>
-                        <th>Estado</th>
-                        <th>Opciones</th>
+                        <th>Question</th>
+                        <th>Answer</th>
+                        <th>Status</th>
+                        <th>Options</th>
                     </tr>
                 </thead>
                 <tbody>

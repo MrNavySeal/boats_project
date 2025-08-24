@@ -12,9 +12,9 @@
 
         public function empresa(){
             if($_SESSION['idUser'] == 1){
-                $data['page_tag'] = "Empresa";
-                $data['page_title'] = "Empresa";
-                $data['page_name'] = "empresa";
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['panelapp'] = "/Configuracion/functions_company.js";
                 $data['company'] = $this->model->selectCompany();
                 $data['currencies'] = $this->model->selectCurrencies();

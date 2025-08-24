@@ -8,7 +8,6 @@
                 die();
             }
             parent::__construct();
-            getPermits(5);
         }
         
         public function banners(){
@@ -57,7 +56,7 @@
                         $html.='
                             <tr class="item">
                                 <td data-title="Portada">
-                                    <img :src="data.image" :alt="data.name" class="img-thumbnail" style="width: 50px; height: 50px;">
+                                    <img src="'.media()."/images/uploads/".$request[$i]['picture'].'"  class="img-thumbnail" style="width: 50px; height: 50px;">
                                 </td>
                                 <td data-label="Titulo: ">'.$request[$i]['name'].'</td>
                                 <td data-label="Estado: ">'.$status.'</td>

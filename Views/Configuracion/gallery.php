@@ -6,7 +6,6 @@
             <thead>
                 <tr>
                     <th>Picture</th>
-                    <th>Name</th>
                     <th>Status</th>
                     <th>Options</th>
                 </tr>
