@@ -2,14 +2,14 @@
     <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Buscar clientes</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Search customers</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="row">
                     <div class="col-md-2">
                         <div class="mb-3">
-                            <label for="intPorPagina" class="form-label">Por página</label>
+                            <label for="intPorPagina" class="form-label">Per page</label>
                             <select class="form-control" aria-label="Default select example" id="intPorPagina" v-model="intPorPagina" @change="getBuscar(1,'clientes')">
                                 <option value="10">10</option>
                                 <option value="25">25</option>
@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-md-10">
                         <div class="mb-3">
-                            <label for="strBuscar" class="form-label">Buscar</label>
+                            <label for="strBuscar" class="form-label">Search</label>
                             <input type="text" class="form-control" id="strBuscar" v-model="strBuscar" @keyup="getBuscar(1,'clientes')">
                         </div>
                     </div> 
@@ -31,25 +31,25 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Portada</th>
-                                <th>Nombre</th>
-                                <th>No. documento</th>
-                                <th>Correo</th>
-                                <th>Teléfono</th>
-                                <th>Opciones</th>
+                                <th>Picture</th>
+                                <th>Name</th>
+                                <th>ID number</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Options</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(data,index) in arrData" :key="index">
                                 <td data-title="ID" class="text-center">{{data.id}}</td>
-                                <td data-title="Portada">
+                                <td data-title="Picture">
                                     <img :src="data.url" :alt="data.name" class="img-thumbnail" style="width: 50px; height: 50px;">
                                 </td>
-                                <td data-title="Nombre">{{data.firstname+" "+data.lastname}}</td>
-                                <td data-title="No. documento">{{data.identification}}</td>
-                                <td data-title="Correo">{{data.email}}</td>
-                                <td data-title="Teléfono" class="text-nowrap">{{data.telefono}}</td>
-                                <td data-title="Opciones">
+                                <td data-title="Name">{{data.firstname+" "+data.lastname}}</td>
+                                <td data-title="ID number">{{data.identification}}</td>
+                                <td data-title="Email">{{data.email}}</td>
+                                <td data-title="Phone" class="text-nowrap">{{data.telefono}}</td>
+                                <td data-title="Options">
                                     <div class="d-flex justify-content-center">
                                         <button type="button" @click="setItem(data,'clientes')" class="btn btn-primary text-nowrap"><i class="fas fa-plus"></i></button>
                                     </div>

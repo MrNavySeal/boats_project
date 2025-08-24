@@ -88,7 +88,7 @@ const App = {
         },
         showModal:function(tipo="crear"){
             if(tipo == "crear"){ 
-                this.strTituloModal = "Nueva cita";
+                this.strTituloModal = "New appointment";
                 this.strEstado= "confirmado";
                 this.intId = 0;
                 this.intValorBase=0;
@@ -131,10 +131,10 @@ const App = {
             this.$refs.btnAdd.disabled = true;
             const response = await fetch(base_url+"/servicios/citas/setCaso",{method:"POST",body:formData});
             const objData = await response.json();
-            this.$refs.btnAdd.innerHTML = `Guardar <i class="fas fa-save"></i>`;
+            this.$refs.btnAdd.innerHTML = `Save <i class="fas fa-save"></i>`;
             this.$refs.btnAdd.disabled = false;
             if(objData.status){
-                Swal.fire("Guardado!",objData.msg,"success");
+                Swal.fire("Saved!",objData.msg,"success");
                 if(this.intId == 0){
                     this.intValorBase=0;
                     this.intValorObjetivo=0;
@@ -170,7 +170,7 @@ const App = {
         },
         getDatos:async function(intId,strTipo){
           this.intId = intId;
-          this.strTituloModal = "Editar cita";
+          this.strTituloModal = "Edit appointment";
           const formData = new FormData();
           formData.append("id",this.intId);
           formData.append("tipo_busqueda",strTipo);
@@ -201,14 +201,14 @@ const App = {
         delDatos:function(intId,strTipo){
             const objVue = this;
             Swal.fire({
-              title:"¿Esta seguro de eliminarlo?",
-              text:"Se eliminará para siempre...",
-              icon: 'warning',
-              showCancelButton:true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText:"Sí, eliminar",
-              cancelButtonText:"No, cancelar"
+                title:"¿Are you sure?",
+                text:"It will be deleted forever...",
+                icon: 'warning',
+                showCancelButton:true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText:"Yes",
+                cancelButtonText:"No"
           }).then(async function(result){
               if(result.isConfirmed){
                   objVue.intId = intId;
@@ -218,7 +218,7 @@ const App = {
                   const response = await fetch(base_url+"/servicios/citas/delDatos",{method:"POST",body:formData});
                   const objData = await response.json();
                   if(objData.status){
-                    Swal.fire("Eliminado!",objData.msg,"success");
+                    Swal.fire("Deleted!",objData.msg,"success");
                     objVue.getBuscar(1,"casos");
                   }else{
                     Swal.fire("Error",objData.msg,"error");
