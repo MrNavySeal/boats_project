@@ -8,12 +8,10 @@
             sessionCookie();
         }
         public function nosotros(){
-            setView(BASE_URL."/nosotros");
             $company=getCompanyInfo();
-            $data['page'] = $this->selectPage(1);
             $data['page_tag'] = $company['name'];
-            $data['page_name'] = "nosotros";
-            $data['page_title'] =$data['page']['name']." | ".$company['name'];
+            $data['page_name'] = "About us";
+            $data['page_title'] ="About us | ".$company['name'];
             $this->views->getView($this,"nosotros",$data); 
         }
     }

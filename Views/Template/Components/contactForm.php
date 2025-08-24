@@ -1,83 +1,65 @@
-<section class="container mt-5 mb-5">
-    <div class="row ">
-        <div class="col-md-5 p-0">
-            <div class="contact-form">
-                <img class="contact-form-img" src="<?=$data['url']?>" alt="">
+
+<?php $company = getCompanyInfo();?>
+<section class="container mt-5 mb-5 bg-white">
+    <div class="contact-form p-2">
+        <div class="row">
+            <div class="col-md-5 bg-color-2 rounded">
+                <div class="p-4">
+                    <h5 class="t-color-4 fw-bold fs-3 mb-4">Contact us</h5>
+                    <h2 class="t-color-4 mb-5 fs-1 fw-bold">Feel free to contact with us for any kind of query.</h2>
+                    <ul class="social social--white mt-5"> <?=getRedesSociales()?></ul>
+                </div>
             </div>
-        </div>
-        <div class="col-md-7 bg-color-2 p-0">
-            <div class="contact-form p-5">
-                <h5 class="t-color-1 fw-bold fs-3 mb-4">Contáctanos</h5>
-                <h2 class="t-color-4 mb-5 fs-1 fw-bold">Haz una cita</h2>
-                <el-form :model="form" label-width="auto">
+            <div class="col-md-7 rounded">
+                <form>
                     <div class="row">
-                        <div class="col-md-12">
-                            <el-form-item >
-                                <el-select  placeholder="Seleccione servicio" v-model="intServicio">
-                                    <el-option v-for="(data,index) in arrServicios" :value="data.id" :label="data.name" />
-                                </el-select>
-                            </el-form-item>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="txtName" class="form-label">Firstname <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="txtName" name="txtName" required>
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <el-form-item>
-                                <el-input v-model="strNombre" placeholder="Nombre" />
-                            </el-form-item>
+                            <div class="mb-3">
+                                <label for="txtLastname" class="form-label">Lastname <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="txtLastname" name="txtLastname" required>
+                            </div>
                         </div>
                         <div class="col-md-6">
-                            <el-form-item>
-                                <el-input v-model="strApellido" placeholder="Apellido" />
-                            </el-form-item>
+                            <div class="mb-3">
+                                <label for="txtPhone" class="form-label">Phone <span class="text-danger">*</span></label>
+                                <input type="phone" class="form-control" id="txtPhone" name="txtPhone" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="txtEmail" class="form-label">Email <span class="text-danger">*</span></label>
+                                <input type="email" class="form-control" id="txtEmail" name="txtEmail" required>
+                            </div>
                         </div>
                         <div class="col-md-12">
-                            <el-form-item>
-                                <el-input v-model="strCorreo" placeholder="Correo electrónico" type="email" />
-                            </el-form-item>
-                        </div>
-                        <div class="col-md-4">
-                            <el-form-item >
-                                <el-select  placeholder="País" v-model="intPais" @change="setFiltro('paises')">
-                                    <el-option v-for="(data,index) in arrPaises" :value="data.id" :label="data.name" />
-                                </el-select>
-                            </el-form-item>
-                        </div>
-                        <div class="col-md-4">
-                            <el-form-item >
-                                <el-select  placeholder="Estado/Departamento" v-model="intDepartamento" @change="setFiltro('departamentos')">
-                                    <el-option v-for="(data,index) in arrDepartamentos" :value="data.id" :label="data.name" />
-                                </el-select>
-                            </el-form-item>
-                        </div>
-                        <div class="col-md-4">
-                            <el-form-item >
-                                <el-select  placeholder="Ciudad" v-model="intCiudad">
-                                    <el-option v-for="(data,index) in arrCiudades" :value="data.id" :label="data.name" />
-                                </el-select>
-                            </el-form-item>
-                        </div>
-                        <div class="col-4">
-                            <el-form-item >
-                                <el-select  placeholder="Seleccione" v-model="intTelefonoCodigo">
-                                    <el-option v-for="(data,index) in arrPaises" :value="data.id" :label="'(+'+data.phonecode+') '+data.name" />
-                                </el-select>
-                            </el-form-item>
-                        </div>
-                        <div class="col-8">
-                            <el-form-item>
-                                <el-input v-model="strTelefono" placeholder="Teléfono" type="phone" />
-                            </el-form-item>
+                            <div class="mb-3">
+                                <label for="serviceList" class="form-label">Services <span class="text-danger">*</span></label>
+                                <select class="form-control" aria-label="Default select example" id="serviceList" name="serviceList" required>
+                                    <?php
+                                        foreach ($data as $det) {
+                                            echo '<option value="'.$det['id'].'">'.$det['name'].'</option>';
+                                        }
+                                    ?>
+                                </select>
+                            </div>
                         </div>
                         <div class="col-md-12">
-                            <el-form-item>
-                                <el-input v-model="strDireccion" placeholder="Dirección" />
-                            </el-form-item>
+                            <div class="mb-3">
+                                <label for="exampleFormControlTextarea1" class="form-label">Message <span class="text-danger">*</span></label>
+                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                            </div>
                         </div>
                     </div>
-                    <el-form-item>
-                        <el-input v-model="strComentario" type="textarea" rows="4" placeholder="Escribe comentarios"/>
-                    </el-form-item>
-                    <el-button class="btn btn-bg-1 p-4 fs-5" type="primary" id="btnContacto" @click="setDatos">Enviar ahora</el-button>
-                </el-form>
-                <ul class="social social--white mt-5"> <?=getRedesSociales()?></ul>
+                    <div class="d-flex justify-content-end">
+                        <button type="button" class="btn btn-bg-1" >Send us a message</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

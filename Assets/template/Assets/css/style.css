@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .btn-bg-1 {
-  background-color: #25b6d1;
+  background-color: #004a94;
   color: #fff;
   text-decoration: none;
   border-radius: 10px;
@@ -110,7 +110,7 @@
 }
 .btn-qty-1 button {
   height: 100%;
-  background-color: #25b6d1;
+  background-color: #004a94;
   color: #fff;
 }
 .btn-qty-1 button:hover {
@@ -136,7 +136,7 @@
 }
 
 .btnv.active {
-  background-color: #25b6d1;
+  background-color: #004a94;
   color: #fff;
   text-decoration: none;
   border-radius: 10px;
@@ -191,7 +191,7 @@
 }
 .card--plus i {
   font-size: 2.5rem;
-  color: #25b6d1;
+  color: #004a94;
   margin-bottom: 2rem;
 }
 .card--plus h3 {
@@ -344,10 +344,10 @@
   cursor: pointer;
 }
 .custom--range::-webkit-slider-thumb {
-  background: #25b6d1;
+  background: #004a94;
 }
 .custom--range:focus::-webkit-slider-thumb {
-  background-color: #25b6d1;
+  background-color: #004a94;
   box-shadow: none;
 }
 .custom--range::-webkit-slider-runnable-track {
@@ -420,7 +420,7 @@
 }
 
 .t-color-1 {
-  color: #25b6d1 !important;
+  color: #004a94 !important;
 }
 
 .t-color-2 {
@@ -440,12 +440,12 @@
 }
 
 .t-color-h-2:hover {
-  color: #25b6d1;
+  color: #004a94;
 }
 
 .bg-color-1 {
   color: #fff;
-  background-color: #25b6d1 !important;
+  background-color: #004a94 !important;
 }
 
 .bg-color-2 {
@@ -551,7 +551,7 @@ nav a {
   font-weight: bold;
 }
 .nav-link a:hover {
-  color: #25b6d1;
+  color: #004a94;
 }
 
 .nav--icon {
@@ -565,7 +565,7 @@ nav a {
 .nav--icon-cart span {
   font-size: 10px;
   position: absolute;
-  background-color: #25b6d1;
+  background-color: #004a94;
   padding: 1px 6px;
   color: #fff;
   border-radius: 50%;
@@ -609,7 +609,7 @@ nav a {
 }
 .search form button {
   border-radius: 0 10px 10px 0;
-  background-color: #25b6d1;
+  background-color: #004a94;
   color: #fff;
 }
 .search form button:hover {
@@ -774,7 +774,7 @@ nav a {
 }
 .cartbar--title span {
   padding: 0.1rem 0.3rem;
-  background-color: #25b6d1;
+  background-color: #004a94;
   border-radius: 50%;
 }
 
@@ -836,7 +836,7 @@ nav a {
 
 .item--price {
   font-weight: bold;
-  color: #25b6d1;
+  color: #004a94;
 }
 
 .item--qty {
@@ -859,7 +859,7 @@ nav a {
   transition: all 0.3s ease;
 }
 .qty--btns button:hover {
-  background-color: #25b6d1;
+  background-color: #004a94;
   color: #fff;
   transition: all 0.3s ease;
 }
@@ -1311,7 +1311,7 @@ nav a {
 }
 
 .product-image-item.active {
-  border: 3px solid #25b6d1;
+  border: 3px solid #004a94;
 }
 
 .product-data #description {
@@ -1385,7 +1385,7 @@ nav a {
 @keyframes ring {
   0% {
     transform: rotate(0deg);
-    box-shadow: 1px 2px 5px #25b6d1;
+    box-shadow: 1px 2px 5px #004a94;
   }
   50% {
     transform: rotate(180deg);
@@ -1397,7 +1397,7 @@ nav a {
   }
   100% {
     transform: rotate(360deg);
-    box-shadow: 1px 2px 5px #25b6d1;
+    box-shadow: 1px 2px 5px #004a94;
   }
 }
 #divLoading span {
@@ -1583,7 +1583,7 @@ nav a {
 .up-image label {
   border-radius: 10px;
   position: absolute;
-  background-color: #25b6d1;
+  background-color: #004a94;
   color: #fff;
   top: 0;
   left: 0;
@@ -1613,7 +1613,7 @@ nav a {
 .zoom i {
   font-size: 20px;
   cursor: pointer;
-  color: #25b6d1;
+  color: #004a94;
 }
 
 .select--frames {
@@ -1680,11 +1680,11 @@ nav a {
 }
 .element--hover:hover {
   transition: all 0.3s ease;
-  border: 1px solid #25b6d1;
+  border: 1px solid #004a94;
 }
 
 .element--active {
-  border: 1px solid #25b6d1;
+  border: 1px solid #004a94;
 }
 
 #framePhotos {
@@ -1829,12 +1829,12 @@ nav a {
   margin: 0 5px;
   cursor: pointer;
   padding: 5px 15px;
-  border: 1px solid #25b6d1;
+  border: 1px solid #004a94;
   border-radius: 50%;
   color: #000;
 }
 .pagination-btn:hover {
-  background-color: #25b6d1;
+  background-color: #004a94;
   color: #fff;
 }
 
@@ -1853,16 +1853,16 @@ nav a {
   cursor: pointer;
   margin: 0 5px;
   padding: 5px 10px;
-  border: 1px solid #25b6d1;
+  border: 1px solid #004a94;
   border-radius: 50%;
   color: #000;
 }
 .pagination-pag ul a:hover {
-  background-color: #25b6d1;
+  background-color: #004a94;
   color: #fff;
 }
 .pagination-pag ul a.active {
-  background-color: #25b6d1;
+  background-color: #004a94;
   color: #fff;
 }
 
@@ -1942,7 +1942,7 @@ footer .logo img {
 }
 .footer--subscribe button {
   border-radius: 0 10px 10px 0;
-  background-color: #25b6d1;
+  background-color: #004a94;
   color: #fff;
 }
 .footer--subscribe button:hover {
@@ -1989,7 +1989,7 @@ footer .logo img {
 }
 .title--decoration span:nth-of-type(1) {
   width: 40%;
-  background-color: #25b6d1;
+  background-color: #004a94;
 }
 .title--decoration span:nth-of-type(2) {
   width: 10%;
@@ -1997,7 +1997,7 @@ footer .logo img {
 }
 .title--decoration span:nth-of-type(3) {
   width: 20%;
-  background-color: #25b6d1;
+  background-color: #004a94;
 }
 .title--decoration span:nth-of-type(4) {
   width: 10%;
@@ -2005,23 +2005,23 @@ footer .logo img {
 }
 .title--decoration span:nth-of-type(5) {
   width: 20%;
-  background-color: #25b6d1;
+  background-color: #004a94;
 }
 
 .review-stars i {
   font-size: 0.75rem;
-  color: #25b6d1;
+  color: #004a94;
 }
 
 .review-measure i {
   font-size: 1rem;
-  color: #25b6d1;
+  color: #004a94;
 }
 
 .review-rate button {
   background-color: unset;
   border: none;
-  color: #25b6d1;
+  color: #004a94;
 }
 
 .comment-list {
@@ -2073,6 +2073,39 @@ footer .logo img {
 }
 .payment__methods ul li {
   padding: 0 0.5rem;
+}
+
+.page-cover {
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+}
+.page-cover img {
+  width: 100%;
+}
+
+.page-cover-content {
+  position: absolute;
+  background-color: #1d2a4d;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.page-cover-content ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  font-weight: bold;
+}
+.page-cover-content ul li .el-link {
+  font-weight: bold;
+  color: #fff;
+  font-size: 1em;
 }
 
 .item {
@@ -2354,7 +2387,7 @@ footer .logo img {
   }
 }
 .progress-bar {
-  background-color: #25b6d1;
+  background-color: #004a94;
 }
 
 .form-select {
@@ -2424,7 +2457,7 @@ input[type=number]::-webkit-outer-spin-button {
   border: none;
   outline: none;
   box-shadow: none;
-  color: #25b6d1;
+  color: #004a94;
   border-color: rgba(0, 0, 0, 0.125);
 }
 
@@ -2472,7 +2505,7 @@ input[type=number]::-webkit-outer-spin-button {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: #25b6d1;
+  background-color: #004a94;
   height: 100%;
   width: 1px;
 }
@@ -2491,13 +2524,29 @@ hr {
 .nav-pills li button {
   padding: 0.5rem;
   color: #fff;
-  background-color: #25b6d1 !important;
+  background-color: #004a94 !important;
 }
 .nav-pills li button:hover {
   color: #fff;
 }
 .nav-pills li button.active {
   background-color: #1d2a4d !important;
+}
+
+.nav-pills.pills-white li {
+  margin-right: 5px;
+}
+.nav-pills.pills-white li button {
+  padding: 0.5rem;
+  color: #fff;
+  background-color: #004a94 !important;
+}
+.nav-pills.pills-white li button:hover {
+  color: #fff;
+}
+.nav-pills.pills-white li button.active {
+  background-color: #fff !important;
+  color: #004a94 !important;
 }
 
 p iframe {

@@ -46,6 +46,7 @@
     $router->setRoute("configuracion/banners/","Configuracion/Banners/banners",false);
 
     //Web
+    $router->setRoute("about/","Nosotros",false);
     $router->setRoute("shop/","Tienda",false);
     $router->setRoute("shop/search/","Tienda/buscar");
     $router->setRoute("shop/product/","Tienda/producto");
