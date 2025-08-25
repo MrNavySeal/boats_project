@@ -41,6 +41,9 @@
     $router->setRoute("sections/banners/","Configuracion/Banners/banners",false);
     $router->setRoute("sections/gallery/","Configuracion/Gallery/gallery",false);
     $router->setRoute("sections/faq/","Configuracion/Secciones/faq",false);
+    $router->setRoute("email/","Configuracion/Administracion/mensajes",false);
+    $router->setRoute("email/message/","Configuracion/Administracion/message");
+    $router->setRoute("email/sent/","Configuracion/Administracion/sent");
 
     //Web
     $router->setRoute("gallery/","Tienda/galeria",false);

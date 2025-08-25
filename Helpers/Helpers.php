@@ -109,7 +109,7 @@
     function emailNotification(){
         require_once("Models/Configuracion/AdministracionModel.php");
         $obj = new AdministracionModel();
-        $request = $obj->selectMails();
+        $request = $obj->selectMensajes();
         $total = 0;
         if(!empty($request)){
             foreach ($request as $email) {

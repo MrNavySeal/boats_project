@@ -31,15 +31,15 @@
                     $strPhone = strClean($_POST['txtContactPhone']);
                     $strMessage = strClean($_POST['txtContactMessage']);
                     $intService = intval($_POST['serviceList']);
-                    $strSubject = "New message";
                     $company = getCompanyInfo();
+                    $service = $this->getServiceT($intService);
+                    $strSubject = "New message -".$service['name'];
                     $request = $this->setMessage($strName,$strPhone,$strEmail,$strSubject,$strMessage,$intService);
                     if($request > 0){
-                        $service = $this->getServiceT($intService);
                         $dataEmail = array('email_remitente' => $company['email'], 
                                                 'email_usuario'=>$strEmail, 
                                                 'email_copia'=>$company['secondary_email'],
-                                                'asunto' =>$strSubject." - ".$service,
+                                                'asunto' =>$strSubject,
                                                 "message"=>$strMessage,
                                                 "company"=>$company,
                                                 "phone"=>$strPhone,

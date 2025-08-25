@@ -1,6 +1,4 @@
-<?php
-    $notification = emailNotification(); 
-?>
+
 <!-- Sidebar Start -->
 <div class="sidebar pe-4 pb-3">
     <nav class="navbar bg-light navbar-light">
