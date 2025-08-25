@@ -240,7 +240,7 @@
             }   
             return $arrData;
         }
-        public function setMessage($strName,$strPhone,$strEmail,$strSubject,$strMessage){
+        public function setMessage($strName,$strPhone,$strEmail,$strSubject,$strMessage,$intService){
             $this->con = new Mysql();
             $this->strName = $strName;
             $this->strEmail = $strEmail;
@@ -248,8 +248,8 @@
             $this->strMessage = $strMessage;
             $this->strPhone = $strPhone;
 
-            $sql = "INSERT INTO contact(name,phone,email,subject,message,status) VALUES(?,?,?,?,?,?)";
-            $arrData = array($this->strName,$this->strPhone,$this->strEmail,$this->strSubject,$strMessage,2);
+            $sql = "INSERT INTO contact(name,phone,email,subject,message,status,service_id) VALUES(?,?,?,?,?,?,?)";
+            $arrData = array($this->strName,$this->strPhone,$this->strEmail,$this->strSubject,$strMessage,2,$intService);
             $request = $this->con->insert($sql,$arrData);
             return $request;
         }

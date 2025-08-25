@@ -45,6 +45,7 @@
     //Web
     $router->setRoute("gallery/","Tienda/galeria",false);
     $router->setRoute("about/","Nosotros",false);
+    $router->setRoute("contact/","Contacto",false);
     $router->setRoute("shop/","Tienda",false);
     $router->setRoute("shop/search/","Tienda/buscar");
     $router->setRoute("shop/product/","Tienda/producto");

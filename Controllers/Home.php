@@ -14,19 +14,22 @@
         }
 
         public function home(){
-            setView(BASE_URL);
             $company = getCompanyInfo();
             $data['page_tag'] = $company['name'];
             $data['page_title'] = $company['name'];
             $data['productos'] = $this->getProductsT(8);
             $data['servicios'] = $this->getServicesT();
+            $data['page'] = $this->getPageT("contacto");
             $data['banners'] = $this->getBanners();
             $data['galeria'] = $this->getGalleryT();
             $data['page_name'] = "home";
-            $data['app'] = "functions_home.js";
             $data['categories'] = $this->getProductsCategories("15,25,21",24);
             $data['posts'] = $this->getArticlesT(3);
             $data['tipos'] = $this->selectTipos();
+            $data['page_functions'] = [
+                "functions_home.js",
+                "functions_contact.js"
+            ];
             $this->views->getView($this,"home",$data);
         }
         public function getProductsCategories(string $categories,int $qty){

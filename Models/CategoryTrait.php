@@ -40,6 +40,20 @@
             $request = $this->con->select_all($sql);
             return $request;
         }
+        public function getServiceT($id){
+            $this->con=new Mysql();
+            $sql = "SELECT * FROM service WHERE status = 1 AND id = $id";       
+            $request = $this->con->select($sql);
+            return $request;
+        }
+        public function getPageT($tipo){
+            $this->con=new Mysql();
+            $sql = "SELECT * FROM page WHERE type = '$tipo'";
+            $request = $this->con->select($sql);
+            $strUrl = media()."/images/uploads/".$request['picture'];
+            $request['url'] = $strUrl;
+            return $request;
+        }
         public function getGalleryT(){
             $this->con=new Mysql();
             $sql = "SELECT * FROM gallery WHERE status = 1 ORDER BY id DESC";       

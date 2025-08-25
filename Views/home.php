@@ -57,18 +57,8 @@
         </div>
         <?php getComponent("AboutSection"); ?>
         <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$galeria]); ?>
-        <div class="bg-color-2">
-            <div class="container">
-                <div class="py-2">
-                    <h3 class="section--title t-color-4 fs-4 mb-0 text-start">Our services</h3>
-                    <h2 class="section--title fs-1 t-color-4 text-start">Full suite of underwater cleaning services</h2>
-                    <div class="services-slider-cat owl-carousel owl-theme mb-5" data-bs-ride="carousel">
-                        <?php for ($j=0; $j < count($servicios); $j++) { $servicio = $servicios[$j]; getComponent("cardService",$servicio);} ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php getComponent("contactForm",$servicios); ?>
+        <?php getComponent("serviceSection",['titulo'=>"Our services","subtitulo"=>"Full suite of underwater cleaning services","datos"=>$servicios])?>
+        <?php getComponent("contactForm",['titulo'=>$data['page']['title'],"subtitulo"=>$data['page']['subtitle'],"datos"=>$servicios])?>
         <?php getComponent("ProductsCarouselSection",['titulo'=>"Our products","subtitulo"=>"Most recent","datos"=>$productos]);?>
     </main>
 <?php

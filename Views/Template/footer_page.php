@@ -125,6 +125,11 @@ for ($i=0; $i < count($social) ; $i++) {
     <?php if(isset($data['panelapp'])){?>
     <script src="<?=media();?>/js/<?=$data['panelapp']."?v=".rand()?>"></script>
     <?php }?>
-
+    <?php if(isset($data['page_functions'])){
+        $functions = $data['page_functions'];
+        foreach ($functions as $det) { 
+    ?>
+    <script src="<?=media();?>/template/Assets/js/<?=$det."?v=".rand()?>"></script>
+    <?php }}?>
 </body>
 </html>
