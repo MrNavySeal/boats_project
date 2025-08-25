@@ -86,6 +86,7 @@
                 </div>
             </div>
             <li class="navmobile-link"><a href="<?=base_url()?>/about/"><strong class="fs-5">About</strong></a></li>
+            <li class="navmobile-link"><a href="<?=base_url()?>/gallery/"><strong class="fs-5">Gallery</strong></a></li>
             <li class="navmobile-link"><a href="<?=base_url()?>/contact/"><strong class="fs-5">Contact us</strong></a></li>
             <?php if(!isset($_SESSION['login'])){ ?>
             <li class="navmobile-link" onclick="openLoginModal();"><a href="#"><strong class="fs-5">Log in</strong></a></li>

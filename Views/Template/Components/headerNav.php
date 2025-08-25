@@ -30,7 +30,7 @@
             <li class="nav-link"><a href="<?=base_url()?>">Home</a></li>
             <div class="nav-link dropdown">
                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    shop
+                    Shop
                     <i class="fas fa-angle-down dropdown-icon"></i>
                 </a>
                 <ul class="dropdown-menu">
@@ -60,6 +60,7 @@
                 </ul>
             </div>
             <li class="nav-link"><a href="<?=base_url()?>/about/">About</a></li>
+            <li class="nav-link"><a href="<?=base_url()?>/gallery/">Gallery</a></li>
             <li class="nav-link"><a href="<?=base_url()?>/contact/">Contact us</a></li>
         </ul>
         <ul class="nav--links">

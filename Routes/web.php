@@ -43,6 +43,7 @@
     $router->setRoute("sections/faq/","Configuracion/Secciones/faq",false);
 
     //Web
+    $router->setRoute("gallery/","Tienda/galeria",false);
     $router->setRoute("about/","Nosotros",false);
     $router->setRoute("shop/","Tienda",false);
     $router->setRoute("shop/search/","Tienda/buscar");

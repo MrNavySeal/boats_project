@@ -77,9 +77,9 @@ for ($i=0; $i < count($social) ; $i++) {
                     <p>Copyright © <?=date("Y")." ".$company['name']?></p>
                     <ul>
                         <li><a href="<?=base_url()?>">Home</a></li>
-                        <li><a href="<?=base_url()?>/politicas/terms">Terms and conditions</a></li>
-                        <li><a href="<?=base_url()?>/politicas/privacy">Privacy terms</a></li>
-                        <li><a href="<?=base_url()?>/contacto">Contact</a></li>
+                        <li><a href="<?=base_url()?>/terms/">Terms and conditions</a></li>
+                        <li><a href="<?=base_url()?>/privacy/">Privacy terms</a></li>
+                        <li><a href="<?=base_url()?>/contact/">Contact</a></li>
                     </ul>
                 </div>
             </div>

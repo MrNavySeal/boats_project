@@ -2553,4 +2553,14 @@ hr {
 p iframe {
   width: 100%;
   min-height: 500px;
+}
+
+.gallery-container {
+  background: rgba(0, 0, 0, 0.5882352941);
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 999999;
 }/*# sourceMappingURL=style.css.map */

@@ -120,6 +120,10 @@ if(document.querySelector("#myAccount")){
         openLoginModal();
     });
 }
+const closeGallery = document.querySelector(".closeGallery");
+closeGallery.addEventListener("click",function(){
+    document.querySelector(".gallery-container").classList.add("d-none");
+});
 
 /***************************General Shop Events****************************** */
 //Scroll top
@@ -132,6 +136,35 @@ if(document.querySelector("#myAccount")){
 });*/
 
 /***************************Essentials Functions****************************** */
+async function openGallery(id){
+    const gallery = document.querySelector(".gallery-container");
+    await getGallery(id);
+    gallery.classList.remove("d-none");
+    gallery.addEventListener("click",function(e){
+        if(e.target.classList.contains("gallery-container")){
+            document.querySelector(".gallery-container").classList.add("d-none");
+        }
+    });
+}
+async function getGallery(id="",type=""){
+    const img = document.querySelector(".gallery-picture");
+    if(id==""){
+        id = parseInt(img.getAttribute("data-id"));
+        if(type=="left"){
+            id--;
+        }else{
+            id++;
+        }
+    }
+    const formData = new FormData();
+    formData.append("id",id);
+    const response = await fetch(base_url+"/Tienda/getImage",{method:"POST",body:formData}); 
+    const objData = await response.json();
+    if(objData.status){
+        img.setAttribute("data-id",id);
+        img.setAttribute("src",objData.data);
+    }
+}
 function openLoginModal(){
     let modalItem = document.querySelector("#modalLogin");
     let modal= `
@@ -177,8 +210,8 @@ function openLoginModal(){
                                         <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-lock"></i></div>
                                         <input type="password" class="form-control" id="txtSignPassword" name="txtSignPassword" placeholder="Password" required></textarea>
                                     </div>
-                                    <p>Al registrarse en nuestro sitio web, aceptas <a href="${base_url}/politicas/terminos" target="_blank">nuestras políticas de uso</a> y 
-                                    <a href="${base_url}/politicas/privacidad" target="_blank">de privacidad</a>.</p>
+                                    <p>Al registrarse en nuestro sitio web, aceptas <a href="${base_url}/terms/" target="_blank">nuestras políticas de uso</a> y 
+                                    <a href="${base_url}/privacy/" target="_blank">de privacidad</a>.</p>
                                     <div class="d-flex justify-content-end mb-3 t-p" >
                                         <div class="c-p loginBtn">Do you have already an account? Log in</div>
                                     </div>

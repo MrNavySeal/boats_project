@@ -58,7 +58,17 @@
 
 </head>
 <body class="bg-light">
- <div id="app">
+    <div class="gallery-container d-none d-flex justify-content-center align-items-center">
+       <div class="container d-flex justify-content-between align-items-center">
+            <div onclick="getGallery('','left')" class="c-p fs-1 fw-bold p-4 text-white d-flex justify-content-center align-items-center mt-2" style="height: 100vh;"><i class="fas fa-caret-left"></i></div>
+            <div class="position-absolute top-0 end-0 text-white bg-color-1 fs-4 rounded-circle ps-3 pe-3 c-p closeGallery">x</div>
+            <div class="position-relative" style="height:50%">
+                <img src="<?=media()?>/images/uploads/about.jpg" class="img-fluid rounded gallery-picture" data-id="0" alt="...">
+            </div>
+            <div onclick="getGallery('','right')" class="c-p fs-1 fw-bold p-4 text-white d-flex justify-content-center align-items-center" style="height: 100vh;"><i class="fas fa-caret-right"></i></div>
+       </div>
+    </div>
+    <div id="app">
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
