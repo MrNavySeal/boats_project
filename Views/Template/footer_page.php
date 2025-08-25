@@ -2,6 +2,7 @@
 $discount = statusCoupon();
 $company = getCompanyInfo();
 $social = getSocialMedia();
+$services = getNavServices();
 
 $links ="";
 for ($i=0; $i < count($social) ; $i++) { 
@@ -18,91 +19,54 @@ for ($i=0; $i < count($social) ; $i++) {
 
     <footer>
         <div class="row m-0 mt-3">
-            <div class="col-lg-4 p-5">
+            <div class="col-lg-6 p-5">
                 <div class="logo">
                     <img src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>">
                 </div>
                 <p><?=$company['description']?></p>
-                <p class="fw-bold fs-4">Síguenos</p>
+                <p class="fw-bold fs-4">Follow us</p>
                 <ul class="social social--dark">
                     <?=$links?>
                 </ul>
             </div>
-            <div class="col-lg-8 p-0">
+            <div class="col-lg-6 p-0">
                 <div class="footer--info">
-                    <div class="row mb-5">
-                        <div class="col-md-4">
-                            <div class="footer--contact">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <p><?=$company['addressfull']?></p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="footer--contact">
-                                <i class="fas fa-phone"></i>
-                                <p><?=$company['phone']." - ".$company['phones']?><br> Llámanos</p>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="footer--contact">
-                                <i class="fas fa-envelope"></i>
-                                <p><?=$company['email']?></p>
-                            </div>
-                        </div>
-                    </div>
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="col-md-6">
                             <div class="footer--data">
                                 <div class="footer--title">
-                                    <h3>Información
+                                    <h3>Services
                                         <span class="title--decoration">
                                             <span></span><span></span><span></span><span></span><span></span>
                                         </span>
                                     </h3>
                                 </div>
                                 <ul>
-                                    <li><a href="<?=base_url()?>/enmarcar">Enmarcar aquí</a></li>
-                                    <li><a href="<?=base_url()?>/tienda">Tienda</a></li>
-                                    <li><a href="<?=base_url()?>/nosotros">¿Quienes somos?</a></li>
-                                    <li><a href="<?=base_url()?>/contacto">Contacto</a></li>
+                                    <?php
+                                        foreach ($services as $det) {
+                                            echo '<li><a href="'.base_url()."/shop/service/".$det['route'].'">'.$det['name'].'</a></li>';
+                                        }
+                                    ?>
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="footer--data">
                                 <div class="footer--title">
-                                    <h3>Métodos de pago
+                                    <h3>Official information
                                         <span class="title--decoration">
                                             <span></span><span></span><span></span><span></span><span></span>
                                         </span>
                                     </h3>
                                 </div>
                                 <ul>
-                                    <li>Todas las tarjetas débito y crédito</li>
-                                    <li>Transferencia bancaria</li>
-                                    <li>Mercadopago</li>
+                                    <li><?=$company['addressfull']?></li>
+                                    <li><?=$company['phone']." - ".$company['phones']?></li>
+                                    <li><?=$company['email']?></li>
                                 </ul>
                             </div>
                         </div>
-                        <?php if(!empty($discount)){ ?>
-                        <div class="col-md-5">
-                            <div class="footer--data">
-                                <div class="footer--title">
-                                    <h3>Suscríbete
-                                        <span class="title--decoration">
-                                            <span></span><span></span><span></span><span></span><span></span>
-                                        </span>
-                                    </h3>
-                                </div>
-                                <p>Suscríbete a nuestro boletín y recibe un cupón de descuento de <?=$discount['discount']?>% <br><br>Reciba información actualizada sobre novedades, ofertas especiales y nuestras promociones</p>
-                                <div class="alert alert-danger d-none" id="alertSuscribe" role="alert"></div>
-                                <form action="" class="footer--subscribe" id="formSuscriber">
-                                    <input type="email" id="txtEmailSuscribe" name="txtEmailSuscribe" placeholder="Tu correo">
-                                    <button type="submit" class="btn" id="btnSuscribe"><i class="fas fa-paper-plane"></i></button>
-                                </form>
-                            </div>
-                        </div>
-                        <?php }?>
+                        
                     </div>
                 </div>
             </div>
@@ -112,10 +76,10 @@ for ($i=0; $i < count($social) ; $i++) {
                 <div class="footer--bar">
                     <p>Copyright © <?=date("Y")." ".$company['name']?></p>
                     <ul>
-                        <li><a href="<?=base_url()?>">Inicio</a></li>
-                        <li><a href="<?=base_url()?>/politicas/terminos">Términos y condiciones</a></li>
-                        <li><a href="<?=base_url()?>/politicas/privacidad">Políticas de privacidad</a></li>
-                        <li><a href="<?=base_url()?>/contacto">Contacto</a></li>
+                        <li><a href="<?=base_url()?>">Home</a></li>
+                        <li><a href="<?=base_url()?>/politicas/terms">Terms and conditions</a></li>
+                        <li><a href="<?=base_url()?>/politicas/privacy">Privacy terms</a></li>
+                        <li><a href="<?=base_url()?>/contacto">Contact</a></li>
                     </ul>
                 </div>
             </div>

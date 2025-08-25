@@ -13,10 +13,9 @@
         return $data;
     }
     function navSubLinks(){
-        require_once("Models/PaginaTrait.php");
         require_once("Models/CategoryTrait.php");
         class SubLink{
-            use PaginaTrait,CategoryTrait;
+            use CategoryTrait;
             public function getInfo(){
                 $services = $this->getServicesT();
                 $categories = $this->getCategoriesT();
@@ -411,7 +410,9 @@
         return $request;
     }
     function getNavServices(){
-        require_once("Models/CategoryTrait.php");
+        require_once("Models/Servicios/ServiciosModel.php");
+        $con = new ServiciosModel();
+        return $con->getServicios();
     }
     function getIp(){
         $ip = "";

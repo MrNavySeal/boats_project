@@ -21,6 +21,7 @@
             $data['productos'] = $this->getProductsT(8);
             $data['servicios'] = $this->getServicesT();
             $data['banners'] = $this->getBanners();
+            $data['galeria'] = $this->getGalleryT();
             $data['page_name'] = "home";
             $data['app'] = "functions_home.js";
             $data['categories'] = $this->getProductsCategories("15,25,21",24);

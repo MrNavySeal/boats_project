@@ -1,5 +1,4 @@
 <?php
-    require_once("Libraries/Core/Mysql.php");
     trait CategoryTrait{
         private $con;
 
@@ -31,7 +30,13 @@
         }
         public function getServicesT(){
             $this->con=new Mysql();
-            $sql = "SELECT * FROM service ORDER BY id DESC";       
+            $sql = "SELECT * FROM service WHERE status = 1 ORDER BY id DESC";       
+            $request = $this->con->select_all($sql);
+            return $request;
+        }
+        public function getGalleryT(){
+            $this->con=new Mysql();
+            $sql = "SELECT * FROM gallery WHERE status = 1 ORDER BY id DESC";       
             $request = $this->con->select_all($sql);
             return $request;
         }

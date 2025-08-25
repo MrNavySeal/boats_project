@@ -102,5 +102,9 @@
             $request = $this->delete($sql);
             return $request;
         }
+        public function getServicios(){
+            $sql = "SELECT * FROM service ORDER BY id DESC";
+            return $this->select_all($sql);
+        }
     }
 ?>

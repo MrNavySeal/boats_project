@@ -17,6 +17,7 @@
 
     $productos = $data['productos'];
     $servicios = $data['servicios'];
+    $galeria = $data['galeria'];
     $banners = $data['banners'];
     $proCant = 4;
     $sliders = round(count($productos)/$proCant);
@@ -54,9 +55,8 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        
         <?php getComponent("AboutSection"); ?>
-        <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$productos]); ?>
+        <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$galeria]); ?>
         <div class="bg-color-2">
             <div class="container">
                 <div class="py-2">

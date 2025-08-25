@@ -3,6 +3,7 @@
 footer{
     height: 100%;
     min-width: 100%;
+    background-color: $color4;
     .logo{
         display: block;
         padding: 1rem;
@@ -40,9 +41,9 @@ footer{
         padding: 0;
         li{
             margin-bottom: 1.2rem;
-            color:$color3;
+            color:$color4;
             a{
-                color:$color3;
+                color:$color4;
             }
         }
     }
