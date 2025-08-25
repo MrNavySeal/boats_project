@@ -146,28 +146,28 @@ function openLoginModal(){
                         <div class="d-flex justify-content-center align-items-center">
                             <div class="login">
                                 <form id="formLogin" name="formLogin">
-                                    <h2 class="mb-4">Iniciar sesión</h2>
+                                    <h2 class="mb-4">Log in</h2>
                                     <div class="mb-3 d-flex">
                                         <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-envelope"></i></div>
                                         <input type="email" class="form-control" id="txtLoginEmail" name="txtEmail" placeholder="Email" required>
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-lock"></i></div>
-                                        <input type="password" class="form-control" id="txtLoginPassword" name="txtPassword" placeholder="Contraseña" required></textarea>
+                                        <input type="password" class="form-control" id="txtLoginPassword" name="txtPassword" placeholder="Password" required></textarea>
                                     </div>
                                     <div class="d-flex justify-content-end mb-3 t-p">
-                                        <div class="c-p" id="forgotBtn">¿Olvidaste tu contraseña?</div>
+                                        <div class="c-p" id="forgotBtn">Has forgotten your password?</div>
                                     </div>
-                                    <button type="submit" id="loginSubmit" class="btn btn-bg-2 w-100 mb-4" >Iniciar sesión</button>
+                                    <button type="submit" id="loginSubmit" class="btn btn-bg-2 w-100 mb-4" >Log in</button>
                                     <div class="d-flex justify-content-center mb-3 t-p" >
-                                        <div class="c-p" id="signBtn">¿Necesitas una cuenta?</div>
+                                        <div class="c-p" id="signBtn">Are you new here?</div>
                                     </div>
                                 </form>
                                 <form id="formSign" class="d-none">
-                                    <h2 class="mb-4">Registrarse</h2>
+                                    <h2 class="mb-4">Sign up</h2>
                                     <div class="mb-3 d-flex">
                                         <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-user"></i></div>
-                                        <input type="text" class="form-control" id="txtSignName" name="txtSignName" placeholder="Nombre" required>
+                                        <input type="text" class="form-control" id="txtSignName" name="txtSignName" placeholder="Name" required>
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-envelope"></i></div>
@@ -175,35 +175,35 @@ function openLoginModal(){
                                     </div>
                                     <div class="mb-3 d-flex">
                                         <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-lock"></i></div>
-                                        <input type="password" class="form-control" id="txtSignPassword" name="txtSignPassword" placeholder="Contraseña" required></textarea>
+                                        <input type="password" class="form-control" id="txtSignPassword" name="txtSignPassword" placeholder="Password" required></textarea>
                                     </div>
                                     <p>Al registrarse en nuestro sitio web, aceptas <a href="${base_url}/politicas/terminos" target="_blank">nuestras políticas de uso</a> y 
                                     <a href="${base_url}/politicas/privacidad" target="_blank">de privacidad</a>.</p>
                                     <div class="d-flex justify-content-end mb-3 t-p" >
-                                        <div class="c-p loginBtn">¿Ya tienes una cuenta? inicia sesión</div>
+                                        <div class="c-p loginBtn">Do you have already an account? Log in</div>
                                     </div>
-                                    <button type="submit" id="signSubmit" class="btn btn-bg-2 w-100 mb-4" >Registrarse</button>
+                                    <button type="submit" id="signSubmit" class="btn btn-bg-2 w-100 mb-4" >Sign up</button>
                                 </form>
                                 <form id="formConfirmSign" class="d-none">
-                                    <h2 class="mb-4">Verificar correo</h2>
+                                    <h2 class="mb-4">Verifying your email</h2>
                                     <div class="mb-3 d-flex">
                                         <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-lock-open"></i></div>
-                                        <input type="text" class="form-control" id="txtCode" name="txtCode" placeholder="Código" required>
+                                        <input type="text" class="form-control" id="txtCode" name="txtCode" placeholder="Code" required>
                                     </div>
-                                    <p>Te hemos enviado un correo electrónico con tu codigo de verificación.</p>
-                                    <button type="submit" id="confimSignSubmit" class="btn btn-bg-2 w-100 mb-4" >Verificar</button>
+                                    <p>We have sent you an email with your verification code.</p>
+                                    <button type="submit" id="confimSignSubmit" class="btn btn-bg-2 w-100 mb-4" >Verify</button>
                                 </form>
                                 <form id="formReset" class="d-none">
-                                    <h2 class="mb-4">Recuperar contraseña</h2>
+                                    <h2 class="mb-4">Recover password</h2>
                                     <div class="mb-3 d-flex">
                                         <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-envelope"></i></div>
                                         <input type="email" class="form-control" id="txtEmailReset" name="txtEmailReset" placeholder="Email" required>
                                     </div>
-                                    <p>Te enviaremos un correo electrónico con las instrucciones a seguir.</p>
+                                    <p>We have sent you an email with the instructions to follow.</p>
                                     <div class="d-flex justify-content-end mb-3 t-p" >
-                                        <div class="c-p loginBtn">Iniciar sesión</div>
+                                        <div class="c-p loginBtn">Log in</div>
                                     </div>
-                                    <button type="submit" id="resetSubmit" class="btn btn-bg-2 w-100 mb-4" >Recuperar contraseña</button>
+                                    <button type="submit" id="resetSubmit" class="btn btn-bg-2 w-100 mb-4" >Recover password</button>
                                 </form>
                             </div>
                         </div>
@@ -262,7 +262,7 @@ function openLoginModal(){
             loginBtn.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             loginBtn.setAttribute("disabled","");
             request(url,formData,"post").then(function(objData){
-                loginBtn.innerHTML=`Iniciar sesión`;
+                loginBtn.innerHTML=`Log in`;
                 loginBtn.removeAttribute("disabled");
                 if(objData.status){
                     window.location.reload(false);
@@ -283,11 +283,11 @@ function openLoginModal(){
         let signBtn = document.querySelector("#signSubmit");
 
         if(strEmail == "" || strPassword =="" || strName ==""){
-            Swal.fire("Error", "Por favor, completa los campos", "error");
+            Swal.fire("Error", "Please fill the fields", "error");
             return false;
         }
         if(strPassword.length < 8){
-            Swal.fire("Error","La contraseña debe tener al menos 8 carácteres","error");
+            Swal.fire("Error","Your password must have at least 8 characters","error");
             return false;
         }
         let url = base_url+'/tienda/validCustomer'; 
@@ -295,7 +295,7 @@ function openLoginModal(){
         signBtn.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
         signBtn.setAttribute("disabled","");
         request(url,formData,"post").then(function(objData){
-            signBtn.innerHTML=`Registrarse`;
+            signBtn.innerHTML=`Sign up`;
             signBtn.removeAttribute("disabled");
             if(objData.status){
                 formSign.classList.add("d-none");
@@ -313,7 +313,7 @@ function openLoginModal(){
         let strPassword = document.querySelector('#txtSignPassword').value;
         let signBtn = document.querySelector("#confimSignSubmit");
         if(strCode==""){
-            Swal.fire("Error", "Por favor, completa los campos", "error");
+            Swal.fire("Error", "Please, fill the fields", "error");
             return false;
         }else{
 
@@ -325,7 +325,7 @@ function openLoginModal(){
             signBtn.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             signBtn.setAttribute("disabled","");
             request(url,formData,"post").then(function(objData){
-                signBtn.innerHTML=`Verificar`;
+                signBtn.innerHTML=`Verify`;
                 signBtn.removeAttribute("disabled");
                 if(objData.status){
                     window.location.reload(false);
@@ -348,21 +348,21 @@ function openLoginModal(){
         let url = base_url+'/Login/resetPass'; 
         let formData = new FormData(formReset);
         if(strEmail == ""){
-            Swal.fire("Error", "Por favor, completa los campos", "error");
+            Swal.fire("Error", "Please, fill the fields", "error");
             return false;
         }
         if(!fntEmailValidate(strEmail)){
-            Swal.fire("Error","El correo es invalido","error");
+            Swal.fire("Error","Email is not valid","error");
             return false;
         }
         btnReset.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
         btnReset.setAttribute("disabled","");
         request(url,formData,"post").then(function(objData){
-            btnReset.innerHTML=`Recuperar contraseña`;
+            btnReset.innerHTML=`Recover password`;
             btnReset.removeAttribute("disabled");
             if(objData.status){
                 Swal.fire({
-                    title: "Recuperar contraseña",
+                    title: "Recover password",
                     text: objData.msg,
                     icon: "success",
                     confirmButtonText: 'Ok',

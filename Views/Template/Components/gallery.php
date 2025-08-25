@@ -8,7 +8,7 @@
         <h2 class="section--title fs-2 t-color-1"><?=$titulo?></h2>
         <h3 class="t-color-2"><?=$subtitulo?></h3>
         <div class="row">
-            <div class="product-slider-cat owl-carousel owl-theme mb-5" data-bs-ride="carousel">
+            <div class="gallery-slider-cat owl-carousel owl-theme mb-5" data-bs-ride="carousel">
                 <?php for ($j=0; $j < count($arrData); $j++) { $data = $arrData[$j]; getComponent("cardGallery",$data);} ?>
             </div>
         </div>

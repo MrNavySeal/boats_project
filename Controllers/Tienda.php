@@ -116,7 +116,9 @@
                     $data['page_tag'] = $company['name'];
                     $data['productos'] = $this->getProductsT(8);
                     $data['page_name'] = "service";
+                    $data['faq'] = $this->getFaqT();
                     $data['services'] = $this->getServicesT();
+                    $data['gallery'] = $this->getGalleryT();
                     $data['page_title'] =$data['service']['name']." | ".$company['name'];
                     $data['app'] = "functions_service.js";
                     $this->views->getView($this,"servicio",$data); 

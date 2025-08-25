@@ -28,6 +28,12 @@
             $request = $this->con->select_all($sql);
             return $request;
         }
+        public function getFaqT(){
+            $this->con=new Mysql();
+            $sql = "SELECT * FROM faq WHERE status = 1 ORDER BY id DESC";       
+            $request = $this->con->select_all($sql);
+            return $request;
+        }
         public function getServicesT(){
             $this->con=new Mysql();
             $sql = "SELECT * FROM service WHERE status = 1 ORDER BY id DESC";       

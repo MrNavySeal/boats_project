@@ -2,7 +2,9 @@
     headerPage($data);
     $service =$data['service'];
     $services = $data['services'];
+    $faq = $data['faq'];
     $productos = $data['productos'];
+    $galeria = $data['gallery'];
     $company = getCompanyInfo();
 ?>
     <?=$data['modal']?>
@@ -28,6 +30,24 @@
                         <h1><?=$service['name']?></h1>
                         <p class="mb-2 mt-2"><?=$service['short_description']?></p>
                         <div class="service-description"><?=$service['description']?></div>
+                        <?php foreach ($faq as $key) { ?>
+                        <div class="navmobile-link accordion " id="accordionService<?=$key['id']?>">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header " id="flush-services<?=$key['id']?>">
+                                <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseServices<?=$key['id']?>" aria-expanded="false" aria-controls="flush-collapseServices<?=$key['id']?>">
+                                    <strong class="fs-5"><?= $key['question']?></strong>
+                                </button>
+                                </h2>
+                                <div id="flush-collapseServices<?=$key['id']?>" class="accordion-collapse collapse " aria-labelledby="flush-services<?=$key['id']?>" data-bs-parent="#accordionFlushServices<?=$key['id']?>">
+                                    <div class="accordion-body bg-light pe-2 ps-2">
+                                        <div class="bg-white rounded pe-2 ps-2 fw-normal">
+                                            <?= $key['answer']?> Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint natus accusantium earum facilis alias illo nemo tempore esse voluptate ullam, hic, id delectus libero. Voluptatem exercitationem laborum recusandae eius totam!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <?php }?>
                     </div>
                     <div class="col-md-4 product-data">
                         <div class="mb-5 bg-light rounded">
@@ -38,11 +58,10 @@
                                 <?php } }?>
                             </div>
                         </div>
-                        
-                        <div class="bg-color-2 rounded">
+                        <div class="bg-color-1 rounded">
                             <div class="p-4">
                                 <h3 class="section--title t-color-4 fs-4 mb-0 text-start">- Keep Your Boat in top condition</h3>
-                                <a href="#" class="pb-2 section--title t-color-4 text-start">Contact us today</a>
+                                <a href="<?=base_url()?>/contact/" class="pb-2 section--title t-color-4 text-start">Contact us today</a>
                             </div>
                         </div>
                         <?php if(!empty($productos)){?>
@@ -55,6 +74,7 @@
                         <?php }?>
                     </div>
                 </div>
+                <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$galeria]); ?>
             </div>
         </main>
     </div>

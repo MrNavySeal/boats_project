@@ -48,7 +48,7 @@ const App = {
             formData.append("estado",this.intEstado);
             this.$refs.btnAdd.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             this.$refs.btnAdd.disabled = true;
-            const response = await fetch(base_url+"/Secciones/setFaq",{method:"POST",body:formData});
+            const response = await fetch(base_url+"/Configuracion/Secciones/setFaq",{method:"POST",body:formData});
             const objData = await response.json();
             this.$refs.btnAdd.innerHTML = `Save <i class="fas fa-save"></i>`;
             this.$refs.btnAdd.disabled = false;
@@ -72,7 +72,7 @@ const App = {
             formData.append("pagina",this.intPagina);
             formData.append("buscar",this.strBuscar);
             formData.append("tipo_busqueda",strTipo);
-            const response = await fetch(base_url+"/secciones/getBuscar",{method:"POST",body:formData});
+            const response = await fetch(base_url+"/Configuracion/Secciones/getBuscar",{method:"POST",body:formData});
             const objData = await response.json();
             this.arrData = objData.data;
             this.intInicioPagina  = objData.start_page;
@@ -87,7 +87,7 @@ const App = {
           const formData = new FormData();
           formData.append("id",this.intId);
           formData.append("tipo_busqueda",strTipo);
-          const response = await fetch(base_url+"/Secciones/getDatos",{method:"POST",body:formData});
+          const response = await fetch(base_url+"/Configuracion/Secciones/getDatos",{method:"POST",body:formData});
           const objData = await response.json();
           if(objData.status){
               this.strPregunta= objData.data.question,
@@ -116,7 +116,7 @@ const App = {
                   const formData = new FormData();
                   formData.append("id",objVue.intId);
                   formData.append("tipo_busqueda",strTipo);
-                  const response = await fetch(base_url+"/Secciones/delDatos",{method:"POST",body:formData});
+                  const response = await fetch(base_url+"/Configuracion/Secciones/delDatos",{method:"POST",body:formData});
                   const objData = await response.json();
                   if(objData.status){
                     Swal.fire("Deleted!",objData.msg,"success");
