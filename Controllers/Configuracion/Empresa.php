@@ -11,7 +11,7 @@
         }
 
         public function empresa(){
-            if($_SESSION['idUser'] == 1){
+            if($_SESSION['permitsModule']['u']){
                 $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}}";
                 $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
@@ -30,8 +30,7 @@
             }
         }
         public function setCompany(){
-            //dep($_POST);exit;
-            if($_SESSION['idUser']==1){
+            if($_SESSION['permitsModule']['u']){
                 if($_POST){
                     if(empty($_POST['txtName']) || empty($_POST['txtCompanyEmail']) || empty($_POST['txtEmail']) || empty($_POST['txtPhone']) 
                     || empty($_POST['txtAddress']) || empty($_POST['countryList']) || empty($_POST['stateList']) || empty($_POST['cityList']) || empty($_POST['txtPassword'])
@@ -100,7 +99,7 @@
 			die();
 		}
         public function setSocial(){
-            if($_SESSION['idUser']==1){
+            if($_SESSION['permitsModule']['u']){
                 if($_POST){
                     $facebook = strClean($_POST['txtFacebook']);
                     $twitter = strClean($_POST['txtTwitter']);
@@ -124,7 +123,7 @@
             die();
         }
         public function setCredentials(){
-            if($_SESSION['idUser']==1){
+            if($_SESSION['permitsModule']['u']){
                 if($_POST){
                     if(empty($_POST['txtClient']) || empty($_POST['txtSecret'])){
                         $arrResponse = array("status" => false, "msg" => 'Error de datos.');

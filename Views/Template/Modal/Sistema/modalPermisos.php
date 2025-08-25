@@ -22,11 +22,11 @@
         <div class="accordion accordion-flush" id="accordionFlushExample">
             <div class="accordion-item" v-for="(module,moduleIndex) in arrPermissions" :key="module.id">
                 <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#flush-module-'+module.name" aria-expanded="false" :aria-controls="'flush-module-'+module.name">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#flush-module-'+module.nickname+module.id" aria-expanded="false" :aria-controls="'flush-module-'+module.nickname+module.id">
                         {{module.name}}
                     </button>
                 </h2>
-                <div :id="'flush-module-'+module.name" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div :id="'flush-module-'+module.nickname+module.id" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
                     <div class="accordion-body">
                         <div class="d-flex gap-4 flex-wrap">
                             <div class="form-check form-switch text-normal">
@@ -66,13 +66,13 @@
                                 <label class="form-check-label" :for="'switchCheckOptionD'+option.name">Eliminar </label>
                             </div>
                         </div>
-                        <div class="accordion accordion-flush mt-2" :id="'accordionFlushSection'+section.name" v-for="(section,sectionIndex) in module.sections" :key="section.id">
+                        <div class="accordion accordion-flush mt-2" :id="'accordionFlushSection'+section.nickname+section.id" v-for="(section,sectionIndex) in module.sections" :key="section.id">
                             <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#flush-section-'+section.name" aria-expanded="false" :aria-controls="'flush-section-'+section.name">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" :data-bs-target="'#flush-section-'+section.name" aria-expanded="false" :aria-controls="'flush-section-'+section.nickname+section.id">
                                     {{section.name}}
                                 </button>
                             </h2>
-                            <div :id="'flush-section-'+section.name" class="accordion-collapse collapse" :data-bs-parent="'#accordionFlushSection'+section.name">
+                            <div :id="'flush-section-'+section.nickname+section.id" class="accordion-collapse collapse" :data-bs-parent="'#accordionFlushSection'+section.name">
                                 <div class="d-flex gap-4 ms-3 mt-2 flex-wrap">
                                     <div class="form-check form-switch text-normal">
                                         <input class="form-check-input" @change="setPermission('section',section)" type="checkbox" role="switch" v-model="section.r" :id="'switchCheckSectionR'+section.name">
