@@ -33,7 +33,7 @@ const App = {
             this.common.showModalModule = true;
             this.common.strName ="";
             this.common.intId =0;
-            this.common.modulesTitle = "Nuevo rol";
+            this.common.modulesTitle = "New role";
         },
         savePermissions:async function(){
             const formData = new FormData();
@@ -45,7 +45,7 @@ const App = {
             this.common.processing =false;
             this.showPermissionModal = false;
             if(objData.status){
-                Swal.fire("Guardado",objData.msg,"success");
+                Swal.fire("Saved",objData.msg,"success");
             }else{
                 Swal.fire("Error",objData.msg,"error");
             }
@@ -64,7 +64,7 @@ const App = {
             this.common.showModalModule = false;
             if(objData.status){
                 this.search();
-                Swal.fire("Guardado",objData.msg,"success");
+                Swal.fire("Saved",objData.msg,"success");
             }else{
                 Swal.fire("Error",objData.msg,"error");
             }
@@ -93,7 +93,7 @@ const App = {
                 this.common.strName =objData.data.name;
                 this.common.intId = objData.data.id;
                 this.common.showModalModule = true;
-                this.common.modulesTitle = "Editar rol";
+                this.common.modulesTitle = "Edit role";
             }else{
                 Swal.fire("Error",objData.msg,"error");
             }
@@ -101,14 +101,14 @@ const App = {
         del:async function(data){
             const objVue = this;
             Swal.fire({
-                title:"¿Esta seguro de eliminar?",
-                text:"Se eliminará para siempre...",
+                title:"¿Are you sure?",
+                text:"It will be deleted forever...",
                 icon: 'warning',
                 showCancelButton:true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText:"Sí, eliminar",
-                cancelButtonText:"No, cancelar"
+                confirmButtonText:"Yes",
+                cancelButtonText:"No"
             }).then(async function(result){
                 if(result.isConfirmed){
                     const formData = new FormData();
@@ -116,7 +116,7 @@ const App = {
                     const response = await fetch(base_url+"/Sistema/Roles/delRol",{method:"POST",body:formData});
                     const objData = await response.json();
                     if(objData.status){
-                        Swal.fire("Eliminado!",objData.msg,"success");
+                        Swal.fire("Deleted!",objData.msg,"success");
                         objVue.search();
                     }else{
                         Swal.fire("Error",objData.msg,"error");
@@ -140,7 +140,7 @@ const App = {
             this.checkU = objData.u;
             this.checkD = objData.d;
             this.strRol = data.name;
-            this.common.modulesTitle = "Permisos de "+this.strRol;
+            this.common.modulesTitle = this.strRol+" permissions";
         },
         setPermission:function(type="module",data=[]){
             if(type=="all"){

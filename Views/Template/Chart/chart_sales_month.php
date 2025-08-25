@@ -10,11 +10,10 @@
             type: 'line'
         },
         title: {
-            text: 'Gráfico de <?=$ingresos['month']." ".$ingresos['year']?>'
+            text: '<?=$ingresos['month']." ".$ingresos['year']?>'
         },
         subtitle: {
-            text: `Ingresos: <?=formatNum($ingresos['total'])?> - Costos: <?=formatNum($costos['total'])?> - Gastos: <?=formatNum($gastos['total'])?><br>
-                   Neto: <?=formatNum($resultadoMensual)?>`
+            text: `Sales: <?=formatNum($ingresos['total'])?>`
         },
         xAxis: {
             categories: [
@@ -40,34 +39,12 @@
             }
         },
         series: [{
-            name: 'Ingresos',
+            name: 'Sales',
             data: [
                 <?php
                     
                     for ($i=0; $i < count($ingresos['sales']) ; $i++) { 
                         echo $ingresos['sales'][$i]['total'].",";
-                    }
-                ?>
-            ]
-        },
-        {
-            name: 'Costos',
-            data: [
-                <?php
-                    
-                    for ($i=0; $i < count($costos['costos']) ; $i++) { 
-                        echo $costos['costos'][$i]['total'].",";
-                    }
-                ?>
-            ]
-        },
-        {
-            name: 'Gastos',
-            data: [
-                <?php
-                    
-                    for ($i=0; $i < count($gastos['gastos']) ; $i++) { 
-                        echo $gastos['gastos'][$i]['total'].",";
                     }
                 ?>
             ]

@@ -9,10 +9,10 @@
             type: 'bar'
         },
         title: {
-            text: 'Clientes del año <?=$arrData[0]['year']?>'
+            text: 'Year <?=$arrData[0]['year']?>'
         },
         subtitle: {
-            text: `clientes: <?=$data['total']?>`
+            text: `Customers: <?=$data['total']?>`
         },
         xAxis: {
             categories: [
@@ -29,7 +29,7 @@
         yAxis: {
             min: 0,
             title: {
-            text: 'Clientes',
+            text: 'Customers',
             align: 'high'
             },
             labels: {
@@ -62,7 +62,7 @@
             enabled: false
         },
         series: [{
-            name: 'Clientes',
+            name: 'Customers',
             data: [
                 <?php
                     for ($i=0; $i < count($arrData) ; $i++) { 

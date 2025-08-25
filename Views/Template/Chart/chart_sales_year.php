@@ -13,11 +13,10 @@
             type: 'bar'
         },
         title: {
-            text: 'Gráfico del año <?=$dataAnual[0]['year']?>'
+            text: 'Year <?=$dataAnual[0]['year']?>'
         },
         subtitle: {
-            text: `Ingresos: <?=formatNum($ingresosAnual)?> - Costos: <?=formatNum($costosAnual)?> - Gastos: <?=formatNum($gastosAnual)?><br>
-                   Neto: <?=formatNum($resultadoAnual)?>`
+            text: `Sales: <?=formatNum($ingresosAnual)?>`
         },
         xAxis: {
             categories: [
@@ -34,7 +33,7 @@
         yAxis: {
             min: 0,
             title: {
-            text: 'Ingresos y egresos',
+            text: 'Sales',
             align: 'high'
             },
             labels: {
@@ -67,29 +66,11 @@
             enabled: false
         },
         series: [{
-            name: 'Ingresos',
+            name: 'Sales',
             data: [
                 <?php
                     for ($i=0; $i < count($dataAnual) ; $i++) { 
                         echo '["'.$dataAnual[$i]['month'].'"'.",".''.$dataAnual[$i]['sale'].'],';
-                    }    
-                ?>
-            ],
-        }, {
-            name: 'Costos',
-            data: [
-                <?php
-                    for ($i=0; $i < count($dataAnual) ; $i++) { 
-                        echo '["'.$dataAnual[$i]['month'].'"'.",".''.$dataAnual[$i]['costos'].'],';
-                    }    
-                ?>
-            ],
-        }, {
-            name: 'Gastos',
-            data: [
-                <?php
-                    for ($i=0; $i < count($dataAnual) ; $i++) { 
-                        echo '["'.$dataAnual[$i]['month'].'"'.",".''.$dataAnual[$i]['gastos'].'],';
                     }    
                 ?>
             ],

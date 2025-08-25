@@ -7,10 +7,10 @@
             type: 'line'
         },
         title: {
-            text: 'Clientes del mes de <?=$arrData['month']." ".$arrData['year']?>'
+            text: '<?=$arrData['month']." ".$arrData['year']?>'
         },
         subtitle: {
-            text: `Clientes: <?=$arrData['total']?>`
+            text: `Customers: <?=$arrData['total']?>`
         },
         xAxis: {
             categories: [
@@ -36,7 +36,7 @@
             }
         },
         series: [{
-            name: 'Clientes',
+            name: 'Customers',
             data: [
                 <?php
                     
