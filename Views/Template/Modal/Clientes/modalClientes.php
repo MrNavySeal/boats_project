@@ -8,53 +8,53 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <app-input label="Nombre" type="text" v-model="strNombre" required="true"></app-input>
+                <app-input label="Name" type="text" v-model="strNombre" required="true"></app-input>
             </div>
             <div class="col-md-6">
-                <app-input label="Apellido" type="text" v-model="strApellido"></app-input>
+                <app-input label="Lastname" type="text" v-model="strApellido"></app-input>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <app-input label="Nro documento" type="text" v-model="strDocumento"></app-input>
+                <app-input label="ID number" type="text" v-model="strDocumento"></app-input>
             </div>
             <div class="col-md-6">
-                <app-input label="Correo" type="email" v-model="strCorreo"></app-input>
+                <app-input label="Email" type="email" v-model="strCorreo"></app-input>
             </div>
         </div>
         <div class="row">
             <div class="col-md-4">
-                <app-select label="Países"  v-model="intPais" @change="setFiltro('paises')">
+                <app-select label="Country"  v-model="intPais" @change="setFiltro('paises')">
                     <option v-for="(data,index) in arrPaises" :value="data.id">{{data.name}}</option>
                 </app-select>
             </div>
             <div class="col-md-4">
-                <app-select label="Estado/departamento"  v-model="intDepartamento" @change="setFiltro('departamentos')">
+                <app-select label="Status"  v-model="intDepartamento" @change="setFiltro('departamentos')">
                     <option v-for="(data,index) in arrDepartamentos" :value="data.id">{{data.name}}</option>
                 </app-select>
             </div>
             <div class="col-md-4">
-                <app-select label="Ciudad"  v-model="intCiudad">
+                <app-select label="City"  v-model="intCiudad">
                     <option v-for="(data,index) in arrCiudades" :value="data.id">{{data.name}}</option>
                 </app-select>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <app-input label="Teléfono" type="phone" v-model="strTelefono" required="true"></app-input>
+                <app-input label="Phone" type="phone" v-model="strTelefono" required="true"></app-input>
             </div>
             <div class="col-md-6">
-                <app-input label="Dirección" type="text" v-model="strDireccion"></app-input>
+                <app-input label="Address" type="text" v-model="strDireccion"></app-input>
             </div>
         </div>
         <div class="row">
             <div class="col-md-6">
-                <app-input label="Contraseña" type="password" v-model="strContrasena"></app-input>
+                <app-input label="Password" type="password" v-model="strContrasena"></app-input>
             </div>
             <div class="col-md-6">
                 <app-select label="Estado"  v-model="intEstado">
-                    <option value="1">Activo</option>
-                    <option value="2">Inactivo</option>
+                    <option value="1">Active</option>
+                    <option value="2">Inactive</option>
                 </app-select>
             </div>
         </div>

@@ -8,17 +8,16 @@
                 die();
             }
             parent::__construct();
-            sessionCookie();
         }
         public function clientes(){
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
-                    "duplicar" => ["mostrar"=>true, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/clientes/"."','','');mypop.focus();"],
+                    "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'], "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
                     "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'], "evento"=>"@click","funcion"=>"openModal()"],
                 ];
-                $data['page_tag'] = "Clientes";
-                $data['page_title'] = "Clientes";
-                $data['page_name'] = "clientes";
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']}";
                 $data['script_type'] = "module";
                 $data['panelapp'] = "/Clientes/functions_clientes.js";
                 $this->views->getView($this,"clientes",$data);
@@ -43,7 +42,7 @@
                     if(empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['telefono']) 
                     || empty($_POST['pais']) || empty($_POST['departamento'])  || empty($_POST['ciudad'])
                     ){
-                        $arrResponse = array("status" => false, "msg" => 'Todos los campos con (*) son obligatorios');
+                        $arrResponse = array("status" => false, "msg" => 'All fields with (*) are required');
                     }else{ 
                         $intId = intval($_POST['id']);
                         $strNombre = ucwords(strClean($_POST['nombre']));
@@ -146,9 +145,9 @@
                                 $data['company'] = $company;
                                 if($strCorreo !="generico@generico.co"){
                                     try { sendEmail($data,"email_credentials"); } catch (\Throwable $th) {}
-                                    $arrResponse = array("status"=>true,"msg"=>'Datos guardados. Se ha enviado un correo electrónico al usuario con las credenciales.');
+                                    $arrResponse = array("status"=>true,"msg"=>'Data saved. It has been sent an email with user credentials.');
                                 }else{
-                                    $arrResponse = array("status"=>true,"msg"=>'Datos guardados.');
+                                    $arrResponse = array("status"=>true,"msg"=>'Data saved.');
                                 }
                             }else{
                                 if($strContrasena!=""){
@@ -160,19 +159,19 @@
                                     $data['company'] = $company;
                                     if($strCorreo !="generico@generico.co"){
                                         try { sendEmail($data,"email_passwordUpdated"); } catch (\Throwable $th) {}
-                                        $arrResponse = array("status"=>true,"msg"=>'La contraseña ha sido actualizada, se ha enviado un correo electrónico con la nueva contraseña.');
+                                        $arrResponse = array("status"=>true,"msg"=>'Password has beend updated, it has sent an email with the new password.');
                                     }else{
-                                        $arrResponse = array("status"=>true,"msg"=>'Datos actualizados');
+                                        $arrResponse = array("status"=>true,"msg"=>'Data updated');
                                     }
                                 }else{
-                                    $arrResponse = array("status"=>true,"msg"=>'Datos actualizados');
+                                    $arrResponse = array("status"=>true,"msg"=>'Data updated');
                                 }
                                 
                             }
                         }else if($request == 'exist'){
-                            $arrResponse = array('status' => false, 'msg' => '¡Atención! el correo electrónico, la identificación o el número de teléfono ya están registrados, pruebe con otro.');		
+                            $arrResponse = array('status' => false, 'msg' => 'Email or id number is already set, try a different one.');		
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                            $arrResponse = array("status" => false, "msg" => 'Something went wrong.');
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -199,7 +198,7 @@
                         if(isset($request['image'])){$request['url'] = media()."/images/uploads/".$request['image'];}
                         $arrResponse = array("status"=>true,"data"=>$request);
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"Error, intenta de nuevo"); 
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong"); 
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
@@ -224,9 +223,9 @@
                      }
                     $request = $this->model->deleteUsuario($intId);
                     if($request > 0 || $request == "ok"){
-                        $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado correctamente.");
+                        $arrResponse = array("status"=>true,"msg"=>"It has been deleted.");
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"No es posible eliminar, intenta de nuevo.");
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }

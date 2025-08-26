@@ -14,7 +14,7 @@
         </app-select>
     </div>
     <div class="col-md-8">
-        <app-input label="Buscar" @input="search()" v-model="common.strSearch"></app-input>
+        <app-input label="Search" @input="search()" v-model="common.strSearch"></app-input>
     </div>
 </div>
 <div class="table-responsive overflow-y no-more-tables" style="max-height:50vh">

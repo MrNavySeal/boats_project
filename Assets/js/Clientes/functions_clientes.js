@@ -86,7 +86,7 @@ const App = {
             await this.getDatosIniciales();
             this.common.showModalModule = true;
             this.common.intId =0;
-            this.common.modulesTitle = "Nuevo cliente";
+            this.common.modulesTitle = "New customer";
             this.strImgUrl= base_url+'/Assets/images/uploads/user.jpg';
             this.strImagen= "";
             this.strNombre ="";
@@ -104,17 +104,17 @@ const App = {
             if(this.strNombre == "" || this.strApellido == "" || this.strTelefono == ""   || this.intPais == "" 
                 || this.intDepartamento == "" || this.intCiudad == "" || this.intRol ==""
             ){
-                Swal.fire("Error","Todos los campos marcados con (*) son obligatorios","error");
+                Swal.fire("Error","All fields with (*) are required","error");
                 return false;
             }
             if(this.strContrasena !=""){
                 if(this.strContrasena.length < 8){
-                    Swal.fire("Error","La contraseña debe tener al menos 8 caracteres","error");
+                    Swal.fire("Error","Password must have at least 8 characters","error");
                     return false;
             }
             }
             if(!fntEmailValidate(this.strCorreo) && this.strCorreo!=""){
-                Swal.fire("Error","El email es invalido","error");
+                Swal.fire("Error","Email is not valid","error");
                 return false;
             }
             const formData = new FormData();
@@ -136,7 +136,7 @@ const App = {
             const objData = await response.json();
             this.common.processing = false;
             if(objData.status){
-                Swal.fire("Guardado!",objData.msg,"success");
+                Swal.fire("Saved!",objData.msg,"success");
                 if(this.intId == 0){
                     this.strImgUrl= base_url+'/Assets/images/uploads/user.jpg';
                     this.strImagen= "";
@@ -200,7 +200,7 @@ const App = {
                 this.strContrasena="";
                 this.common.intId = objData.data.id;
                 this.common.showModalModule = true;
-                this.common.modulesTitle = "Editar usuario";
+                this.common.modulesTitle = "Edit customer";
           }else{
                 Swal.fire("Error",objData.msg,"error");
           }
@@ -214,7 +214,7 @@ const App = {
             this.strImagen = e.target.files[0];
             let type = this.strImagen.type;
             if(type != "image/png" && type != "image/jpg" && type != "image/jpeg" && type != "image/gif"){
-                Swal.fire("Error","Solo se permite imágenes.","error");
+                Swal.fire("Error","Only pictures.","error");
             }else{
                 let objectUrl = window.URL || window.webkitURL;
                 let route = objectUrl.createObjectURL(this.strImagen);
@@ -224,14 +224,14 @@ const App = {
         del:function(data){
             const objVue = this;
             Swal.fire({
-              title:"¿Esta seguro de eliminarlo?",
-              text:"Se eliminará para siempre...",
-              icon: 'warning',
-              showCancelButton:true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText:"Sí, eliminar",
-              cancelButtonText:"No, cancelar"
+                title:"¿Are you sure?",
+                text:"It will be deleted forever...",
+                icon: 'warning',
+                showCancelButton:true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText:"Yes",
+                cancelButtonText:"No"
           }).then(async function(result){
               if(result.isConfirmed){
                   const formData = new FormData();
@@ -239,7 +239,7 @@ const App = {
                   const response = await fetch(base_url+"/clientes/clientes/delDatos",{method:"POST",body:formData});
                   const objData = await response.json();
                   if(objData.status){
-                    Swal.fire("Eliminado!",objData.msg,"success");
+                    Swal.fire("Deleted!",objData.msg,"success");
                     objVue.search();
                   }else{
                     Swal.fire("Error",objData.msg,"error");
