@@ -5,8 +5,8 @@
     $strFuncion = is_array($data) ? $data['funcion'] : "getBuscar";
 ?>
 <div v-if="<?=$strVariable?>.length > 0">
-    <p class="text-center m-0 mb-1"><strong>Total de registros: </strong> {{intTotalResultados}}</p>
-    <p class="text-center m-0 mb-1">Página {{ intPagina }} de {{ intTotalPaginas }}</p>
+    <p class="text-center m-0 mb-1"><strong>Total: </strong> {{intTotalResultados}}</p>
+    <p class="text-center m-0 mb-1">Page {{ intPagina }} of {{ intTotalPaginas }}</p>
     <nav aria-label="Page navigation example" class="d-flex justify-content-center w-100">
         <ul class="pagination" id="pagination">
             <li class="page-item" v-show="intPagina > 1">

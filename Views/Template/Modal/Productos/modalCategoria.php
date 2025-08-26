@@ -8,19 +8,19 @@
         </div>
         <div class="row">
             <div class="col-md-6">
-                <app-input label="Nombre" type="text" v-model="common.strName" required="true"></app-input>
+                <app-input label="Name" type="text" v-model="common.strName" required="true"></app-input>
             </div>
             <div class="col-md-6">
-                <app-select label="Estado"  v-model="intStatus">
-                    <option value="1">Activo</option>
-                    <option value="2">Inactivo</option>
+                <app-select label="Status"  v-model="intStatus">
+                    <option value="1">Active</option>
+                    <option value="2">Inactive</option>
                 </app-select>
             </div>
         </div>
-        <app-input label="isVisible" title="Habilitar si la categoría es visible en la tienda virtual" type="switch" v-model="intVisible"></app-input>
-        <app-textarea label="Descripción" v-model="strDescription" rows="5"></app-textarea>
+        <app-input label="isVisible" title="Allow it if this category is visible on your e-commerce" type="switch" v-model="intVisible"></app-input>
+        <app-textarea label="Description" v-model="strDescription" rows="5"></app-textarea>
     </template>
     <template #footer>
-        <app-button icon="save" @click="save()" btn="primary" title="Guardar" :disabled="common.processing" :processing="common.processing"></app-button>
+        <app-button icon="save" @click="save()" btn="primary" title="Save" :disabled="common.processing" :processing="common.processing"></app-button>
     </template>
 </app-modal>

@@ -4,7 +4,7 @@
 ?>
 <div class="row">
     <div class="col-md-4">
-        <app-select label="Por página"  @change="search()" v-model="common.intPerPage">
+        <app-select label="Per page"  @change="search()" v-model="common.intPerPage">
             <option value="10" selected>10</option>
             <option value="25">25</option>
             <option value="50">50</option>
@@ -13,32 +13,32 @@
         </app-select>
     </div>
     <div class="col-md-8">
-        <app-input label="Buscar" @input="search()" v-model="common.strSearch"></app-input>
+        <app-input label="Search" @input="search()" v-model="common.strSearch"></app-input>
     </div>
 </div>
 <div class="table-responsive overflow-y no-more-tables" style="max-height:50vh">
     <table class="table align-middle table-hover">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Portada</th>
-                <th>Nombre</th>
+                <th>ID</th>
+                <th>Picture</th>
+                <th>Name</th>
                 <th>Visible</th>
-                <th>Estado</th>
-                <th>Opciones</th>
+                <th>Status</th>
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(data,index) in common.arrData" :key="index">
-                <td data-title="Id">{{data.id}}</td>
-                <td data-title="Portada">
+                <td data-title="ID">{{data.id}}</td>
+                <td data-title="Picture">
                     <img :src="data.url" :alt="data.name" class="img-thumbnail" style="width: 50px; height: 50px;">
                 </td>
-                <td data-title="Nombre">{{data.name}}</td>
+                <td data-title="Name">{{data.name}}</td>
                 <td data-title="Visible">{{data.is_visible? "Si" : "No"}}</td>
-                <td data-title="Estado" class="text-center">
+                <td data-title="Status" class="text-center">
                     <span :class="data.status == '1' ? 'bg-success' : 'bg-danger'" class="badge text-white">
-                        {{ data.status == '1' ? "Activo" : "Inactivo" }}
+                        {{ data.status == '1' ? "Active" : "Inactive" }}
                     </span>
                 </td>
                 <td data-title="Opciones">

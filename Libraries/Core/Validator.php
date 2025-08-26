@@ -86,22 +86,22 @@
         }
         private function getMessage($rule,$params,$content){
             $messages = [
-                "required" => "El campo es obligatorio",
-                "string"=>"El campo debe ser texto",
-                "numeric"=>"El campo debe ser numérico",
-                "array"=>"El campo debe ser una lista",
-                "integer"=>"El campo debe ser un número entero",
-                "double"=>"El campo debe ser un número con decimales",
-                "string_min"=>"El campo debe tener al menos $params carácteres",
-                "string_max"=>"El campo debe tener máximo $params carácteres",
-                "array_min"=>"El campo debe tener al menos $params elementos",
-                "array_max"=>"El campo debe tener máximo $params elementos",
-                "numeric_min"=>"El campo debe ser mayor o igual a $params",
-                "numeric_max"=>"El campo debe ser menor o igual a $params",
-                "integer_min"=>"El campo debe ser mayor o igual a $params",
-                "integer_max"=>"El campo debe ser menor o igual a $params",
-                "double_min"=>"El campo debe ser mayor o igual a $params",
-                "double_max"=>"El campo debe ser menor o igual a $params",
+                "required" => "The field is required",
+                "string"=>"The field must be text",
+                "numeric"=>"The field must be numeric",
+                "array"=>"The field must be a list",
+                "integer"=>"The field must be a number",
+                "double"=>"The field must be a number",
+                "string_min"=>"The field must have at least $params characters",
+                "string_max"=>"The field must have max $params characters",
+                "array_min"=>"The field must have at least $params elements",
+                "array_max"=>"El campo debe tener máximo $params elements",
+                "numeric_min"=>"The field must be greater than or equal to $params",
+                "numeric_max"=>"The field must be less than or equal to $params",
+                "integer_min"=>"The field must be greater than or equal to $params",
+                "integer_max"=>"The field must be less than or equal to $params",
+                "double_min"=>"The field must be greater than or equal to $params",
+                "double_max"=>"The field must be less than or equal to $params",
             ];
             $type = gettype($content);
             $rule = in_array($rule,["min","max"]) ? $type."_".$rule : $rule; 

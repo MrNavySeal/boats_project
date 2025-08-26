@@ -37,7 +37,7 @@ const App = {
             this.strDescription ="";
             this.strImage ="";
             this.strImgUrl = base_url+'/Assets/images/uploads/category.jpg';
-            this.common.modulesTitle = "Nueva categoría";
+            this.common.modulesTitle = "New category";
         },
         save:async function(){
             const formData = new FormData();
@@ -56,7 +56,7 @@ const App = {
                 this.common.intId =0;
                 this.common.showModalModule = false;
                 this.search(this.common.intPage);
-                Swal.fire("Guardado",objData.msg,"success");
+                Swal.fire("Saved",objData.msg,"success");
             }else{
                 Swal.fire("Error",objData.msg,"error");
             }
@@ -88,7 +88,7 @@ const App = {
                 this.intVisible = objData.data.is_visible;
                 this.strDescription =objData.data.description;
                 this.strImgUrl = objData.data.url;
-                this.common.modulesTitle = "Editar categoría";
+                this.common.modulesTitle = "Edit category";
                 this.common.showModalModule = true;
             }else{
                 Swal.fire("Error",objData.msg,"error");
@@ -97,14 +97,14 @@ const App = {
         del:async function(data){
             const objVue = this;
             Swal.fire({
-                title:"¿Esta seguro de eliminar?",
-                text:"Se eliminará para siempre...",
+                title:"¿Are you sure?",
+                text:"It will be deleted forever...",
                 icon: 'warning',
                 showCancelButton:true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText:"Sí, eliminar",
-                cancelButtonText:"No, cancelar"
+                confirmButtonText:"Yes",
+                cancelButtonText:"No"
             }).then(async function(result){
                 if(result.isConfirmed){
                     const formData = new FormData();
@@ -112,7 +112,7 @@ const App = {
                     const response = await fetch(base_url+"/Productos/ProductosCategorias/delCategoria",{method:"POST",body:formData});
                     const objData = await response.json();
                     if(objData.status){
-                        Swal.fire("Eliminado!",objData.msg,"success");
+                        Swal.fire("Deleted!",objData.msg,"success");
                         objVue.search(objVue.common.intPage);
                     }else{
                         Swal.fire("Error",objData.msg,"error");
@@ -127,7 +127,7 @@ const App = {
             this.strImage = e.target.files[0];
             let type = this.strImage.type;
             if(type != "image/png" && type != "image/jpg" && type != "image/jpeg" && type != "image/gif"){
-                Swal.fire("Error","Solo se permite imágenes.","error");
+                Swal.fire("Error","Only pictures.","error");
             }else{
                 let objectUrl = window.URL || window.webkitURL;
                 let route = objectUrl.createObjectURL(this.strImage);

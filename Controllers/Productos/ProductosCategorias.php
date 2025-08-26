@@ -11,12 +11,12 @@
         public function categorias(){
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
-                    "duplicar" => ["mostrar"=>true, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/productos/categorias/"."','','');mypop.focus();"],
+                    "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'], "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
                     "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'], "evento"=>"@click","funcion"=>"openModal()"],
                 ];
-                $data['page_tag'] = "Categorías | Productos";
-                $data['page_title'] = "Categorías | Productos";
-                $data['page_name'] = "categorias";
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['script_type'] = "module";
                 $data['panelapp'] = "/Productos/functions_categorias.js";
                 $this->views->getView($this,"categorias",$data);
@@ -28,12 +28,12 @@
         public function subcategorias(){
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
-                    "duplicar" => ["mostrar"=>true, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/productos/subcategorias/"."','','');mypop.focus();"],
+                    "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'], "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
                     "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'], "evento"=>"@click","funcion"=>"openModal()"],
                 ];
-                $data['page_tag'] = "Subcategorias | Productos";
-                $data['page_title'] = "Subcategorias | Productos";
-                $data['page_name'] = "subcategorias";
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['script_type'] = "module";
                 $data['panelapp'] = "/Productos/functions_subcategorias.js";
                 $this->views->getView($this,"subcategorias",$data);
@@ -53,7 +53,7 @@
         public function getSelectSubcategories(){
             if($_POST){
                 $idCategory = intval(strClean($_POST['idCategory']));
-                $html='<option value="0" selected>Seleccione</option>';
+                $html='<option value="0" selected>Select</option>';
                 $request = $this->model->getSelectSubcategories($idCategory);
                 if(count($request)>0){
                     for ($i=0; $i < count($request); $i++) { 
@@ -82,7 +82,7 @@
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
                     if(empty($_POST)){
-                        $arrResponse = array("status"=>false,"msg"=>"Error de datos");
+                        $arrResponse = array("status"=>false,"msg"=>"Please, fill the fields");
                     }else{
                         $idCategory = intval($_POST['id']);
                         $request = $this->model->selectCategoria($idCategory);
@@ -91,7 +91,7 @@
                             $request['url'] = media()."/images/uploads/".$request['picture'];
                             $arrResponse = array("status"=>true,"data"=>$request);
                         }else{
-                            $arrResponse = array("status"=>false,"msg"=>"Error, intenta de nuevo"); 
+                            $arrResponse = array("status"=>false,"msg"=>"Something went wrong"); 
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -103,7 +103,7 @@
             if($_SESSION['permitsModule']['w']){
                 if($_POST){
                     if(empty($_POST['name'])){
-                        $arrResponse = array("status" => false, "msg" => 'Error de datos');
+                        $arrResponse = array("status" => false, "msg" => 'Please fill the fields');
                     }else{ 
                         $idCategory = intval($_POST['id']);
                         $strName = ucwords(strClean($_POST['name']));
@@ -166,14 +166,14 @@
                                 uploadImage($photo,$photoCategory);
                             }
                             if($option == 1){
-                                $arrResponse = array("status"=>true,"msg"=>"Datos guardados.");
+                                $arrResponse = array("status"=>true,"msg"=>"Data saved.");
                             }else{
-                                $arrResponse = array("status"=>true,"msg"=>"Datos actualizados.");
+                                $arrResponse = array("status"=>true,"msg"=>"Data updated.");
                             }
                         }else if($request == 'exist'){
-                            $arrResponse = array('status' => false, 'msg' => 'La categoría ya existe, prueba con otro nombre.');		
+                            $arrResponse = array('status' => false, 'msg' => 'This category already exists, try a different one.');		
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                            $arrResponse = array("status" => false, "msg" => 'Something went wrong.');
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -193,11 +193,11 @@
                     $request = $this->model->deleteCategoria($id);
 
                     if($request=="ok"){
-                        $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado.");
+                        $arrResponse = array("status"=>true,"msg"=>"It has been deleted.");
                     }else if($request =="exist"){
-                        $arrResponse = array("status"=>false,"msg"=>"La categoría tiene al menos una subcategoría asignada, no puede ser eliminada.");
+                        $arrResponse = array("status"=>false,"msg"=>"This category has a subcategory set, it can not be deleted.");
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"No es posible eliminar, intenta de nuevo.");
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
@@ -223,7 +223,7 @@
                     if(!empty($request)){
                         $arrResponse = array("status"=>true,"data"=>$request);
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"Error, intenta de nuevo."); 
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong"); 
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
@@ -238,7 +238,7 @@
                         "category"=>"required|numeric"
                     ])->getErrors();
                     if(!empty($errors)){
-                        $arrResponse = array("status" => false, "errors" => $errors,"msg"=>"Error de datos, por favor revisar los campos.");
+                        $arrResponse = array("status" => false, "errors" => $errors,"msg"=>"Please, check the fields.");
                     }else{ 
                         $idSubCategory = intval($_POST['id']);
                         $strName = ucwords(strClean($_POST['name']));
@@ -262,14 +262,14 @@
                         }
                         if(is_numeric($request)){
                             if($option == 1){
-                                $arrResponse=array("status"=>true,"msg"=>"Datos guardados");
+                                $arrResponse=array("status"=>true,"msg"=>"Data saved");
                             }else{
-                                $arrResponse=array("status"=>true,"msg"=>"Datos actualizados");
+                                $arrResponse=array("status"=>true,"msg"=>"Data updated");
                             }
                         }else if($request == 'exist'){
-                            $arrResponse = array('status' => false, 'msg' => 'La subcategoría ya existe, intenta con otro nombre.',"errors" => []);		
+                            $arrResponse = array('status' => false, 'msg' => 'This subcategory already exists, try a different one',"errors" => []);		
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.',"errors" => []);
+                            $arrResponse = array("status" => false, "msg" => 'Something went wrong',"errors" => []);
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -285,15 +285,15 @@
                     if(!empty($request)){
                         $request = $this->model->deleteSubcategoria($id);
                         if($request=="ok"){
-                            $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado.");
+                            $arrResponse = array("status"=>true,"msg"=>"It has been deleted.");
                         }else if($request=="exist"){
-                            $arrResponse = array("status"=>false,"msg"=>"La subcategoría tiene al menos un producto asignado, no puede ser eliminada.");
+                            $arrResponse = array("status"=>false,"msg"=>"The subcategory already has products set. It can not be deleted");
                         }
                         else{
-                            $arrResponse = array("status"=>false,"msg"=>"No es posible eliminar, intenta de nuevo.");
+                            $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                         }
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"No es posible eliminar, intenta de nuevo.");
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }

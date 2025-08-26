@@ -1,8 +1,8 @@
 export default {
     template:`
         <div v-if="common.arrData.length > 0">
-            <p class="text-center m-0 mb-1"><strong>Total de registros: </strong> {{common.intTotalResults}}</p>
-            <p class="text-center m-0 mb-1">Página {{ common.intPage }} de {{ common.intTotalPages }}</p>
+            <p class="text-center m-0 mb-1"><strong>Total: </strong> {{common.intTotalResults}}</p>
+            <p class="text-center m-0 mb-1">Page {{ common.intPage }} of {{ common.intTotalPages }}</p>
             <nav aria-label="Page navigation example" class="d-flex justify-content-center w-100">
                 <ul class="pagination" id="pagination">
                     <li class="page-item" v-show="common.intPage > 1">
