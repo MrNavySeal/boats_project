@@ -11,12 +11,12 @@
         public function productos(){
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
-                    "duplicar" => ["mostrar"=>true, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/productos/"."','','');mypop.focus();"],
+                    "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'], "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
                     "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'], "evento"=>"@click","funcion"=>"openModal()"],
                 ];
-                $data['page_tag'] = "Productos";
-                $data['page_title'] = "Productos";
-                $data['page_name'] = "productos";
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']}";
                 $data['script_type'] = "module";
                 $data['panelapp'] = "/Productos/functions_productos.js";
                 $this->views->getView($this,"productos",$data);
@@ -130,7 +130,7 @@
                 if($_POST){
                     $arrData = json_decode($_POST['data'],true);
                     if(empty($arrData)){
-                        $arrResponse = array("status" => false, "msg" => 'Error de datos');
+                        $arrResponse = array("status" => false, "msg" => 'Please, fill the fields');
                     }else{ 
                         $id = intval($arrData['id']);
                         $strName = ucwords(strClean($arrData['name']));
@@ -229,17 +229,17 @@
                                     uploadImage($imgFraming,$photoFraming);
                                 }
                                 if($option == 1){
-                                    $arrResponse = array("status" => true,"msg"=>"Datos guardados.");
+                                    $arrResponse = array("status" => true,"msg"=>"Data saved.");
                                 }else{
-                                    $arrResponse = array("status" => true,"msg"=>"Datos actualizados.");
+                                    $arrResponse = array("status" => true,"msg"=>"Data updated.");
                                 }
                             }else if($request == 'exist'){
-                                $arrResponse = array('status' => false, 'msg' => '¡Atención! El producto ya existe, pruebe con otro nombre y referencia.');		
+                                $arrResponse = array('status' => false, 'msg' => 'This product is already exist, try a different one.');		
                             }else{
-                                $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos.');
+                                $arrResponse = array("status" => false, "msg" => 'Somethin went wrong.');
                             }
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible almacenar los datos. Por favor revise los campos.',"errors"=>$errors);
+                            $arrResponse = array("status" => false, "msg" => 'Please, check the fields.',"errors"=>$errors);
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -251,14 +251,14 @@
             if($_SESSION['permitsModule']['d']){
                 if($_POST){
                     if(empty($_POST['id'])){
-                        $arrResponse=array("status"=>false,"msg"=>"Error de datos");
+                        $arrResponse=array("status"=>false,"msg"=>"Something went wrong");
                     }else{
                         $id = intval($_POST['id']);
                         $request = $this->model->deleteProduct($id);
                         if($request=="ok"){
-                            $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado.");
+                            $arrResponse = array("status"=>true,"msg"=>"It has been deleted.");
                         }else{
-                            $arrResponse = array("status"=>false,"msg"=>"No se ha podido eliminar, inténta de nuevo.");
+                            $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

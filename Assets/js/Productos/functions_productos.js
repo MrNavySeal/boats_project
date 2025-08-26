@@ -39,7 +39,7 @@ const App = {
             strName:"",
             strReference:"",
             strShortDescription:"",
-            intCheckProduct:false,
+            intCheckProduct:true,
             intCheckIngredient:false,
             intCheckRecipe:false,
             intCheckStock:false,
@@ -83,7 +83,7 @@ const App = {
             this.strName="";
             this.strReference="";
             this.strShortDescription="";
-            this.intCheckProduct=false;
+            this.intCheckProduct=true;
             this.intCheckIngredient=false;
             this.intCheckRecipe=false;
             this.intCheckStock=false;
@@ -108,7 +108,7 @@ const App = {
             this.arrVariantsAdded = [];
             this.errors = [];
             this.intCheckStock = false;
-            this.common.productTitle = "Nuevo producto";
+            this.common.productTitle = "New product";
 
         },
         save:async function(){
@@ -161,7 +161,7 @@ const App = {
                 this.common.intId =0;
                 this.common.showModalProduct = false;
                 this.search(this.common.intPage);
-                Swal.fire("Guardado",objData.msg,"success");
+                Swal.fire("Saved",objData.msg,"success");
             }else{
                 this.errors = objData.errors;
                 Swal.fire("Error",objData.msg,"error");
@@ -221,12 +221,12 @@ const App = {
                 const data = objData.data;
                 if(type=="edit"){
                     this.common.showModalProduct = true;
-                    this.common.productTitle = "Editar producto";
+                    this.common.productTitle = "Edit product";
                     setTinymce("#txtDescription",400);
                     document.querySelector("#txtDescription").value = data.description;
                 }else{
                     this.common.showModalViewProduct = true;
-                    this.common.productTitle = "Ver producto";
+                    this.common.productTitle = "Watch product";
                     setTinymce("#txtViewDescription",400);
                     document.querySelector("#txtViewDescription").value = data.description;
                 }
@@ -287,14 +287,14 @@ const App = {
         del:async function(data){
             const objVue = this;
             Swal.fire({
-                title:"¿Esta seguro de eliminar?",
-                text:"Se eliminará para siempre...",
+                title:"¿Are you sure?",
+                text:"It will be deleted forever...",
                 icon: 'warning',
                 showCancelButton:true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText:"Sí, eliminar",
-                cancelButtonText:"No, cancelar"
+                confirmButtonText:"Yes",
+                cancelButtonText:"No"
             }).then(async function(result){
                 if(result.isConfirmed){
                     const formData = new FormData();
@@ -302,7 +302,7 @@ const App = {
                     const response = await fetch(base_url+"/Productos/Productos/delProduct",{method:"POST",body:formData});
                     const objData = await response.json();
                     if(objData.status){
-                        Swal.fire("Eliminado!",objData.msg,"success");
+                        Swal.fire("Deleted!",objData.msg,"success");
                         objVue.search(objVue.common.intPage);
                     }else{
                         Swal.fire("Error",objData.msg,"error");
@@ -336,11 +336,11 @@ const App = {
                 let id = this.intSpec;
                 const arr = this.arrSpecsAdded.filter(function(e){return e.id == id});
                 if(this.intSpec == ""){
-                    Swal.fire("Atención!","Seleccione una característica.","warning");
+                    Swal.fire("Warning","Select a feature.","warning");
                     return false;
                 }
                 if(arr.length > 0){
-                    Swal.fire("Atención!","La característica ya ha sido agregada, seleccione otra.","warning");
+                    Swal.fire("Warning","This feature has beend added, try a different one.","warning");
                     return false;
                 }
                 const arrData = [...this.arrSpecs];
@@ -352,11 +352,11 @@ const App = {
                 let id = this.intVariant;
                 const arr = this.arrVariantsAdded.filter(function(e){return e.id == id});
                 if(this.intVariant == ""){
-                    Swal.fire("Atención!","Seleccione una variante.","warning");
+                    Swal.fire("Warning","Select a variant.","warning");
                     return false;
                 }
                 if(arr.length > 0){
-                    Swal.fire("Atención!","La variante ya ha sido agregada, seleccione otra.","warning");
+                    Swal.fire("Warning","This variant has beend added, try a different one.","warning");
                     return false;
                 }
                 const arrData = [...this.arrVariants];
@@ -378,7 +378,7 @@ const App = {
             }
         },
         view:async function(data){
-            window.open(base_url+"/tienda/producto/"+data.route,"_blank");
+            window.open(base_url+"/shop/product/"+data.route,"_blank");
         },
         /**
          * This function mix all variants I have selected and mixing all their options to
@@ -450,7 +450,7 @@ const App = {
             for (let i = 0; i < files.length; i++) {
                 const f = files[i];
                 if(f.type != "image/png" && f.type != "image/jpg" && f.type != "image/jpeg" && f.type != "image/gif"){
-                    Swal.fire("Error","Solo se permite imágenes","error");
+                    Swal.fire("Error","Only pictures.","error");
                     return false;
                 }else{
                     let objectUrl = window.URL || window.webkitURL;
@@ -464,7 +464,7 @@ const App = {
             this.strImage = e.target.files[0];
             let type = this.strImage.type;
             if(type != "image/png" && type != "image/jpg" && type != "image/jpeg" && type != "image/gif"){
-                Swal.fire("Error","Solo se permite imágenes.","error");
+                Swal.fire("Error","Only pictures.","error");
             }else{
                 let objectUrl = window.URL || window.webkitURL;
                 let route = objectUrl.createObjectURL(this.strImage);

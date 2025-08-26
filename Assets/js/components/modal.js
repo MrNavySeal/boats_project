@@ -24,7 +24,7 @@ export default {
                     </div>
                     <div class="modal-footer">
                         <slot name="footer"></slot>
-                        <app-button btn="secondary" @click="close" title="Cerrar"></app-button>
+                        <app-button btn="secondary" @click="close" title="Close"></app-button>
                     </div>
                 </div>
             </div>
