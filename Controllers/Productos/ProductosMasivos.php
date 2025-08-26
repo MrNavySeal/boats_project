@@ -19,12 +19,12 @@
         public function productos(){
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
-                    "atras" => ["mostrar"=>true, "evento"=>"onclick","funcion"=>"window.location.href='".BASE_URL.'/productos/'."'"],
-                    "duplicar" => ["mostrar"=>true, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/productos/creacion-edicion-masiva/"."','','');mypop.focus();"],
+                    "atras" => ["mostrar"=>true, "evento"=>"onclick","funcion"=>"window.location.href='".BASE_URL.'/products/'."'"],
+                    "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'], "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
                 ];
-                $data['page_tag'] = "Creación & Edición masiva | Productos";
-                $data['page_title'] = "Creación & Edición masiva | Productos";
-                $data['page_name'] = "masivos";
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['script_type'] = "module";
                 $data['panelapp'] = "/Productos/functions_masivo.js";
                 $this->views->getView($this,"productos-masivos",$data);
@@ -556,7 +556,7 @@
                             $index ++;
                         }
                         $this->setProducts($arrProducts,$type);
-                        $arrResponse = array("status"=>true,"msg"=>"Productos cargados correctamente.");
+                        $arrResponse = array("status"=>true,"msg"=>"Products uploaded.");
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
