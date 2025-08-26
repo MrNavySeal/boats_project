@@ -36,7 +36,7 @@ const App = {
             this.common.intId =0;
             this.intStatus = 1;
             this.objCategory={name:"",id:""};
-            this.common.subcategoryTitle = "Nueva subcategoría";
+            this.common.subcategoryTitle = "New subcategory";
             this.category.modalType='';
         },
         save:async function(){
@@ -56,7 +56,7 @@ const App = {
                 this.common.intId =0;
                 this.common.showModalSubcategory = false;
                 this.search(this.common.intPage);
-                Swal.fire("Guardado",objData.msg,"success");
+                Swal.fire("Saved",objData.msg,"success");
             }else{
                 Swal.fire("Error",objData.msg,"error");
                 this.common.errors = objData.errors;
@@ -111,7 +111,7 @@ const App = {
                     id:objData.data.categoryid,
                     name:objData.data.category
                 };
-                this.common.subcategoryTitle = "Editar subcategoría";
+                this.common.subcategoryTitle = "Edit subcategory";
                 this.common.showModalSubcategory = true;
             }else{
                 Swal.fire("Error",objData.msg,"error");
@@ -120,14 +120,14 @@ const App = {
         del:async function(data){
             const objVue = this;
             Swal.fire({
-                title:"¿Esta seguro de eliminar?",
-                text:"Se eliminará para siempre...",
+                title:"¿Are you sure?",
+                text:"It will be deleted forever...",
                 icon: 'warning',
                 showCancelButton:true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText:"Sí, eliminar",
-                cancelButtonText:"No, cancelar"
+                confirmButtonText:"Yes",
+                cancelButtonText:"No"
             }).then(async function(result){
                 if(result.isConfirmed){
                     const formData = new FormData();
@@ -135,7 +135,7 @@ const App = {
                     const response = await fetch(base_url+"/Productos/ProductosCategorias/delSubcategoria",{method:"POST",body:formData});
                     const objData = await response.json();
                     if(objData.status){
-                        Swal.fire("Eliminado!",objData.msg,"success");
+                        Swal.fire("Deleted!",objData.msg,"success");
                         objVue.search(objVue.common.intPage);
                     }else{
                         Swal.fire("Error",objData.msg,"error");

@@ -1,8 +1,8 @@
-<app-modal title="Buscar subcategorías" id="modalSubcategory" v-model="subcategory.showModalPaginationSubcategory" size="lg">
+<app-modal title="Search subcategories" id="modalSubcategory" v-model="subcategory.showModalPaginationSubcategory" size="lg">
     <template #body>
         <div class="row">
             <div class="col-md-4">
-                <app-select label="Por página"  @change="search()" v-model="subcategory.intPerPage">
+                <app-select label="Per page"  @change="search()" v-model="subcategory.intPerPage">
                     <option value="10" selected>10</option>
                     <option value="25">25</option>
                     <option value="50">50</option>
@@ -11,7 +11,7 @@
                 </app-select>
             </div>
             <div class="col-md-8">
-                <app-input label="Buscar" @input="search()" v-model="subcategory.strSearch"></app-input>
+                <app-input label="Search" @input="search()" v-model="subcategory.strSearch"></app-input>
             </div>
         </div>
         <div class="table-responsive overflow-y no-more-tables" style="max-height:50vh">

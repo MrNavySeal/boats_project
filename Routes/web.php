@@ -18,7 +18,7 @@
 
     //Productos
     $router->setRoute("products/categories/","Productos/ProductosCategorias/categorias",false);
-    $router->setRoute("products/subcategores/","Productos/ProductosCategorias/subcategorias",false);
+    $router->setRoute("products/subcategories/","Productos/ProductosCategorias/subcategorias",false);
     $router->setRoute("products/masive-creation/","Productos/ProductosMasivos/productos",false);
     $router->setRoute("products/","Productos/Productos",false);
     $router->setRoute("products/variants/","Productos/ProductosOpciones/variantes",false);

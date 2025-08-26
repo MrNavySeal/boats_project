@@ -5,7 +5,7 @@
 ?>
 <div class="row">
     <div class="col-md-4">
-        <app-select label="Por página"  @change="pagination.modalType='';search()" v-model="common.intPerPage">
+        <app-select label="Per page"  @change="pagination.modalType='';search()" v-model="common.intPerPage">
             <option value="10" selected>10</option>
             <option value="25">25</option>
             <option value="50">50</option>
@@ -14,31 +14,31 @@
         </app-select>
     </div>
     <div class="col-md-8">
-        <app-input label="Buscar" @input="pagination.modalType='';search()" v-model="common.strSearch"></app-input>
+        <app-input label="Search" @input="pagination.modalType='';search()" v-model="common.strSearch"></app-input>
     </div>
 </div>
 <div class="table-responsive overflow-y no-more-tables" style="max-height:50vh">
     <table class="table align-middle table-hover">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Categoria</th>
-                <th>Estado</th>
-                <th>Opciones</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(data,index) in common.arrData" :key="index">
-                <td data-title="Id">{{data.id}}</td>
-                <td data-title="Nombre">{{data.name}}</td>
-                <td data-title="Categoría">{{data.category}}</td>
-                <td data-title="Estado" class="text-center">
+                <td data-title="ID">{{data.id}}</td>
+                <td data-title="Name">{{data.name}}</td>
+                <td data-title="Category">{{data.category}}</td>
+                <td data-title="Status" class="text-center">
                     <span :class="data.status == '1' ? 'bg-success' : 'bg-danger'" class="badge text-white">
-                        {{ data.status == '1' ? "Activo" : "Inactivo" }}
+                        {{ data.status == '1' ? "Active" : "Inactive" }}
                     </span>
                 </td>
-                <td data-title="Opciones">
+                <td data-title="Options">
                     <div class="d-flex gap-2">
                         <?php if($_SESSION['permitsModule']['u']){ ?>
                         <app-button  icon="edit" btn="success" @click="edit(data)"></app-button>
