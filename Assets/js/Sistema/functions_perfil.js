@@ -19,7 +19,7 @@ request(base_url+"/Sistema/Usuarios/getSelectLocationInfo","","get").then(functi
 intCountry.addEventListener("change",function(){
     let url = base_url+"/Sistema/Usuarios/getEstados/estado/"+intCountry.value;
     request(url,"","get").then(function(objData){
-        let html='<option value="0" selected>Seleccione</option>';
+        let html='<option value="0" selected>Select</option>';
         objData.forEach(e => { html+=`<option value="${e.id}">${e.name}</option>`});
         intState.innerHTML = html;
     });
@@ -28,7 +28,7 @@ intCountry.addEventListener("change",function(){
 intState.addEventListener("change",function(){
     let url = base_url+"/Sistema/Usuarios/getEstados/ciudad/"+intState.value;
     request(url,"","get").then(function(objData){
-        let html='<option value="0" selected>Seleccione</option>';
+        let html='<option value="0" selected>Select</option>';
         objData.forEach(e => { html+=`<option value="${e.id}">${e.name}</option>`});
         intCity.innerHTML = html;
     });
@@ -53,29 +53,21 @@ formProfile.addEventListener("submit",function(e){
 
     if(strFirstName == "" || strLastName == "" || strEmail == "" || strPhone == "" || intCountry == 0 || intState == 0
     || intCity == 0 || strAddress =="" || strDocument==""){
-        Swal.fire("Error","Todos los campos marcados con (*) son obligatorios","error");
+        Swal.fire("Error","All fields with (*) are required","error");
         return false;
     }
     if(strPassword!=""){
         if(strPassword.length < 8){
-            Swal.fire("Error","La contraseña debe tener al menos 8 caracteres","error");
+            Swal.fire("Error","Password must have at least 8 characters","error");
             return false;
         }
         if(strPassword != strConfirmPassword){
-            Swal.fire("Error","Las contraseñas no coinciden","error");
+            Swal.fire("Error","Passwords do not match","error");
             return false;
         }
     }
     if(!fntEmailValidate(strEmail)){
-        Swal.fire("Error","El correo electrónico no es válido","error");
-        return false;
-    }
-    if(strPhone.length < 10 || strPhone.length > 10){
-        Swal.fire("Error","El número de teléfono debe tener 10 dígitos","error");
-        return false;
-    }
-    if(strDocument.length < 8 || strDocument.length > 10){
-        Swal.fire("Error","El número de cédula debe tener de 8 a 10 dígitos","error");
+        Swal.fire("Error","Email is not valid","error");
         return false;
     }
     let formData = new FormData(formProfile);
@@ -88,7 +80,7 @@ formProfile.addEventListener("submit",function(e){
         }else{
             Swal.fire("Error",objData.msg,"error");
         }
-        btnAdd.innerHTML="Actualizar";
+        btnAdd.innerHTML="Update";
         btnAdd.removeAttribute("disabled");
     })
 })

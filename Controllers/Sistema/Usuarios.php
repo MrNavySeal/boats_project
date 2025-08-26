@@ -12,12 +12,12 @@
         public function usuarios(){
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
-                    "duplicar" => ["mostrar"=>true, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/sistema/usuarios/"."','','');mypop.focus();"],
+                    "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'], "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
                     "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'], "evento"=>"@click","funcion"=>"openModal()"],
                 ];
-                $data['page_tag'] = "Usuarios | Sistema";
-                $data['page_title'] = "Usuarios | Sistema";
-                $data['page_name'] = "usuarios";
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['script_type'] = "module";
                 $data['panelapp'] = "/Sistema/functions_usuarios.js";
                 $this->views->getView($this,"usuarios",$data);
@@ -42,7 +42,7 @@
                     if(empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['telefono']) 
                     || empty($_POST['pais']) || empty($_POST['departamento'])  || empty($_POST['ciudad'])
                     ){
-                        $arrResponse = array("status" => false, "msg" => 'Todos los campos con (*) son obligatorios');
+                        $arrResponse = array("status" => false, "msg" => 'Please, fill the fields');
                     }else{ 
                         $intId = intval($_POST['id']);
                         $strNombre = ucwords(strClean($_POST['nombre']));
@@ -143,9 +143,9 @@
                                 $data['company'] = $company;
                                 if($strCorreo !="generico@generico.co"){
                                     try { sendEmail($data,"email_credentials"); } catch (\Throwable $th) {}
-                                    $arrResponse = array("status"=>true,"msg"=>'Datos guardados. Se ha enviado un correo electrónico al usuario con las credenciales.');
+                                    $arrResponse = array("status"=>true,"msg"=>'Data saved.');
                                 }else{
-                                    $arrResponse = array("status"=>true,"msg"=>'Datos guardados.');
+                                    $arrResponse = array("status"=>true,"msg"=>'Data saved.');
                                 }
                             }else{
                                 if($strContrasena!=""){
@@ -157,19 +157,19 @@
                                     $data['company'] = $company;
                                     if($strCorreo !="generico@generico.co"){
                                         try { sendEmail($data,"email_passwordUpdated"); } catch (\Throwable $th) {}
-                                        $arrResponse = array("status"=>true,"msg"=>'La contraseña ha sido actualizada, se ha enviado un correo electrónico con la nueva contraseña.');
+                                        $arrResponse = array("status"=>true,"msg"=>'Password has beend updated, it has sent an email with the new password.');
                                     }else{
-                                        $arrResponse = array("status"=>true,"msg"=>'Datos actualizados');
+                                        $arrResponse = array("status"=>true,"msg"=>'Data updated');
                                     }
                                 }else{
-                                    $arrResponse = array("status"=>true,"msg"=>'Datos actualizados');
+                                    $arrResponse = array("status"=>true,"msg"=>'Data updated');
                                 }
                                 
                             }
                         }else if($request == 'exist'){
-                            $arrResponse = array('status' => false, 'msg' => '¡Atención! el correo electrónico, la identificación o el número de teléfono ya están registrados, pruebe con otro.');		
+                            $arrResponse = array('status' => false, 'msg' => 'Email or id number is already set, try a different one.');		
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                            $arrResponse = array("status" => false, "msg" => 'Something went wrong');
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -196,7 +196,7 @@
                         if(isset($request['image'])){$request['url'] = media()."/images/uploads/".$request['image'];}
                         $arrResponse = array("status"=>true,"data"=>$request);
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"Error, intenta de nuevo"); 
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong"); 
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
@@ -221,9 +221,9 @@
                      }
                     $request = $this->model->deleteUsuario($intId);
                     if($request > 0 || $request == "ok"){
-                        $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado correctamente.");
+                        $arrResponse = array("status"=>true,"msg"=>"It has been deleted.");
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"No es posible eliminar, intenta de nuevo.");
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
@@ -239,9 +239,9 @@
                     $intRolId = intval($_POST['rol']);
                     $request = $this->model->insertPermisos($intRolId,$intId,$arrData);
                     if(is_numeric($request) && $request > 0){
-                        $arrResponse = array("status"=>true,"msg"=>"Permisos asignados correctamente.");
+                        $arrResponse = array("status"=>true,"msg"=>"Permissions have been set.");
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"No se ha podido guardar, intente de nuevo.");
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
@@ -294,7 +294,7 @@
             $states = getDepartamentos($idCountry);
             $cities = getCiudades($idState);
             //dep($countries);exit;
-            $countrieshtml='<option value="0">Seleccione</option>';
+            $countrieshtml='<option value="0">Select</option>';
             $stateshtml='';
             $citieshtml='';
             foreach ($countries as $country) {
@@ -326,7 +326,7 @@
             if($_POST){
                 if(empty($_POST['txtFirstName']) || empty($_POST['txtLastName']) || empty($_POST['txtPhone']) || empty($_POST['countryList'] ) || empty($_POST['stateList'] )
                 || empty($_POST['txtEmail']) || empty($_POST['cityList'] ) || empty($_POST['txtAddress'] || empty($_POST['txtDocument']))){
-                    $arrResponse = array("status" => false, "msg" => 'Error de datos');
+                    $arrResponse = array("status" => false, "msg" => 'Fill the fields');
                 }else{ 
                     $idUser = intval($_POST['idUser']);
                     $strName = ucwords(strClean($_POST['txtFirstName']));
@@ -380,11 +380,11 @@
                         if($photo!=""){
                             uploadImage($photo,$photoProfile);
                         }
-                        $arrResponse = array('status' => true, 'msg' => 'Datos actualizados');
+                        $arrResponse = array('status' => true, 'msg' => 'Data updated');
                     }else if($request_user == 'exist'){
-                        $arrResponse = array('status' => false, 'msg' => '¡Atención! el correo electrónico, la cédula o el número de teléfono ya están registrados, pruebe con otro.');		
+                        $arrResponse = array('status' => false, 'msg' => 'Email or id number is already set, try a different one.');		
                     }else{
-                        $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos');
+                        $arrResponse = array("status" => false, "msg" => 'Something went wrong');
                     }
                 }
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

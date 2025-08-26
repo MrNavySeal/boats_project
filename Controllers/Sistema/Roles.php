@@ -11,12 +11,12 @@
         public function roles(){
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
-                    "duplicar" => ["mostrar"=>true, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/sistema/roles"."','','');mypop.focus();"],
+                    "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'], "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
                     "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'], "evento"=>"@click","funcion"=>"openModal()"],
                 ];
-                $data['page_tag'] = "Roles | Sistema";
-                $data['page_title'] = "Roles | Sistema";
-                $data['page_name'] = "roles";
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['script_type'] = "module";
                 $data['panelapp'] = "/Sistema/functions_roles.js";
                 $this->views->getView($this,"roles",$data);
@@ -49,9 +49,9 @@
                     $intId = intval($_POST['id']);
                     $request = $this->model->insertPermisos($intId,$arrData);
                     if(is_numeric($request) && $request > 0){
-                        $arrResponse = array("status"=>true,"msg"=>"Permisos asignados correctamente.");
+                        $arrResponse = array("status"=>true,"msg"=>"Permissions have been set.");
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"No se ha podido guardar, intente de nuevo.");
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
@@ -62,7 +62,7 @@
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
                     if(empty($_POST['name'])){
-                        $arrResponse = array("status"=>false,"msg"=>"El nombre no puede estar vacío.");
+                        $arrResponse = array("status"=>false,"msg"=>"Please, fill the fields.");
                     }else{
                         $strName = clear_cadena(strClean(ucfirst(strtolower($_POST['name']))));
                         $intId = intval($_POST['id']);
@@ -80,14 +80,14 @@
                         }
                         if(is_numeric($request) && $request > 0){
                             if($option == 1){
-                                $arrResponse = array("status"=>true,"msg"=>"Datos guardados correctamente.");
+                                $arrResponse = array("status"=>true,"msg"=>"Data saved.");
                             }else{
-                                $arrResponse = array("status"=>true,"msg"=>"Datos actualizados correctamente.");
+                                $arrResponse = array("status"=>true,"msg"=>"Data updated.");
                             }
                         }else if($request=="existe"){
-                            $arrResponse = array("status"=>false,"msg"=>"El módulo ya existe, inténte con otro nombre.");
+                            $arrResponse = array("status"=>false,"msg"=>"This role already exists.");
                         }else{
-                            $arrResponse = array("status"=>false,"msg"=>"No se ha podido guardar, intente de nuevo.");
+                            $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -113,7 +113,7 @@
                     if(!empty($request)){
                         $arrResponse = array("status"=>true,"data"=>$request);
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"Datos no encontratos.");
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
@@ -126,11 +126,11 @@
                     $intId = intval($_POST['id']);
                     $request = $this->model->deleteRol($intId);
                     if($request =="ok"){
-                        $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado correctamente");
+                        $arrResponse = array("status"=>true,"msg"=>"It has been deleted");
                     }else if($request=="existe"){
-                        $arrResponse = array("status"=>false,"msg"=>"El rol contiene usuarios, debe eliminarlos primero.");
+                        $arrResponse = array("status"=>false,"msg"=>"Role has users, it can not be deleted.");
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"No se ha podido eliminar.");
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }

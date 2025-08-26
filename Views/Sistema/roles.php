@@ -5,7 +5,7 @@
 ?>
 <div class="row">
     <div class="col-md-4">
-        <app-select label="Por página"  @change="search()" v-model="common.intPerPage">
+        <app-select label="Per page"  @change="search()" v-model="common.intPerPage">
             <option value="10" selected>10</option>
             <option value="25">25</option>
             <option value="50">50</option>
@@ -21,16 +21,16 @@
     <table class="table align-middle table-hover">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Nombre</th>
-                <th>Opciones</th>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(data,index) in common.arrData" :key="index">
-                <td data-title="Id">{{data.id}}</td>
-                <td data-title="Nombre">{{data.name}}</td>
-                <td data-title="Opciones">
+                <td data-title="ID">{{data.id}}</td>
+                <td data-title="Name">{{data.name}}</td>
+                <td data-title="Options">
                     <div class="d-flex gap-2">
                         <?php if($_SESSION['permitsModule']['u']){ ?>
                         <app-button  icon="key" btn="secondary" @click="permissions(data)"></app-button>

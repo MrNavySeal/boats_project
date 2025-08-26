@@ -5,7 +5,7 @@
 ?>
 <div class="row">
     <div class="col-md-4">
-        <app-select label="Por página"  @change="search()" v-model="common.intPerPage">
+        <app-select label="Per page"  @change="search()" v-model="common.intPerPage">
             <option value="10" selected>10</option>
             <option value="25">25</option>
             <option value="50">50</option>
@@ -22,43 +22,43 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Portada</th>
-                <th>Nombre</th>
-                <th>CC/NIT</th>
-                <th>Correo</th>
-                <th>Teléfono</th>
-                <th>País</th>
-                <th>Departamento</th>
-                <th>Ciudad</th>
-                <th>Dirección</th>
-                <th>Rol</th>
-                <th>Fecha</th>
-                <th>Estado</th>
-                <th>Opciones</th>
+                <th>Picture</th>
+                <th>Name</th>
+                <th>ID number</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Role</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Options</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="(data,index) in common.arrData" :key="index">
                 <td data-title="ID" class="text-center">{{data.id}}</td>
-                <td data-title="Portada">
+                <td data-title="Picture">
                     <img :src="data.url" :alt="data.name" class="img-thumbnail" style="width: 50px; height: 50px;">
                 </td>
-                <td data-title="Nombre">{{data.nombre}}</td>
-                <td data-title="CC/NIT">{{data.documento}}</td>
-                <td data-title="Correo">{{data.email}}</td>
-                <td data-title="Teléfono" class="text-nowrap">{{data.telefono}}</td>
-                <td data-title="País">{{data.pais}}</td>
-                <td data-title="Departamento">{{data.departamento}}</td>
-                <td data-title="Ciudad">{{data.ciudad}}</td>
-                <td data-title="Dirección">{{data.direccion}}</td>
-                <td data-title="Rol">{{data.role}}</td>
-                <td data-title="Fecha">{{data.fecha}}</td>
-                <td data-title="Estado" class="text-center">
+                <td data-title="Name">{{data.nombre}}</td>
+                <td data-title="ID number">{{data.documento}}</td>
+                <td data-title="Email">{{data.email}}</td>
+                <td data-title="Phone" class="text-nowrap">{{data.telefono}}</td>
+                <td data-title="Country">{{data.pais}}</td>
+                <td data-title="State">{{data.departamento}}</td>
+                <td data-title="City">{{data.ciudad}}</td>
+                <td data-title="Address">{{data.direccion}}</td>
+                <td data-title="Role">{{data.role}}</td>
+                <td data-title="Date">{{data.fecha}}</td>
+                <td data-title="Status" class="text-center">
                     <span :class="data.status == '1' ? 'bg-success' : 'bg-danger'" class="badge text-white">
-                        {{ data.status == '1' ? "Activo" : "Inactivo" }}
+                        {{ data.status == '1' ? "Active" : "Inactive" }}
                     </span>
                 </td>
-                <td data-title="Opciones">
+                <td data-title="Options">
                     <div class="d-flex gap-2">
                         <?php if($_SESSION['permitsModule']['u']){ ?>
                         <app-button  icon="key" btn="secondary" @click="permissions(data)"></app-button>
