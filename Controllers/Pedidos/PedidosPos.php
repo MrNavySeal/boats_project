@@ -20,7 +20,6 @@
                 $data['page_title'] = implode(" | ",[$_SESSION['permitsModule']['option'],$_SESSION['permitsModule']['module']]);
                 $data['page_name'] = strtolower($_SESSION['permitsModule']['option']);
                 $data['panelapp'] = "/Pedidos/functions_orders_venta.js";
-                $data['framing'] = "/Marqueteria/functions_molding_custom.js";
                 $this->views->getView($this,"venta",$data);
             }else{
                 header("location: ".base_url());

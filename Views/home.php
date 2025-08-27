@@ -23,6 +23,8 @@
     $sliders = round(count($productos)/$proCant);
     $activeSlider = "active";
     $categories = $data['categories'];
+    $contact = $data['contact'];
+    $about = $data['about'];
 ?>
     <div id="modalItem"></div>
     <main>
@@ -55,10 +57,10 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <?php getComponent("AboutSection"); ?>
+        <?php getComponent("AboutSection",$about); ?>
         <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$galeria]); ?>
         <?php getComponent("serviceSection",['titulo'=>"Our services","subtitulo"=>"Full suite of underwater cleaning services","datos"=>$servicios])?>
-        <?php getComponent("contactForm",['titulo'=>$data['page']['title'],"subtitulo"=>$data['page']['subtitle'],"datos"=>$servicios])?>
+        <?php getComponent("contactForm",['titulo'=>$contact['title'],"subtitulo"=>$contact['subtitle'],"datos"=>$servicios])?>
         <?php getComponent("ProductsCarouselSection",['titulo'=>"Our products","subtitulo"=>"Most recent","datos"=>$productos]);?>
     </main>
 <?php

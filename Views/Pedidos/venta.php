@@ -4,7 +4,6 @@ $active="d-none";
 
 if($_SESSION['permitsModule']['w']){
     getModal("modalOrder");
-    getModal("modalFrameCustom");
 }
 
 ?>
@@ -25,38 +24,21 @@ if($_SESSION['permitsModule']['w']){
     <?php if($_SESSION['permitsModule']['w']){?>
         <ul class="nav nav-pills mb-3" id="product-tab">
             <li class="nav-item">
-                <button class="nav-link active" id="navEnmarcar-tab" data-bs-toggle="tab" data-bs-target="#navEnmarcar" type="button" role="tab" aria-controls="navEnmarcar" aria-selected="true">Marquetería</button>
+                <button class="nav-link active" id="navTienda-tab" data-bs-toggle="tab" data-bs-target="#navTienda" type="button" role="tab" aria-controls="navTienda" aria-selected="true">Shop</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link " id="navTienda-tab" data-bs-toggle="tab" data-bs-target="#navTienda" type="button" role="tab" aria-controls="navTienda" aria-selected="true">Tienda</button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" id="navOtros-tab" data-bs-toggle="tab" data-bs-target="#navOtros" type="button" role="tab" aria-controls="navOtros" aria-selected="true">Otros</button>
+                <button class="nav-link" id="navOtros-tab" data-bs-toggle="tab" data-bs-target="#navOtros" type="button" role="tab" aria-controls="navOtros" aria-selected="true">Others</button>
             </li>
         </ul>
         <div class="row">
             <div class="col-md-6 mb-3">
                 <div class="tab-content">
-                    <div class="tab-pane fade show active" id="navEnmarcar">
-                        <div class="mt-3">
-                            <table class="table align-middle" id="tableMolding">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nombre</th>
-                                        <th>Opciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="tab-pane fade " id="navTienda">
+                    <div class="tab-pane show active " id="navTienda">
                         <div class="mt-3">
                             <div class="row">
                                 <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label for="perPage" class="form-label">Por página</label>
+                                        <label for="perPage" class="form-label">Per page</label>
                                         <select class="form-control" aria-label="Default select example" id="perPage" name="perPage">
                                             <option value="10">10</option>
                                             <option value="25">25</option>
@@ -68,7 +50,7 @@ if($_SESSION['permitsModule']['w']){
                                 </div>
                                 <div class="col-md-9">
                                     <div class="mb-3">
-                                        <label for="txtSearch" class="form-label">Buscar</label>
+                                        <label for="txtSearch" class="form-label">Search</label>
                                         <input type="text" class="form-control" id="txtSearch" name="txtSearch">
                                     </div>
                                 </div>
@@ -77,17 +59,17 @@ if($_SESSION['permitsModule']['w']){
                                 <table class="table align-middle table-hover">
                                     <thead>
                                         <tr>
-                                            <th>Portada</th>
+                                            <th>Picture</th>
                                             <th>Stock</th>
-                                            <th>Referencia</th>
-                                            <th>Artículo</th>
-                                            <th>Precio</th>
+                                            <th>Reference</th>
+                                            <th>Article</th>
+                                            <th>Price</th>
                                         </tr>
                                     </thead>
                                     <tbody id="tableProducts"></tbody>
                                 </table>
                             </div>
-                            <p id="totalRecords" class="text-center m-0 mb-1"><strong>Total de registros: </strong> 0</p>
+                            <p id="totalRecords" class="text-center m-0 mb-1"><strong>Total: </strong> 0</p>
                             <nav aria-label="Page navigation example" class="d-flex justify-content-center w-100">
                                 <ul class="pagination" id="pagination">
                                     <li class="page-item">
@@ -120,40 +102,40 @@ if($_SESSION['permitsModule']['w']){
                     <div class="tab-pane fade" id="navOtros">
                         <div class="mt-3">
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Descripción del servicio</label>
+                                <label for="exampleFormControlInput1" class="form-label">Description</label>
                                 <textarea rows="4" class="form-control" id="txtService" name="txtService"></textarea>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">Cantidad</label>
+                                        <label for="exampleFormControlInput1" class="form-label">Qty</label>
                                         <input type="number" class="form-control" id="intQty" name="intQty">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">Precio</label>
+                                        <label for="exampleFormControlInput1" class="form-label">Price</label>
                                         <input type="number" class="form-control" id="intPrice" name="intPrice">
                                     </div>
                                 </div>
                             </div>
-                            <button type="button" class="btn btn-primary" onclick="addProduct(null,3)"><i class="fas fa-plus"></i> Agregar</button>
+                            <button type="button" class="btn btn-primary" onclick="addProduct(null,3)"><i class="fas fa-plus"></i> Add</button>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
-                <h3 class="bg-primary p-1 mb-0 text-center text-white">Atendiendo</h3>
+                <h3 class="bg-primary p-1 mb-0 text-center text-white">Point of sale</h3>
                 <div class="table-responsive overflow-y no-more-tables" style="max-height:50vh">
                     <table class="table align-middle">
                         <thead>
                             <tr>
                                 <th class="text-nowrap">Stock</th>
-                                <th class="text-nowrap">Referencia</th>
-                                <th class="text-nowrap">Artículo</th>
-                                <th class="text-nowrap">Cantidad</th>
-                                <th class="text-nowrap">Precio</th>
-                                <th class="text-nowrap">Oferta</th>
+                                <th class="text-nowrap">Reference</th>
+                                <th class="text-nowrap">Article</th>
+                                <th class="text-nowrap">Qty</th>
+                                <th class="text-nowrap">Price</th>
+                                <th class="text-nowrap">Offer</th>
                                 <th class="text-nowrap">Subtotal</th>
                                 <th></th>
                             </tr>
@@ -165,7 +147,7 @@ if($_SESSION['permitsModule']['w']){
                                 <td class="text-end" id="subtotalProducts">$0</td>
                             </tr>
                             <tr>
-                                <td colspan="6" class="text-end fw-bold">Descuento:</td>
+                                <td colspan="6" class="text-end fw-bold">Discount:</td>
                                 <td class="text-end" id="discountProducts">$0</td>
                             </tr>
                             <tr>
@@ -177,9 +159,8 @@ if($_SESSION['permitsModule']['w']){
                     </table>
                 </div>
                 <div class="d-flex mt-2">
-                    <button type="button" class="btn btn-primary w-100" id="btnPurchase">Pagar</button>
-                    <button type="button" class="btn btn-success w-100" id="btnQuote">Cotizar</button>
-                    <button type="button" class="btn btn-danger w-100" id="btnClean">Limpiar</button>
+                    <button type="button" class="btn btn-primary w-100" id="btnPurchase">Checkout</button>
+                    <button type="button" class="btn btn-danger w-100" id="btnClean">Clean</button>
                 </div>
             </div>
         </div> 

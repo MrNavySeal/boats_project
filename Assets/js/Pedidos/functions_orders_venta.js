@@ -1,7 +1,6 @@
 'use strict';
 
 const modalPurchase = new bootstrap.Modal(document.querySelector("#modalPurchase"));
-const modalFrame = new bootstrap.Modal(document.querySelector("#modalFrame"));
 const btnAdd = document.querySelector("#btnAdd");
 const btnPurchase = document.querySelector("#btnPurchase");
 const btnClean = document.querySelector("#btnClean");

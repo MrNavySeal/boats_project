@@ -13,29 +13,13 @@
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
                     "duplicar" => ["mostrar"=>true, "evento"=>"onclick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
-                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'], "evento"=>"onclick","funcion"=>"window.location.href='".BASE_URL."/pedidos/punto-venta/'"],
+                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'], "evento"=>"onclick","funcion"=>"window.location.href='".BASE_URL."/orders/pos/'"],
                 ];
-                $data['page_tag'] = implode(" | ",[$_SESSION['permitsModule']['option'],$_SESSION['permitsModule']['module']]);
-                $data['page_title'] = implode(" | ",[$_SESSION['permitsModule']['option'],$_SESSION['permitsModule']['module']]);
-                $data['page_name'] = strtolower($_SESSION['permitsModule']['option']);
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['panelapp'] = "/Pedidos/functions_orders.js";
                 $this->views->getView($this,"pedidos",$data);
-            }else{
-                header("location: ".base_url());
-                die();
-            }
-        }
-        public function creditos(){
-            if($_SESSION['permitsModule']['r']){
-                $data['botones'] = [
-                    "duplicar" => ["mostrar"=>true, "evento"=>"onclick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
-                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'], "evento"=>"onclick","funcion"=>"window.location.href='".BASE_URL."/pedidos/punto-venta/'"],
-                ];
-                $data['page_tag'] = implode(" | ",[$_SESSION['permitsModule']['option'],$_SESSION['permitsModule']['module']]);
-                $data['page_title'] = implode(" | ",[$_SESSION['permitsModule']['option'],$_SESSION['permitsModule']['module']]);
-                $data['page_name'] = strtolower($_SESSION['permitsModule']['option']);
-                $data['panelapp'] = "/Pedidos/functions_orders_creditos.js";
-                $this->views->getView($this,"creditos",$data);
             }else{
                 header("location: ".base_url());
                 die();
@@ -44,38 +28,15 @@
         public function detalle(){
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
-                    "atras" => ["mostrar"=>true,"evento"=>"onclick","funcion"=>"window.location.href='".BASE_URL."/pedidos/'"],
+                    "atras" => ["mostrar"=>true,"evento"=>"onclick","funcion"=>"window.location.href='".BASE_URL."/orders/'"],
                     "duplicar" => ["mostrar"=>true, "evento"=>"onclick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
-                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'], "evento"=>"onclick","funcion"=>"window.location.href='".BASE_URL."/pedidos/punto-venta/'"],
+                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'], "evento"=>"onclick","funcion"=>"window.location.href='".BASE_URL."/orders/pos/'"],
                 ];
                 $data['page_tag'] = implode(" | ",[$_SESSION['permitsModule']['option'],$_SESSION['permitsModule']['module']]);
                 $data['page_title'] = implode(" | ",[$_SESSION['permitsModule']['option'],$_SESSION['permitsModule']['module']]);
                 $data['page_name'] = strtolower($_SESSION['permitsModule']['option']);
                 $data['panelapp'] = "/Pedidos/functions_orders_detail.js";
                 $this->views->getView($this,"detalle",$data);
-            }else{
-                header("location: ".base_url());
-                die();
-            }
-        }
-        public function transaccion($idTransaction){
-            if($_SESSION['permitsModule']['r']){
-                $idPerson ="";
-                if($_SESSION['userData']['roleid'] == 2 ){
-                    $idPerson= $_SESSION['idUser'];
-                }
-                $data['transaction'] = $this->model->selectTransaction($idTransaction,$idPerson);
-                $data['botones'] = [
-                    "atras" => ["mostrar"=>true,"evento"=>"onclick","funcion"=>"window.location.href='".BASE_URL."/pedidos/'"],
-                    "duplicar" => ["mostrar"=>true, "evento"=>"onclick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
-                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'], "evento"=>"onclick","funcion"=>"window.location.href='".BASE_URL."/pedidos/punto-venta/'"],
-                ];
-                $data['page_tag'] = "Transacción | ".$_SESSION['permitsModule']['module'];
-                $data['page_title'] = "Transacción | ".$_SESSION['permitsModule']['module'];
-                $data['page_name'] = strtolower($_SESSION['permitsModule']['module']);
-                $data['panelapp'] = "/Pedidos/functions_orders.js";
-                $this->views->getView($this,"transaccion",$data);
-                
             }else{
                 header("location: ".base_url());
                 die();

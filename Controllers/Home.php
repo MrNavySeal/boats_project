@@ -19,7 +19,8 @@
             $data['page_title'] = $company['name'];
             $data['productos'] = $this->getProductsT(8);
             $data['servicios'] = $this->getServicesT();
-            $data['page'] = $this->getPageT("contacto");
+            $data['about'] = $this->getPageT("nosotros");
+            $data['contact'] = $this->getPageT("contacto");
             $data['banners'] = $this->getBanners();
             $data['galeria'] = $this->getGalleryT();
             $data['page_name'] = "home";
