@@ -9,9 +9,9 @@
         <div class="navmobile--header align-items-center">
             <div class="d-flex align-items-center logo-desktop">
                 <img class="me-2" src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>" width="80">
-                <span class="fs-2 fw-bold t-color-2"><?=$company['name']?></span>
+                <span class="fs-4 fw-bold t-color-2"><?=$company['name']?></span>
             </div>
-            <span id="closeNav" class="t-color-2"><i class="fas fa-times"></i></span>
+            <span id="closeNav" class="t-color-2 p-2"><i class="fas fa-times"></i></span>
         </div>
         <ul class="navmobile-links d-none" id="navProfile">                      
             <?php

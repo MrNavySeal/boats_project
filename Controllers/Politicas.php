@@ -1,7 +1,7 @@
 <?php
-    require_once("Models/PaginaTrait.php");
+    require_once("Models/CategoryTrait.php");
     class Politicas extends Controllers{
-        use PaginaTrait;
+        use CategoryTrait;
         public function __construct(){
             session_start();
             parent::__construct();
@@ -9,18 +9,18 @@
         }
         public function privacidad(){
             $company=getCompanyInfo();
-            $data['page'] = $this->selectPage(2);
+            $data['page'] = $this->getPageT("privacidad");
             $data['page_tag'] = $company['name'];
-            $data['page_name'] = "privacidad";
-            $data['page_title'] =$data['page']['name']." | ".$company['name'];
+            $data['page_name'] = "Privacy";
+            $data['page_title'] ="Privacy | ".$company['name'];
             $this->views->getView($this,"politica",$data); 
         }
         public function terminos(){
             $company=getCompanyInfo();
-            $data['page'] = $this->selectPage(3);
+            $data['page'] = $this->getPageT("terminos");
             $data['page_tag'] = $company['name'];
-            $data['page_name'] = "terminos";
-            $data['page_title'] =$data['page']['name']." | ".$company['name'];
+            $data['page_name'] = "Terms and conditions";
+            $data['page_title'] ="Terms and conditions | ".$company['name'];
             $this->views->getView($this,"politica",$data); 
         }
     }

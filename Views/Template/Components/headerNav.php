@@ -19,7 +19,7 @@
     <nav class="nav--bar">
         <div class="d-flex align-items-center logo-desktop">
             <img class="me-2" src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>" width="60">
-            <span class="fs-2 fw-bold"><?=$company['name']?></span>
+            <span class="fs-4 fw-bold"><?=$company['name']?></span>
         </div>
         <div class="icon-mobile">
             <a href="<?=base_url()?>">

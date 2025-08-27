@@ -14,6 +14,7 @@
             $data['page_tag'] = "Contact | ".$company['name'];
 			$data['page_title'] = "Contact | ".$company['name'];
 			$data['page_name'] = "Contact";
+            $data['servicios'] = $this->getServicesT();
             $data['page'] = $this->getPageT("contacto");
             $data['app'] = "functions_contact.js";
             $this->views->getView($this,"contacto",$data);

@@ -13,6 +13,7 @@
             }
         }
     }
+    $servicios = $data['servicios'];
 ?>
 <?php getComponent("pageCover",$data); ?>
     <div class="container mt-4">

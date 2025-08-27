@@ -46,6 +46,8 @@
     $router->setRoute("email/sent/","Configuracion/Administracion/sent");
 
     //Web
+    $router->setRoute("terms/","Politicas/terminos",false);
+    $router->setRoute("privacy/","Politicas/privacidad",false);
     $router->setRoute("gallery/","Tienda/galeria",false);
     $router->setRoute("about/","Nosotros",false);
     $router->setRoute("contact/","Contacto",false);
