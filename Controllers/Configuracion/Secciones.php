@@ -56,6 +56,9 @@
                         $strMision=strClean($_POST['nosotros_mision']);
                         $strVision=strClean($_POST['nosotros_vision']);
                         $strFilosofia=strClean($_POST['nosotros_filosofia']);
+                        $strMisionTitulo=strClean($_POST['nosotros_mision_titulo']);
+                        $strVisionTitulo=strClean($_POST['nosotros_vision_titulo']);
+                        $strFilosofiaTitulo=strClean($_POST['nosotros_filosofia_titulo']);
                         $strDescripcion="";
                         $strDescripcionCorta=ucfirst(strClean($_POST['nosotros_descripcion_corta']));
                         $strTitulo=ucfirst(strClean($_POST['nosotros_titulo']));
@@ -70,7 +73,8 @@
                             $strImagen = $_FILES['nosotros_imagen'];
                             $strImagenNombre = $strPagina.'_'.bin2hex(random_bytes(6)).'.png';
                         }
-                        $request = $this->model->updatePagina($strPagina,$strTitulo,$strSubtitulo,$strDescripcionCorta,$strDescripcion,$strImagenNombre,$strMision,$strVision,$strFilosofia,$strTitulo2,$strSubtitulo2);
+                        $request = $this->model->updatePagina($strPagina,$strTitulo,$strSubtitulo,$strDescripcionCorta,$strDescripcion,$strImagenNombre,
+                        $strMision,$strVision,$strFilosofia,$strTitulo2,$strSubtitulo2,$strMisionTitulo,$strVisionTitulo,$strFilosofiaTitulo);
                         if($strImagen != ""){ uploadImage($strImagen,$strImagenNombre); }
                     }
 

@@ -51,13 +51,28 @@
                     <label for="txtName" class="form-label">Subtitle </label>
                     <input type="text" class="form-control" v-model="strSubtitulo2Nosotros" required>
                 </div>
+                <hr>
+                <div class="mb-3">
+                    <label for="txtName" class="form-label">Mission title </label>
+                    <input type="text" class="form-control" v-model="strMisionTitulo" required>
+                </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Mission</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" v-model="strMision" required rows="4"></textarea>
                 </div>
+                <hr>
+                <div class="mb-3">
+                    <label for="txtName" class="form-label">Vision title </label>
+                    <input type="text" class="form-control" v-model="strVisionTitulo" required>
+                </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Vision</label>
                     <textarea class="form-control" id="exampleFormControlTextarea1" v-model="strVision" required rows="4"></textarea>
+                </div>
+                <hr>
+                <div class="mb-3">
+                    <label for="txtName" class="form-label">Philosophy title </label>
+                    <input type="text" class="form-control" v-model="strFilosofiaTitulo" required>
                 </div>
                 <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Philosophy</label>

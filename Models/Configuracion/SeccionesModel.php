@@ -21,7 +21,7 @@
 
         //Paginas
         public function updatePagina(string $strPagina,string $strTitulo,string $strSubtitulo,string $strDescripcionCorta,$strDescripcion="",string $strImagen,
-        $strMision="",$strVision="",$strFilosofia="",$strTitulo2="",$strSubtitulo2=""){
+        $strMision="",$strVision="",$strFilosofia="",$strTitulo2="",$strSubtitulo2="",$strMisionTitulo="",$strVisionTitulo="",$strFilosofiaTitulo=""){
             $this->strPagina = $strPagina;
             $this->strTitulo = $strTitulo;
             $this->strSubtitulo = $strSubtitulo;
@@ -30,7 +30,7 @@
             $this->strImagen = $strImagen;
 
             $sql = "UPDATE page SET title=?,subtitle=?,short_description=?, description=?,picture=?,mission=?,vision=?,philosophy=?,title2=?,subtitle2=? 
-            WHERE type = '$this->strPagina'";
+            ,mission_title=?,vision_title=?,philosophy_title=? WHERE type = '$this->strPagina'";
             $arrData = [
                 $this->strTitulo,
                 $this->strSubtitulo,
@@ -41,7 +41,10 @@
                 $strVision,
                 $strFilosofia,
                 $strTitulo2,
-                $strSubtitulo2
+                $strSubtitulo2,
+                $strMisionTitulo,
+                $strVisionTitulo,
+                $strFilosofiaTitulo
             ];
             $request = $this->update($sql,$arrData);
             return $request;

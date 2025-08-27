@@ -12,6 +12,7 @@
             $data['page_tag'] = $company['name'];
             $data['gallery'] = $this->getGalleryT();
             $data['servicios'] = $this->getServicesT();
+            $data['about'] = $this->getPageT("nosotros");
             $data['page_name'] = "About us";
             $data['page_title'] ="About us | ".$company['name'];
             $data['app'] = "functions_home.js";

@@ -12,6 +12,9 @@ const App = {
             strMision:"",
             strVision:"",
             strFilosofia:"",
+            strMisionTitulo:"",
+            strVisionTitulo:"",
+            strFilosofiaTitulo:"",
             strImagenNosotros:"",
             strImagenUrlNosotros:base_url+'/Assets/images/uploads/category.jpg',
 
@@ -36,8 +39,11 @@ const App = {
             const formData = new FormData();
 
             formData.append("nosotros_mision",this.strMision);
-            formData.append("nosotros_vision",this.strMision);
-            formData.append("nosotros_filosofia",this.strMision);
+            formData.append("nosotros_vision",this.strVision);
+            formData.append("nosotros_filosofia",this.strFilosofia);
+            formData.append("nosotros_mision_titulo",this.strMisionTitulo);
+            formData.append("nosotros_vision_titulo",this.strVisionTitulo);
+            formData.append("nosotros_filosofia_titulo",this.strFilosofiaTitulo);
             formData.append("nosotros_descripcion_corta",this.strDescripcionCortaNosotros);
             formData.append("nosotros_titulo",this.strTituloNosotros);
             formData.append("nosotros_subtitulo",this.strSubtituloNosotros);
@@ -90,6 +96,9 @@ const App = {
                 this.strVision = data.nosotros.vision;
                 this.strMision = data.nosotros.mission;
                 this.strFilosofia = data.nosotros.philosophy
+                this.strVisionTitulo = data.nosotros.vision_title;
+                this.strMisionTitulo = data.nosotros.mission_title;;
+                this.strFilosofiaTitulo = data.nosotros.philosophy_title;
                 document.querySelector("#strDescripcionTerminos").value=data.terminos.description;
                 document.querySelector("#strDescripcionPrivacidad").value=data.privacidad.description;
                 
