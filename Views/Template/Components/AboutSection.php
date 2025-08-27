@@ -1,3 +1,4 @@
+
 <section class="container my-5">
     <div class="row">
         <div class="col-md-6">
@@ -8,7 +9,7 @@
                 <h3 class="section--title t-color-1 fs-4 mb-0 text-start"><?=$data['title']?></h3>
                 <h2 class="section--title fs-1 text-start"><?=$data['subtitle']?></h2>
             </div>
-            <p><?=$data['description']?></p>
+            <p><?=$data['short_description']?></p>
             <a href="<?=base_url()?>/contact/" class="btn btn-bg-1 w-100">Contact us</a>
         </div>
     </div>
