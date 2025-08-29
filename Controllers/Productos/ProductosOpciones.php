@@ -11,9 +11,13 @@
         }
         public function unidades(){
             if($_SESSION['permitsModule']['r']){
-                $data['page_tag'] = "Unidades de medida | Productos";
-                $data['page_title'] = "Unidades de medida | Productos";
-                $data['page_name'] = "unidades";
+                $data['botones'] = [
+                    "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'], "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
+                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'],"evento"=>"onclick","funcion"=>"openModal()"],
+                ];
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['panelapp'] = "/Productos/functions_medidas.js";
                 $this->views->getView($this,"unidades",$data);
             }else{
@@ -24,12 +28,12 @@
         public function caracteristicas(){
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
-                    "duplicar" => ["mostrar"=>true, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/productos/caracteristicas/"."','','');mypop.focus();"],
-                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w']],
+                    "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'], "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
+                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'],"evento"=>"onclick","funcion"=>"openModal()"],
                 ];
-                $data['page_tag'] = "Características | Productos";
-                $data['page_title'] = "Características | Productos";
-                $data['page_name'] = "caracteristicas";
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['panelapp'] = "/Productos/functions_caracteristicas.js";
                 $this->views->getView($this,"caracteristicas",$data);
             }else{
@@ -40,12 +44,12 @@
         public function variantes(){
             if($_SESSION['permitsModule']['r']){
                 $data['botones'] = [
-                    "duplicar" => ["mostrar"=>true, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/productos/variantes/"."','','');mypop.focus();"],
-                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w']],
+                    "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'], "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL.$_SESSION['permitsModule']['route']."','','');mypop.focus();"],
+                    "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'],"evento"=>"onclick","funcion"=>"openModal()"],
                 ];
-                $data['page_tag'] = "Variantes | Productos";
-                $data['page_title'] = "Variantes | Productos";
-                $data['page_name'] = "variantes";
+                $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
+                $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['panelapp'] = "/Productos/functions_variantes.js";
                 $this->views->getView($this,"variantes",$data);
             }else{
@@ -64,9 +68,9 @@
                         $btnDelete="";
                         $status="";
                         if($request[$i]['status']==1){
-                            $status='<span class="badge me-1 bg-success">Activo</span>';
+                            $status='<span class="badge me-1 bg-success">Active</span>';
                         }else{
-                            $status='<span class="badge me-1 bg-danger">Inactivo</span>';
+                            $status='<span class="badge me-1 bg-danger">Inactive</span>';
                         }
 
                         if($_SESSION['permitsModule']['u']){
@@ -86,16 +90,13 @@
         public function getMeasure(){
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
-                    if(empty($_POST)){
-                        $arrResponse = array("status"=>false,"msg"=>"Error de datos");
+
+                    $id = intval($_POST['id']);
+                    $request = $this->model->selectMeasure($id);
+                    if(!empty($request)){
+                        $arrResponse = array("status"=>true,"data"=>$request);
                     }else{
-                        $id = intval($_POST['id']);
-                        $request = $this->model->selectMeasure($id);
-                        if(!empty($request)){
-                            $arrResponse = array("status"=>true,"data"=>$request);
-                        }else{
-                            $arrResponse = array("status"=>false,"msg"=>"Error, intenta de nuevo"); 
-                        }
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong, try again"); 
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
@@ -106,7 +107,7 @@
             if($_SESSION['permitsModule']['w']){
                 if($_POST){
                     if(empty($_POST['txtName']) || empty($_POST['txtInitials'])){
-                        $arrResponse = array("status" => false, "msg" => 'Error de datos');
+                        $arrResponse = array("status" => false, "msg" => 'Please, fill the fields');
                     }else{ 
                         $id = intval($_POST['id']);
                         $arrData = array(
@@ -127,14 +128,14 @@
                         }
                         if(is_numeric($request) && $request > 0){
                             if($option == 1){
-                                $arrResponse = array("status"=>true,"msg"=>"Datos guardados.");
+                                $arrResponse = array("status"=>true,"msg"=>"Data saved.");
                             }else{
-                                $arrResponse = array("status"=>true,"msg"=>"Datos actualizados.");
+                                $arrResponse = array("status"=>true,"msg"=>"Data updated.");
                             }
                         }else if($request == "exist"){
-                            $arrResponse = array('status' => false, 'msg' => 'La unidad de medida ya existe, prueba con otro nombre.');		
+                            $arrResponse = array('status' => false, 'msg' => 'This unit already exist, try another one.');		
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                            $arrResponse = array("status" => false, "msg" => 'Something went wrong, try again.');
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -147,14 +148,14 @@
 
                 if($_POST){
                     if(empty($_POST['id'])){
-                        $arrResponse=array("status"=>false,"msg"=>"Error de datos");
+                        $arrResponse=array("status"=>false,"msg"=>"Please, fill the fields");
                     }else{
                         $id = intval($_POST['id']);
                         $request = $this->model->deleteMeasure($id);
                         if($request=="ok"){
-                            $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado.");
+                            $arrResponse = array("status"=>true,"msg"=>"It has been deleted.");
                         }else{
-                            $arrResponse = array("status"=>false,"msg"=>"No es posible eliminar, intenta de nuevo.");
+                            $arrResponse = array("status"=>false,"msg"=>"Something went wrong, try again.");
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -173,9 +174,9 @@
                         $btnDelete="";
                         $status="";
                         if($request[$i]['status']==1){
-                            $status='<span class="badge me-1 bg-success">Activo</span>';
+                            $status='<span class="badge me-1 bg-success">Active</span>';
                         }else{
-                            $status='<span class="badge me-1 bg-danger">Inactivo</span>';
+                            $status='<span class="badge me-1 bg-danger">Inactive</span>';
                         }
 
                         if($_SESSION['permitsModule']['u']){
@@ -196,14 +197,14 @@
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
                     if(empty($_POST)){
-                        $arrResponse = array("status"=>false,"msg"=>"Error de datos");
+                        $arrResponse = array("status"=>false,"msg"=>"Please, fill the fields");
                     }else{
                         $id = intval($_POST['id']);
                         $request = $this->model->selectSpec($id);
                         if(!empty($request)){
                             $arrResponse = array("status"=>true,"data"=>$request);
                         }else{
-                            $arrResponse = array("status"=>false,"msg"=>"Error, intenta de nuevo"); 
+                            $arrResponse = array("status"=>false,"msg"=>"Something went wrong, try again"); 
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -215,7 +216,7 @@
             if($_SESSION['permitsModule']['w']){
                 if($_POST){
                     if(empty($_POST['txtName'])){
-                        $arrResponse = array("status" => false, "msg" => 'Error de datos');
+                        $arrResponse = array("status" => false, "msg" => 'Please, fill the fields');
                     }else{ 
                         $id = intval($_POST['id']);
                         $arrData = array(
@@ -235,14 +236,14 @@
                         }
                         if(is_numeric($request) && $request > 0){
                             if($option == 1){
-                                $arrResponse = array("status"=>true,"msg"=>"Datos guardados.");
+                                $arrResponse = array("status"=>true,"msg"=>"Data saved.");
                             }else{
-                                $arrResponse = array("status"=>true,"msg"=>"Datos actualizados.");
+                                $arrResponse = array("status"=>true,"msg"=>"Data updated.");
                             }
                         }else if($request == "exist"){
                             $arrResponse = array('status' => false, 'msg' => 'La característica ya existe, prueba con otro nombre.');		
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                            $arrResponse = array("status" => false, "msg" => 'Something went wrong.');
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -255,14 +256,14 @@
 
                 if($_POST){
                     if(empty($_POST['id'])){
-                        $arrResponse=array("status"=>false,"msg"=>"Error de datos");
+                        $arrResponse=array("status"=>false,"msg"=>"Please, fill the fields");
                     }else{
                         $id = intval($_POST['id']);
                         $request = $this->model->deleteSpec($id);
                         if($request=="ok"){
-                            $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado.");
+                            $arrResponse = array("status"=>true,"msg"=>"It has been deleted.");
                         }else{
-                            $arrResponse = array("status"=>false,"msg"=>"No es posible eliminar, intenta de nuevo.");
+                            $arrResponse = array("status"=>false,"msg"=>"Something went wrong, try again.");
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -282,9 +283,9 @@
                         $btnDelete="";
                         $status="";
                         if($request[$i]['status']==1){
-                            $status='<span class="badge me-1 bg-success">Activo</span>';
+                            $status='<span class="badge me-1 bg-success">Active</span>';
                         }else{
-                            $status='<span class="badge me-1 bg-danger">Inactivo</span>';
+                            $status='<span class="badge me-1 bg-danger">Inactive</span>';
                         }
 
                         if($_SESSION['permitsModule']['u']){
@@ -305,14 +306,14 @@
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
                     if(empty($_POST)){
-                        $arrResponse = array("status"=>false,"msg"=>"Error de datos");
+                        $arrResponse = array("status"=>false,"msg"=>"Please, fill the fields");
                     }else{
                         $id = intval($_POST['id']);
                         $request = $this->model->selectVariant($id);
                         if(!empty($request)){
                             $arrResponse = array("status"=>true,"data"=>$request);
                         }else{
-                            $arrResponse = array("status"=>false,"msg"=>"Error, intenta de nuevo"); 
+                            $arrResponse = array("status"=>false,"msg"=>"Something went wrong, try again"); 
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -324,7 +325,7 @@
             if($_SESSION['permitsModule']['w']){
                 if($_POST){
                     if(empty($_POST['txtName']) || empty($_POST['options'])){
-                        $arrResponse = array("status" => false, "msg" => 'Error de datos');
+                        $arrResponse = array("status" => false, "msg" => 'Please, fill the fields');
                     }else{ 
                         $id = intval($_POST['id']);
                         $arrData = array(
@@ -345,14 +346,14 @@
                         }
                         if(is_numeric($request) && $request > 0){
                             if($option == 1){
-                                $arrResponse = array("status"=>true,"msg"=>"Datos guardados.");
+                                $arrResponse = array("status"=>true,"msg"=>"Data saved.");
                             }else{
-                                $arrResponse = array("status"=>true,"msg"=>"Datos actualizados.");
+                                $arrResponse = array("status"=>true,"msg"=>"Data updated.");
                             }
                         }else if($request == "exist"){
-                            $arrResponse = array('status' => false, 'msg' => 'La variante ya existe, prueba con otro nombre.');		
+                            $arrResponse = array('status' => false, 'msg' => 'This variant already exist, try another one.');		
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                            $arrResponse = array("status" => false, "msg" => 'Something went wrong.');
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -365,14 +366,14 @@
 
                 if($_POST){
                     if(empty($_POST['id'])){
-                        $arrResponse=array("status"=>false,"msg"=>"Error de datos");
+                        $arrResponse=array("status"=>false,"msg"=>"Please, fill the fields");
                     }else{
                         $id = intval($_POST['id']);
                         $request = $this->model->deleteVariant($id);
                         if($request=="ok"){
-                            $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado.");
+                            $arrResponse = array("status"=>true,"msg"=>"It has been deleted.");
                         }else{
-                            $arrResponse = array("status"=>false,"msg"=>"No es posible eliminar, intenta de nuevo.");
+                            $arrResponse = array("status"=>false,"msg"=>"Something went wrong, try again.");
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

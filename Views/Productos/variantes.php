@@ -7,10 +7,10 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
-                <th>Cantidad</th>
-                <th>Estado</th>
-                <th>Opciones</th>
+                <th>Name</th>
+                <th>Qty</th>
+                <th>Status</th>
+                <th>Options</th>
             </tr>
         </thead>
         <tbody></tbody>

@@ -206,7 +206,7 @@
                 for ($i=0; $i < $total; $i++) { 
                     $id = $request[$i]['id_variation'];
                     $sql ="SELECT count(*) as total FROM variation_options WHERE variation_id = $id";
-                    $request[$i]['qty'] = $this->select($sql)['total']." opciones";
+                    $request[$i]['qty'] = $this->select($sql)['total']." options";
                 }
             }
             return $request;
