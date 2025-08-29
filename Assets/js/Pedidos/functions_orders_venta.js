@@ -5,7 +5,6 @@ const btnAdd = document.querySelector("#btnAdd");
 const btnPurchase = document.querySelector("#btnPurchase");
 const btnClean = document.querySelector("#btnClean");
 const btnSetPurchase = document.querySelector("#btnSetPurchase");
-const btnQuote = document.querySelector("#btnQuote");
 const searchItems = document.querySelector("#searchItems");
 const selectItems = document.querySelector("#selectItems");
 const items = document.querySelector("#items");
@@ -23,7 +22,7 @@ let arrData = [];
 
 let tableMolding = new DataTable("#tableMolding",{
     "language": {
-        "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Spanish.json"
+        "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/English.json"
     },
     "ajax":{
         "url": " "+base_url+"/Pedidos/PedidosPos/getMoldingProducts",
@@ -67,7 +66,7 @@ async function getProducts(page = 1){
     arrData = objData.data;
     tableProducts.innerHTML =arrHtml.products;
     document.querySelector("#pagination").innerHTML = arrHtml.pages;
-    document.querySelector("#totalRecords").innerHTML = `<strong>Total de registros: </strong> ${objData.total_records}`;
+    document.querySelector("#totalRecords").innerHTML = `<strong>Total: </strong> ${objData.total_records}`;
 }
 
 /*************************Events*******************************/
@@ -75,17 +74,11 @@ btnPurchase.addEventListener("click",function(){
     getCustomers();
     modalPurchase.show();
     orderType = 1;
-    document.querySelector("#modalPurchase .modal-title").innerHTML="Información de pago";
+    document.querySelector("#modalPurchase .modal-title").innerHTML="Details";
     document.querySelector("#contentPurchase").classList.remove("d-none");
     document.querySelector("#contentQuote").classList.add("d-none");
 });
-btnQuote.addEventListener("click",function(){
-    modalPurchase.show();
-    orderType = 2;
-    document.querySelector("#modalPurchase .modal-title").innerHTML="Información de cotización";
-    document.querySelector("#contentPurchase").classList.add("d-none");
-    document.querySelector("#contentQuote").classList.remove("d-none");
-});
+
 btnClean.addEventListener("click",function(){
     arrProducts = [];
     tablePurchase.innerHTML ="";
@@ -108,9 +101,9 @@ searchItems.addEventListener('input',function() {
         btn.setAttribute("onclick","addItem(this)");
         btn.innerHTML = `
             <p class="m-0 fw-bold">${e.name}</p>
-            <p class="m-0">CC/NIT: <span>${e.identification}</span></p>
-            <p class="m-0">Correo: <span>${e.email}</span></p>
-            <p class="m-0">Teléfono: <span>${e.phone}</span></p>
+            <p class="m-0">ID number: <span>${e.identification}</span></p>
+            <p class="m-0">Email: <span>${e.email}</span></p>
+            <p class="m-0">Phone: <span>${e.phone}</span></p>
         `
         items.appendChild(btn);
     });
@@ -118,11 +111,11 @@ searchItems.addEventListener('input',function() {
 formSetOrder.addEventListener("submit",function(e){
     e.preventDefault();
     if(document.querySelector("#id").value == ""){
-        Swal.fire("Error","Debe seleccionar el cliente","error");
+        Swal.fire("Error","You must select a customer","error");
         return false;
     }
     if(arrProducts.length == 0){
-        Swal.fire("Error","Debe agregar al menos un artículo","error");
+        Swal.fire("Error","You must add at least one product","error");
         return false;
     }
     let url = base_url+"/Pedidos/PedidosPos/setOrder";
@@ -133,10 +126,10 @@ formSetOrder.addEventListener("submit",function(e){
     btnSetPurchase.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
     btnSetPurchase.setAttribute("disabled","");
     request(url,formData,"post").then(function(objData){
-        btnSetPurchase.innerHTML=`<i class="fas fa-save"></i> Guardar`;
+        btnSetPurchase.innerHTML=`<i class="fas fa-save"></i> Save`;
         btnSetPurchase.removeAttribute("disabled");
         if(objData.status){
-            Swal.fire("Guardado",objData.msg,"success");
+            Swal.fire("Saved",objData.msg,"success");
             formSetOrder.reset();
             arrProducts = [];
             tablePurchase.innerHTML ="";
@@ -461,13 +454,13 @@ function showProducts(){
         let objString = JSON.stringify(pro).replace(/"/g, '&quot;');
         tr.innerHTML = `
             <td data-title="Stock">${pro.is_stock ? pro.stock : "N/A"}</td>
-            <td data-title="Referencia">${pro.reference}</td>
-            <td data-title="Artículo"> ${strDescription}</td>
-            <td data-title="Cantidad"><input class="form-control text-center" onchange="updateProduct(this,'qty','${objString}')" value="${pro.qty}" type="number"></td>
-            <td data-title="Precio"><input class="form-control" value="${pro.price_sell}" onchange="updateProduct(this,'price_sell','${objString}')" type="number"></td>
-            <td data-title="Oferta"><input class="form-control" value="${pro.price_offer}" onchange="updateProduct(this,'discount','${objString}')" value="" type="number"></td>
+            <td data-title="Reference">${pro.reference}</td>
+            <td data-title="Article"> ${strDescription}</td>
+            <td data-title="Qty"><input style="width:100px;"class="form-control text-center" onchange="updateProduct(this,'qty','${objString}')" value="${pro.qty}" type="number"></td>
+            <td data-title="Price"><input style="width:100px;"class="form-control" value="${pro.price_sell}" onchange="updateProduct(this,'price_sell','${objString}')" type="number"></td>
+            <td data-title="Offer"><input style="width:100px;"class="form-control" value="${pro.price_offer}" onchange="updateProduct(this,'discount','${objString}')" value="" type="number"></td>
             <td data-title="Subtotal" class="text-end">$${formatNum(pro.subtotal,".")}</td>
-            <td data-title="Opciones" ><button class="btn btn-danger m-1 text-white" onclick="deleteProduct(this,'${objString}')"type="button"><i class="fas fa-trash-alt"></i></button></td>
+            <td data-title="Options" ><button class="btn btn-danger m-1 text-white" onclick="deleteProduct(this,'${objString}')"type="button"><i class="fas fa-trash-alt"></i></button></td>
         `;
         tablePurchase.appendChild(tr);
     });
