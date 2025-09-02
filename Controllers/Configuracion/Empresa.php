@@ -29,6 +29,14 @@
                 die();
             }
         }
+        public function setSchedule(){
+            if($_SESSION['permitsModule']['u']){
+                if($_POST){
+                    dep($_POST);exit;
+                }
+            }
+            die();
+        }
         public function setCompany(){
             if($_SESSION['permitsModule']['u']){
                 if($_POST){

@@ -43,6 +43,9 @@
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="social-tab" data-bs-toggle="tab" data-bs-target="#social" type="button" role="tab" aria-controls="social" aria-selected="false">Social media</button>
         </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="schedule-tab" data-bs-toggle="tab" data-bs-target="#schedule" type="button" role="tab" aria-controls="schedule" aria-selected="false">My schedule</button>
+        </li>
         <?php if($_SESSION['idUser'] == 1){?>
         <li class="nav-item" role="presentation">
             <button class="nav-link" id="payment-tab" data-bs-toggle="tab" data-bs-target="#payment" type="button" role="tab" aria-controls="payment" aria-selected="true">Payment</button>
@@ -190,6 +193,73 @@
                     <button type="submit" class="btn btn-primary" id="btnSocial"> Save</button>
                 </div>
             </form>
+        </div>
+        <div class="tab-pane fade" id="schedule" role="tabpanel" aria-labelledby="schedule-tab">
+            <div class="overflow-y">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="mb-3">
+                            <label for="countryList" class="form-label">Type</label>
+                            <select class="form-control" aria-label="Default select example" id="typeSchedule">
+                                <option value="1" selected>Monday-Friday</option>
+                                <option value="2">Saturday</option>
+                                <option value="3">Sunday</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="mb-3 ">
+                            <label for="txtName" class="form-label">From </label>
+                            <input type="time" class="form-control" id="timeFrom">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="mb-3">
+                            <label for="txtName" class="form-label">To </label>
+                            <input type="time" class="form-control" id="timeTo">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="mb-3 ">
+                            <label for="txtName" class="form-label">Break time from </label>
+                            <input type="time" class="form-control" id="breakFrom">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="mb-3">
+                            <label for="txtName" class="form-label">Break time to </label>
+                            <input type="time" class="form-control" id="breakTo">
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="mb-3">
+                            <label for="txtName" class="form-label">Interval </label>
+                            <div class="d-flex">
+                                <input type="number" class="form-control" id="interval">
+                                <button type="button" class="btn btn-primary" onclick="genSchedule()">Generate</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="fw-bold">Monday to friday</div>
+                        <div id="scheduleMonday"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="fw-bold">Saturday</div>
+                        <div id="scheduleSaturday"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="fw-bold">Sunday</div>
+                        <div id="scheduleSunday"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" id="btnSchedule"> Save</button>
+            </div>
         </div>
         <?php if($_SESSION['idUser'] == 1){?>
         <div class="tab-pane fade" id="payment" role="tabpanel" aria-labelledby="payment-tab">

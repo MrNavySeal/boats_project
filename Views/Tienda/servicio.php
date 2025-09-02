@@ -61,7 +61,9 @@
                         <div class="bg-color-1 rounded">
                             <div class="p-4">
                                 <h3 class="section--title t-color-4 fs-4 mb-0 text-start">- Keep Your Boat in top condition</h3>
-                                <a href="<?=base_url()?>/contact/" class="pb-2 section--title t-color-4 text-start">Contact us today</a>
+                                <div class="d-flex justify-content-center mt-4">
+                                    <button type="button" class="btn btn-bg-2" onclick="openSchedule()">Schedule online</button>
+                                </div>
                             </div>
                         </div>
                         <?php if(!empty($productos)){?>
@@ -74,9 +76,17 @@
                         <?php }?>
                     </div>
                 </div>
-                <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$galeria]); ?>
             </div>
         </main>
+        <div class="rounded p-2 bg-color-1">
+            <h2 class="section--title fs-2 t-color-4">Your boat’s next level of performance starts here</h2>
+            <div class="d-flex justify-content-center mt-2">
+                <button type="button" class="btn btn-bg-2" onclick="openSchedule()">Schedule online</button>
+            </div>
+        </div>
+    </div>
+    <div class="container bg-white rounded">
+        <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$galeria]); ?>
     </div>
 <?php
     footerPage($data);
