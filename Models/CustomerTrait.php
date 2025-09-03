@@ -388,7 +388,8 @@
         public function selectCaso($intId){
             $this->con = new Mysql();
             $this->intId = $intId;
-            $sql = "SELECT date,time,amount as total,personid,service_id,idtransaction,status FROM orderdata WHERE idorder = $this->intId";
+            $sql = "SELECT DATE_FORMAT(date, '%d/%m/%Y') as date,time,amount as total,personid,service_id,idtransaction,status 
+            FROM orderdata WHERE idorder = $this->intId";
             $request = $this->con->select($sql);
             if(!empty($request)){
                 $sqlCliente = "SELECT p.firstname,

@@ -39,6 +39,10 @@
                             <td><?=$arrCliente['pais']."/".$arrCliente['departamento']."/".$arrCliente['ciudad']."/".$arrCliente['address'];?></td>
                         </tr>
                         <tr>
+                            <td class="w-25 bg-color-2 t-color-4">Scheduled date</td>
+                            <td><?=$arrOrden['date']. " ".$arrOrden['time'] ?></td>
+                        </tr>
+                        <tr>
                             <td class="w-25 bg-color-2 t-color-4">Description</td>
                             <td><?=$arrServicio['servicio']?></td>
                         </tr>

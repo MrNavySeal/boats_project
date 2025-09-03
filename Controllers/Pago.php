@@ -23,8 +23,8 @@
                     $data['id_encrypt'] = $params;
                     $data['company'] = $company;
                     $data['page_tag'] = $company['name'];
-                    $data['page_title'] = "Pago | ".$company['name'];
-                    $data['page_name'] = "Pago";
+                    $data['page_title'] = "Checkout | ".$company['name'];
+                    $data['page_name'] = "Checkout";
                     $data['data'] = $request;
                     $data['app'] = "functions_pago.js";
                     $this->views->getView($this,"servicio",$data);

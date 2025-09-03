@@ -41,7 +41,7 @@
                                 <div id="flush-collapseServices<?=$key['id']?>" class="accordion-collapse collapse " aria-labelledby="flush-services<?=$key['id']?>" data-bs-parent="#accordionFlushServices<?=$key['id']?>">
                                     <div class="accordion-body bg-light pe-2 ps-2">
                                         <div class="bg-white rounded pe-2 ps-2 fw-normal">
-                                            <?= $key['answer']?> Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint natus accusantium earum facilis alias illo nemo tempore esse voluptate ullam, hic, id delectus libero. Voluptatem exercitationem laborum recusandae eius totam!
+                                            <?= $key['answer']?>
                                         </div>
                                     </div>
                                 </div>
