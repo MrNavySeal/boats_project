@@ -235,17 +235,24 @@
             $this->strFecha = $strFecha;
             $this->intValorBase = $intValorBase;
             $this->strEstado = $strEstado;
-            $sql = "UPDATE orderdata SET service_id=?,personid=?,time=?,date=?,amount=?,statusorder=?
-            WHERE idorder = $this->intId";
-            $arrData =[
-                $this->intServicio,
-                $this->intCliente, 
-                $this->strHora,
-                $this->strFecha, 
-                $this->intValorBase,
-                $this->strEstado,
-            ];
-            $request = $this->update($sql,$arrData);
+            $sql = "SELECT * FROM orderdata WHERE type_order = 2 AND time = '$strHora' AND DATE(date) = '$strFecha' AND idorder != $intId";
+            $request = $this->select_all($sql);
+            if(empty($request)){
+
+                $sql = "UPDATE orderdata SET service_id=?,personid=?,time=?,date=?,amount=?,statusorder=?
+                WHERE idorder = $this->intId";
+                $arrData =[
+                    $this->intServicio,
+                    $this->intCliente, 
+                    $this->strHora,
+                    $this->strFecha, 
+                    $this->intValorBase,
+                    $this->strEstado,
+                ];
+                $request = $this->update($sql,$arrData);
+            }else{
+                $request ="exists";
+            }
             return $request;
         }
         public function deleteCaso($id){
