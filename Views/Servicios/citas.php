@@ -44,7 +44,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="(data,index) in arrData" :key="index">
+                    <tr v-for="(data,index) in arrInfo" :key="index">
                         <td data-title="ID" class="text-center">{{data.idorder}}</td>
                         <td data-title="Transaction">{{data.idtransaction}}</td>
                         <td data-title="Name">{{data.firstname+" "+data.lastname}}</td>
@@ -52,22 +52,21 @@
                         <td data-title="Phone" class="text-nowrap">{{data.telefono}}</td>
                         <td data-title="Email">{{data.email}}</td>
                         <td data-title="Appointment" class="text-center text-nowrap">{{data.date}}</td>
-                        <td data-title="Total" class="text-end text-nowrap">{{formatMoney(data.amount)}}</td>
+                        <td data-title="Total" class="text-end text-nowrap">${{formatMoney(data.amount)}}</td>
                         <td data-title="Payment status" class="text-center">
                             <span :class="data.status == 'approved' ? 'bg-success text-white' : data.status == 'pendent' ? 'bg-warning text-black' :'bg-danger text-white'" class="badge">
-                                {{ data.status == 'approved' ? "approved" : data.status == 'pendent' ? "pendent" : "canceled" }}
+                                {{ data.status }}
                             </span>
                         </td>
                         <td data-title="Appointment status" class="text-center">
-                            <span :class="data.statusorder == 'confirmado' ? 'bg-black text-white' : data.statusorder == 'en proceso' ? 'bg-warning text-black' : data.statusorder == 'finalizado' ? 'bg-success text-white' :'bg-danger text-white'" class="badge">
-                                {{ data.statusorder == 'confirmado' ? 'confirmed' : data.statusorder == 'en proceso' ? 'in process' : data.statusorder == 'finalizado' ? 'finished' :'canceled'}}
+                            <span :class="data.statusorder == 'confirmed' ? 'bg-black text-white' : data.statusorder == 'in process' ? 'bg-warning text-black' : data.statusorder == 'finished' ? 'bg-success text-white' :'bg-danger text-white'" class="badge">
+                                {{ data.statusorder}}
                             </span>
                         </td>
                         <td data-title="Options">
                             <div class="d-flex justify-content-center">
                                 <button class="btn btn-primary text-white m-1" :id="'btnPopover'+data.idorder" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Copiado!" type="button" title="Paypal"  @click="copiar(data,'btnPopover'+data.idorder)" v-if="data.status != 'approved'"><i class="fab fa-paypal"></i></button>
-                                <button class="btn btn-info text-white m-1" type="button" title="Correo"  @click="openBotones('correo',data.email)" ><i class="fa fa-envelope"></i></button>
-                                <button class="btn btn-success m-1"  title="Whatsapp"  @click="openBotones('wpp',data.phonecode+data.phone)"><i class="fab fa-whatsapp"></i></button>
+                                <button class="btn btn-success m-1"  title="Whatsapp"  @click="openBotones('wpp','+1'+data.telefono)"><i class="fab fa-whatsapp"></i></button>
                                 <?php if($_SESSION['permitsModule']['u']){ ?>
                                 <button class="btn btn-success m-1" type="button" title="Editar"  @click="getDatos(data.idorder)" ><i class="fas fa-pencil-alt"></i></button>
                                 <?php } ?>

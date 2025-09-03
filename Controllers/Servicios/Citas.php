@@ -15,12 +15,12 @@
                     "duplicar" => ["mostrar"=>$_SESSION['permitsModule']['r'] ? true : false, "evento"=>"onClick","funcion"=>"mypop=window.open('".BASE_URL."/casos"."','','');mypop.focus();"],
                     "nuevo" => ["mostrar"=>$_SESSION['permitsModule']['w'] ? true : false, "evento"=>"@click","funcion"=>"showModal()"],
                 ];
+                $data['script_type'] = "module";
                 $data['page_tag'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}}";
                 $data['page_title'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['page_name'] = "{$_SESSION['permitsModule']['option']} | {$_SESSION['permitsModule']['module']}";
                 $data['panelapp'] = "/Servicios/functions_citas.js";
                 $this->views->getView($this,"citas",$data);
-                //dep($data);exit;
             }else{
                 header("location: ".base_url());
                 die();
@@ -59,9 +59,8 @@
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
                     if(empty($_POST['servicio']) || empty($_POST['cliente']) || empty($_POST['fecha']) || empty($_POST['hora']) || empty($_POST['valor_base'])){
-                        $arrResponse = array("status" => false, "msg" => 'Los campos con (*) son obligatorios.');
+                        $arrResponse = array("status" => false, "msg" => 'All the fields with (*) are required');
                     }else{ 
-                        
                         $intId = intval($_POST['id']);
                         $intServicio = intval($_POST['servicio']);
                         $intCliente = intval($_POST['cliente']);
@@ -81,25 +80,26 @@
                                 $request = $this->model->updateCaso($intId,$intServicio,$intCliente,$strHora,$strFecha,$intValorBase,$strEstado);
                             }
                         }
-
-                        if($request > 0 ){
+                        if(is_numeric($request) && $request > 0 ){
                             if($option == 1){ 
-                                $arrResponse = array('status' => true, 'msg' => 'Datos guardados');	
+                                $arrResponse = array('status' => true, 'msg' => 'Data saved');	
                                 $company = getCompanyInfo();
                                 $arrCaso = $this->model->selectCaso($request);
                                 $arrCaso['url'] =base_url()."/pago/pago/".setEncriptar($arrCaso['idorder']);
                                 $arrCaso['total'] = $arrCaso['value_target'];
                                 $arrEmailOrden = array(
-                                    'asunto' => "Continua con el pago!",
+                                    'asunto' => "Continue with the payment!",
                                     'email_usuario' => $arrCaso['cliente']['email'], 
                                     'email_remitente'=>$company['email'],
                                     'company'=>$company,
                                     'email_copia' => $company['secondary_email'],
                                     'order' => $arrCaso);
                                 try {sendEmail($arrEmailOrden,'email_order_caso');} catch (Exception $e) {}
-                            }else{ $arrResponse = array('status' => true, 'msg' => 'Datos actualizados'); }
+                            }else{ $arrResponse = array('status' => true, 'msg' => 'Data updated'); }
+                        }else if($request =="exists"){
+                            $arrResponse = array("status" => false, "msg" => 'Oops! The date and time are already taken.');
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                            $arrResponse = array("status" => false, "msg" => 'Something went wrong.');
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -113,9 +113,9 @@
                     $intId = intval($_POST['id']);
                     $request = $this->model->deleteCaso($intId);
                     if($request > 0 || $request == "ok"){
-                        $arrResponse = array("status"=>true,"msg"=>"Se ha eliminado correctamente.");
+                        $arrResponse = array("status"=>true,"msg"=>"It has been deleted.");
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"No es posible eliminar, intenta de nuevo.");
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
@@ -130,7 +130,7 @@
                     if(!empty($request)){
                         $arrResponse = array("status"=>true,"data"=>$request);
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"Error, intenta de nuevo"); 
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong"); 
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
@@ -164,7 +164,16 @@
         }
         public function getDatosIniciales(){
             if($_SESSION['permitsModule']['r']){
-                echo json_encode(['currency'=>getCompanyInfo()['currency']['code'],"status"=>STATUS],JSON_UNESCAPED_UNICODE);
+                $arrSchedule = $this->model->selectSchedule();
+                $arrNormal = array_filter($arrSchedule,function($e){return $e['type']==1;});
+                $arrSaturday = array_filter($arrSchedule,function($e){return $e['type']==2;});
+                $arrSunday = array_filter($arrSchedule,function($e){return $e['type']==3;});
+                echo json_encode([
+                'currency'=>getCompanyInfo()['currency']['code'],
+                "schedule_normal"=>$arrNormal,
+                "schedule_saturday"=>$arrSaturday,
+                "schedule_sunday"=>$arrSunday,
+                "status"=>STATUS],JSON_UNESCAPED_UNICODE);
             }
             die();
         }

@@ -19,6 +19,11 @@
         public function __construct(){
             parent::__construct();
         }
+        public function selectSchedule(){
+            $sql = "SELECT * FROM schedule";
+            $request = $this->select_all($sql);
+            return $request;
+        }
         public function selectServicios($intPorPagina,$intPaginaActual, $strBuscar){
             $this->intPorPagina = $intPorPagina;
             $this->intPaginaActual = $intPaginaActual;
@@ -152,8 +157,7 @@
             $totalPages = $totalPages == 0 ? 1 : $totalPages;
             $request = $this->select_all($sql);
             foreach ($request as &$data) {
-                $strHora = date("h:i A", strtotime($data['time'])); // "09:23 PM"
-                $data['date'] = $data['date'] . ' ' . $strHora;
+                $data['date'] = $data['date'] . ' ' . $data['time'];
             }
             $startPage = max(1, $this->intPaginaActual - floor(BUTTONS / 2));
             if ($startPage + BUTTONS - 1 > $totalPages) {
@@ -202,19 +206,25 @@
             $this->strFecha = $strFecha;
             $this->intValorBase = $intValorBase;
             $this->strEstado = $strEstado;
-            $sql = "INSERT INTO orderdata(service_id,personid,time,date,amount,status,statusorder,type_order)
-            VALUES(?,?,?,?,?,?,?,?)";
-            $arrData =[
-                $this->intServicio,
-                $this->intCliente, 
-                $this->strHora,
-                $this->strFecha, 
-                $this->intValorBase,
-                "pendent",
-                $this->strEstado,
-                2
-            ];
-            $request = $this->insert($sql,$arrData);
+            $sql = "SELECT * FROM orderdata WHERE type_order = 2 AND time = '$strHora' AND DATE(date) = '$strFecha'";
+            $request = $this->select_all($sql);
+            if(empty($request)){
+                $sql = "INSERT INTO orderdata(service_id,personid,time,date,amount,status,statusorder,type_order)
+                VALUES(?,?,?,?,?,?,?,?)";
+                $arrData =[
+                    $this->intServicio,
+                    $this->intCliente, 
+                    $this->strHora,
+                    $this->strFecha, 
+                    $this->intValorBase,
+                    "pendent",
+                    $this->strEstado,
+                    2
+                ];
+                $request = $this->insert($sql,$arrData);
+            }else{
+                $request ="exists";
+            }
             return $request;
         }
         public function updateCaso($intId,$intServicio,$intCliente,$strHora,$strFecha,$intValorBase,$strEstado){

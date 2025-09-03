@@ -16,7 +16,7 @@ const App = {
             intPorPagina:25,
             intTotalResultados:0,
             arrData:[],
-            arrDataModal:[],
+            arrInfo:[],
             arrBotones:[],
             strBuscar:"",
 
@@ -27,7 +27,7 @@ const App = {
             strNombre:"",
             strDescripcion:"",
             strDescripcionCorta:"",
-            strEstado:"confirmado",
+            strEstado:"confirmed",
             strEstadoPedido:"pendent",
             strTitulo:"",
             strTituloModal:"",
@@ -39,17 +39,14 @@ const App = {
             objServicio:{id:"",name:""},
             objCliente:{id:"",firstname:"",lastname:"",currency:"COP"},
             arrEstados:[],
+            arrNormal:[],
+            arrSaturday:[],
+            arrSunday:[],
+            arrSchedule:[],
         };
     },mounted(){
         this.getBuscar(1,"casos");
         this.getDatosIniciales();
-    },computed:{
-        valorBase:function() {
-            return this.formatMoney(this.intValorBase)
-        },
-        valorObjetivo:function() {
-            return this.formatMoney(this.intValorObjetivo)
-        },
     },methods:{
         formatMoney: function(valor){
             valor = new String(valor);
@@ -85,11 +82,14 @@ const App = {
             const objData = await response.json();
             this.strMoneda = objData.currency;
             this.arrEstados =objData.status;
+            this.arrNormal = objData.schedule_normal;
+            this.arrSaturday = objData.schedule_saturday;
+            this.arrSunday = objData.schedule_sunday;
         },
         showModal:function(tipo="crear"){
             if(tipo == "crear"){ 
                 this.strTituloModal = "New appointment";
-                this.strEstado= "confirmado";
+                this.strEstado= "confirmed";
                 this.intId = 0;
                 this.intValorBase=0;
                 this.intValorObjetivo=0;
@@ -106,11 +106,11 @@ const App = {
         },
         setDatos: async function(){
             if(this.objCliente.id == "" || this.objServicio.id == "" || this.strFecha == "" || this.strHora=="" || this.intValorBase==""){
-                Swal.fire("Error","Todos los campos marcados con (*) son obligatorios","error");
+                Swal.fire("Error","All the fields with (*) are required","error");
                 return false;
             }
             if(this.intValorBase <= 0){
-                Swal.fire("Error","El valor y su conversión no puede ser menor o igual a cero","error");
+                Swal.fire("Error","The value must be greater than zero.","error");
                 return false;
             }
             const formData = new FormData();
@@ -143,7 +143,7 @@ const App = {
                     this.strHora="";
                     this.objServicio={id:"",name:""};
                     this.objCliente={id:"",firstname:"",lastname:"",currency:"COP"};
-                    this.strEstado= "confirmado";
+                    this.strEstado= "confirmed";
                 }
                 this.modal.hide();
             }else{
@@ -161,7 +161,11 @@ const App = {
             formData.append("tipo_busqueda",strTipo);
             const response = await fetch(base_url+"/servicios/citas/getBuscar",{method:"POST",body:formData});
             const objData = await response.json();
-            this.arrData = objData.data;
+            if(strTipo=="servicios" || strTipo=="clientes"){
+                this.arrData = objData.data;
+            }else{
+                this.arrInfo = objData.data;
+            }
             this.intInicioPagina  = objData.start_page;
             this.intTotalBotones = objData.limit_page;
             this.intTotalPaginas = objData.total_pages;
@@ -249,6 +253,21 @@ const App = {
                 },1500);
             });
         }
+    },
+    computed:{
+        computedHorario:function(){
+            if (!this.strFecha) return [];
+            const day = new Date(this.strFecha + "T00:00:00").getDay();
+            if (day === 0) return this.arrSunday;
+            if (day === 6) return this.arrSaturday;
+            return this.arrNormal;
+        },
+        valorBase:function() {
+            return this.formatMoney(this.intValorBase)
+        },
+        valorObjetivo:function() {
+            return this.formatMoney(this.intValorObjetivo)
+        },
     }
 };
 const app = Vue.createApp(App);

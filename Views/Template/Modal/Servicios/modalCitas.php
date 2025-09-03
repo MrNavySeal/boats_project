@@ -35,7 +35,9 @@
                         <div class="col-md-4">
                             <div class="mb-3">
                                 <label for="" class="form-label">Set time <span class="text-danger">*</span></label>
-                                <input type="time" class="form-control" v-model="strHora">
+                                <select class="form-control" aria-label="Default select example" v-model="strHora" required>
+                                    <option v-for="(data,index) in computedHorario" :key="index" :value="data.value" >{{data.value}}</option>
+                                </select>
                             </div>
                         </div>
                         <div class="col-md-4">
