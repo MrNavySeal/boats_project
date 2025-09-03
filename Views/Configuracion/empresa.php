@@ -4,6 +4,10 @@
     $states="";
     $cities="";
     $currencies ="";
+    $schedule = $data['schedule'];
+    $arrNormal = array_filter($schedule,function($e){return $e['type']==1;});
+    $arrSaturday = array_filter($schedule,function($e){return $e['type']==2;});
+    $arrSunday = array_filter($schedule,function($e){return $e['type']==3;});
 
     for ($i=0; $i < count($data['currencies']) ; $i++) { 
         if($data['company']['currency']['id'] == $data['currencies'][$i]['id']){
@@ -245,15 +249,15 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="fw-bold">Monday to friday</div>
-                        <div id="scheduleMonday"></div>
+                        <div id="scheduleMonday"> <?php foreach ($arrNormal as $det) { echo "{$det['value']}<br>";  } ?> </div>
                     </div>
                     <div class="col-md-4">
                         <div class="fw-bold">Saturday</div>
-                        <div id="scheduleSaturday"></div>
+                        <div id="scheduleSaturday"><?php foreach ($arrSaturday as $det) { echo "{$det['value']}<br>";  } ?></div>
                     </div>
                     <div class="col-md-4">
                         <div class="fw-bold">Sunday</div>
-                        <div id="scheduleSunday"></div>
+                        <div id="scheduleSunday"><?php foreach ($arrSunday as $det) { echo "{$det['value']}<br>";  } ?></div>
                     </div>
                 </div>
             </div>

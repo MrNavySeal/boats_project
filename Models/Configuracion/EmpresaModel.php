@@ -27,6 +27,11 @@
             $request = $this->select_all($sql);
             return $request;
         }
+        public function selectSchedule(){
+            $sql = "SELECT * FROM schedule";
+            $request = $this->select_all($sql);
+            return $request;
+        }
         public function selectCompany(){
             $data = array();
             $sql ="SELECT 
@@ -41,8 +46,24 @@
             $location = $this->select($sql);
             $data['addressfull'] = $data['address'].", ".$location['country'].", ".$location['state'].", ".$location['city'];
             $data['currency'] = $this->select("SELECT c.id,c.code, c.symbol FROM currency c INNER JOIN company co WHERE c.id = co.currency");
-            //dep($data);exit;
             return $data;
+        }
+        public function insertSchedule($arrNormal,$arrSaturday,$arrSunday){
+            $this->delete("DELETE FROM schedule");
+            $request = 0;
+            foreach ($arrNormal as $det) {
+                $sql = "INSERT INTO schedule(type,value) VALUES(?,?)";
+                $request = $this->insert($sql,[1,$det]);
+            }
+            foreach ($arrSaturday as $det) {
+                $sql = "INSERT INTO schedule(type,value) VALUES(?,?)";
+                $request = $this->insert($sql,[2,$det]);
+            }
+            foreach ($arrSunday as $det) {
+                $sql = "INSERT INTO schedule(type,value) VALUES(?,?)";
+                $request = $this->insert($sql,[3,$det]);
+            }
+            return $request;
         }
         public function updateCompany($logo,$strName,$intCurrency,$strCompanyEmail,$strEmail,$strPassword,$intCountry,
         $intState,$intCity,$strPhone,$strAddress,$strKeywords,$strDescription,$phoneS,$strNit){

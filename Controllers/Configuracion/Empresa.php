@@ -23,6 +23,7 @@
                 $data['cities'] = $this->model->selectCities($data['company']['state']);
                 $data['social'] = $this->model->selectSocial();
                 $data['paypal'] = $this->model->selectCredentials();
+                $data['schedule'] = $this->model->selectSchedule();
                 $this->views->getView($this,"empresa",$data);
             }else{
                 header("location: ".base_url());
@@ -32,7 +33,20 @@
         public function setSchedule(){
             if($_SESSION['permitsModule']['u']){
                 if($_POST){
-                    dep($_POST);exit;
+                    $arrNormal = json_decode($_POST['normal'],true);
+                    $arrSaturday = json_decode($_POST['saturday'],true);
+                    $arrSunday = json_decode($_POST['sunday'],true);
+                    if(!empty($arrNormal) || !empty($arrSaturday) || !empty($arrSunday)){
+                        $request = $this->model->insertSchedule($arrNormal,$arrSaturday,$arrSunday);
+                        if($request > 0){
+                            $arrResponse = array("status"=>true,"msg"=>"Data saved");
+                        }else{
+                            $arrResponse = array("status"=>false,"msg"=>"Something went wrong");
+                        }
+                    }else{
+                        $arrResponse = array("status"=>true,"msg"=>"Data saved");
+                    }
+                    echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
                 }
             }
             die();
@@ -43,7 +57,7 @@
                     if(empty($_POST['txtName']) || empty($_POST['txtCompanyEmail']) || empty($_POST['txtEmail']) || empty($_POST['txtPhone']) 
                     || empty($_POST['txtAddress']) || empty($_POST['countryList']) || empty($_POST['stateList']) || empty($_POST['cityList']) || empty($_POST['txtPassword'])
                     || empty($_POST['txtPhoneS']) || empty($_POST['txtNit'])){
-                        $arrResponse = array("status" => false, "msg" => 'Error de datos');
+                        $arrResponse = array("status" => false, "msg" => 'Something went wrong');
                     }else{ 
                         $strName = strClean($_POST['txtName']);
                         $intCurrency = intval($_POST['currencyList']);
@@ -93,9 +107,9 @@
                             if($photo!=""){
                                 uploadImage($photo,$logo);
                             }
-                            $arrResponse = array("status" => true, "msg" => 'Datos guardados.');
+                            $arrResponse = array("status" => true, "msg" => 'Data saved.');
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                            $arrResponse = array("status" => false, "msg" => 'Something went wrong.');
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -118,9 +132,9 @@
 
                     $request = $this->model->updateSocial($facebook,$twitter,$youtube,$instagram,$linkedin,$whatsapp);
                     if($request > 0 ){
-                        $arrResponse = array("status" => true, "msg" => 'Datos guardados.');
+                        $arrResponse = array("status" => true, "msg" => 'Data saved.');
                     }else{
-                        $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                        $arrResponse = array("status" => false, "msg" => 'Something went wrong.');
                     }
                 }
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
@@ -134,7 +148,7 @@
             if($_SESSION['permitsModule']['u']){
                 if($_POST){
                     if(empty($_POST['txtClient']) || empty($_POST['txtSecret'])){
-                        $arrResponse = array("status" => false, "msg" => 'Error de datos.');
+                        $arrResponse = array("status" => false, "msg" => 'Something went wrong.');
                     }else{
 
                         $client = strClean($_POST['txtClient']);
@@ -142,9 +156,9 @@
     
                         $request = $this->model->updateCredentials($client,$secret);
                         if($request > 0 ){
-                            $arrResponse = array("status" => true, "msg" => 'Datos guardados.');
+                            $arrResponse = array("status" => true, "msg" => 'Data saved.');
                         }else{
-                            $arrResponse = array("status" => false, "msg" => 'No es posible guardar los datos.');
+                            $arrResponse = array("status" => false, "msg" => 'Something went wrong.');
                         }
                     }
                 }
