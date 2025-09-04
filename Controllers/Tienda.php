@@ -138,6 +138,35 @@
             $data['page_title'] ="Gallery | Shop";
             $this->views->getView($this,"galeria",$data); 
         }
+        public function setSchedule(){
+            if($_POST){
+                $errors = validator()->validate([
+                    "scheduleFirstname"=>"required;First name",
+                    "scheduleLastname"=>"required;Last name",
+                    "schedulePhone"=>"required|numeric;Phone",
+                    "scheduleEmail"=>"required|email;Email",
+                    "scheduleDate"=>"required;Date",
+                    "scheduleTime"=>"required;Time",
+                    "scheduleService"=>"required|numeric;Service",
+                ])->getErrors();
+                if(empty($errors)){
+                        /* $strName = ucwords(strClean($_POST['txtSignName']));
+                        $strEmail = strtolower(strClean($_POST['txtSignEmail']));
+                        $strPassword = hash("SHA256",$_POST['txtSignPassword']);
+                        $strPicture = "user.jpg";
+                        $rolid = 2;
+
+                        $request = $this->setCustomerT($strName,$strPicture,$strEmail,$strPassword,$rolid); */
+                }else{
+                    $arrResponse = array("status"=>false,"Please, check the fields.","errors"=>$errors);
+                }
+                echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
+            }
+            die();
+        }
+        public function getServices(){
+            echo json_encode($this->getServicesT(),JSON_UNESCAPED_UNICODE);
+        }
         public function getSchedule(){
             if($_POST){
                 $strDate = strClean($_POST['date']);
@@ -214,22 +243,22 @@
                             $this->login->sessionLogin($_SESSION['idUser']);
                             $company = getCompanyInfo();
                             sessionUser($_SESSION['idUser']);
-                            $arrResponse = array("status" => true,"msg"=>"Se ha registrado con éxito.");
+                            $arrResponse = array("status" => true,"msg"=>"You have been signed up.");
                             $data = array(
                                 'nombreUsuario'=> $strName, 
                                 'email_remitente' => $company['email'], 
                                 'email_usuario'=>$strEmail, 
                                 'company'=>$company,
-                                'asunto' =>"¡Registración exitosa! Bienvenido a ".$company['name']);
+                                'asunto' =>"Welcome to ".$company['name']);
                             sendEmail($data,"email_welcome");
                         }else if($request =="exist"){
-                            $arrResponse = array("status" => false,"msg"=>"El usuario ya existe, por favor inicie sesión.");
+                            $arrResponse = array("status" => false,"msg"=>"This user already exists, please log in.");
                         }else{
-                            $arrResponse = array("status" => false,"msg"=>"No se pueden almacenar los datos, inténtelo más tarde.");
+                            $arrResponse = array("status" => false,"msg"=>"Something went wrong.");
     
                         }
                     }else{
-                        $arrResponse = array("status" => false,"msg"=>"Código incorrecto, inténtelo de nuevo.");
+                        $arrResponse = array("status" => false,"msg"=>"Wrong code, try again.");
                     }
 
                 }
@@ -301,7 +330,7 @@
                             "percent"=>$percent > 0 ? "-".$percent."%" : ""
                         );
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"Error de datos");
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong");
                     }
                 }
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

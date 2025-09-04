@@ -51,8 +51,12 @@
                         </td>
                         <td data-title="Opciones">
                             <div class="d-flex justify-content-center">
-                                <button class="btn btn-success m-1" type="button" title="Editar" v-if="data.edit" @click="getDatos(data.id,'servicios')" ><i class="fas fa-pencil-alt"></i></button>
-                                <button class="btn btn-danger m-1" type="button" title="Eliminar" v-if="data.delete" @click="delDatos(data.id,'servicios')" ><i class="fas fa-trash-alt"></i></button>
+                                <?php if($_SESSION['permitsModule']['u']){ ?>
+                                <button class="btn btn-success m-1" type="button" title="Editar" @click="getDatos(data.id,'servicios')" ><i class="fas fa-pencil-alt"></i></button>
+                                <?php } ?>
+                                <?php if($_SESSION['permitsModule']['d']){ ?>
+                                <button class="btn btn-danger m-1" type="button" title="Eliminar"  @click="delDatos(data.id,'servicios')" ><i class="fas fa-trash-alt"></i></button>
+                                <?php } ?>
                             </div>
                         </td>
                     </tr>

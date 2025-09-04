@@ -74,9 +74,24 @@
         }
         public function getTime($type,$date){
             $this->con=new Mysql();
-            $sql = "SELECT * FROM schedule WHERE type = $type";
+            $sql = "SELECT value FROM schedule WHERE type = $type";
             $request = $this->con->select_all($sql);
-            return $request;
+            $arrTime = array_column($request,"value");
+            $timeMap = array_map(function($e){
+                return "'$e'";
+            },$arrTime);
+            $strTime = implode(",",$timeMap);
+            $timeScheduled = $this->con->select_all("SELECT time FROM orderdata 
+            WHERE type_order = 2 AND statusorder != 'finished' 
+            AND time in ($strTime) AND DATE(date) = '$date'");
+            $timeScheduled = array_column($timeScheduled,"time");
+            $arrData = [];
+            foreach ($request as $data) {
+                if(!in_array($data['value'],$timeScheduled)){
+                    array_push($arrData,$data);
+                }
+            }
+            return $arrData;
         }
     }
     

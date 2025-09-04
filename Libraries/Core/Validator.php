@@ -30,7 +30,7 @@
                         [$ruleName,$params] = explode(":",$ruleSet);
                         $params = explode(";",$params)[0];
                     }else{
-                        $ruleName = $ruleSet;
+                        $ruleName = explode(";",$ruleSet)[0];
                     }
                     $method = "validate".ucFirst(strtolower($ruleName));
                     if(method_exists($this,$method)){
@@ -102,27 +102,36 @@
                 return count($content) <= intval($params);
             }
         }
+        private function validateEmail($content){
+            if(filter_var($content, FILTER_VALIDATE_EMAIL)){
+                $flag = true;
+            }else{
+                $flag = false;
+            }
+            return $flag;
+        }
         private function getMessage($field,$rule,$params,$content){
             $messages = [
-                "required" => "El campo $field es obligatorio",
-                "string"=>"El campo $field debe ser texto",
-                "numeric"=>"El campo $field debe ser numérico",
-                "array"=>"El campo debe ser una lista",
-                "integer"=>"El campo debe ser un número entero",
-                "double"=>"El campo debe ser un número con decimales",
-                "greater"=>"El campo $field debe ser mayor que $params",
-                "less"=>"El campo $field debe ser menor que $params",
-                "equal"=>"El campo $field debe ser igual a $params",
-                "string_min"=>"El campo $field debe tener al menos $params carácteres",
-                "string_max"=>"El campo $field debe tener máximo $params carácteres",
-                "array_min"=>"El campo $field debe tener al menos $params elementos",
-                "array_max"=>"El campo $field debe tener máximo $params elementos",
-                "numeric_min"=>"El campo $field debe ser mayor o igual a $params",
-                "numeric_max"=>"El campo $field debe ser menor o igual a $params",
-                "integer_min"=>"El campo $field debe ser mayor o igual a $params",
-                "integer_max"=>"El campo $field debe ser menor o igual a $params",
-                "double_min"=>"El campo $field debe ser mayor o igual a $params",
-                "double_max"=>"El campo $field debe ser menor o igual a $params",
+                "required" => "The field $field is required",
+                "string"=>"The field $field must be a string",
+                "email"=>"The field $field must be an email",
+                "numeric"=>"The field $field must be numeric",
+                "array"=>"The field must be a list",
+                "integer"=>"The field must be an integer",
+                "double"=>"The field must be decimal",
+                "greater"=>"The field $field must be greater than $params",
+                "less"=>"The field $field must be less than $params",
+                "equal"=>"The field $field must be equal $params",
+                "string_min"=>"The field $field must have at least $params characters",
+                "string_max"=>"The field $field must have max $params characters",
+                "array_min"=>"The field $field must have at least $params elements",
+                "array_max"=>"The field $field must have max $params elemets",
+                "numeric_min"=>"The field $field must be greater or equal to $params",
+                "numeric_max"=>"The field $field must be less or equal to $params",
+                "integer_min"=>"The field $field must be greater or equal to $params",
+                "integer_max"=>"The field $field must be less or equal to $params",
+                "double_min"=>"The field $field must be greater or equal to $params",
+                "double_max"=>"The field $field must be less or equal to $params",
             ];
             $type = gettype($content);
             $rule = in_array($rule,["min","max"]) ? $type."_".$rule : $rule; 

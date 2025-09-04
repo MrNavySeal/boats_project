@@ -146,17 +146,21 @@ async function openSchedule(){
     document.querySelector("#scheduleDate").value = todayStr;
     document.getElementById("scheduleDate").setAttribute("min", todayStr);
 
-    const scheduleFirstname = document.querySelector("#scheduleFirstname").value;
-    const scheduleLastname = document.querySelector("#scheduleLastname").value;
-    const schedulePhone = document.querySelector("#schedulePhone").value;
-    const scheduleEmail = document.querySelector("#scheduleEmail").value;
     const scheduleDate = document.querySelector("#scheduleDate");
-    const scheduleTime = document.querySelector("#scheduleTime").value;
-    const scheduleService = document.querySelector("#scheduleService").value;
+
+    const response = await fetch(base_url+"/Tienda/getServices");
+    const objData = await response.json();
+    const service = document.querySelector("#scheduleService");
+    service.innerHTML ="";
+    let html='<option value="">Select</option>';
+    objData.forEach(e => { html+=`<option value="${e.id}">${e.name}</option>`; });
+    service.innerHTML=html;
+    
     getSchedule();
     scheduleDate.addEventListener("change",function(){
         getSchedule();
     });
+    
     async function getSchedule(){
         let date = new Date(scheduleDate.value+ "T00:00:00");
         let day = date.getDay();
@@ -170,13 +174,44 @@ async function openSchedule(){
         const objData = await response.json();
         const schedule = document.querySelector("#scheduleTime");
         schedule.innerHTML ="";
-        let html='<option value="Select">Select</option>';
+        let html='<option value="">Select</option>';
         objData.forEach(e => { html+=`<option value="${e.value}">${e.value}</option>`; });
         schedule.innerHTML=html;
     }
-    
+    function showErrors(field,errors){
+        field = document.querySelector("."+field);
+        field.innerHTML="";
+        let html="";
+        if(errors != undefined){
+            errors.forEach(e => {
+                html+=`<li>${e}</li>`;
+            });
+        }
+        field.innerHTML = html;
+    }
     let modal = new bootstrap.Modal(document.querySelector("#modalSchedule"));
     modal.show();
+
+    const formSchedule = document.querySelector("#formSchedule");
+    const btnSchedule = document.querySelector("#btnSchedule");
+    formSchedule.addEventListener("submit",async function(e){
+        e.preventDefault();
+        const formData = new FormData(formSchedule);
+        const response = await fetch(base_url+"/Tienda/setSchedule",{method:"POST",body:formData});
+        const objData = await response.json();
+        if(objData.status){
+            Swal.fire("Scheduled!", objData.msg, "success");
+        }else{
+            const errores = objData.errors;
+            showErrors("scheduleFirstname",errores.scheduleFirstname);
+            showErrors("scheduleLastname",errores.scheduleLastname);
+            showErrors("schedulePhone",errores.schedulePhone);
+            showErrors("scheduleEmail",errores.scheduleEmail);
+            showErrors("scheduleDate",errores.scheduleDate);
+            showErrors("scheduleTime",errores.scheduleTime);
+            showErrors("scheduleService",errores.scheduleService);
+        }
+    })
 }
 async function openGallery(id){
     const gallery = document.querySelector(".gallery-container");
