@@ -72,6 +72,12 @@
             $request = $this->con->select_all($sql);
             return $request;
         }
+        public function getTime($type,$date){
+            $this->con=new Mysql();
+            $sql = "SELECT * FROM schedule WHERE type = $type";
+            $request = $this->con->select_all($sql);
+            return $request;
+        }
     }
     
 ?>

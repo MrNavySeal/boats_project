@@ -79,7 +79,7 @@ navMask.addEventListener("click",function(){
 
 
 document.addEventListener("DOMContentLoaded",function(){
-    //loading.classList.add("d-none");
+    loading.classList.add("d-none");
 });
 
 btnCart.addEventListener("click",function(){
@@ -136,6 +136,48 @@ closeGallery.addEventListener("click",function(){
 });*/
 
 /***************************Essentials Functions****************************** */
+async function openSchedule(){
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, "0");
+    const dd = String(today.getDate()).padStart(2, "0");
+    const todayStr = `${yyyy}-${mm}-${dd}`;
+    
+    document.querySelector("#scheduleDate").value = todayStr;
+    document.getElementById("scheduleDate").setAttribute("min", todayStr);
+
+    const scheduleFirstname = document.querySelector("#scheduleFirstname").value;
+    const scheduleLastname = document.querySelector("#scheduleLastname").value;
+    const schedulePhone = document.querySelector("#schedulePhone").value;
+    const scheduleEmail = document.querySelector("#scheduleEmail").value;
+    const scheduleDate = document.querySelector("#scheduleDate");
+    const scheduleTime = document.querySelector("#scheduleTime").value;
+    const scheduleService = document.querySelector("#scheduleService").value;
+    getSchedule();
+    scheduleDate.addEventListener("change",function(){
+        getSchedule();
+    });
+    async function getSchedule(){
+        let date = new Date(scheduleDate.value+ "T00:00:00");
+        let day = date.getDay();
+        let type = 1;
+        if(day == 0) type = 3;
+        if(day == 6) type = 2;
+        let formData = new FormData();
+        formData.append("date",scheduleDate.value);
+        formData.append("type",type)
+        const response = await fetch(base_url+"/Tienda/getSchedule",{method:"POST",body:formData});
+        const objData = await response.json();
+        const schedule = document.querySelector("#scheduleTime");
+        schedule.innerHTML ="";
+        let html='<option value="Select">Select</option>';
+        objData.forEach(e => { html+=`<option value="${e.value}">${e.value}</option>`; });
+        schedule.innerHTML=html;
+    }
+    
+    let modal = new bootstrap.Modal(document.querySelector("#modalSchedule"));
+    modal.show();
+}
 async function openGallery(id){
     const gallery = document.querySelector(".gallery-container");
     await getGallery(id);
@@ -165,6 +207,7 @@ async function getGallery(id="",type=""){
         img.setAttribute("src",objData.data);
     }
 }
+
 function openLoginModal(){
     let modalItem = document.querySelector("#modalLogin");
     let modal= `

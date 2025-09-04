@@ -69,6 +69,7 @@
        </div>
     </div>
     <div id="app">
+    
     <div class="toast-container position-fixed bottom-0 end-0 p-3">
         <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
@@ -81,8 +82,8 @@
             </div>
         </div>
     </div>
-    <!-- <div id="divLoading"> <div></div> <span>Cargando...</span> </div> -->
-    <?php getComponent("headerNav");?>
+    <div id="divLoading"> <div></div> <span>Loading...</span> </div>
+    <?php getModal("modalSchedule");getComponent("headerNav");?>
     <div id="modalLogin"></div>
     
     

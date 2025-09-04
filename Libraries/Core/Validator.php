@@ -22,10 +22,13 @@
             foreach ($fields as $field => $rule) {
                 $content = $arrFields[$field];
                 $arrRules = explode("|",$rule);
+                $arrNickName = explode(";",implode(",",$arrRules));
+                $strNickName =!empty($arrNickName) ? $arrNickName[1] : "";
                 foreach ($arrRules as $ruleSet) {
                     $params = null;
                     if(strpos($ruleSet,":") !== false){
                         [$ruleName,$params] = explode(":",$ruleSet);
+                        $params = explode(";",$params)[0];
                     }else{
                         $ruleName = $ruleSet;
                     }
@@ -33,7 +36,7 @@
                     if(method_exists($this,$method)){
                         $result = $this->$method($content,$params);
                         if(!$result){
-                            $this->errors[$field][] = $this->getMessage($ruleName,$params,$content);
+                            $this->errors[$field][] = $this->getMessage($strNickName != "" ? $strNickName : $field,$ruleName,$params,$content);
                         }
                     }
                 }
@@ -64,6 +67,21 @@
         private function validateRequired($content){
             return !empty($content);
         }
+        private function validateGreater($content,$params){
+            $content = doubleval($content);
+            $params = doubleval($params);
+            return $content > $params;
+        }
+        private function validateLess($content,$params){
+            $content = doubleval($content);
+            $params = doubleval($params);
+            return $content < $params;
+        }
+        private function validateEqual($content,$params){
+            $content = doubleval($content);
+            $params = doubleval($params);
+            return $content == $params;
+        }
         private function validateMin($content,$params){
             $type = gettype($content);
             if($type == "string"){
@@ -84,24 +102,27 @@
                 return count($content) <= intval($params);
             }
         }
-        private function getMessage($rule,$params,$content){
+        private function getMessage($field,$rule,$params,$content){
             $messages = [
-                "required" => "The field is required",
-                "string"=>"The field must be text",
-                "numeric"=>"The field must be numeric",
-                "array"=>"The field must be a list",
-                "integer"=>"The field must be a number",
-                "double"=>"The field must be a number",
-                "string_min"=>"The field must have at least $params characters",
-                "string_max"=>"The field must have max $params characters",
-                "array_min"=>"The field must have at least $params elements",
-                "array_max"=>"El campo debe tener máximo $params elements",
-                "numeric_min"=>"The field must be greater than or equal to $params",
-                "numeric_max"=>"The field must be less than or equal to $params",
-                "integer_min"=>"The field must be greater than or equal to $params",
-                "integer_max"=>"The field must be less than or equal to $params",
-                "double_min"=>"The field must be greater than or equal to $params",
-                "double_max"=>"The field must be less than or equal to $params",
+                "required" => "El campo $field es obligatorio",
+                "string"=>"El campo $field debe ser texto",
+                "numeric"=>"El campo $field debe ser numérico",
+                "array"=>"El campo debe ser una lista",
+                "integer"=>"El campo debe ser un número entero",
+                "double"=>"El campo debe ser un número con decimales",
+                "greater"=>"El campo $field debe ser mayor que $params",
+                "less"=>"El campo $field debe ser menor que $params",
+                "equal"=>"El campo $field debe ser igual a $params",
+                "string_min"=>"El campo $field debe tener al menos $params carácteres",
+                "string_max"=>"El campo $field debe tener máximo $params carácteres",
+                "array_min"=>"El campo $field debe tener al menos $params elementos",
+                "array_max"=>"El campo $field debe tener máximo $params elementos",
+                "numeric_min"=>"El campo $field debe ser mayor o igual a $params",
+                "numeric_max"=>"El campo $field debe ser menor o igual a $params",
+                "integer_min"=>"El campo $field debe ser mayor o igual a $params",
+                "integer_max"=>"El campo $field debe ser menor o igual a $params",
+                "double_min"=>"El campo $field debe ser mayor o igual a $params",
+                "double_max"=>"El campo $field debe ser menor o igual a $params",
             ];
             $type = gettype($content);
             $rule = in_array($rule,["min","max"]) ? $type."_".$rule : $rule; 

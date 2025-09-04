@@ -138,6 +138,15 @@
             $data['page_title'] ="Gallery | Shop";
             $this->views->getView($this,"galeria",$data); 
         }
+        public function getSchedule(){
+            if($_POST){
+                $strDate = strClean($_POST['date']);
+                $intType = intval($_POST['type']);
+                $request = $this->getTime($intType,$strDate);
+                echo json_encode($request,JSON_UNESCAPED_UNICODE);
+            }
+            die();
+        }
         public function getImage(){
             if($_POST){
                 $id = intval($_POST['id']);
