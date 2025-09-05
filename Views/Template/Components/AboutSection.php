@@ -10,7 +10,10 @@
                 <h2 class="section--title fs-1 text-start"><?=$data['subtitle']?></h2>
             </div>
             <p><?=$data['short_description']?></p>
-            <a href="<?=base_url()?>/contact/" class="btn btn-bg-1 w-100">Contact us</a>
+            <div class="d-flex justify-content-center gap-2">
+                <button type="button" class="btn btn-bg-2" onclick="openSchedule()">Schedule online</button>
+                <a href="<?=base_url()?>/contact/" class="btn btn-bg-1">Contact us</a>
+            </div>
         </div>
     </div>
 </section>

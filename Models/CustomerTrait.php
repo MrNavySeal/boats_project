@@ -25,7 +25,7 @@
         private $strCedula;
         
 
-        public function setCustomerT($strName,$strPicture,$strEmail,$strPassword,$rolid,$strLastName=""){
+        public function setCustomerT($strName,$strPicture,$strEmail,$strPassword,$rolid){
             $this->con = new Mysql();
             $this->strNombre = $strName;
             $this->strPicture = $strPicture; 
@@ -37,7 +37,7 @@
             $sql = "SELECT * FROM person WHERE email = '$this->strEmail'";
             $request = $this->con->select_all($sql);
             if(empty($request)){
-                $query = "INSERT INTO person(firstname,image,email,countryid,stateid,cityid,password,roleid,lastname) VALUE(?,?,?,?,?,?,?,?)";
+                $query = "INSERT INTO person(firstname,image,email,countryid,stateid,cityid,password,roleid) VALUE(?,?,?,?,?,?,?,?)";
                 $arrData = array($this->strNombre,
                                 $this->strPicture,
                                 $this->strEmail,
@@ -53,6 +53,35 @@
                 $return ="exist";
             }
             return $return;
+        }
+        public function setServiceT($intServicio,$intCliente,$strHora,$strFecha){
+            $this->con = new Mysql();
+            $sql = "SELECT * FROM orderdata WHERE type_order = 2 AND time = '$strHora' AND DATE(date) = '$strFecha'";
+            $request = $this->con->select_all($sql);
+            if(empty($request)){
+                $sql = "INSERT INTO orderdata(service_id,personid,time,date,amount,status,statusorder,type_order)
+                VALUES(?,?,?,?,?,?,?,?)";
+                $arrData =[
+                    $intServicio,
+                    $intCliente, 
+                    $strHora,
+                    $strFecha, 
+                    0,
+                    "pendent",
+                    "confirmed",
+                    2
+                ];
+                $request = $this->con->insert($sql,$arrData);
+            }else{
+                $request ="exists";
+            }
+            return $request;
+        }
+        public function selectCustomer(string $email){
+            $this->con = new Mysql();
+            $sql = "SELECT *, idperson as id FROM person WHERE email = '$email'";
+            $request = $this->con->select($sql);
+            return $request;
         }
         public function selectCountries(){
             $this->con = new Mysql();

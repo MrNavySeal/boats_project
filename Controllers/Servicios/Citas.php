@@ -140,12 +140,16 @@
         public function getBuscar(){
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
+                    $idUser = "";
+                    if($_SESSION['userData']['roleid'] == 2){
+                        $idUser = $_SESSION['idUser'];
+                    }
                     $intPorPagina = intval($_POST['paginas']);
                     $intPaginaActual = intval($_POST['pagina']);
                     $strBuscar = clear_cadena(strClean($_POST['buscar']));
                     $strTipoBusqueda = clear_cadena(strClean($_POST['tipo_busqueda']));
                     if($strTipoBusqueda == "casos"){
-                        $request = $this->model->selectCasos($intPorPagina,$intPaginaActual, $strBuscar);
+                        $request = $this->model->selectCasos($intPorPagina,$intPaginaActual, $strBuscar,$idUser);
                     }else if($strTipoBusqueda == "servicios"){
                         $request = $this->model->selectServicios($intPorPagina,$intPaginaActual, $strBuscar);
                     }else if($strTipoBusqueda == "clientes"){

@@ -62,6 +62,7 @@
         <?php getComponent("serviceSection",['titulo'=>"Our services","subtitulo"=>"Full suite of underwater cleaning services","datos"=>$servicios])?>
         <?php getComponent("contactForm",['titulo'=>$contact['title'],"subtitulo"=>$contact['subtitle'],"datos"=>$servicios])?>
         <?php getComponent("ProductsCarouselSection",['titulo'=>"Our products","subtitulo"=>"Most recent","datos"=>$productos]);?>
+        <?php getComponent("scheduleOnline"); ?>
     </main>
 <?php
     footerPage($data);

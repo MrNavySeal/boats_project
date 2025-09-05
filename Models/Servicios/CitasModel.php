@@ -109,7 +109,7 @@
             );
             return $arrData;
         }
-        public function selectCasos($intPorPagina,$intPaginaActual, $strBuscar){
+        public function selectCasos($intPorPagina,$intPaginaActual, $strBuscar,$idUser){
             $this->intPorPagina = $intPorPagina;
             $this->intPaginaActual = $intPaginaActual;
             $this->strBuscar = $strBuscar;
@@ -118,6 +118,8 @@
             if($this->intPorPagina != 0){
                 $limit = " LIMIT $this->intPaginaInicio,$this->intPorPagina";
             }
+            $whre="";
+            if($idUser!="")$whre=" AND personid=$idUser";
             $sql = "SELECT ord.*,
             DATE_FORMAT(ord.date,'%d/%m/%Y') as date,
             co.name as pais,
@@ -138,7 +140,7 @@
             LEFT JOIN cities ci ON p.cityid = ci.id
             WHERE (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
-            OR ci.name like '$this->strBuscar%' OR serv.name like '$this->strBuscar%') AND type_order = 2
+            OR ci.name like '$this->strBuscar%' OR serv.name like '$this->strBuscar%') AND type_order = 2 $whre  
             ORDER BY ord.idorder DESC $limit";  
 
             $sqlTotal = "SELECT count(*) as total FROM orderdata ord
@@ -149,7 +151,7 @@
             LEFT JOIN cities ci ON p.cityid = ci.id
             WHERE (CONCAT(p.firstname,p.lastname) like '$this->strBuscar%' OR p.phone like '$this->strBuscar%' 
             OR p.address like '$this->strBuscar%' OR co.name like '$this->strBuscar%' OR st.name like '$this->strBuscar%' 
-            OR ci.name like '$this->strBuscar%' OR serv.name like '$this->strBuscar%')  AND type_order = 2
+            OR ci.name like '$this->strBuscar%' OR serv.name like '$this->strBuscar%')  AND type_order = 2 $whre
             ORDER BY ord.idorder";
 
             $totalRecords = $this->select($sqlTotal)['total'];

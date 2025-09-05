@@ -40,7 +40,7 @@
                         <th>Total</th>
                         <th>Payment status</th>
                         <th>Appointment status</th>
-                        <th>Opciones</th>
+                        <th>Options</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -65,9 +65,9 @@
                         </td>
                         <td data-title="Options">
                             <div class="d-flex justify-content-center">
-                                <button class="btn btn-primary text-white m-1" :id="'btnPopover'+data.idorder" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Copiado!" type="button" title="Paypal"  @click="copiar(data,'btnPopover'+data.idorder)" v-if="data.status != 'approved'"><i class="fab fa-paypal"></i></button>
-                                <button class="btn btn-success m-1"  title="Whatsapp"  @click="openBotones('wpp','+1'+data.telefono)"><i class="fab fa-whatsapp"></i></button>
+                                <button class="btn btn-primary text-white m-1" :id="'btnPopover'+data.idorder" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="Copied!" type="button" title="Paypal"  @click="copiar(data,'btnPopover'+data.idorder)" v-if="data.status != 'approved' && data.amount > 0"><i class="fab fa-paypal"></i></button>
                                 <?php if($_SESSION['permitsModule']['u']){ ?>
+                                <button class="btn btn-success m-1"  title="Whatsapp"  @click="openBotones('wpp','+1'+data.telefono)"><i class="fab fa-whatsapp"></i></button>
                                 <button class="btn btn-success m-1" type="button" title="Editar"  @click="getDatos(data.idorder)" ><i class="fas fa-pencil-alt"></i></button>
                                 <?php } ?>
                                 <?php if($_SESSION['permitsModule']['d']){ ?>

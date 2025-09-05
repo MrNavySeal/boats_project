@@ -141,8 +141,7 @@
         public function setSchedule(){
             if($_POST){
                 $errors = validator()->validate([
-                    "scheduleFirstname"=>"required;First name",
-                    "scheduleLastname"=>"required;Last name",
+                    "scheduleFirstname"=>"required;Name",
                     "schedulePhone"=>"required|numeric;Phone",
                     "scheduleEmail"=>"required|email;Email",
                     "scheduleDate"=>"required;Date",
@@ -150,15 +149,56 @@
                     "scheduleService"=>"required|numeric;Service",
                 ])->getErrors();
                 if(empty($errors)){
-                        /* $strName = ucwords(strClean($_POST['txtSignName']));
-                        $strEmail = strtolower(strClean($_POST['txtSignEmail']));
-                        $strPassword = hash("SHA256",$_POST['txtSignPassword']);
+                        $intPhone = strClean($_POST['schedulePhone']);
+                        $strDate = strClean($_POST['scheduleDate']);
+                        $strTime = strClean($_POST['scheduleTime']);
+                        $intService = intval($_POST['scheduleService']);
+                        $strName = ucwords(strClean($_POST['scheduleFirstname']));
+                        $strEmail = strtolower(strClean($_POST['scheduleEmail']));
+                        $strPassword =  hash("SHA256",bin2hex(random_bytes(4)));
                         $strPicture = "user.jpg";
                         $rolid = 2;
-
-                        $request = $this->setCustomerT($strName,$strPicture,$strEmail,$strPassword,$rolid); */
+                        $request = $this->setCustomerT($strName,$strPicture,$strEmail,$strPassword,$rolid);
+                        if(is_numeric($request) && $request > 0){
+                            $_SESSION['idUser'] = $request;
+                            $_SESSION['login'] = true;
+                            $this->login->sessionLogin($_SESSION['idUser']);
+                            $company = getCompanyInfo();
+                            sessionUser($_SESSION['idUser']);
+                            $data = array(
+                                'nombreUsuario'=> $strName, 
+                                'email_remitente' => $company['email'], 
+                                'email_usuario'=>$strEmail, 
+                                'company'=>$company,
+                                'asunto' =>"Welcome to ".$company['name']);
+                            sendEmail($data,"email_welcome");
+                            $request = $this->setServiceT($intService,$request,$strTime,$strDate);
+                            if(is_numeric($request) && $request > 0 ){
+                                $arrResponse = array('status' => true, 'msg' => 'You have scheduled with us! We will contact you.');	
+                            }else{
+                                $arrResponse = array("status"=>false,"msg"=>"Something went wrong");
+                            }
+                        }else if($request =="exist"){
+                            $arrCustomer = $this->selectCustomer($strEmail);
+                            if(!empty($arrCustomer)){
+                                $_SESSION['idUser'] = $arrCustomer['id'];
+                                $_SESSION['login'] = true;
+                                $this->login->sessionLogin($_SESSION['idUser']);
+                                sessionUser($_SESSION['idUser']);
+                                $request = $this->setServiceT($intService,$arrCustomer['id'],$strTime,$strDate);
+                                if(is_numeric($request) && $request > 0 ){
+                                    $arrResponse = array('status' => true, 'msg' => 'You have scheduled with us! We will contact you.');	
+                                }else{
+                                    $arrResponse = array("status"=>false,"msg"=>"Something went wrong");
+                                }
+                            }else{
+                                $arrResponse = array("status"=>false,"msg"=>"Something went wrong");
+                            }
+                        }else{
+                            $arrResponse = array("status"=>false,"msg"=>"Something went wrong");
+                        }
                 }else{
-                    $arrResponse = array("status"=>false,"Please, check the fields.","errors"=>$errors);
+                    $arrResponse = array("status"=>false,"msg"=>"Please, check the fields.","errors"=>$errors);
                 }
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             }

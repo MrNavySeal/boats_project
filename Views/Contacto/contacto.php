@@ -19,6 +19,7 @@
     <div class="container mt-4">
         <?php getComponent("contactForm",['titulo'=>$data['page']['title'],"subtitulo"=>$data['page']['subtitle'],"datos"=>$servicios])?>
     </div>
+    <?php getComponent("scheduleOnline"); ?>
 <?php
     footerPage($data);
 ?>

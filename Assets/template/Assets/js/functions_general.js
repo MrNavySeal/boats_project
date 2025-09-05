@@ -197,19 +197,23 @@ async function openSchedule(){
     formSchedule.addEventListener("submit",async function(e){
         e.preventDefault();
         const formData = new FormData(formSchedule);
+        btnSchedule.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;    
+        btnSchedule.setAttribute("disabled","");
         const response = await fetch(base_url+"/Tienda/setSchedule",{method:"POST",body:formData});
         const objData = await response.json();
+        btnSchedule.innerHTML="Schedule";    
+        btnSchedule.removeAttribute("disabled");
         if(objData.status){
             Swal.fire("Scheduled!", objData.msg, "success");
         }else{
             const errores = objData.errors;
             showErrors("scheduleFirstname",errores.scheduleFirstname);
-            showErrors("scheduleLastname",errores.scheduleLastname);
             showErrors("schedulePhone",errores.schedulePhone);
             showErrors("scheduleEmail",errores.scheduleEmail);
             showErrors("scheduleDate",errores.scheduleDate);
             showErrors("scheduleTime",errores.scheduleTime);
             showErrors("scheduleService",errores.scheduleService);
+            Swal.fire("Error", objData.msg, "error");
         }
     })
 }

@@ -10,31 +10,24 @@
                     <tbody id="listItem">
                         <form id="formSchedule">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label for="scheduleFirstname" class="form-label">Firstname <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="scheduleFirstname" name="scheduleFirstname" >
+                                        <label for="scheduleFirstname" class="form-label">Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" id="scheduleFirstname" name="scheduleFirstname" value="<?=$_SESSION['userData']['firstname']?>">
                                         <ul class="scheduleFirstname text-danger"></ul>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
-                                        <label for="scheduleLastname" class="form-label">Lastname</label>
-                                        <input type="text" class="form-control" id="scheduleLastname" name="scheduleLastname" >
-                                        <ul class="scheduleLastname text-danger"></ul>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="mb-3">
                                         <label for="schedulePhone" class="form-label">Phone <span class="text-danger">*</span></label>
-                                        <input type="number" class="form-control" id="schedulePhone" name="schedulePhone" >
+                                        <input type="number" class="form-control" id="schedulePhone" name="schedulePhone" value="<?=$_SESSION['userData']['phone']?>">
                                         <ul class="schedulePhone text-danger"></ul>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label for="scheduleEmail" class="form-label">Email <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="scheduleEmail" name="scheduleEmail" >
+                                        <input type="email" class="form-control" id="scheduleEmail" name="scheduleEmail" value="<?=$_SESSION['userData']['email']?>">
                                         <ul class="scheduleEmail text-danger"></ul>
                                     </div>
                                 </div>
