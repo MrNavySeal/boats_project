@@ -48,9 +48,9 @@
                 <td data-title="Reference">{{data.reference}}</td>
                 <td data-title="Category">{{data.category}}</td>
                 <td data-title="Subcategory">{{data.subcategory}}</td>
-                <td data-title="Purchase price" class="text-center">{{data.product_type == 1 ? "Desde" : ""}} {{data.price_purchase}}</td>
-                <td data-title="Sale price" class="text-end">{{data.product_type == 1 ? "Desde" : ""}} {{data.price_sell}}</td>
-                <td data-title="Offer price" class="text-end">{{data.product_type == 1 ? "Desde" : ""}} {{data.price_discount}}</td>
+                <td data-title="Purchase price" class="text-center">{{data.product_type == 1 ? "From" : ""}} {{data.price_purchase}}</td>
+                <td data-title="Sale price" class="text-end">{{data.product_type == 1 ? "From" : ""}} {{data.price_sell}}</td>
+                <td data-title="Offer price" class="text-end">{{data.product_type == 1 ? "From" : ""}} {{data.price_discount}}</td>
                 <td data-title="Stock" class="text-center">{{data.is_stock ? data.stock : "N/A"}}</td>
                 <td data-title="Date" class="text-center">{{data.date}}</td>
                 <td data-title="Status" class="text-center">

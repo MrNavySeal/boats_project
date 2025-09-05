@@ -8,7 +8,10 @@
     $rate="";
     $stock ="";
     $showBtns = !$product['is_stock'] || ($product['is_stock'] && $product['stock'] > 0) ? "" : "d-none";
-    $resultDiscount = floor((1-($product['discount']/$product['price']))*100);
+    $resultDiscount = "";
+    if($producto['discount'] > 0){
+        $resultDiscount = floor((1-($producto['discount']/$producto['price']))*100);
+    }
     $discount = $product['discount'] > 0 ? '<span class="discount" id="productDiscount">-'.$product['discount'].'%</span>' : "";
     $reference = $product['reference']!="" ? "REF: ".$product['reference'] : "";
 

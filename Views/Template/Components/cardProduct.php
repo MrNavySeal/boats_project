@@ -7,7 +7,7 @@
         $resultDiscount = floor((1-($producto['discount']/$producto['price']))*100);
     }
     $reference = $producto['reference']!="" ? "REF: ".$producto['reference'] : "";
-    $variant = $producto['product_type'] ? "Desde " : "";
+    $variant = $producto['product_type'] ? "From " : "";
     $price ='</span><span class="current">'.$variant.formatNum($producto['price']).'</span>';
     if($producto['is_stock']){
         if($producto['discount'] > 0 && $producto['stock'] > 0){
