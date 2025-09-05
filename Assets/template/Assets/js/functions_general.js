@@ -205,6 +205,7 @@ async function openSchedule(){
         btnSchedule.removeAttribute("disabled");
         if(objData.status){
             Swal.fire("Scheduled!", objData.msg, "success");
+            modal.hide();
         }else{
             const errores = objData.errors;
             showErrors("scheduleFirstname",errores.scheduleFirstname);
