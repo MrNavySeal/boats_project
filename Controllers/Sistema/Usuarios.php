@@ -268,9 +268,9 @@
         }
         /*************************Profile methods*******************************/
         public function perfil(){
-            $data['page_tag'] = "Perfil";
-            $data['page_title'] = "Perfil";
-            $data['page_name'] = "perfil";
+            $data['page_tag'] = "Profile";
+            $data['page_title'] = "Profile";
+            $data['page_name'] = "Profile";
             $data['panelapp'] = "/Sistema/functions_perfil.js";
             $this->views->getView($this,"perfil",$data);
         }

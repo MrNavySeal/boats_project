@@ -2,13 +2,13 @@
     <div class="modal-dialog modal-dialog-centered modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">Detalle de pedido</h5>
+                <h5 class="modal-title" id="staticBackdropLabel">Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <ul class="nav nav-pills mb-3" id="product-tab">
                     <li class="nav-item">
-                        <button class="nav-link active" id="navDetail-tab" data-bs-toggle="tab" data-bs-target="#navDetail" type="button" role="tab" aria-controls="navDetail" aria-selected="true">Detalle</button>
+                        <button class="nav-link active" id="navDetail-tab" data-bs-toggle="tab" data-bs-target="#navDetail" type="button" role="tab" aria-controls="navDetail" aria-selected="true">Details</button>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link " id="navAdvance-tab" data-bs-toggle="tab" data-bs-target="#navAdvance" type="button" role="tab" aria-controls="navAdvance" aria-selected="true">Abonos</button>
@@ -18,97 +18,82 @@
                     <div class="tab-pane fade show active" id="navDetail">
                         <div class="table-responsive">
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">Fecha de emisión</label>
+                                        <label for="" class="form-label fw-bold">Date</label>
                                         <p class="text-break" id="strDate"></p>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">Fecha de vencimiento</label>
-                                        <p class="text-break" id="strDateBeat"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">Factura de venta</label>
+                                        <label for="" class="form-label fw-bold"># bill</label>
                                         <p class="text-break" id="strId"></p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">Transacción</label>
+                                        <label for="" class="form-label fw-bold">Transaction</label>
                                         <p class="text-break" id="strCode"></p>
                                     </div>
                                 </div>
-                                
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">Estado de pago</label>
+                                        <label for="" class="form-label fw-bold">Status</label>
                                         <p class="text-break" id="strStatus"></p>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">Estado de pedido</label>
-                                        <p class="text-break" id="strStatusOrder"></p>
-                                    </div>
-                                </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">Método de pago</label>
+                                        <label for="" class="form-label fw-bold">Payment type</label>
                                         <p class="text-break" id="strMethod"></p>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">Nombre</label>
+                                        <label for="" class="form-label fw-bold">Name</label>
                                         <p class="text-break" id="strName"></p>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">Teléfono</label>
+                                        <label for="" class="form-label fw-bold">Phone</label>
                                         <p class="text-break" id="strPhone"></p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="mb-3">
+                                        <label for="" class="form-label fw-bold">Email</label>
+                                        <p class="text-break" id="strEmail"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">Correo</label>
-                                        <p class="text-break" id="strEmail"></p>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">CC/NIT</label>
+                                        <label for="" class="form-label fw-bold">ID number</label>
                                         <p class="text-break" id="strNit"></p>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="mb-3">
-                                        <label for="" class="form-label fw-bold">Dirección</label>
+                                        <label for="" class="form-label fw-bold">Address</label>
                                         <p class="text-break" id="strAddress"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="" class="form-label fw-bold">Notas</label>
+                                <label for="" class="form-label fw-bold">Notes</label>
                                 <p class="text-break" id="strNotes"></p>
                             </div>
                             <table class="table text-nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Referencia</th>
-                                        <th>Descripción</th>
-                                        <th>Precio</th>
-                                        <th class="text-center">Cantidad</th>
+                                        <th>Reference</th>
+                                        <th>Description</th>
+                                        <th>Price</th>
+                                        <th class="text-center">Qty</th>
                                         <th>Subtotal</th>
                                     </tr>
                                 </thead>
@@ -119,11 +104,11 @@
                                         <td id="subtotal"></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4" class="fw-bold text-end">Descuento:</td>
+                                        <td colspan="4" class="fw-bold text-end">Discount:</td>
                                         <td id="orderDiscount"></td>
                                     </tr>
                                     <tr>
-                                        <td colspan="4" class="fw-bold text-end">Envio:</td>
+                                        <td colspan="4" class="fw-bold text-end">Shipment:</td>
                                         <td id="shipping"></td>
                                     </tr>
                                     <tr>

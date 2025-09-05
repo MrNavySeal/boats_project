@@ -35,10 +35,10 @@
                     if(!empty($request)){
                         $arrResponse = array("status"=>true,"data"=>$request);
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"El artículo no existe");
+                        $arrResponse = array("status"=>false,"msg"=>"The product does not exist");
                     }
                 }else{
-                    $arrResponse = array("status"=>false,"msg"=>"Error de datos");
+                    $arrResponse = array("status"=>false,"msg"=>"Something went wrong");
                 }
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
             }
@@ -129,7 +129,7 @@
             if($_SESSION['permitsModule']['w']){
                 if($_POST){
                     if(empty($_POST['id'])){
-                        $arrResponse = array("status"=>false,"msg"=>"Error de datos");
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong");
                     }else{
                         $strDate = $_POST['strDate'] == "" ? date("Y-m-d") : strClean($_POST['strDate']);
                         $strDateQuote = $_POST['strDate'] == "" ? date("Y-m-d") : strClean($_POST['strDateQuote']);
@@ -162,59 +162,17 @@
                                     "products"=>$arrProducts,
                                     "total"=>$arrTotal
                                 );
-                                if($intOrderType == 1){
-                                    $request = $this->model->insertOrder($data);
-                                }else{
-                                    $request = $this->model->insertQuote($data);
-                                }
+                                $request = $this->model->insertOrder($data);
                                 if($request > 0){
-                                    if($intOrderType == 1){
-                                        $arrResponse = array("status"=>true,"msg"=>"La venta se ha registrado con éxito");
-                                    }else{
-                                        $arrResponse = array("status"=>true,"msg"=>"La cotización se ha registrado con éxito");
-                                    }
+                                    $arrResponse = array("status"=>true,"msg"=>"The sale has been saved successfully");
                                 }else{
-                                    $arrResponse = array("status"=>false,"msg"=>"Ha ocurrido un error, inténtelo de nuevo");
+                                    $arrResponse = array("status"=>false,"msg"=>"Something went wrong");
                                 }
                             }else{
-                                $arrResponse = array("status"=>false,"msg"=>"Debe agregar artículos a la venta!");
+                                $arrResponse = array("status"=>false,"msg"=>"You must add at least a product");
                             }
                         }else{
-                            $arrResponse = array("status"=>false,"msg"=>"El cliente no existe!"); 
-                        }
-                    }
-                    echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);
-                }
-            }
-            die();
-        }
-        /*************************Molding methods*******************************/
-        public function getMoldingProducts(){
-            if($_SESSION['permitsModule']['w']){
-                $request = $this->model->selectMoldingCategories();
-                if(count($request)>0){
-                    for ($i=0; $i < count($request); $i++) { 
-                        $btn = '<button type="button" class="btn btn-primary" onclick="getConfig(this,'.$request[$i]['id'].')">Cotizar</button>';
-                        $request[$i]['options'] = $btn;
-                    }
-                }
-                echo json_encode($request,JSON_UNESCAPED_UNICODE);
-            }
-            die();
-        }
-        public function getConfig(){
-            if($_SESSION['permitsModule']['w']){
-                if($_POST){
-                    if(empty($_POST['id'])){
-                        $arrResponse = array("status"=>false,"msg"=>"Error de datos");
-                    }else{
-                        $intId = intval($_POST['id']);
-                        $request = $this->model->selectConfig($intId);
-                        if(empty($request)){
-                            $arrResponse = array("status"=>false,"msg"=>"La categoria no está configurada");
-                        }else{
-                            $arrColors = $this->model->selectColors();
-                            $arrResponse = array("status"=>true,"data"=>$request,"color"=>$arrColors);
+                            $arrResponse = array("status"=>false,"msg"=>"This customer does not exist!"); 
                         }
                     }
                     echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

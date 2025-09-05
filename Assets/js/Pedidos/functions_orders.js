@@ -33,7 +33,6 @@ window.addEventListener("load",function(){
 searchHtml.addEventListener("input",function(){getData();});
 perPage.addEventListener("change",function(){getData();});
 selectPago.addEventListener("change",function(){getData();});
-selectPedido.addEventListener("change",function(){getData();});
 initialDateHtml.addEventListener("input",function(){getData();});
 finallDateHtml.addEventListener("input",function(){getData();});
 async function getData(page = 1){
@@ -44,14 +43,12 @@ async function getData(page = 1){
     formData.append("initial_date",initialDateHtml.value);
     formData.append("final_date",finallDateHtml.value);
     formData.append("status_payment",selectPago.value);
-    formData.append("status_order",selectPedido.value);
     const response = await fetch(base_url+"/Pedidos/Pedidos/getOrders",{method:"POST",body:formData});
     const objData = await response.json();
     tableData.innerHTML =objData.html;
     arrData = objData.full_data;
-    document.querySelector("#tableFooter").innerHTML = objData.html_total;
     document.querySelector("#pagination").innerHTML = objData.html_pages;
-    document.querySelector("#totalRecords").innerHTML = `<strong>Total de registros: </strong> ${objData.total_records}`;
+    document.querySelector("#totalRecords").innerHTML = `<strong>Total: </strong> ${objData.total_records}`;
 }
 function viewItem(id){
     document.querySelector("#tablePurchaseDetail").innerHTML ="";
@@ -133,10 +130,8 @@ function viewItem(id){
     let total = (subtotal+order.shipping)-discount;
     document.querySelector("#strMethod").innerHTML = order.type;
     document.querySelector("#strDate").innerHTML = order.date;
-    document.querySelector("#strDateBeat").innerHTML = order.date_beat;
     document.querySelector("#strId").innerHTML = order.idorder;
     document.querySelector("#strStatus").innerHTML = order.status;
-    document.querySelector("#strStatusOrder").innerHTML = order.statusorder;
     document.querySelector("#strCode").innerHTML = order.idtransaction;
     document.querySelector("#strName").innerHTML = order.name;
     document.querySelector("#strAddress").innerHTML = order.address;
@@ -242,14 +237,14 @@ async function updateItem(){
 }
 function deleteItem(id){
     Swal.fire({
-        title:"¿Estás segur@ de anular la factura?",
-        text:"Tendrás que volverla a hacer...",
+        title:"¿Are you sure?",
+        text:"It will be disabled forever",
         icon: 'warning',
         showCancelButton:true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText:"Sí, anular",
-        cancelButtonText:"No, cancelar"
+        confirmButtonText:"Yes",
+        cancelButtonText:"No"
     }).then(function(result){
         if(result.isConfirmed){
             let url = base_url+"/Pedidos/Pedidos/delOrder"

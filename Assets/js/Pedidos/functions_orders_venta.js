@@ -73,6 +73,7 @@ async function getProducts(page = 1){
 btnPurchase.addEventListener("click",function(){
     getCustomers();
     modalPurchase.show();
+    document.querySelector("#txtDate").value = new Date().toISOString().split("T")[0]; 
     orderType = 1;
     document.querySelector("#modalPurchase .modal-title").innerHTML="Details";
     document.querySelector("#contentPurchase").classList.remove("d-none");
@@ -115,7 +116,7 @@ formSetOrder.addEventListener("submit",function(e){
         return false;
     }
     if(arrProducts.length == 0){
-        Swal.fire("Error","You must add at least one product","error");
+        Swal.fire("Error","You must add at least a product","error");
         return false;
     }
     let url = base_url+"/Pedidos/PedidosPos/setOrder";

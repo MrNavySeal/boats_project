@@ -4,7 +4,7 @@
         getModal("modalOrderEdit");
     }
     getModal("modalOrderDetail");
-    $status='<option value="">Todo</option>';
+    $status='<option value="">All</option>';
     for ($i=0; $i < count(STATUS) ; $i++) { 
         $status .='<option value="'.STATUS[$i].'">'.STATUS[$i].'</option>';
     }
@@ -14,7 +14,7 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="mb-3">
-                    <label for="perPage" class="form-label">Por página</label>
+                    <label for="perPage" class="form-label">Per page</label>
                     <select class="form-control" aria-label="Default select example" id="perPage" name="perPage">
                         <option value="10">10</option>
                         <option value="25">25</option>
@@ -26,32 +26,28 @@
             </div>
             <div class="col-md-2">
                 <div class="mb-3">
-                    <label for="txtInitialDate" class="form-label">Fecha inicial</label>
+                    <label for="txtInitialDate" class="form-label">From</label>
                     <input type="date" class="form-control" id="txtInitialDate" name="txtInitialDate">
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="mb-3">
-                    <label for="txtFinalDate" class="form-label">Fecha final</label>
+                    <label for="txtFinalDate" class="form-label">To</label>
                     <input type="date" class="form-control" id="txtFinalDate" name="txtFinalDate">
                 </div>
             </div>
-            <div class="col-md-2">
-                <label for="selectPago" class="form-label">Estado de pago</label>
+            <div class="col-md-3">
+                <label for="selectPago" class="form-label">Status</label>
                 <select class="form-control" aria-label="Default select example" id="selectPago" name="selectPago">
-                    <option value="">Todo</option>
-                    <option value="pendent">Crédito</option>
-                    <option value="approved">Pagado</option>
-                    <option value="canceled">Anulado</option>
+                    <option value="">All</option>
+                    <option value="pendent">Pendent</option>
+                    <option value="approved">Approved</option>
+                    <option value="canceled">Canceled</option>
                 </select>
             </div>
-            <div class="col-md-2">
-                <label for="selectPedido" class="form-label">Estado de pedido</label>
-                <select class="form-control" aria-label="Default select example" id="selectPedido" name="selectPedido"><?=$status?></select>
-            </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <div class="mb-3">
-                    <label for="txtSearch" class="form-label">Buscar</label>
+                    <label for="txtSearch" class="form-label">Search</label>
                     <input type="text" class="form-control" id="txtSearch" name="txtSearch">
                 </div>
             </div>
@@ -60,35 +56,24 @@
             <table class="table align-middle table-hover">
                 <thead>
                     <tr class="text-center">
-                        <th>Id</th>
-                        <th>Transacción</th>
-                        <th>Fecha</th>
-                        <th>Nombre</th>
-                        <th>Correo</th>
-                        <th>Teléfono</th>
-                        <th>CC/NIT</th>
-                        <th>Método de pago</th>
+                        <th>ID</th>
+                        <th>Transaction</th>
+                        <th>Date</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>ID number</th>
+                        <th>Payment</th>
                         <th>Total</th>
-                        <th>Total pendiente</th>
-                        <th>Estado de pago</th>
-                        <th>Estado de pedido</th>
-                        <th>Opciones</th>
+                        <th>Status</th>
+                        <th>Options</th>
                     </tr>
                 </thead>
                 <tbody id="tableData"></tbody>
             </table>
         </div>
         <div class="no-more-tables">
-            <table class="table align-middle table-hover">
-                <thead>
-                    <tr class="text-end">
-                        <th>Total</th>
-                        <th>Total Pendiente</th>
-                    </tr>
-                </thead>
-                <tbody id="tableFooter"></tbody>
-            </table>
-            <p id="totalRecords" class="text-center m-0 mb-1"><strong>Total de registros: </strong> 0</p>
+            <p id="totalRecords" class="text-center m-0 mb-1"><strong>Total: </strong> 0</p>
             <nav aria-label="Page navigation example" class="d-flex justify-content-center w-100">
                 <ul class="pagination" id="pagination">
                     <li class="page-item">

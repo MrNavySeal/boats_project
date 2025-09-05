@@ -38,7 +38,7 @@
             $request = $this->select($sql)['total'];
             return $request;
         }
-        public function selectOrders($idPerson,string $strSearch,int $intPerPage,int $intPageNow,$strInitialDate,$strFinalDate,$strStatusOrder,$strStatusPayment){
+        public function selectOrders($idPerson,string $strSearch,int $intPerPage,int $intPageNow,$strInitialDate,$strFinalDate,$strStatusPayment){
             $start = ($intPageNow-1)*$intPerPage;
             $whre="";
             if($idPerson!="")$whre=" AND personid=$idPerson";
@@ -63,8 +63,7 @@
             DATE_FORMAT(date_beat, '%d/%m/%Y') as date_beat  
             FROM orderdata WHERE (idorder like '$strSearch%' OR idtransaction like '$strSearch%' OR name like '$strSearch%'
             OR identification like '$strSearch%' OR email like '$strSearch%' OR phone like '$strSearch%' OR amount like '$strSearch%'
-            OR type like '$strSearch%') AND DATE(date) BETWEEN '$strInitialDate' AND '$strFinalDate' 
-            AND statusorder like '$strStatusOrder%' AND status like '$strStatusPayment%' AND type_order = 1 $whre 
+            OR type like '$strSearch%') AND DATE(date) BETWEEN '$strInitialDate' AND '$strFinalDate' AND status like '$strStatusPayment%' AND type_order = 1 $whre 
             ORDER BY idorder DESC LIMIT $start,$intPerPage";      
             $request = $this->select_all($sql);
 
@@ -89,8 +88,7 @@
             DATE_FORMAT(date_beat, '%d/%m/%Y') as date_beat 
             FROM orderdata WHERE (idorder like '$strSearch%' OR idtransaction like '$strSearch%' OR name like '$strSearch%'
             OR identification like '$strSearch%' OR email like '$strSearch%' OR phone like '$strSearch%' OR amount like '$strSearch%'
-            OR type like '$strSearch%') AND DATE(date) BETWEEN '$strInitialDate' AND '$strFinalDate' 
-            AND statusorder like '$strStatusOrder%' AND status like '$strStatusPayment%' AND type_order = 1 $whre";    
+            OR type like '$strSearch%') AND DATE(date) BETWEEN '$strInitialDate' AND '$strFinalDate' AND status like '$strStatusPayment%' AND type_order = 1 $whre";    
             $requestFull = $this->select_all($sqlTotal);
             $totalRecords = count($requestFull);
             $totalPages = $totalRecords > 0 ? ceil($totalRecords/$intPerPage) : 0;  
@@ -379,11 +377,8 @@
         }
         public function deleteOrder($id){
             $this->intIdOrder = $id;
-            $sql = "SELECT * FROM orderdetail WHERE orderid  = $this->intIdOrder AND topic = 2";
-            $request = $this->select_all($sql);
-            $sql = "UPDATE orderdata SET status=?,statusorder =? WHERE idorder = $this->intIdOrder;DELETE FROM count_amount WHERE order_id = $this->intIdOrder";
+            $sql = "UPDATE orderdata SET status=?,statusorder =? WHERE idorder = $this->intIdOrder;";
             $return = $this->update($sql,array("canceled","anulado"));
-            if(!empty($request)){$this->insertAdjustment($id,$request);}
             return $return;
         }
         public function insertAdjustment($id,$arrData){
