@@ -79,7 +79,7 @@
                             </td>
                         </tr>
                         <tr v-if="arrRecibidos.length == 0">
-                            <td colspan="9" class="text-center fw-bold">No hay datos</td>
+                            <td colspan="9" class="text-center fw-bold">There are no data</td>
                         </tr>
                     </tbody>
                 </table>
