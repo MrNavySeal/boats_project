@@ -1,7 +1,4 @@
 <?php 
-    /*ini_set('display_errors', '1');
-    ini_set('display_startup_errors', '1');
-    error_reporting(E_ALL);*/
     class PedidosModel extends Mysql{
         private $intIdOrder;
         private $intIdUser;
@@ -67,7 +64,7 @@
             FROM orderdata WHERE (idorder like '$strSearch%' OR idtransaction like '$strSearch%' OR name like '$strSearch%'
             OR identification like '$strSearch%' OR email like '$strSearch%' OR phone like '$strSearch%' OR amount like '$strSearch%'
             OR type like '$strSearch%') AND DATE(date) BETWEEN '$strInitialDate' AND '$strFinalDate' 
-            AND statusorder like '$strStatusOrder%' AND status like '$strStatusPayment%' $whre 
+            AND statusorder like '$strStatusOrder%' AND status like '$strStatusPayment%' AND type_order = 1 $whre 
             ORDER BY idorder DESC LIMIT $start,$intPerPage";      
             $request = $this->select_all($sql);
 
@@ -93,7 +90,7 @@
             FROM orderdata WHERE (idorder like '$strSearch%' OR idtransaction like '$strSearch%' OR name like '$strSearch%'
             OR identification like '$strSearch%' OR email like '$strSearch%' OR phone like '$strSearch%' OR amount like '$strSearch%'
             OR type like '$strSearch%') AND DATE(date) BETWEEN '$strInitialDate' AND '$strFinalDate' 
-            AND statusorder like '$strStatusOrder%' AND status like '$strStatusPayment%' $whre";    
+            AND statusorder like '$strStatusOrder%' AND status like '$strStatusPayment%' AND type_order = 1 $whre";    
             $requestFull = $this->select_all($sqlTotal);
             $totalRecords = count($requestFull);
             $totalPages = $totalRecords > 0 ? ceil($totalRecords/$intPerPage) : 0;  
@@ -345,7 +342,7 @@
             WHERE (det.description like '$strSearch%' OR det.price like '$strSearch%' OR det.reference like '$strSearch%'
             OR cab.identification like '$strSearch%' OR cab.name like '$strSearch%' OR cab.name like '$strSearch%'
             OR cab.idtransaction like '$strSearch%' OR cab.idorder like '$strSearch%' )  AND DATE(cab.date) BETWEEN '$strInitialDate' AND '$strFinalDate'
-            $whre ORDER BY cab.idorder DESC LIMIT $start,$intPerPage";      
+            AND cab.type_order = 1 $whre ORDER BY cab.idorder DESC LIMIT $start,$intPerPage";      
             $request = $this->select_all($sql);
 
             $sqlTotal = "SELECT COALESCE(COUNT(*),0) as total
@@ -354,7 +351,7 @@
             WHERE (det.description like '$strSearch%' OR det.price like '$strSearch%' OR det.reference like '$strSearch%'
             OR cab.identification like '$strSearch%' OR cab.name like '$strSearch%' OR cab.name like '$strSearch%'
             OR cab.idtransaction like '$strSearch%' OR cab.idorder like '$strSearch%' )  AND DATE(cab.date) BETWEEN '$strInitialDate' AND '$strFinalDate'
-            $whre";    
+            AND cab.type_order = 1 $whre";    
             $totalRecords = $this->select($sqlTotal)['total'];
             $totalPages = $totalRecords > 0 ? ceil($totalRecords/$intPerPage) : 0;  
 
