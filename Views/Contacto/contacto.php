@@ -15,11 +15,15 @@
     }
     $servicios = $data['servicios'];
 ?>
-<?php getComponent("pageCover",$data); ?>
-    <div class="container mt-4">
-        <?php getComponent("contactForm",['titulo'=>$data['page']['title'],"subtitulo"=>$data['page']['subtitle'],"datos"=>$servicios])?>
+    <div class="container p-2 mt-4 mb-5">
+        <nav class="mt-2 mb-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a class="text-decoration-none" href="<?=base_url()?>">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Contact us</li>
+            </ol>
+        </nav>
+         <?php getComponent("contactForm",['titulo'=>$data['page']['title'],"subtitulo"=>$data['page']['subtitle'],"datos"=>$servicios])?>
     </div>
-    <?php getComponent("scheduleOnline"); ?>
 <?php
     footerPage($data);
 ?>

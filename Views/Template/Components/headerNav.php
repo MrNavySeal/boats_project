@@ -15,11 +15,6 @@
     }
     
 ?>
-<div class="d-flex align-items-center justify-content-end pt-3 pb-3 gap-3 call-action">
-    <span class="fw-bold fs-5 me-3">Ready to Schedule Your Service?</span>
-    <button type="button" onclick="window.open('tel:'<?='+1'.$company['phone']?>)" class="btn btn-primary fs-5 "><i class="fas fa-phone" aria-hidden="true"></i> <?=$company['phone']?></button>
-    <button type="button" class="btn btn-secondary fs-5" onclick="openSchedule()">Schedule online</button>
-</div>
 <header class="bg-white">
     <nav class="nav--bar">
         <div class="d-flex align-items-center logo-desktop">
@@ -68,9 +63,10 @@
             </div>
             <li class="nav-link"><a href="<?=base_url()?>/about/">About</a></li>
             <li class="nav-link"><a href="<?=base_url()?>/gallery/">Gallery</a></li>
-            <li class="nav-link"><a href="<?=base_url()?>/contact/">Contact us</a></li>
         </ul>
         <ul class="nav--links">
+            <li class="nav--icon p-0" ><button type="button" onclick="window.open('tel:'<?='+1'.$company['phone']?>)" class="btn btn-primary w-100 "><i class="fas fa-phone" aria-hidden="true"></i> <?=$company['phone']?></button></li>
+            <li class="nav--icon p-0" ><button type="button" class="btn btn-secondary w-100 " onclick="openSchedule()">Schedule online</button></li>
             <li class="nav--icon" id="btnSearch"><i class="fas fa-search"></i></li>
             <li class="nav--icon nav--icon-cart" id="btnCart">
                 <span id="qtyCart"><?=$qtyCart?></span>
