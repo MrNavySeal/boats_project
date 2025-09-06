@@ -15,11 +15,16 @@
     }
     
 ?>
+<div class="d-flex align-items-center justify-content-end pt-3 pb-3 gap-3">
+    <span class="fw-bold fs-5 me-3">Ready to Schedule Your Service?</span>
+    <a href="#" class="btn btn-primary fs-5 "><i class="fas fa-phone" aria-hidden="true"></i> <?=$company['phone']." - ".$company['phones']?></a>
+    <a href="#" class="btn btn-secondary fs-5">Schedule online</a>
+</div>
 <header class="bg-white">
     <nav class="nav--bar">
         <div class="d-flex align-items-center logo-desktop">
-            <img class="me-2" src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>" width="60">
-            <span class="fs-4 fw-bold"><?=$company['name']?></span>
+            <img class="me-2" src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>" width="80">
+            <span class="fs-3 fw-bold"><?=$company['name']?></span>
         </div>
         <div class="icon-mobile">
             <a href="<?=base_url()?>">

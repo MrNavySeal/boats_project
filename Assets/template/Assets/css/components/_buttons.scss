@@ -1,3 +1,21 @@
+.btn-primary{
+    background-color: $color2 !important;
+    &:hover{
+        background-color: $color1 !important;
+    }
+}
+.btn-secondary{
+    background-color: $color1 !important;
+    &:hover{
+        background-color: $color2 !important;
+    }
+}
+.btn-success{
+   background-color: $color1 !important;
+    &:hover{
+        background-color: $color3 !important;
+    } 
+}
 .btn-bg-1{
     background-color: $color1;
     color:$color4;

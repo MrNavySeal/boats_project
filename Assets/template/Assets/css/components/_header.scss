@@ -2,6 +2,9 @@
 
 header{
     padding: 0 2rem;
+    height: 100px;
+    display: flex;
+    align-items: center;
 }
 .logo{
     padding: 1rem;
@@ -44,6 +47,7 @@ nav{
     padding: 0;
     font-weight: bold;
     a{
+        color:$color3;
         &:hover{
             color:$color1;
         }
@@ -80,7 +84,7 @@ nav{
     height: 100%;
     min-width: 100%;
     top: -100%;
-    background-color: rgba($color2, 0.8);
+    background-color: rgba($color3, 0.8);
     z-index: 100;
     display: flex;
     justify-content: center;
@@ -362,7 +366,7 @@ nav{
 }
 .cartbar.active{
     .cartbar--mask{
-        background-color: rgba($color2, 0.8);
+        background-color: rgba($color3, 0.8);
         transition: background-color 0.3s ease;
         animation-name: showMask;
         animation-delay: 0s;
@@ -375,7 +379,7 @@ nav{
 }
 .navmobile.active{
     .navmobile--mask{
-        background-color: rgba($color2, 0.8);
+        background-color: rgba($color3, 0.8);
         transition: background-color 0.3s ease;
         animation-name: showMask;
         animation-delay: 0s;

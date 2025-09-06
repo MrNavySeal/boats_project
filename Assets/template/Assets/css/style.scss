@@ -19,7 +19,10 @@
 @import "components/page_cover";
 @import "components/item","components/mailbox", "components/form"; 
 @import "components/mediaqueries";
-
+.btn{
+    border: none !important;
+    border-radius: 0;
+}
 .progress-bar{
     background-color: $color1;
 }
