@@ -130,6 +130,18 @@
                 die();
             }
         }
+        public function servicios(){
+            $company=getCompanyInfo();
+            $data['page_tag'] = $company['name'];
+            $data['page_name'] = "services";
+            $data['faq'] = $this->getFaqT();
+            $data['services'] = $this->getServicesT();
+            $data['gallery'] = $this->getGalleryT();
+            $data['page_title'] ="Services | ".$company['name'];
+            $data['app'] = "functions_service.js";
+            $this->views->getView($this,"servicios",$data); 
+
+        }
         public function galeria(){
             $company=getCompanyInfo();
             $data['page_tag'] = $company['name'];

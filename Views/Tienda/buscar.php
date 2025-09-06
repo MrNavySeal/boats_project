@@ -22,9 +22,9 @@
 ?>
     <div id="modalItem"></div>
     <div id="modalPoup"></div>
-    <main class="addFilter">
-        <div class="container bg-white rounded p-2 mt-5 mb-3">
-            <nav class="mt-2 mb-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <main class="addFilter bg-white">
+        <div class=" container rounded p-2">
+            <nav class="mt-5 mb-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a class="text-decoration-none" href="<?=base_url()?>">Home</a></li>
                   <li class="breadcrumb-item"><a class="text-decoration-none" href="<?=base_url()?>/shop/">Shop</a></li>
@@ -53,12 +53,12 @@
                     </div>
                     <div class="pagination">
                         <?php if($current > 1){?>
-                        <a href="<?=base_url()."/shop/search?p=1".$urlSort.$urlSearch?>" class="pagination-btn pagination-start"><i class="fas fa-angle-double-left" aria-hidden="true"></i></a>
-                        <a href="<?=base_url()."/shop/search?p=".$prevPage.$urlSort.$urlSearch?>" class="pagination-btn pagination-prev"><i class="fas fa-angle-left" aria-hidden="true"></i></a>
+                        <a href="<?=base_url()."/shop/search/?p=1".$urlSort.$urlSearch?>" class="pagination-btn pagination-start"><i class="fas fa-angle-double-left" aria-hidden="true"></i></a>
+                        <a href="<?=base_url()."/shop/search/?p=".$prevPage.$urlSort.$urlSearch?>" class="pagination-btn pagination-prev"><i class="fas fa-angle-left" aria-hidden="true"></i></a>
                         <?php }?>
                         <?php if($current < $paginas){?>
-                        <a href="<?=base_url()."/shop/search?p=".$nextPage.$urlSort.$urlSearch?>" class="pagination-btn pagination-next"><i class="fas fa-angle-right" aria-hidden="true"></i></a>
-                        <a href="<?=base_url()."/shop/search?p=".$paginas.$urlSort.$urlSearch?>" class="pagination-btn pagination-end"><i class="fas fa-angle-double-right" aria-hidden="true"></i></a>
+                        <a href="<?=base_url()."/shop/search/?p=".$nextPage.$urlSort.$urlSearch?>" class="pagination-btn pagination-next"><i class="fas fa-angle-right" aria-hidden="true"></i></a>
+                        <a href="<?=base_url()."/shop/search/?p=".$paginas.$urlSort.$urlSearch?>" class="pagination-btn pagination-end"><i class="fas fa-angle-double-right" aria-hidden="true"></i></a>
                         <?php }?>
                     </div>
                 </div>

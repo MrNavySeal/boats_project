@@ -81,6 +81,7 @@
                         ?>
                         <li class="navmobile-link fw-normal"><a href="<?=$routeC?>"><?=$navServices[$i]['name']?></a></li>
                         <?php }?>
+                        <li class="navmobile-link"><a href="<?=base_url()?>/shop/services/">All</a></li>
                     </div>
                     </div>
                 </div>

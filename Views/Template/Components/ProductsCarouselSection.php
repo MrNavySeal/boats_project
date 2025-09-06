@@ -3,14 +3,25 @@
     $subtitulo = $data['subtitulo'];
     $productos = $data['datos'];
 ?>
-<section class="container bg-white">
-    <div class="mb-3 px-2">
-        <h2 class="section--title fs-2 t-color-1"><?=$titulo?></h2>
-        <h3 class="t-color-2"><?=$subtitulo?></h3>
+<section class="bg-white">
+    <div class="mb-3 px-2 pb-2 pt-2 container">
+        <h3 class="section--title t-color-1 fs-1 mb-0 text-center"><?=$titulo?></h3>
+        <h2 class="section--title fs-4 t-color-5 text-center"><?=$subtitulo?></h2>
         <div class="row">
-            <div class="product-slider-cat owl-carousel owl-theme mb-5" data-bs-ride="carousel">
-                <?php for ($j=0; $j < count($productos); $j++) { $producto = $productos[$j]; getComponent("cardProduct",$producto);} ?>
+            <div class="row">
+                <?php for ($j=0; $j < 4; $j++) { 
+                    $producto = $productos[$j]; 
+                    if(!empty($producto)){
+                        echo '<div class="col-md-3">';
+                        getComponent("cardProduct",$producto);
+                        echo '</div>';
+                        } 
+                    }
+                ?>
             </div>
+        </div>
+        <div class="d-flex justify-content-center mt-4 mb-4">
+            <a href="<?=base_url()."/shop/"?>" class="btn btn-secondary">View all our products</a>
         </div>
     </div>
 </section>

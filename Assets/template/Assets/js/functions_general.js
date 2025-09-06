@@ -602,7 +602,7 @@ function addCart(element){
     element.innerHTML=`<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
     element.setAttribute("disabled","");
     request(base_url+"/carrito/addCart",formData,"post").then(function(objData){
-        element.innerHTML=`<i class="fas fa-shopping-cart"></i>`;
+        element.innerHTML=`Add to cart <i class="fas fa-shopping-cart"></i>`;
         element.removeAttribute("disabled");
         document.querySelector(".toast-header img").src=objData.data.image;
         document.querySelector(".toast-header img").alt=objData.data.name;

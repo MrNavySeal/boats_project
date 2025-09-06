@@ -18,9 +18,9 @@
 ?>
     <div id="modalItem"></div>
     <div id="modalPoup"></div>
-    <main class="addFilter">
-        <div class="container bg-white rounded p-2 mt-5 mb-3">
-            <nav class="mt-2 mb-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+    <main class="addFilter bg-white">
+        <div class=" container p-2 rounded p-2">
+            <nav class="mt-5 mb-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a class="text-decoration-none" href="<?=base_url()?>">Home</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Shop</li>

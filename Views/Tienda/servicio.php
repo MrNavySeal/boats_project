@@ -9,14 +9,14 @@
 ?>
     <?=$data['modal']?>
     <div id="modalItem"></div>
-    <div class="container bg-white rounded p-2 mt-4 mb-5">
+    <div class=" bg-white p-2 mb-5">
         <main id="product">
-            <div class=" mt-4 mb-4">
-                <nav class="mt-2 mb-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <div class="container p-2">
+                <nav class="mt-5 mb-2" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                     <ol class="breadcrumb">
                       <li class="breadcrumb-item"><a class="text-decoration-none" href="<?=base_url()?>">Home</a></li>
-                      <li class="breadcrumb-item">Shop</li>
-                      <li class="breadcrumb-item">Services</li>
+                      <li class="breadcrumb-item"><a class="text-decoration-none" href="<?=base_url()?>/Shop/">Shop</a></li>
+                      <li class="breadcrumb-item"><a class="text-decoration-none" href="<?=base_url()?>/Shop/services/">Services</a></li>
                       <li class="breadcrumb-item active" aria-current="page"><?=$service['name']?></li>
                     </ol>
                 </nav>

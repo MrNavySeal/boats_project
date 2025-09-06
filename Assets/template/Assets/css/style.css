@@ -457,7 +457,7 @@
 }
 
 .t-color-5 {
-  color: #E6E6E6 !important;
+  color: #4f5d73 !important;
 }
 
 .t-color-h-2:hover {
@@ -879,7 +879,7 @@ nav a {
   height: 30px;
 }
 .qty--btns button {
-  border: 1px solid #E6E6E6;
+  border: 1px solid #4f5d73;
   background-color: #fff;
   color: #0066A5;
   width: 30px;
@@ -893,7 +893,7 @@ nav a {
 .qty--btns input {
   text-align: center;
   width: 30px;
-  border: 1px solid #E6E6E6;
+  border: 1px solid #4f5d73;
   color: #0066A5;
 }
 .qty--btns input:focus {
@@ -1185,7 +1185,7 @@ nav a {
   left: 0;
   width: 0;
   height: 0.2rem;
-  background-color: #E6E6E6;
+  background-color: #4f5d73;
   transition: width 0.5s;
 }
 
@@ -2325,6 +2325,9 @@ footer .logo img {
   }
 }
 @media screen and (max-width: 576px) {
+  .call-action {
+    display: none !important;
+  }
   .content-site {
     padding: 0 2rem;
   }
@@ -2424,23 +2427,23 @@ footer .logo img {
 }
 
 .form-select {
-  border: 0.5px solid #E6E6E6;
+  border: 0.5px solid #4f5d73;
   margin: 0 1px;
 }
 .form-select:focus {
   outline: none;
   box-shadow: 0 0 0 transparent !important;
-  border: 0.5px solid #E6E6E6;
+  border: 0.5px solid #4f5d73;
 }
 
 .form-control {
-  border: 0.5px solid #E6E6E6;
+  border: 0.5px solid #4f5d73;
   margin: 0 1px;
 }
 .form-control:focus {
   outline: none;
   box-shadow: 0 0 0 transparent !important;
-  border: 0.5px solid #E6E6E6;
+  border: 0.5px solid #4f5d73;
 }
 
 .toast-container {
@@ -2449,6 +2452,10 @@ footer .logo img {
 
 a {
   text-decoration: none;
+}
+
+input, select {
+  border-radius: 0 !important;
 }
 
 input[type=number]::-webkit-inner-spin-button,

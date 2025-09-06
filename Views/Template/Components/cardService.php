@@ -10,6 +10,9 @@
     </div>
     <div class="card--product-info">
         <h4><a href="<?=base_url()."/shop/service/".$producto['route']?>"><?=$producto['name']?></a></h4>
+        <div style="height:100px;" class="overflow-hidden">
+            <p><?=$producto['short_description']?></p>
+        </div>
     </div>
     <div class="card--product-btns">
         <div class="d-flex">

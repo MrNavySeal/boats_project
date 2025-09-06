@@ -15,10 +15,10 @@
     }
     
 ?>
-<div class="d-flex align-items-center justify-content-end pt-3 pb-3 gap-3">
+<div class="d-flex align-items-center justify-content-end pt-3 pb-3 gap-3 call-action">
     <span class="fw-bold fs-5 me-3">Ready to Schedule Your Service?</span>
-    <a href="#" class="btn btn-primary fs-5 "><i class="fas fa-phone" aria-hidden="true"></i> <?=$company['phone']." - ".$company['phones']?></a>
-    <a href="#" class="btn btn-secondary fs-5">Schedule online</a>
+    <button type="button" onclick="window.open('tel:'<?='+1'.$company['phone']?>)" class="btn btn-primary fs-5 "><i class="fas fa-phone" aria-hidden="true"></i> <?=$company['phone']?></button>
+    <button type="button" class="btn btn-secondary fs-5" onclick="openSchedule()">Schedule online</button>
 </div>
 <header class="bg-white">
     <nav class="nav--bar">
@@ -62,6 +62,8 @@
                     ?>
                     <li><a class="dropdown-item" href="<?=base_url()."/shop/service/".$link['route']?>"><?=$link['name']?></a></li>
                     <?php } ?>
+                    <hr>
+                    <li><a class="dropdown-item" href="<?=base_url()?>/shop/services/">All</a></li>
                 </ul>
             </div>
             <li class="nav-link"><a href="<?=base_url()?>/about/">About</a></li>

@@ -92,6 +92,9 @@
 
 }
 @media screen and (max-width: 576px){ 
+    .call-action{
+        display: none !important;
+    }
     .content-site{
         padding: 0 2rem;
     }

@@ -3,8 +3,8 @@
     $subtitulo = $data['subtitulo'];
     $arrData = $data['datos'];
 ?>
-<section class="container bg-white mt-5 mb-5">
-    <div class="mb-3 px-2">
+<section class=" bg-white mt-5 mb-5">
+    <div class="mb-3 px-2 container">
         <h2 class="section--title fs-2 t-color-1"><?=$titulo?></h2>
         <h3 class="t-color-2"><?=$subtitulo?></h3>
         <div class="row">

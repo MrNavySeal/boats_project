@@ -57,12 +57,10 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <?php getComponent("AboutSection",$about); ?>
-        <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$galeria]); ?>
-        <?php getComponent("serviceSection",['titulo'=>"Our services","subtitulo"=>"Full suite of underwater cleaning services","datos"=>$servicios])?>
+        <?php getComponent("serviceSection",['titulo'=>"Our services","subtitulo"=>"We offer a full suite of underwater cleaning services to keep your vessel and dock sparkling clean.","datos"=>$servicios])?>
+        <?php getComponent("ProductsCarouselSection",['titulo'=>"Marine Products","subtitulo"=>"Professional-grade cleaning and maintenance products trusted by boat owners and marine professionals","datos"=>$productos]);?>
         <?php getComponent("contactForm",['titulo'=>$contact['title'],"subtitulo"=>$contact['subtitle'],"datos"=>$servicios])?>
-        <?php getComponent("ProductsCarouselSection",['titulo'=>"Our products","subtitulo"=>"Most recent","datos"=>$productos]);?>
-        <?php getComponent("scheduleOnline"); ?>
+        <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$galeria]); ?>
     </main>
 <?php
     footerPage($data);

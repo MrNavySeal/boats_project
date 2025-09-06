@@ -1,24 +1,24 @@
 
-<section class="container my-5">
-    <div class="row">
-        <div class="col-md-6">
-            <img src="<?=media()?>/images/uploads/<?=$data['picture']?>" class="img-fluid" alt="...">
-        </div>
-        <div class="col-md-6 my-2">
-            <div>
-                <h3 class="section--title t-color-1 fs-4 mb-0 text-start"><?=$data['title']?></h3>
-                <h2 class="section--title fs-1 text-start"><?=$data['subtitle']?></h2>
+<section class="bg-white">
+    <div class="container pt-4 pb-4">
+        <div class="row">
+            <div class="col-md-6">
+                <img src="<?=media()?>/images/uploads/<?=$data['picture']?>" class="img-fluid" alt="...">
             </div>
-            <p><?=$data['short_description']?></p>
-            <div class="d-flex justify-content-center gap-2">
-                <button type="button" class="btn btn-bg-2" onclick="openSchedule()">Schedule online</button>
-                <a href="<?=base_url()?>/contact/" class="btn btn-bg-1">Contact us</a>
+            <div class="col-md-6 my-2">
+                <div>
+                    <h3 class="section--title t-color-1 fs-4 mb-0 text-start"><?=$data['title']?></h3>
+                    <h2 class="section--title fs-1 text-start"><?=$data['subtitle']?></h2>
+                </div>
+                <p><?=$data['short_description']?></p>
+                <div class="d-flex justify-content-center gap-2">
+                    <button type="button" class="btn btn-secondary" onclick="openSchedule()">Schedule online</button>
+                    <a href="<?=base_url()?>/contact/" class="btn btn-secondary">Contact us</a>
+                </div>
             </div>
         </div>
     </div>
-</section>
-<section class="container mb-2 mt-2">
-    <div class="mb-3 px-2 py-2">
+    <div class="container mb-3 px-2 py-2">
         <div class="row">
             <div class="col-md-12 bg-color-4 p-4">
                 <h3 class="t-color-4 fs-4"><?=$data['title2']?></h3>
