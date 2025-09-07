@@ -41,8 +41,8 @@
             if(isset($_SESSION['login']) && isset($_SESSION['arrCart']) && !empty($_SESSION['arrCart'])){
                 $company=getCompanyInfo();
                 $data['page_tag'] = $company['name'];
-                $data['page_title'] ="Pago | ".$company['name'];
-                $data['page_name'] = "pago";
+                $data['page_title'] ="Checkout | ".$company['name'];
+                $data['page_name'] = "Checkout";
                 $data['credentials'] = getCredentials();
                 $data['company'] = getCompanyInfo();
                 $data['shipping'] = $this->selectShippingMode();
@@ -50,18 +50,18 @@
                 if(isset($_GET['situ'])){
                     $situ = strtolower(strClean($_GET['situ']));
                     if($situ != "true" && $situ != "false"){
-                        header("location: ".base_url()."/pago");
+                        header("location: ".base_url()."/checkout/");
                         die();
                     }else if($situ =="true"){
                         $data['shipping'] = array("id"=>4,"value"=>0);
                     }else if($situ =="false"){
                         if($data['shipping']['id'] == 3 && !isset($_SESSION['shippingcity'])){
-                            header("location: ".base_url()."/carrito");
+                            header("location: ".base_url()."/cart/");
                             die();
                         }
                     }
                 }else if($data['shipping']['id'] == 3 && !isset($_SESSION['shippingcity'])){
-                    header("location: ".base_url()."/carrito");
+                    header("location: ".base_url()."/cart/");
                      die();
                 }
                 
@@ -72,7 +72,7 @@
                         $data['cupon'] = $cuponData;
                         $data['cupon']['check'] = $this->checkCoupon($_SESSION['idUser'],$data['cupon']['id']);
                     }else{
-                        header("location: ".base_url()."/pago");
+                        header("location: ".base_url()."/cart/");
                         die();
                     }
                 }

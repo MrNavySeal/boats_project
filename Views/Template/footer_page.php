@@ -61,7 +61,7 @@ for ($i=0; $i < count($social) ; $i++) {
                                 </div>
                                 <ul>
                                     <li><?=$company['addressfull']?></li>
-                                    <li><?=$company['phone']." - ".$company['phones']?></li>
+                                    <li><?=$company['phone']?></li>
                                     <li><?=$company['email']?></li>
                                 </ul>
                             </div>
