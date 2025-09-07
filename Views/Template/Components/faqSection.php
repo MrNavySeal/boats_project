@@ -1,6 +1,6 @@
 <section class="bg-white">
     <div class="container">
-        <h3 class="t-color-1">Frequent Questions</h3>
+        <h3 class="t-color-1 fw-bold">Frequent Questions</h3>
         <?php $faq = $data; foreach ($faq as $key) { ?>
         <div class="navmobile-link accordion " id="accordionService<?=$key['id']?>">
             <div class="accordion-item">

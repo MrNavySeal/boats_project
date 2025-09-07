@@ -1,7 +1,7 @@
 
 <?php 
     $company = getCompanyInfo();
-    $company['addressfull']=str_replace(" ","+",$company['addressfull']);
+    /* $company['addressfull']=str_replace(" ","+",$company['addressfull']); */
     $titulo = $data['titulo'];
     $subtitulo = $data['subtitulo'];
     $servicios = $data['datos'];

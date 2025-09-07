@@ -37,15 +37,15 @@
                             <div class="p-3">
                                 <h2 class="text-center">Other services</h2>
                                 <?php  foreach ($services as $serv) { if($serv['name'] != $service['name']){ ?>
-                                <div class="bg-color-2 p-2 rounded mb-1"><a class="t-color-4 text-center fs-4" href="<?=base_url()."/shop/service/".$serv['route']?>"><?=$serv['name']?></a></div>
+                                <div class="bg-color-1 p-2 rounded mb-1"><a class="t-color-4 text-center fs-4" href="<?=base_url()."/shop/service/".$serv['route']?>"><?=$serv['name']?></a></div>
                                 <?php } }?>
                             </div>
                         </div>
                         <div class="rounded">
                             <div class="p-4">
-                                <h3 class="section--title t-color-2 fw-bold fs-4 mb-0 text-center">Keep Your Boat in top condition</h3>
+                                <h3 class="section--title t-color-1 fw-bold fs-4 mb-0 text-center">Keep Your Boat in top condition</h3>
                                 <div class="d-flex justify-content-center mt-4">
-                                    <button type="button" class="btn btn-bg-2" onclick="openSchedule()">Schedule online</button>
+                                    <button type="button" class="btn btn-secondary" onclick="openSchedule()">Schedule online</button>
                                 </div>
                             </div>
                         </div>

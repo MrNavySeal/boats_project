@@ -7,8 +7,8 @@
             </div>
             <div class="col-md-6 my-2">
                 <div>
-                    <h3 class="section--title t-color-1 fs-4 mb-0 text-start"><?=$data['title']?></h3>
-                    <h2 class="section--title fs-1 text-start"><?=$data['subtitle']?></h2>
+                    <h3 class="section--title fs-4 mb-0 text-start"><?=$data['title']?></h3>
+                    <h2 class=" fs-1 text-start"><?=$data['subtitle']?></h2>
                 </div>
                 <p><?=$data['short_description']?></p>
                 <div class="d-flex justify-content-center gap-2">
@@ -23,7 +23,7 @@
     <div class="container rounded">
         <div class="row">
             <div class="col-md-12 p-4">
-                <h3 class="t-color-1 fs-4"><?=$data['title2']?></h3>
+                <h3 class="t-color-1 fw-bold fs-4"><?=$data['title2']?></h3>
                 <h4 class="mb-4"><?=$data['subtitle2']?></h4>
                 <ul class="nav nav-pills pills-white mb-3" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -39,19 +39,19 @@
                 <div class="tab-content" id="pills-tabContent">
                     <div class="tab-pane fade show active" id="pills-specification" role="tabpanel" aria-labelledby="pills-description-tab" tabindex="0">
                         <div class="bg-white p-2 rounded">
-                            <h4 class="t-color-2 fw-bold"><?=$data['mission_title']?></h4>
+                            <h4 class="fw-bold"><?=$data['mission_title']?></h4>
                             <p class="text-black"><?=$data['mission']?></p>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-description" role="tabpanel" aria-labelledby="pills-description-tab" tabindex="0">
                         <div class="bg-white p-2 rounded">
-                            <h4 class="t-color-2 fw-bold"><?=$data['vision_title']?></h4>
+                            <h4 class=" fw-bold"><?=$data['vision_title']?></h4>
                             <p class="text-black"><?=$data['vision']?></p>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-other" role="tabpanel" aria-labelledby="pills-other-tab" tabindex="0">
                         <div class="bg-white p-2 rounded">
-                            <h4 class="t-color-2 fw-bold"><?=$data['philosophy_title']?></h4>
+                            <h4 class=" fw-bold"><?=$data['philosophy_title']?></h4>
                             <p class="text-black"><?=$data['philosophy']?></p>
                         </div>
                     </div>
