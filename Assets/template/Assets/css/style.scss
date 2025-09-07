@@ -21,7 +21,6 @@
 @import "components/mediaqueries";
 .btn{
     border: none !important;
-    border-radius: 0;
 }
 .progress-bar{
     background-color: $color1;
@@ -50,9 +49,6 @@
 }
 a{
     text-decoration: none;
-}
-input, select{
-    border-radius: 0 !important;
 }
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 

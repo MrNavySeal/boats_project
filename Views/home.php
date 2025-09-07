@@ -28,23 +28,40 @@
 ?>
     <div id="modalItem"></div>
     <main>
-        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleControls" class="carousel slide bg-white" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <?php
                     for ($i=0; $i < count($banners); $i++) { 
                         $active="";
-                        $a= $banners[$i]['button'] != "" ? '<button class="m-1 btn btn-bg-1">'.$banners[$i]['button'].'</button>' : "";
+                        $a= $banners[$i]['button'] != "" ? '<a href="'.$banners[$i]['link'].'" class="btn btn-primary">'.$banners[$i]['button'].'</a>' : "";
                         $p = $banners[$i]['description'] !="" ? '<p>'.$banners[$i]['description'].'</p>' : "";
                         if($i == 0)$active="active";
                         $img = media()."/images/uploads/".$banners[$i]['picture'];
                 ?>
-                <div class="carousel-item slider_item <?=$active?>">
-                    <a href="<?=$banners[$i]['link']?>" class="slider_description">
-                        <h2><?=$banners[$i]['name']?></h2>
-                        <?=$p?>
-                        <?=$a?>
-                    </a>
-                    <img src="<?=$img?>" class="d-block w-100" alt="<?=$banners[$i]['name']?>">
+                <div class="carousel-item <?=$active?>">
+                    <div class="row p-4 mt-4" style="height:500px">
+                        <div class="col-md-6 d-flex align-items-center  mb-3">
+                            <div>
+                                <h2 class="fs-1 fw-bold"><?=$banners[$i]['name']?></h2>
+                                <?=$p?>
+                                <div class="d-flex gap-2">
+                                    <?=$a?>
+                                    <button type="button" class="btn btn-secondary" onclick="openSchedule()">Schedule online</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 d-flex align-items-center mb-3 overflow-hidden">
+                            <img src="<?=$img?>" class="img-fluid border rounded" alt="<?=$banners[$i]['name']?>">
+                        </div>
+                    </div>
+                    <!-- <div class="d-flex">
+                        <img src="<?=$img?>" class="object-fit-fill border rounded" alt="<?=$banners[$i]['name']?>">
+                        <a href="<?=$banners[$i]['link']?>" class="slider_description">
+                            <h2><?=$banners[$i]['name']?></h2>
+                            <?=$p?>
+                            <?=$a?>
+                        </a>
+                    </div> -->
                 </div>
                 <?php }?>
             </div>
@@ -59,8 +76,10 @@
         </div>
         <?php getComponent("serviceSection",['titulo'=>"Our services","subtitulo"=>"We offer a full suite of underwater cleaning services to keep your vessel and dock sparkling clean.","datos"=>$servicios])?>
         <?php getComponent("ProductsCarouselSection",['titulo'=>"Marine Products","subtitulo"=>"Professional-grade cleaning and maintenance products trusted by boat owners and marine professionals","datos"=>$productos]);?>
-        <?php getComponent("contactForm",['titulo'=>$contact['title'],"subtitulo"=>$contact['subtitle'],"datos"=>$servicios])?>
+        <?php getComponent("AboutSection",$about); ?>
+        <?php getComponent("faqSection",$data['faq']);?>
         <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$galeria]); ?>
+        <?php getComponent("contactForm",['titulo'=>$contact['title'],"subtitulo"=>$contact['subtitle'],"datos"=>$servicios])?>
     </main>
 <?php
     footerPage($data);

@@ -23,6 +23,7 @@
             $data['contact'] = $this->getPageT("contacto");
             $data['banners'] = $this->getBanners();
             $data['galeria'] = $this->getGalleryT();
+            $data['faq'] = $this->getFaqT();
             $data['page_name'] = "home";
             $data['categories'] = $this->getProductsCategories("15,25,21",24);
             $data['posts'] = $this->getArticlesT(3);

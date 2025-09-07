@@ -30,24 +30,7 @@
                         <h1><?=$service['name']?></h1>
                         <p class="mb-2 mt-2"><?=$service['short_description']?></p>
                         <div class="service-description"><?=$service['description']?></div>
-                        <?php foreach ($faq as $key) { ?>
-                        <div class="navmobile-link accordion " id="accordionService<?=$key['id']?>">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header " id="flush-services<?=$key['id']?>">
-                                <button class="accordion-button collapsed bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseServices<?=$key['id']?>" aria-expanded="false" aria-controls="flush-collapseServices<?=$key['id']?>">
-                                    <strong class="fs-5"><?= $key['question']?></strong>
-                                </button>
-                                </h2>
-                                <div id="flush-collapseServices<?=$key['id']?>" class="accordion-collapse collapse " aria-labelledby="flush-services<?=$key['id']?>" data-bs-parent="#accordionFlushServices<?=$key['id']?>">
-                                    <div class="accordion-body bg-light pe-2 ps-2">
-                                        <div class="bg-white rounded pe-2 ps-2 fw-normal">
-                                            <?= $key['answer']?>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <?php }?>
+                        
                     </div>
                     <div class="col-md-4 product-data">
                         <div class="mb-5 bg-light rounded">
@@ -58,9 +41,9 @@
                                 <?php } }?>
                             </div>
                         </div>
-                        <div class="bg-color-1 rounded">
+                        <div class="rounded">
                             <div class="p-4">
-                                <h3 class="section--title t-color-4 fs-4 mb-0 text-start">- Keep Your Boat in top condition</h3>
+                                <h3 class="section--title t-color-2 fw-bold fs-4 mb-0 text-center">Keep Your Boat in top condition</h3>
                                 <div class="d-flex justify-content-center mt-4">
                                     <button type="button" class="btn btn-bg-2" onclick="openSchedule()">Schedule online</button>
                                 </div>
@@ -78,8 +61,8 @@
                 </div>
             </div>
         </main>
-        <?php getComponent("scheduleOnline"); ?>
     </div>
+    <?php getComponent("faqSection",$faq)?>
     <div class="container bg-white rounded">
         <?php getComponent("gallery",['titulo'=>"Our gallery","subtitulo"=>"","datos"=>$galeria]); ?>
     </div>
