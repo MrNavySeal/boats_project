@@ -22,13 +22,13 @@
 		public function loginUser(){
 			if($_POST){
 				if(empty($_POST['txtEmail']) || empty($_POST['txtPassword'])){
-					$arrResponse = array('status' => false, 'msg' => 'Error de datos' );
+					$arrResponse = array('status' => false, 'msg' => 'Something went wrong' );
 				}else{
 					$strUser  =  strtolower(strClean($_POST['txtEmail']));
 					$strPassword = hash("SHA256",$_POST['txtPassword']);
 					$requestUser = $this->model->loginUser($strUser, $strPassword);
 					if(empty($requestUser)){
-						$arrResponse = array('status'=>false, 'msg'=> 'El usuario o la contraseña son incorrectos.');
+						$arrResponse = array('status'=>false, 'msg'=> 'User or password are incorrect.');
 					}else{
 						$arrData =$requestUser;
 						if($arrData['status']==1){
@@ -44,7 +44,7 @@
 							$_COOKIE['passwordcookie'] = $strPassword;
 							$arrResponse = array('status'=>true);
 						}else{
-							$arrResponse = array('status'=>false, 'msg'=> "El usuario no está activo.");
+							$arrResponse = array('status'=>false, 'msg'=> "User is not active.");
 						}
 					}
 				}
@@ -55,14 +55,14 @@
 		public function resetPass(){
 			if($_POST){
 				if(empty($_POST['txtEmailReset'])){
-					$arrResponse = array('status' => false, 'msg' => 'Error de datos');
+					$arrResponse = array('status' => false, 'msg' => 'Something went wrong');
 				}else{
 					$token = token();
 					$strEmail = strtolower(strClean($_POST['txtEmailReset']));
 					$arrData = $this->model->getUserEmail($strEmail);
 
 					if(empty($arrData)){
-						$arrResponse = array('status' => false, 'msg' => 'El usuario no existe');
+						$arrResponse = array('status' => false, 'msg' => 'User does not exist');
 					}else{
 						$idperson = $arrData['idperson'];
 						$name = $arrData['firstname'].' '.$arrData['lastname'];
@@ -75,7 +75,7 @@
 							'email_remitente' => $company['email'], 
 							'email_usuario'=>$strEmail, 
 							'company'=>$company,
-							'asunto' =>'Recuperar contraseña','url_recovery' => $url_recovery);
+							'asunto' =>'Recover your password','url_recovery' => $url_recovery);
 
 
 						if($requestUpdate){
@@ -83,14 +83,14 @@
 							$sendEmail = sendEmail($dataUsuario, 'email_resetPassword');
 
 							if($sendEmail){
-								$arrResponse = array('status' => true, 'msg' => 'Se ha enviado un correo electrónico para cambiar la contraseña');
+								$arrResponse = array('status' => true, 'msg' => 'An email has been sent to recover your password');
 								
 							}else{
-								$arrResponse = array('status' => false, 'msg' => 'El proceso no puede realizarse, inténtelo de nuevo más tarde.');
+								$arrResponse = array('status' => false, 'msg' => 'Something went wrong.');
 							}
 							
 						}else{
-							$arrResponse = array('status' => false, 'msg' => 'El proceso no puede realizarse, inténtelo de nuevo más tarde.');
+							$arrResponse = array('status' => false, 'msg' => 'Something went wrong.');
 						}
 					}
 				}
@@ -114,7 +114,7 @@
 				}else{
 					$company = getCompanyInfo();
 					$data['page_tag'] = "Recovery";
-					$data['page_title'] = "Actualizar contraseña | ".$company['name'] ;
+					$data['page_title'] = "Recover your password | ".$company['name'] ;
 					$data['email'] = $strEmail;
 					$data['token'] = $strToken;
 					$data['company'] = $company;
@@ -128,7 +128,7 @@
 		}
 		public function setPassword(){
 			if(empty($_POST['idUser']) || empty($_POST['txtEmail']) || empty($_POST['txtPassword']) || empty($_POST['txtToken']) || empty($_POST['txtPasswordConfirm'])){
-				$arrResponse = array('status' => false,'msg' => 'Error de datos');
+				$arrResponse = array('status' => false,'msg' => 'Something went wrong');
 			}else{
 				$idUser = intval($_POST['idUser']);
 				$strPassword = strClean($_POST['txtPassword']);
@@ -137,25 +137,25 @@
 				$strPasswordConfirm = strClean($_POST['txtPasswordConfirm']);
 				$password = $strPassword;
 				if($strPassword != $strPasswordConfirm){
-					$arrResponse = array('status' => false,'msg'=>'Las contraseñas no coinciden');
+					$arrResponse = array('status' => false,'msg'=>'Passwords do not match');
 				}else{
 					$arrResponseUser = $this->model->getUser($strEmail, $strToken);
 					if(empty($arrResponseUser)){
-						$arrResponse = array('status' => false,'msg'=>'Error de datos');
+						$arrResponse = array('status' => false,'msg'=>'Something went wrong');
 					}else{
 						$strPassword = hash("SHA256",$strPassword);
 						$requestPass = $this->model->insertPassword($idUser, $strPassword);
 						$company = getCompanyInfo();
 						if($requestPass){
-                            $data['asunto']="Contraseña actualizada";
+                            $data['asunto']="Password updated";
                             $data['email_usuario'] = $strEmail;
                             $data['email_remitente'] = $company['email'];
 							$data['company'] = $company;
                             $data['password'] = $password;
                             sendEmail($data,"email_passwordUpdated");
-							$arrResponse = array('status' => true, 'msg' => 'Contraseña actualizada');
+							$arrResponse = array('status' => true, 'msg' => 'Password updated');
 						}else{
-							$arrResponse = array('status' => false, 'msg' => 'El proceso no puede realizarse, inténtelo de nuevo más tarde.');
+							$arrResponse = array('status' => false, 'msg' => 'Something went wrong.');
 						}
 					}
 				}

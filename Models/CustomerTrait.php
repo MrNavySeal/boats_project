@@ -25,28 +25,31 @@
         private $strCedula;
         
 
-        public function setCustomerT($strName,$strPicture,$strEmail,$strPassword,$rolid){
+        public function setCustomerT($strName,$strPicture,$strEmail,$strPassword,$rolid,$strPhone =""){
             $this->con = new Mysql();
             $this->strNombre = $strName;
             $this->strPicture = $strPicture; 
             $this->strEmail =  $strEmail;
             $this->strPassword = $strPassword;
             $this->intRolId = $rolid;
+            $this->strPhone = $strPhone;
             $return="";
             
             $sql = "SELECT * FROM person WHERE email = '$this->strEmail'";
             $request = $this->con->select_all($sql);
             if(empty($request)){
-                $query = "INSERT INTO person(firstname,image,email,countryid,stateid,cityid,password,roleid) VALUE(?,?,?,?,?,?,?,?)";
-                $arrData = array($this->strNombre,
-                                $this->strPicture,
-                                $this->strEmail,
-                                99999,
-                                99999,
-                                99999,
-                                $this->strPassword,
-                                $this->intRolId
-                                );
+                $query = "INSERT INTO person(firstname,image,email,countryid,stateid,cityid,password,roleid,phone) VALUE(?,?,?,?,?,?,?,?,?)";
+                $arrData = array(
+                    $this->strNombre,
+                    $this->strPicture,
+                    $this->strEmail,
+                    99999,
+                    99999,
+                    99999,
+                    $this->strPassword,
+                    $this->intRolId,
+                    $this->strPhone
+                );
                 $request_insert = $this->con->insert($query,$arrData);
                 $return = $request_insert;
             }else{

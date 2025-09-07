@@ -170,7 +170,7 @@
                         $strPassword =  hash("SHA256",bin2hex(random_bytes(4)));
                         $strPicture = "user.jpg";
                         $rolid = 2;
-                        $request = $this->setCustomerT($strName,$strPicture,$strEmail,$strPassword,$rolid);
+                        $request = $this->setCustomerT($strName,$strPicture,$strEmail,$strPassword,$rolid,$intPhone);
                         if(is_numeric($request) && $request > 0){
                             $_SESSION['idUser'] = $request;
                             $_SESSION['login'] = true;

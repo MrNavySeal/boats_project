@@ -264,17 +264,17 @@ function openLoginModal(){
                                 <form id="formLogin" name="formLogin">
                                     <h2 class="mb-4">Log in</h2>
                                     <div class="mb-3 d-flex">
-                                        <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-envelope"></i></div>
+                                        <div class="d-flex justify-content-center align-items p-3 bg-color-1 text-white"><i class="fas fa-envelope"></i></div>
                                         <input type="email" class="form-control" id="txtLoginEmail" name="txtEmail" placeholder="Email" required>
                                     </div>
                                     <div class="mb-3 d-flex">
-                                        <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-lock"></i></div>
+                                        <div class="d-flex justify-content-center align-items p-3 bg-color-1 text-white"><i class="fas fa-lock"></i></div>
                                         <input type="password" class="form-control" id="txtLoginPassword" name="txtPassword" placeholder="Password" required></textarea>
                                     </div>
                                     <div class="d-flex justify-content-end mb-3 t-p">
                                         <div class="c-p" id="forgotBtn">Has forgotten your password?</div>
                                     </div>
-                                    <button type="submit" id="loginSubmit" class="btn btn-bg-2 w-100 mb-4" >Log in</button>
+                                    <button type="submit" id="loginSubmit" class="btn btn-secondary w-100 mb-4" >Log in</button>
                                     <div class="d-flex justify-content-center mb-3 t-p" >
                                         <div class="c-p" id="signBtn">Are you new here?</div>
                                     </div>
@@ -282,44 +282,44 @@ function openLoginModal(){
                                 <form id="formSign" class="d-none">
                                     <h2 class="mb-4">Sign up</h2>
                                     <div class="mb-3 d-flex">
-                                        <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-user"></i></div>
+                                        <div class="d-flex justify-content-center align-items p-3 bg-color-1 text-white"><i class="fas fa-user"></i></div>
                                         <input type="text" class="form-control" id="txtSignName" name="txtSignName" placeholder="Name" required>
                                     </div>
                                     <div class="mb-3 d-flex">
-                                        <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-envelope"></i></div>
+                                        <div class="d-flex justify-content-center align-items p-3 bg-color-1 text-white"><i class="fas fa-envelope"></i></div>
                                         <input type="email" class="form-control" id="txtSignEmail" name="txtSignEmail" placeholder="Email" required>
                                     </div>
                                     <div class="mb-3 d-flex">
-                                        <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-lock"></i></div>
+                                        <div class="d-flex justify-content-center align-items p-3 bg-color-1 text-white"><i class="fas fa-lock"></i></div>
                                         <input type="password" class="form-control" id="txtSignPassword" name="txtSignPassword" placeholder="Password" required></textarea>
                                     </div>
-                                    <p>Al registrarse en nuestro sitio web, aceptas <a href="${base_url}/terms/" target="_blank">nuestras políticas de uso</a> y 
-                                    <a href="${base_url}/privacy/" target="_blank">de privacidad</a>.</p>
+                                    <p>Signing up on our website, you agree <a href="${base_url}/terms/" target="_blank">with our terms of use</a> y 
+                                    <a href="${base_url}/privacy/" target="_blank">and privacy policies</a>.</p>
                                     <div class="d-flex justify-content-end mb-3 t-p" >
                                         <div class="c-p loginBtn">Do you have already an account? Log in</div>
                                     </div>
-                                    <button type="submit" id="signSubmit" class="btn btn-bg-2 w-100 mb-4" >Sign up</button>
+                                    <button type="submit" id="signSubmit" class="btn btn-secondary w-100 mb-4" >Sign up</button>
                                 </form>
                                 <form id="formConfirmSign" class="d-none">
                                     <h2 class="mb-4">Verifying your email</h2>
                                     <div class="mb-3 d-flex">
-                                        <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-lock-open"></i></div>
+                                        <div class="d-flex justify-content-center align-items p-3 bg-color-1 text-white"><i class="fas fa-lock-open"></i></div>
                                         <input type="text" class="form-control" id="txtCode" name="txtCode" placeholder="Code" required>
                                     </div>
                                     <p>We have sent you an email with your verification code.</p>
-                                    <button type="submit" id="confimSignSubmit" class="btn btn-bg-2 w-100 mb-4" >Verify</button>
+                                    <button type="submit" id="confimSignSubmit" class="btn btn-secondary w-100 mb-4" >Verify</button>
                                 </form>
                                 <form id="formReset" class="d-none">
                                     <h2 class="mb-4">Recover password</h2>
                                     <div class="mb-3 d-flex">
-                                        <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white"><i class="fas fa-envelope"></i></div>
+                                        <div class="d-flex justify-content-center align-items p-3 bg-color-1 text-white"><i class="fas fa-envelope"></i></div>
                                         <input type="email" class="form-control" id="txtEmailReset" name="txtEmailReset" placeholder="Email" required>
                                     </div>
                                     <p>We have sent you an email with the instructions to follow.</p>
                                     <div class="d-flex justify-content-end mb-3 t-p" >
                                         <div class="c-p loginBtn">Log in</div>
                                     </div>
-                                    <button type="submit" id="resetSubmit" class="btn btn-bg-2 w-100 mb-4" >Recover password</button>
+                                    <button type="submit" id="resetSubmit" class="btn btn-secondary w-100 mb-4" >Recover password</button>
                                 </form>
                             </div>
                         </div>
