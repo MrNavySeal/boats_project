@@ -264,15 +264,15 @@
                 $requestDetail = $this->insertOrderDetail($arrOrder);
                 $orderInfo = $this->getOrder($request);
                 $company = getCompanyInfo();
-                /* $dataEmailOrden = array(
-                    'asunto' => "Se ha generado un pedido",
+                $dataEmailOrden = array(
+                    'asunto' => "Your order has been approved",
                     'email_usuario' => $strEmail, 
                     'email_remitente'=>$company['email'],
                     'company'=>$company,
                     'email_copia' => $company['secondary_email'],
                     'order' => $orderInfo);
 
-                try {sendEmail($dataEmailOrden,'email_order');} catch (Exception $e) {} */
+                try {sendEmail($dataEmailOrden,'email_order');} catch (Exception $e) {}
                 $idOrder = openssl_encrypt($request,METHOD,KEY);
                 $idTransaction = openssl_encrypt($orderInfo['order']['idtransaction'],METHOD,KEY);
                 $orderData = array("order"=>$idOrder,"transaction"=>$idTransaction);
