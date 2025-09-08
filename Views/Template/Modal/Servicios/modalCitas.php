@@ -44,6 +44,16 @@
                             <label for="" class="form-label">Total <span class="text-danger">*</span></label>
                             <input  type="text" class="form-control text-end" :value="valorBase" aria-describedby="basic-addon1" @keyup="setBase($event)">
                         </div>
+                        <div class="col-md-12">
+                            <div class="mb-3">
+                                <label for="strEstadoPedido" class="form-label">Payment status <span class="text-danger">*</span></label>
+                                <select class="form-control" aria-label="Default select example" id="strEstadoPedido" v-model="strEstadoPedido" name="strEstadoPedido" required>
+                                    <option value="approved">Approved</option>
+                                    <option value="pendent">Pendent</option>
+                                    <option value="canceled">Canceled</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="col-md-12" v-if="intId > 0">
                             <div class="mb-3">
                                 <label for="strEstado" class="form-label">Status <span class="text-danger">*</span></label>

@@ -58,7 +58,7 @@
         public function setCaso(){
             if($_SESSION['permitsModule']['r']){
                 if($_POST){
-                    if(empty($_POST['servicio']) || empty($_POST['cliente']) || empty($_POST['fecha']) || empty($_POST['hora']) || empty($_POST['valor_base'])){
+                    if(empty($_POST['servicio']) || empty($_POST['cliente']) || empty($_POST['fecha']) || empty($_POST['hora'])){
                         $arrResponse = array("status" => false, "msg" => 'All the fields with (*) are required');
                     }else{ 
                         $intId = intval($_POST['id']);
@@ -67,6 +67,7 @@
                         $strHora = strClean($_POST['hora']);
                         $strFecha = strClean($_POST['fecha']);
                         $strEstado = strtolower(strClean($_POST['estado']));
+                        $strEstadoPago = strtolower(strClean($_POST['estado_pago']));
                         $intValorBase = doubleval($_POST['valor_base']);
                         if($intId == 0){
                             if($_SESSION['permitsModule']['w']){
@@ -77,7 +78,7 @@
                         }else{
                             if($_SESSION['permitsModule']['u']){
                                 $option = 2;
-                                $request = $this->model->updateCaso($intId,$intServicio,$intCliente,$strHora,$strFecha,$intValorBase,$strEstado);
+                                $request = $this->model->updateCaso($intId,$intServicio,$intCliente,$strHora,$strFecha,$intValorBase,$strEstado,$strEstadoPago);
                             }
                         }
                         if(is_numeric($request) && $request > 0 ){

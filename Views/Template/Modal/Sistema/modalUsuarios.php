@@ -65,6 +65,6 @@
         </div>
     </template>
     <template #footer>
-        <app-button icon="save" @click="save()" btn="primary" title="Guardar" :disabled="common.processing" :processing="common.processing"></app-button>
+        <app-button icon="save" @click="save()" btn="primary" title="Save" :disabled="common.processing" :processing="common.processing"></app-button>
     </template>
 </app-modal>

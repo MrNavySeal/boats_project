@@ -105,12 +105,8 @@ const App = {
             
         },
         setDatos: async function(){
-            if(this.objCliente.id == "" || this.objServicio.id == "" || this.strFecha == "" || this.strHora=="" || this.intValorBase==""){
+            if(this.objCliente.id == "" || this.objServicio.id == "" || this.strFecha == "" || this.strHora==""){
                 Swal.fire("Error","All the fields with (*) are required","error");
-                return false;
-            }
-            if(this.intValorBase <= 0){
-                Swal.fire("Error","The value must be greater than zero.","error");
                 return false;
             }
             const formData = new FormData();
@@ -126,6 +122,7 @@ const App = {
             formData.append("descripcion",this.strDescripcion);
             formData.append("titulo",this.strTitulo);
             formData.append("estado",this.strEstado);
+            formData.append("estado_pago",this.strEstadoPedido);
 
             this.$refs.btnAdd.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>`;
             this.$refs.btnAdd.disabled = true;

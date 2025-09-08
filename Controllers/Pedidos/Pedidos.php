@@ -118,7 +118,7 @@
                                 <td data-title="Phone">'.$pro['phone'].'</td>
                                 <td data-title="ID number">'.$pro['identification'].'</td>
                                 <td data-title="Payment" class="text-center">'.$pro['type'].'</td>
-                                <td data-title="Total" class="text-end">$'.$pro['format_amount'].'</td>
+                                <td data-title="Total" class="text-end">'.$pro['format_amount'].'</td>
                                 <td data-title="Status" class="text-center">'.$status.'</td>
                                 <td data-title="Options"><div class="d-flex">'.$btnView.$btnWpp.$btnDelete.'</div></td>
                             </tr>

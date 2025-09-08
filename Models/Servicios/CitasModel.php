@@ -249,7 +249,7 @@
             }
             return $request;
         }
-        public function updateCaso($intId,$intServicio,$intCliente,$strHora,$strFecha,$intValorBase,$strEstado){
+        public function updateCaso($intId,$intServicio,$intCliente,$strHora,$strFecha,$intValorBase,$strEstado,$strEstadoPago){
             $this->intId = $intId;
             $this->intServicio = $intServicio;
             $this->intCliente = $intCliente;
@@ -261,7 +261,7 @@
             $request = $this->select_all($sql);
             if(empty($request)){
 
-                $sql = "UPDATE orderdata SET service_id=?,personid=?,time=?,date=?,amount=?,statusorder=?
+                $sql = "UPDATE orderdata SET service_id=?,personid=?,time=?,date=?,amount=?,statusorder=?,status=?
                 WHERE idorder = $this->intId";
                 $arrData =[
                     $this->intServicio,
@@ -270,6 +270,7 @@
                     $this->strFecha, 
                     $this->intValorBase,
                     $this->strEstado,
+                    $strEstadoPago
                 ];
                 $request = $this->update($sql,$arrData);
             }else{
