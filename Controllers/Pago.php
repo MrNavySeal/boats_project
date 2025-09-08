@@ -102,6 +102,22 @@
                 die();
             }
         }
+        public function serviceConfirmed($params){
+            $company=getCompanyInfo();
+            $id = setDesencriptar($params);
+            $data = $this->selectCaso($id);
+            if(!empty($data)){
+                $data['page_tag'] = $company['name'];
+                $data['page_title'] ="Service approved | ".$company['name'];
+                $data['page_name'] = "approved";
+                $data['orderData'] = $data;
+                $data['order'] = $params;
+                $this->views->getView($this,"confirmar_servicio",$data);
+            }else{
+                header("location: ".base_url());
+                die();
+            }
+        }
         public function error(){
             $company=getCompanyInfo();
             $data['page_tag'] = $company['name'];
@@ -330,17 +346,17 @@
                         $strStatus = $strStatus == "completed" ? "approved" : "pendent";
                         $request = $this->updateCaso($intId,$strTransaccion,$strStatus);
                         if($request > 0){
-                            $company = getCompanyInfo();
+                            //$company = getCompanyInfo();
                             $arrOrden['idorder'] = $intId;
-                            $arrEmailOrden = array(
+                            /* $arrEmailOrden = array(
                                 'asunto' => "Se ha generado un pago",
                                 'email_usuario' => $arrOrden['cliente']['email'], 
                                 'email_remitente'=>$company['email'],
                                 'company'=>$company,
                                 'email_copia' => $company['secondary_email'],
                                 'order' => $arrOrden);
-                            try {sendEmail($arrEmailOrden,'email_order');} catch (Exception $e) {}
-                            $arrResponse = array("status"=>true,"msg"=>"Payment has been made successfully.");
+                            try {sendEmail($arrEmailOrden,'email_order');} catch (Exception $e) {} */
+                            $arrResponse = array("status"=>true,"msg"=>"Payment has been made successfully.","id"=>$intId);
                         }else{
                             $arrResponse = array("status"=>false,"msg"=>"Something went wrong, please try again.");
                         }

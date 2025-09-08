@@ -82,7 +82,7 @@
             </div>
         </div>
     </div>
-    <div id="divLoading"> <div></div> <span>Loading...</span> </div>
+    <div id="divLoading" class="d-none"> <div></div> <span>Loading...</span> </div>
     <?php getModal("modalSchedule");getComponent("headerNav");?>
     <div id="modalLogin"></div>
     

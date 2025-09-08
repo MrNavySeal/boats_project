@@ -7,7 +7,7 @@
             <p class="m-0">Your order has beend declined</p>
             <hr>
             <div class="mt-3">
-                <a href="<?=base_url()?>/pago" class="btn btn-bg-1">Try again</a>
+                <a href="<?=base_url()?>/checkout/" class="btn btn-bg-1">Try again</a>
             </div>
         </div>
     </main>

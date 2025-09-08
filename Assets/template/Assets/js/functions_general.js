@@ -78,8 +78,8 @@ navMask.addEventListener("click",function(){
 });
 
 
-document.addEventListener("DOMContentLoaded",function(){
-    loading.classList.add("d-none");
+document.addEventListener("load",function(){
+    //loading.classList.add("d-none");
 });
 
 btnCart.addEventListener("click",function(){

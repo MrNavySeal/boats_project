@@ -21,9 +21,9 @@ window.addEventListener("load",function(){
                       const response = await fetch(base_url+"/pago/setCaso",{method:"POST",body:formData});
                       const objData = await response.json();
                       if(objData.status){
-                          window.location.href=base_url+"/pago/confirmado/"+intIdOrder;
+                          window.location.href=base_url+"/checkout/service-approved/"+intIdOrder;
                       }else{
-                          window.location.href=base_url+"/pago/error";
+                          window.location.href=base_url+"/checkout/error/";
                       }
                   });
               }

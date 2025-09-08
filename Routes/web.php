@@ -63,4 +63,5 @@
     $router->setRoute("checkout/error/","Pago/error",false);
     $router->setRoute("checkout/service/","Pago/servicio");
     $router->setRoute("recovery/","Login/confirmUser");
+    $router->setRoute("checkout/service-approved/","Pago/serviceConfirmed");
 ?>
