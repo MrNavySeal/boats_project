@@ -83,7 +83,7 @@
                         if(is_numeric($request) && $request > 0 ){
                             if($option == 1){ 
                                 $arrResponse = array('status' => true, 'msg' => 'Data saved');	
-                                $company = getCompanyInfo();
+                                /* $company = getCompanyInfo();
                                 $arrCaso = $this->model->selectCaso($request);
                                 $arrCaso['url'] =base_url()."/pago/pago/".setEncriptar($arrCaso['idorder']);
                                 $arrCaso['total'] = $arrCaso['value_target'];
@@ -94,7 +94,7 @@
                                     'company'=>$company,
                                     'email_copia' => $company['secondary_email'],
                                     'order' => $arrCaso);
-                                try {sendEmail($arrEmailOrden,'email_order_caso');} catch (Exception $e) {}
+                                try {sendEmail($arrEmailOrden,'email_order_caso');} catch (Exception $e) {} */
                             }else{ $arrResponse = array('status' => true, 'msg' => 'Data updated'); }
                         }else if($request =="exists"){
                             $arrResponse = array("status" => false, "msg" => 'Oops! The date and time are already taken.');

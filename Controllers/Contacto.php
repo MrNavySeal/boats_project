@@ -23,7 +23,7 @@
             if($_POST){
                 if(empty($_POST['txtContactName']) || empty($_POST['txtContactlastname']) || empty($_POST['txtContactEmail']) 
                     || empty($_POST['txtContactMessage']) || empty($_POST['txtContactPhone']) || empty($_POST['serviceList'])){
-                    $arrResponse = array("status"=>false,"msg"=>"Data error");
+                    $arrResponse = array("status"=>false,"msg"=>"Something went wrong");
                 }else{
                     $strName = ucwords(strClean($_POST['txtContactName']));
                     $strLastname = ucwords(strClean($_POST['txtContactLastname']));
@@ -44,7 +44,8 @@
                                                 "message"=>$strMessage,
                                                 "company"=>$company,
                                                 "phone"=>$strPhone,
-                                                'name'=>$strName);
+                                                'name'=>$strName,
+                                            "service"=>$service['name']);
                         try {
                             sendEmail($dataEmail,'email_contact');
                             $arrResponse = array("status"=>true,"msg"=>"Your message has been sent, we will contact you soon.");

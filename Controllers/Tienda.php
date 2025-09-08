@@ -257,15 +257,15 @@
                                         'email_remitente' => $company['email'], 
                                         'email_usuario'=>$strEmail, 
                                         'company' =>$company,
-                                        'asunto' =>'Código de verificación - '.$company['name'],
+                                        'asunto' =>'Verification code - '.$company['name'],
                                         'codigo' => $code);
                     $_SESSION['code'] = $code;
                     $sendEmail = sendEmail($dataUsuario,'email_validData');
                     if($sendEmail){
-                        $arrResponse = array("status"=>true,"msg"=>"Se ha enviado un código a tu correo electrónico para validar tus datos.");
+                        $arrResponse = array("status"=>true,"msg"=>"A code has been sent to your email.");
                         
                     }else{
-                        $arrResponse = array("status"=>false,"msg"=>"Error, intenta de nuevo.");
+                        $arrResponse = array("status"=>false,"msg"=>"Something went wrong.");
                     }
                 }
                 echo json_encode($arrResponse,JSON_UNESCAPED_UNICODE);

@@ -11,16 +11,16 @@
                     <input type="hidden" id="idUser" name="idUser" value="<?= $data['idperson']; ?>" required >
                     <input type="hidden" id="txtEmailRecovery" name="txtEmail" value="<?= $data['email']; ?>" required >
                     <input type="hidden" id="txtToken" name="txtToken" value="<?= $data['token']; ?>" required >
-                    <h2 class="mb-4">Actualizar contraseña</h2>
+                    <h2 class="mb-4">Update password</h2>
                     <div class="mb-3 d-flex">
-                        <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white text-white"><i class="fas fa-lock"></i></div>
-                        <input id="txtPasswordRecovery" name="txtPassword" class="form-control" type="password" placeholder="Nueva contraseña" required >
+                        <div class="d-flex justify-content-center align-items p-3 bg-color-1 text-white text-white"><i class="fas fa-lock"></i></div>
+                        <input id="txtPasswordRecovery" name="txtPassword" class="form-control" type="password" placeholder="New passsword" required >
                     </div>
                     <div class="mb-3 d-flex">
-                        <div class="d-flex justify-content-center align-items p-3 bg-color-2 text-white text-white"><i class="fas fa-lock"></i></div>
-                        <input id="txtPasswordConfirmRecovery" name="txtPasswordConfirm" class="form-control" type="password" placeholder="Confirmar contraseña" required >
+                        <div class="d-flex justify-content-center align-items p-3 bg-color-1 text-white text-white"><i class="fas fa-lock"></i></div>
+                        <input id="txtPasswordConfirmRecovery" name="txtPasswordConfirm" class="form-control" type="password" placeholder="Confirm password" required >
                     </div>
-                    <button type="submit" id="recoverySubmit" class="btn btn-bg-2 w-100 mb-4" >Actualizar</button>
+                    <button type="submit" id="recoverySubmit" class="btn btn-secondary w-100 mb-4" >Update</button>
                 </form>
             </div>
         </div>

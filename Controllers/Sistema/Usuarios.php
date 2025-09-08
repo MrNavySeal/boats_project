@@ -136,21 +136,21 @@
                             }
                             if($option == 1){
                                 $data['nombreUsuario'] = $strNombre." ".$strApellido;
-                                $data['asunto']="Credenciales";
+                                $data['asunto']="Credentials";
                                 $data['email_usuario'] = $strCorreo;
                                 $data['email_remitente'] = $company['email'];
                                 $data['password'] = $strTempContrasena;
                                 $data['company'] = $company;
                                 if($strCorreo !="generico@generico.co"){
                                     try { sendEmail($data,"email_credentials"); } catch (\Throwable $th) {}
-                                    $arrResponse = array("status"=>true,"msg"=>'Data saved.');
+                                    $arrResponse = array("status"=>true,"msg"=>'Data saved. It has been sent an email with user credentials.');
                                 }else{
                                     $arrResponse = array("status"=>true,"msg"=>'Data saved.');
                                 }
                             }else{
                                 if($strContrasena!=""){
                                     $data['nombreUsuario'] = $strNombre." ".$strApellido;
-                                    $data['asunto']="Credenciales";
+                                    $data['asunto']="Credentials";
                                     $data['email_usuario'] = $strCorreo;
                                     $data['email_remitente'] = $company['email'];
                                     $data['password'] = $strTempContrasena;

@@ -67,7 +67,7 @@
 						$idperson = $arrData['idperson'];
 						$name = $arrData['firstname'].' '.$arrData['lastname'];
 
-						$url_recovery = base_url().'/login/confirmUser/'.$strEmail.'/'.$token;
+						$url_recovery = base_url().'/recovery/'.$strEmail.'/'.$token;
 						$requestUpdate = $this->model->setTokenUser($idperson,$token);
 						$company = getCompanyInfo();
 						$dataUsuario = array(
