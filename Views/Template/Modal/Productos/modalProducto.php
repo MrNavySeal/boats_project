@@ -157,7 +157,7 @@
                         <option v-for="(data,index) in arrSpecs" :key="index" :value="data.id">{{data.name}}</option>
                     </template>
                     <template #right>
-                        <app-button icon="new" btn="primary" @click="addItem('spec')"></app-button>
+                        <app-button icon="new" btn="primary" @click="addItem('spec')" title="Add"></app-button>
                     </template>
                 </app-button-select>
                 <div v-if="arrSpecsAdded.length > 0">
@@ -194,7 +194,7 @@
                             <option v-for="(data,index) in arrVariants" :key="index" :value="data.id">{{data.name}}</option>
                         </template>
                         <template #right>
-                            <app-button icon="new" btn="primary" @click="addItem('variant')"></app-button>
+                            <app-button icon="new" btn="primary" @click="addItem('variant')" title="Add"></app-button>
                         </template>
                     </app-button-select>
                     <div v-if="arrVariantsAdded.length > 0">

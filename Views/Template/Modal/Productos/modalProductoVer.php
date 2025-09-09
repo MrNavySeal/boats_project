@@ -31,7 +31,7 @@
                                         <app-input label="Name" :errors="errors.name" type="text" v-model="strName" disabled></app-input>
                                     </div>
                                     <div class="col-md-6">
-                                        <app-input label="Reference" type="text" title="Código SKU" v-model="strReference" disabled></app-input>
+                                        <app-input label="Reference" type="text" title="SKU code" v-model="strReference" disabled></app-input>
                                     </div>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                             <app-input disabled label="checkIngredient" :errors="errors.product_type" @click="intCheckRecipe=false" title="Seleccione si el artículo es un insumo" type="switch" v-model="intCheckIngredient"></app-input>
                             <app-input disabled label="checkRecipe" :errors="errors.product_type" @click="intCheckIngredient=false;intCheckProduct=false;" title="Seleccione si el artículo es una fórmula/servicio/combo" type="switch" v-model="intCheckRecipe"></app-input>
                         </div> -->
-                        <app-select label="unidadMedida" title="Unidad de medida" v-model="intMeasure" disabled>
+                        <app-select label="unidadMedida" title="Unit" v-model="intMeasure" disabled>
                             <option v-for="(data,index) in arrMeasures" :key="index" :value="data.id">{{data.name}}</option>
                         </app-select>
                         <div class="mb-3" v-if="!intCheckRecipe">
