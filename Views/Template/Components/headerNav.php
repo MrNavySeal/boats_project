@@ -65,7 +65,7 @@
             <li class="nav-link"><a href="<?=base_url()?>/gallery/">Gallery</a></li>
         </ul>
         <ul class="nav--links">
-            <li class="nav--icon p-0" ><button type="button" onclick="window.open('tel:'<?='+1'.$company['phone']?>)" class="btn btn-primary w-100 "><i class="fas fa-phone" aria-hidden="true"></i> <?=$company['phone']?></button></li>
+            <li class="nav--icon p-0" ><a href="<?='https://wa.me/+1'.$company['phone']?>" class="btn btn-primary w-100 "><i class="fas fa-phone" aria-hidden="true"></i> <?=$company['phone']?></a></li>
             <li class="nav--icon p-0" ><button type="button" class="btn btn-secondary w-100 " onclick="openSchedule()">Schedule online</button></li>
             <li class="nav--icon" id="btnSearch"><i class="fas fa-search"></i></li>
             <li class="nav--icon nav--icon-cart" id="btnCart">
