@@ -132,7 +132,7 @@
             return;
         }
         public function insertOrder(int $idUser, string $idTransaction, string $strName,string $strCedula,string $strEmail,string $strPhone,string $strAddress,
-        string $strNote,string $cupon,int $envio,int $total,string $status, string $type,string $statusOrder){
+        string $strNote,string $cupon,int $envio,$total,string $status, string $type,string $statusOrder){
             $request ="";
             $this->con = new Mysql();
             $this->strIdTransaction = $idTransaction;
