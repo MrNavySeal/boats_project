@@ -41,7 +41,7 @@
                                         <app-input label="Name" :errors="errors.name" type="text" v-model="strName" required="true"></app-input>
                                     </div>
                                     <div class="col-md-6">
-                                        <app-input label="Reference" type="text" title="Código SKU" v-model="strReference"></app-input>
+                                        <app-input label="Reference" type="text" title="SKU code" v-model="strReference"></app-input>
                                     </div>
                                 </div>
                             </div>

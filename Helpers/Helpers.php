@@ -96,14 +96,14 @@
         $format .= print_r('</pre>');
         return $format;
     }
-    function formatNum(int $num,$divisa=true){
+    function formatNum($num,$divisa=true){
         $companyData = getCompanyInfo();
         if($divisa){
             $code = $companyData['currency']['code'];
         }else{
             $code="";
         }
-        $num = "$".number_format($num,0,DEC,MIL);
+        $num = "$".number_format($num,2,DEC,MIL);
         return $num;
     }
     function emailNotification(){
