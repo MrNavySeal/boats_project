@@ -21,7 +21,7 @@ for ($i=0; $i < count($social) ; $i++) {
         <div class="row m-0 mt-3">
             <div class="col-lg-6 p-5">
                 <div class="logo">
-                    <img src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>">
+                    <img src="<?=media()."/images/uploads/".$company['logo']?>" class="rounded" alt="<?=$company['name']?>">
                 </div>
                 <p><?=$company['description']?></p>
                 <p class="fw-bold fs-4">Follow us</p>

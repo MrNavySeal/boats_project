@@ -18,12 +18,12 @@
 <header class="bg-white">
     <nav class="nav--bar">
         <div class="d-flex align-items-center logo-desktop">
-            <img class="me-2" src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>" width="80">
+            <img class="me-2 rounded" src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>" width="80">
             <span class="fs-3 fw-bold"><?=$company['name']?></span>
         </div>
         <div class="icon-mobile">
             <a href="<?=base_url()?>">
-                <img src="<?=media()."/images/uploads/".$company['logo']?>" alt="<?=$company['name']?>">
+                <img src="<?=media()."/images/uploads/".$company['logo']?>" class="rounded" alt="<?=$company['name']?>">
             </a>
         </div>
         <ul class="nav--links">
